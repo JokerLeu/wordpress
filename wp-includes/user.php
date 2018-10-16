@@ -1,5 +1,6 @@
 <?php
 /**
+ * 核心用户API
  * Core User API
  *
  * @package WordPress
@@ -417,11 +418,12 @@ function count_many_users_posts( $users, $post_type = 'post', $public_only = fal
 	return $count;
 }
 
-//
+// 用户选项函数
 // User option functions
 //
 
 /**
+ * 获取当前用户的ID
  * Get the current user's ID
  *
  * @since MU (3.0.0)
@@ -489,6 +491,7 @@ function get_user_option( $option, $user = 0, $deprecated = '' ) {
 }
 
 /**
+ * 使用全局博客功能更新用户选项。
  * Update user option with global blog capability.
  *
  * User options are just like user metadata except that they have support for
@@ -932,11 +935,12 @@ function count_users( $strategy = 'time', $site_id = null ) {
 	return $result;
 }
 
-//
+// 私人助手功能
 // Private helper functions
 //
 
 /**
+ * 设置全局用户变量
  * Set up global user vars.
  *
  * Used by wp_set_current_user() for back compat. Might be deprecated in the future.
@@ -978,6 +982,7 @@ function setup_userdata($for_user_id = '') {
 }
 
 /**
+ * 创建用户下拉HTML内容。
  * Create dropdown HTML content of users.
  *
  * The content can either be displayed, which it is by default or retrieved by
@@ -1076,6 +1081,7 @@ function wp_dropdown_users( $args = '' ) {
 	$option_none_value = $r['option_none_value'];
 
 	/**
+     * 为下拉列表中的用户列表过滤查询参数。
 	 * Filters the query arguments for the list of users in the dropdown.
 	 *
 	 * @since 4.4.0
@@ -1139,6 +1145,7 @@ function wp_dropdown_users( $args = '' ) {
 	}
 
 	/**
+     * 过滤WP_下拉_用户()HTML输出。
 	 * Filters the wp_dropdown_users() HTML output.
 	 *
 	 * @since 2.3.0
@@ -2570,7 +2577,8 @@ function _wp_get_current_user() {
 			return $current_user;
 		}
 
-		// Upgrade stdClass to WP_User
+		// 升级标准类到WP_User
+        // Upgrade stdClass to WP_User
 		if ( is_object( $current_user ) && isset( $current_user->ID ) ) {
 			$cur_id = $current_user->ID;
 			$current_user = null;
@@ -2590,6 +2598,7 @@ function _wp_get_current_user() {
 	}
 
 	/**
+     * 过滤当前用户。
 	 * Filters the current user.
 	 *
 	 * The default filters use this to determine the current user from the

@@ -19,6 +19,7 @@ if ( !defined('ABSPATH') )
 global $hook_suffix;
 ?>
 
+<!--页面底部 由wp-admin/admin-footer.php生成-->
 <div class="clear"></div></div><!-- wpbody-content -->
 <div class="clear"></div></div><!-- wpbody -->
 <div class="clear"></div></div><!-- wpcontent -->
@@ -26,14 +27,16 @@ global $hook_suffix;
 <div id="wpfooter" role="contentinfo">
 	<?php
 	/**
+     * 在管理页脚的打开标签后触发。
 	 * Fires after the opening tag for the admin footer.
 	 *
 	 * @since 2.5.0
 	 */
 	do_action( 'in_admin_footer' );
 	?>
-	<p id="footer-left" class="alignleft">
+	<p id="footer-left" class="alignleft"><!--页脚感谢使用标签-->
 		<?php
+        // 感谢使用的文字
 		$text = sprintf( __( 'Thank you for creating with <a href="%s">WordPress</a>.' ), __( 'https://wordpress.org/' ) );
 		/**
          * 页脚显示感谢使用信息
@@ -46,7 +49,7 @@ global $hook_suffix;
 		echo apply_filters( 'admin_footer_text', '<span id="footer-thankyou">' . $text . '</span>' );
 		?>
 	</p>
-	<p id="footer-upgrade" class="alignright">
+	<p id="footer-upgrade" class="alignright"><!--页脚版本标签-->
 		<?php
 		/**
          * 页脚显示更新版本信息

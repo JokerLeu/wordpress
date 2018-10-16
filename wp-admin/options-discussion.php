@@ -17,6 +17,7 @@ $parent_file = 'options-general.php';
 
 add_action( 'admin_print_footer_scripts', 'options_discussion_add_js' );
 
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
 	'title'   => __('Overview'),
@@ -24,22 +25,27 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>',
 ) );
 
+// 帮助-更多信息：
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Settings_Discussion_Screen">Documentation on Discussion Settings</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/">Support Forums</a>') . '</p>'
 );
 
+// 添加管理头部
 include( ABSPATH . 'wp-admin/admin-header.php' );
 ?>
 
+<!--代码在wp-admin/options-discussion.php文件中-->
 <div class="wrap">
+    <!--页面标题 讨论设置-->
 <h1><?php echo esc_html( $title ); ?></h1>
 
 <form method="post" action="options.php">
 <?php settings_fields('discussion'); ?>
 
 <table class="form-table">
+    <!--默认文章设置-->
 <tr>
 <th scope="row"><?php _e('Default article settings'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Default article settings'); ?></span></legend>
@@ -58,6 +64,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 <p class="description"><?php echo '(' . __( 'These settings may be overridden for individual articles.' ) . ')'; ?></p>
 </fieldset></td>
 </tr>
+    <!--其他评论设置-->
 <tr>
 <th scope="row"><?php _e('Other comment settings'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Other comment settings'); ?></span></legend>
@@ -139,6 +146,7 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 ?></label>
 </fieldset></td>
 </tr>
+    <!--发送电子邮件通知我-->
 <tr>
 <th scope="row"><?php _e('Email me whenever'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Email me whenever'); ?></span></legend>
@@ -151,6 +159,7 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 <?php _e('A comment is held for moderation'); ?> </label>
 </fieldset></td>
 </tr>
+    <!--在评论显示之前-->
 <tr>
 <th scope="row"><?php _e('Before a comment appears'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Before a comment appears'); ?></span></legend>
@@ -161,6 +170,7 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 <label for="comment_whitelist"><input type="checkbox" name="comment_whitelist" id="comment_whitelist" value="1" <?php checked('1', get_option('comment_whitelist')); ?> /> <?php _e('Comment author must have a previously approved comment'); ?></label>
 </fieldset></td>
 </tr>
+    <!--评论审核-->
 <tr>
 <th scope="row"><?php _e('Comment Moderation'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Comment Moderation'); ?></span></legend>
@@ -172,6 +182,7 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 </p>
 </fieldset></td>
 </tr>
+    <!--评论黑名单-->
 <tr>
 <th scope="row"><?php _e('Comment Blacklist'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Comment Blacklist'); ?></span></legend>
@@ -184,17 +195,20 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 <?php do_settings_fields('discussion', 'default'); ?>
 </table>
 
+    <!--头像-->
 <h2 class="title"><?php _e('Avatars'); ?></h2>
 
 <p><?php _e('An avatar is an image that follows you from weblog to weblog appearing beside your name when you comment on avatar enabled sites. Here you can enable the display of avatars for people who comment on your site.'); ?></p>
 
 <?php
+// 以上将是一个很好的地方链接到法典文件上的Gractar函数，把它放在主题中。像这样的东西吗？
 // the above would be a good place to link to codex documentation on the gravatar functions, for putting it in themes. anything like that?
 
 $show_avatars = get_option( 'show_avatars' );
 ?>
 
 <table class="form-table">
+    <!--头像显示-->
 <tr>
 <th scope="row"><?php _e('Avatar Display'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Avatar Display'); ?></span></legend>
@@ -204,11 +218,13 @@ $show_avatars = get_option( 'show_avatars' );
 	</label>
 </fieldset></td>
 </tr>
+    <!--最高等级-->
 <tr class="avatar-settings<?php if ( ! $show_avatars ) echo ' hide-if-js'; ?>">
 <th scope="row"><?php _e('Maximum Rating'); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Maximum Rating'); ?></span></legend>
 
 <?php
+// 文章级别 最高等级列表
 $ratings = array(
 	/* translators: Content suitability rating: https://en.wikipedia.org/wiki/Motion_Picture_Association_of_America_film_rating_system */
 	'G' => __('G &#8212; Suitable for all audiences'),
@@ -227,6 +243,7 @@ endforeach;
 
 </fieldset></td>
 </tr>
+    <!--默认头像-->
 <tr class="avatar-settings<?php if ( ! $show_avatars ) echo ' hide-if-js'; ?>">
 <th scope="row"><?php _e('Default Avatar'); ?></th>
 <td class="defaultavatarpicker"><fieldset><legend class="screen-reader-text"><span><?php _e('Default Avatar'); ?></span></legend>
@@ -234,6 +251,7 @@ endforeach;
 <?php _e('For users without a custom avatar of their own, you can either display a generic logo or a generated one based on their email address.'); ?><br />
 
 <?php
+// 默认头像列表
 $avatar_defaults = array(
 	'mystery' => __('Mystery Person'),
 	'blank' => __('Blank'),
@@ -244,6 +262,7 @@ $avatar_defaults = array(
 	'retro' => __('Retro (Generated)')
 );
 /**
+ * 过滤默认的头像。
  * Filters the default avatars.
  *
  * Avatars are stored in key/value pairs, where the key is option value,
@@ -257,9 +276,11 @@ $avatar_defaults = apply_filters( 'avatar_defaults', $avatar_defaults );
 $default = get_option( 'avatar_default', 'mystery' );
 $avatar_list = '';
 
+// 强制化身以显示这些选择
 // Force avatars on to display these choices
 add_filter( 'pre_option_show_avatars', '__return_true', 100 );
 
+// 遍历循环排列
 foreach ( $avatar_defaults as $default_key => $default_name ) {
 	$selected = ($default == $default_key) ? 'checked="checked" ' : '';
 	$avatar_list .= "\n\t<label><input type='radio' name='avatar_default' id='avatar_{$default_key}' value='" . esc_attr($default_key) . "' {$selected}/> ";
@@ -268,9 +289,11 @@ foreach ( $avatar_defaults as $default_key => $default_name ) {
 	$avatar_list .= '<br />';
 }
 
+// 从指定的筛选器钩子中移除函数
 remove_filter( 'pre_option_show_avatars', '__return_true', 100 );
 
 /**
+ * 过滤默认化身列表的HTML输出。
  * Filters the HTML output of the default avatar list.
  *
  * @since 2.6.0
@@ -282,13 +305,25 @@ echo apply_filters( 'default_avatar_select', $avatar_list );
 
 </fieldset></td>
 </tr>
-<?php do_settings_fields('discussion', 'avatars'); ?>
+<?php
+// 打印特定设置部分的设置字段
+do_settings_fields('discussion', 'avatars');
+?>
 </table>
 
-<?php do_settings_sections('discussion'); ?>
+<?php
+// 打印添加到特定设置页的所有设置部分
+do_settings_sections('discussion');
+?>
 
-<?php submit_button(); ?>
+<?php
+// 用提交的文本和适当的类回送提交按钮。
+submit_button();
+?>
 </form>
 </div>
 
-<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+<?php
+// 添加页脚
+include( ABSPATH . 'wp-admin/admin-footer.php' );
+?>

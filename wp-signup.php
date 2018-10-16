@@ -49,6 +49,7 @@ if ( !is_main_site() ) {
 $wp_query->is_404 = false;
 
 /**
+ * 在站点注册页面加载之前触发
  * Fires before the Site Signup page is loaded.
  *
  * @since 4.4.0
@@ -228,6 +229,7 @@ function validate_blog_form() {
 }
 
 /**
+ * 显示用户注册表
  * Display user registration form
  *
  * @since MU (3.0.0)
@@ -241,7 +243,8 @@ function show_user_form($user_name = '', $user_email = '', $errors = '') {
 		$errors = new WP_Error();
 	}
 
-	// User name
+	// 用户名
+    // User name
 	echo '<label for="user_name">' . __('Username:') . '</label>';
 	if ( $errmsg = $errors->get_error_message('user_name') ) {
 		echo '<p class="error">'.$errmsg.'</p>';
@@ -260,6 +263,7 @@ function show_user_form($user_name = '', $user_email = '', $errors = '') {
 		echo '<p class="error">' . $errmsg . '</p>';
 	}
 	/**
+     * 在网站注册表格上的用户注册表格的末尾触发
 	 * Fires at the end of the user registration form on the site sign-up form.
 	 *
 	 * @since 3.0.0
@@ -270,6 +274,7 @@ function show_user_form($user_name = '', $user_email = '', $errors = '') {
 }
 
 /**
+ * 验证用户注册名和电子邮件
  * Validate user signup name and email
  *
  * @since MU (3.0.0)
@@ -281,6 +286,7 @@ function validate_user_form() {
 }
 
 /**
+ * 允许返回用户注册另一个站点
  * Allow returning users to sign up for another site
  *
  * @since MU (3.0.0)
@@ -363,6 +369,7 @@ function signup_another_blog( $blogname = '', $blog_title = '', $errors = '' ) {
 }
 
 /**
+ * 验证新站点注册。
  * Validate a new site signup.
  *
  * @since MU (3.0.0)
@@ -450,6 +457,7 @@ function validate_another_blog_signup() {
 }
 
 /**
+ * 确认新站点注册。
  * Confirm a new site signup.
  *
  * @since MU (3.0.0)
@@ -508,6 +516,7 @@ function confirm_another_blog_signup( $domain, $path, $blog_title, $user_name, $
 }
 
 /**
+ * 建立新的用户注册过程
  * Setup the new user signup process
  *
  * @since MU (3.0.0)
@@ -582,6 +591,7 @@ function signup_user( $user_name = '', $user_email = '', $errors = '' ) {
 }
 
 /**
+ * 验证新用户注册
  * Validate the new user signup
  *
  * @since MU (3.0.0)
@@ -612,6 +622,7 @@ function validate_user_signup() {
 }
 
 /**
+ * 新用户注册确认
  * New user signup confirmation
  *
  * @since MU (3.0.0)
@@ -828,6 +839,7 @@ function signup_get_available_languages() {
 $active_signup = get_site_option( 'registration', 'none' );
 
 /**
+ * 过滤网站注册的类型。
  * Filters the type of site sign-up.
  *
  * @since 3.0.0

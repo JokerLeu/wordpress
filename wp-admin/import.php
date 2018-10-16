@@ -48,7 +48,9 @@ if ( ! empty( $_GET['invalid'] ) && isset( $popular_importers[ $_GET['invalid'] 
 	unset( $importer_id );
 }
 
+// 输入默认的ThickBox js和CSS。
 add_thickbox();
+// 编排脚本。
 wp_enqueue_script( 'plugin-install' );
 wp_enqueue_script( 'updates' );
 
@@ -56,6 +58,7 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
 $parent_file = 'tools.php';
 ?>
 
+<!--代码在wp-admin/import.php中-->
 <div class="wrap">
 <h1><?php echo esc_html( $title ); ?></h1>
 <?php if ( ! empty( $_GET['invalid'] ) ) : ?>
@@ -69,9 +72,11 @@ $parent_file = 'tools.php';
 <p><?php _e('If you have posts or comments in another system, WordPress can import those into this site. To get started, choose a system to import from below:'); ?></p>
 
 <?php
+// 已注册（已安装）的导入者。它们存储在全局$wp_importers中。检索导入者列表。
 // Registered (already installed) importers. They're stored in the global $wp_importers.
 $importers = get_importers();
 
+// 如果一个流行的导入者没有注册，创建一个链接到插件安装程序的虚拟注册。
 // If a popular importer is not registered, create a dummy registration that links to the plugin installer.
 foreach ( $popular_importers as $pop_importer => $pop_data ) {
 	if ( isset( $importers[ $pop_importer ] ) )
@@ -201,7 +206,9 @@ if ( current_user_can('install_plugins') )
 </div>
 
 <?php
+// 在需要时打印文件系统凭据模式。
 wp_print_request_filesystem_credentials_modal();
+// 打印更新管理通知的JavaScript模板。
 wp_print_admin_notice_templates();
 
 include( ABSPATH . 'wp-admin/admin-footer.php' );

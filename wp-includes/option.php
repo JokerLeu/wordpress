@@ -151,6 +151,7 @@ function get_option( $option, $default = false ) {
 }
 
 /**
+ * 保护WordPress特殊选项不被修改。
  * Protect WordPress special option from being modified.
  *
  * Will die if $option is in protected list. Protected options are 'alloptions'
@@ -875,6 +876,7 @@ function delete_expired_transients( $force_db = false ) {
 }
 
 /**
+ * 保存和恢复存储在Cookie中的用户界面设置。
  * Saves and restores user interface settings stored in a cookie.
  *
  * Checks if the current user-settings cookie is updated and stores it. When no
@@ -925,6 +927,7 @@ function wp_user_settings() {
 }
 
 /**
+ * 基于设置名称检索用户界面设置值。
  * Retrieve user interface setting value based on setting name.
  *
  * @since 2.7.0
@@ -1095,6 +1098,7 @@ function delete_all_user_settings() {
 }
 
 /**
+ * 基于选项名称检索当前网络的选项值。
  * Retrieve an option value for the current network based on name of option.
  *
  * @since 2.8.0
@@ -1113,6 +1117,7 @@ function get_site_option( $option, $default = false, $deprecated = true ) {
 }
 
 /**
+ * 为当前网络添加一个新选项。
  * Add a new option for the current network.
  *
  * Existing options will not be updated. Note that prior to 3.3 this wasn't the case.
@@ -1288,6 +1293,7 @@ function get_network_option( $network_id, $option, $default = false ) {
 }
 
 /**
+ * 添加新的网络选项。
  * Add a new network option.
  *
  * Existing options will not be updated.
@@ -1652,6 +1658,7 @@ function delete_site_transient( $transient ) {
 }
 
 /**
+ * 获取站点瞬时值。
  * Get the value of a site transient.
  *
  * If the transient does not exist, does not have a value, or has expired,
@@ -1667,6 +1674,7 @@ function delete_site_transient( $transient ) {
 function get_site_transient( $transient ) {
 
 	/**
+     * 过滤现有站点的瞬时值。
 	 * Filters the value of an existing site transient.
 	 *
 	 * The dynamic portion of the hook name, `$transient`, refers to the transient name.
@@ -1690,7 +1698,8 @@ function get_site_transient( $transient ) {
 	if ( wp_using_ext_object_cache() ) {
 		$value = wp_cache_get( $transient, 'site-transient' );
 	} else {
-		// Core transients that do not have a timeout. Listed here so querying timeouts can be avoided.
+		// 没有超时的核心瞬变。这里列出了这样的查询超时，可以避免。
+        // Core transients that do not have a timeout. Listed here so querying timeouts can be avoided.
 		$no_timeout = array('update_core', 'update_plugins', 'update_themes');
 		$transient_option = '_site_transient_' . $transient;
 		if ( ! in_array( $transient, $no_timeout ) ) {

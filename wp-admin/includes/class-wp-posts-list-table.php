@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表API：WP_Posts_List_Table类
  * List Table API: WP_Posts_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 核心类用于实现列表中的显示。
  * Core class used to implement displaying posts in a list table.
  *
  * @since 3.1.0

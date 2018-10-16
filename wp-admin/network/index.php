@@ -1,7 +1,7 @@
 <?php
 /**
- * Multisite administration panel.
  * 多站点管理面板。
+ * Multisite administration panel.
  *
  * @package WordPress
  * @subpackage Multisite
@@ -14,6 +14,7 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 /** Load WordPress dashboard API */
 require_once( ABSPATH . 'wp-admin/includes/dashboard.php' );
 
+// 用户权限检测
 if ( ! current_user_can( 'manage_network' ) )
 	wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
 
@@ -67,7 +68,10 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
 
 <div id="dashboard-widgets-wrap">
 
-<?php wp_dashboard(); ?>
+<?php
+// 显示仪表板
+wp_dashboard();
+?>
 
 <div class="clear"></div>
 </div><!-- dashboard-widgets-wrap -->
@@ -75,5 +79,6 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
 </div><!-- wrap -->
 
 <?php
+// 渲染模板的事件的事件和新闻的部件。
 wp_print_community_events_templates();
 include( ABSPATH . 'wp-admin/admin-footer.php' );

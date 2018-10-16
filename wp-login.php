@@ -87,16 +87,20 @@ function login_header( $title = 'Log In', $message = '', $wp_error = null ) {
 
     // 以下是网页内容
 	?><!DOCTYPE html>
+    <!--浏览器判断-->
 	<!--[if IE 8]>
 		<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" <?php language_attributes(); ?>>
 	<![endif]-->
 	<!--[if !(IE 8) ]><!-->
 		<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<!--<![endif]-->
+    <!--以下是头部信息-->
 	<head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<title><?php echo $login_title; ?></title>
 	<?php
+
+    // 以下逻辑在网页头部加入
 
     // 输入CSS样式表
 	wp_enqueue_style( 'login' );
@@ -195,6 +199,8 @@ function login_header( $title = 'Log In', $message = '', $wp_error = null ) {
 
 	?>
 	</head>
+    <!--结束头部-->
+    <!--内容信息-->
 	<body class="login <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 	<?php
 	/**
@@ -309,7 +315,9 @@ function login_footer($input_id = '') {
 	do_action( 'login_footer' ); ?>
 	<div class="clear"></div>
 	</body>
+    <!--结束内容-->
 	</html>
+    <!--结束网页-->
 	<?php
 }
 
@@ -863,6 +871,7 @@ case 'register' :
 		exit;
 	}
 
+	// 如果用户注册被关闭
 	if ( !get_option('users_can_register') ) {
 		wp_redirect( site_url('wp-login.php?registration=disabled') );
 		exit();

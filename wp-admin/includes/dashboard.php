@@ -230,6 +230,7 @@ function wp_dashboard() {
 	}
 
 ?>
+    <!--显示仪表盘 由wp-admin/includes/dashboard.php->wp_dashboard()生成-->
 <div id="dashboard-widgets" class="metabox-holder<?php echo $columns_css; ?>">
 	<div id="postbox-container-1" class="postbox-container">
 	<?php do_meta_boxes( $screen->id, 'normal', '' ); ?>
@@ -970,6 +971,7 @@ function wp_dashboard_rss_output( $widget_id ) {
 }
 
 /**
+ * 检查是否检查了$check_urls中的所有反馈URL都被缓存。
  * Checks to see if all of the feed url in $check_urls are cached.
  *
  * If $check_urls is empty, look for the rss feed url found in the dashboard
@@ -1215,6 +1217,7 @@ function wp_print_community_events_markup() {
 }
 
 /**
+ * 渲染模板的事件的事件和新闻的部件。
  * Renders the events templates for the Event and News widget.
  *
  * @since 4.8.0

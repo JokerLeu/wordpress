@@ -1,7 +1,9 @@
 <?php
 /**
+ * 模板WordPress管理API。
  * Template WordPress Administration API.
  *
+ * 一团糟。也有一些很好的功能写得很好。
  * A Big Mess. Also some neat functions that are nicely written.
  *
  * @package WordPress
@@ -14,7 +16,7 @@ require_once( ABSPATH . 'wp-admin/includes/class-walker-category-checklist.php' 
 /** WP_Internal_Pointers class */
 require_once( ABSPATH . 'wp-admin/includes/class-wp-internal-pointers.php' );
 
-//
+// 类别检查表
 // Category Checklists
 //
 
@@ -1316,6 +1318,7 @@ function add_settings_field($id, $title, $callback, $page, $section = 'default',
 }
 
 /**
+ * 打印添加到特定设置页的所有设置部分
  * Prints out all settings sections added to a particular settings page
  *
  * Part of the Settings API. Use this in a settings page callback function
@@ -1350,6 +1353,7 @@ function do_settings_sections( $page ) {
 }
 
 /**
+ * 打印特定设置部分的设置字段
  * Print out the settings fields for a particular settings section
  *
  * Part of the Settings API. Use this in a settings page to output
@@ -1392,6 +1396,7 @@ function do_settings_fields($page, $section) {
 }
 
 /**
+ * 注册要显示给用户的设置错误
  * Register a settings error to be displayed to the user
  *
  * Part of the Settings API. Use this to show messages to users about settings validation
@@ -1485,6 +1490,7 @@ function get_settings_errors( $setting = '', $sanitize = false ) {
 }
 
 /**
+ * 显示由add_settings_error()注册的设置错误。
  * Display settings errors registered by add_settings_error().
  *
  * Part of the Settings API. Outputs a div for each error retrieved by
@@ -1533,6 +1539,7 @@ function settings_errors( $setting = '', $sanitize = false, $hide_on_update = fa
 }
 
 /**
+ * 输出用于将媒体连接到媒体列表屏幕中的帖子或页面的模式窗口。
  * Outputs the modal window used for attaching media to posts or pages in the media-listing screen.
  *
  * @since 2.7.0
@@ -1945,6 +1952,7 @@ function compression_test() {
 }
 
 /**
+ * 用提交的文本和适当的类回送提交按钮。
  * Echoes a submit button, with provided text and appropriate class(es).
  *
  * @since 3.1.0
@@ -2038,6 +2046,7 @@ function get_submit_button( $text = '', $type = 'primary large', $name = 'submit
 }
 
 /**
+ * wordpress后台html文件开始
  *
  * @global bool $is_IE
  */
@@ -2051,6 +2060,7 @@ function _wp_admin_html_begin() {
 
 ?>
 <!DOCTYPE html>
+<!--生成代码在wp-admin/includes/template.php的_wp_admin_html_begin()-->
 <!--[if IE 8]>
 <html xmlns="http://www.w3.org/1999/xhtml" class="ie8 <?php echo $admin_html_class; ?>" <?php
 	/**
@@ -2073,6 +2083,7 @@ function _wp_admin_html_begin() {
 }
 
 /**
+ * 将屏幕字符串转换为屏幕对象
  * Convert a screen string to a screen object
  *
  * @since 3.0.0
@@ -2100,6 +2111,7 @@ function convert_to_screen( $hook_name ) {
 }
 
 /**
+ * 输出用于恢复DOM存储中的POST数据的HTML
  * Output the HTML for restoring the post data from DOM storage
  *
  * @since 3.6.0
@@ -2120,6 +2132,7 @@ function _local_storage_notice() {
 }
 
 /**
+ * 输出具有给定评级星级评级的HTML元素。
  * Output a HTML element with a star rating for a given rating.
  *
  * Outputs a HTML element with the star rating exposed on a 0..5 scale in
@@ -2188,6 +2201,7 @@ function wp_star_rating( $args = array() ) {
 }
 
 /**
+ * 在编辑页面时输出通知（仅供内部使用）。
  * Output a notice when editing the page for posts (internal use only).
  *
  * @ignore

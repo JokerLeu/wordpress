@@ -29,6 +29,7 @@ if ( 'mail.example.com' === $mailserver_url || empty( $mailserver_url ) ) {
 }
 
 /**
+ * 触发允许插件通过电子邮件完成文章的完全接管。
  * Fires to allow a plugin to do a complete takeover of Post by Email.
  *
  * @since 2.9.0
@@ -127,7 +128,8 @@ for ( $i = 1; $i <= $count; $i++ ) {
 				$subject = $subject[0];
 			}
 
-			/*
+			/**
+             * 设置作者使用电子邮件地址（来自或回复，最后使用），否则使用站点管理员。
 			 * Set the author using the email address (From or Reply-To, the last used)
 			 * otherwise use the site admin.
 			 */
@@ -183,6 +185,7 @@ for ( $i = 1; $i <= $count; $i++ ) {
 	$content = trim($content);
 
 	/**
+     * 过滤电子邮件的原始内容。
 	 * Filters the original content of the email.
 	 *
 	 * Give Post-By-Email extending plugins full access to the content, either

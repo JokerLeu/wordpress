@@ -272,6 +272,7 @@ function category_description( $category = 0 ) {
 }
 
 /**
+ * 显示或检索类别的HTML下拉列表。
  * Display or retrieve the HTML dropdown list of categories.
  *
  * The 'hierarchical' argument, which is disabled by default, will override the

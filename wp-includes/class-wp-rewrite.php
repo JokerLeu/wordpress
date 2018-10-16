@@ -354,6 +354,7 @@ class WP_Rewrite {
 	}
 
 	/**
+     * 确定是否正在使用固定链接和重写模块未启用。
 	 * Determines whether permalinks are being used and rewrite module is not enabled.
 	 *
 	 * Means that permalink links are enabled and index.php is in the URL.
@@ -1436,6 +1437,7 @@ class WP_Rewrite {
 	}
 
 	/**
+     * 检索mod_rewrite-formatted重写规则以写入.htaccess。
 	 * Retrieves mod_rewrite-formatted rewrite rules to write to .htaccess.
 	 *
 	 * Does not actually write to the .htaccess file, but creates the rules for

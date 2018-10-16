@@ -1,5 +1,6 @@
 <?php
 /**
+ * 管理API：WP_List_Table类
  * Administration API: WP_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 在Ajax化HTML表中显示项目列表的基类。
  * Base class for displaying a list of items in an ajaxified HTML table.
  *
  * @since 3.1.0
@@ -16,6 +18,7 @@
 class WP_List_Table {
 
 	/**
+     * 当前项目列表。
 	 * The current list of items.
 	 *
 	 * @since 3.1.0
@@ -24,6 +27,7 @@ class WP_List_Table {
 	public $items;
 
 	/**
+     * 有关当前表的各种信息。
 	 * Various information about the current table.
 	 *
 	 * @since 3.1.0
@@ -32,6 +36,7 @@ class WP_List_Table {
 	protected $_args;
 
 	/**
+     * 显示分页所需的各种信息。
 	 * Various information needed for displaying the pagination.
 	 *
 	 * @since 3.1.0
@@ -40,6 +45,7 @@ class WP_List_Table {
 	protected $_pagination_args = array();
 
 	/**
+     * 当前屏幕。
 	 * The current screen.
 	 *
 	 * @since 3.1.0
@@ -48,6 +54,7 @@ class WP_List_Table {
 	protected $screen;
 
 	/**
+     * 缓存批量操作。
 	 * Cached bulk actions.
 	 *
 	 * @since 3.1.0
@@ -56,6 +63,7 @@ class WP_List_Table {
 	private $_actions;
 
 	/**
+     * 缓存分页输出。
 	 * Cached pagination output.
 	 *
 	 * @since 3.1.0
@@ -64,6 +72,7 @@ class WP_List_Table {
 	private $_pagination;
 
 	/**
+     * 视图切换器模式。
 	 * The view switcher modes.
 	 *
 	 * @since 4.1.0
@@ -72,6 +81,7 @@ class WP_List_Table {
 	protected $modes = array();
 
 	/**
+     * 存储由-> get_column_info()返回的值。
 	 * Stores the value returned by ->get_column_info().
 	 *
 	 * @since 4.1.0
@@ -97,6 +107,7 @@ class WP_List_Table {
 		'single_row_columns' );
 
 	/**
+     * 构造函数。
 	 * Constructor.
 	 *
 	 * The child class should call this constructor from its own constructor to override
@@ -155,6 +166,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 使私有属性的可读性向后兼容。
 	 * Make private properties readable for backward compatibility.
 	 *
 	 * @since 4.0.0
@@ -169,6 +181,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 使私有属性的可置位性向后兼容。
 	 * Make private properties settable for backward compatibility.
 	 *
 	 * @since 4.0.0
@@ -184,6 +197,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 使私有属性的可检查性向后兼容。
 	 * Make private properties checkable for backward compatibility.
 	 *
 	 * @since 4.0.0
@@ -198,6 +212,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 使私有属性的可复位性向后兼容。
 	 * Make private properties un-settable for backward compatibility.
 	 *
 	 * @since 4.0.0
@@ -211,6 +226,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 使私有/受保护的方法的可读性向后兼容性。
 	 * Make private/protected methods readable for backward compatibility.
 	 *
 	 * @since 4.0.0
@@ -227,6 +243,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 检查当前用户的权限
 	 * Checks the current user's permissions
 	 *
 	 * @since 3.1.0
@@ -656,6 +673,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 获取当前页码
 	 * Get the current page number
 	 *
 	 * @since 3.1.0
@@ -672,6 +690,7 @@ class WP_List_Table {
 	}
 
 	/**
+     * 获取单个页面上显示的项目数
 	 * Get number of items to display on a single page
 	 *
 	 * @since 3.1.0

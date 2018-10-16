@@ -9,8 +9,8 @@
  */
 
 /**
- * Core class used for switching locales.
  * 核心类WP_Locale_Switcher用于切换地区。
+ * Core class used for switching locales.
  *
  * @since 4.7.0
  */

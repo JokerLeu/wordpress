@@ -15,7 +15,8 @@
 
 ?>
 
-		</div><!-- #content -->
+		<!--代码在模板的footer.php文件-->
+        </div><!-- #content -->
 
 		<footer id="colophon" class="site-footer" role="contentinfo">
 			<div class="wrap">
@@ -46,7 +47,10 @@
 		</footer><!-- #colophon -->
 	</div><!-- .site-content-contain -->
 </div><!-- #page -->
-<?php wp_footer(); ?>
+<?php
+// 触发wp_footer页脚动作
+wp_footer();
+?>
 
 </body>
 </html>

@@ -124,6 +124,7 @@ if ( isset( $_GET['download'] ) ) {
 require_once( ABSPATH . 'wp-admin/admin-header.php' );
 
 /**
+ * 创建用于导出给定文章类型的DATE选项字段。
  * Create the date options fields for exporting a given post type.
  *
  * @global wpdb      $wpdb      WordPress database abstraction object.
@@ -157,32 +158,40 @@ function export_date_options( $post_type = 'post' ) {
 }
 ?>
 
+<!--代码在wp-admin/export.php文件-->
 <div class="wrap">
+    <!--页面标题 导出-->
 <h1><?php echo esc_html( $title ); ?></h1>
 
 <p><?php _e('When you click the button below WordPress will create an XML file for you to save to your computer.'); ?></p>
 <p><?php _e('This format, which we call WordPress eXtended RSS or WXR, will contain your posts, pages, comments, custom fields, categories, and tags.'); ?></p>
 <p><?php _e('Once you&#8217;ve saved the download file, you can use the Import function in another WordPress installation to import the content from this site.'); ?></p>
 
+    <!--选择导出的内容-->
 <h2><?php _e( 'Choose what to export' ); ?></h2>
 <form method="get" id="export-filters">
 <fieldset>
 <legend class="screen-reader-text"><?php _e( 'Content to export' ); ?></legend>
+    <!--所有内容-->
 <input type="hidden" name="download" value="true" />
 <p><label><input type="radio" name="content" value="all" checked="checked" aria-describedby="all-content-desc" /> <?php _e( 'All content' ); ?></label></p>
 <p class="description" id="all-content-desc"><?php _e( 'This will contain all of your posts, pages, comments, custom fields, terms, navigation menus, and custom posts.' ); ?></p>
 
+    <!--文章-->
 <p><label><input type="radio" name="content" value="posts" /> <?php _e( 'Posts' ); ?></label></p>
 <ul id="post-filters" class="export-filters">
+    <!--文章-分类目录-->
 	<li>
 		<label><span class="label-responsive"><?php _e( 'Categories:' ); ?></span>
 		<?php wp_dropdown_categories( array( 'show_option_all' => __('All') ) ); ?>
 		</label>
 	</li>
+    <!--文章-作者-->
 	<li>
 		<label><span class="label-responsive"><?php _e( 'Authors:' ); ?></span>
 		<?php
 		$authors = $wpdb->get_col( "SELECT DISTINCT post_author FROM {$wpdb->posts} WHERE post_type = 'post'" );
+		// 创建用户下拉HTML内容。
 		wp_dropdown_users( array(
 			'include' => $authors,
 			'name' => 'post_author',
@@ -192,6 +201,7 @@ function export_date_options( $post_type = 'post' ) {
 		) ); ?>
 		</label>
 	</li>
+    <!--文章-开始日期 结束日期-->
 	<li>
 		<fieldset>
 		<legend class="screen-reader-text"><?php _e( 'Date range:' ); ?></legend>
@@ -207,24 +217,30 @@ function export_date_options( $post_type = 'post' ) {
 		</select>
 		</fieldset>
 	</li>
+    <!--文章-状态-->
 	<li>
 		<label for="post-status" class="label-responsive"><?php _e( 'Status:' ); ?></label>
 		<select name="post_status" id="post-status">
 			<option value="0"><?php _e( 'All' ); ?></option>
-			<?php $post_stati = get_post_stati( array( 'internal' => false ), 'objects' );
-			foreach ( $post_stati as $status ) : ?>
+			<?php
+            // 获取文章状态列表。
+            $post_stati = get_post_stati( array( 'internal' => false ), 'objects' );
+			foreach ( $post_stati as $status ) :?>
 			<option value="<?php echo esc_attr( $status->name ); ?>"><?php echo esc_html( $status->label ); ?></option>
 			<?php endforeach; ?>
 		</select>
 	</li>
 </ul>
 
+    <!--页面-->
 <p><label><input type="radio" name="content" value="pages" /> <?php _e( 'Pages' ); ?></label></p>
 <ul id="page-filters" class="export-filters">
+    <!--页面-作者-->
 	<li>
 		<label><span class="label-responsive"><?php _e( 'Authors:' ); ?></span>
 		<?php
 		$authors = $wpdb->get_col( "SELECT DISTINCT post_author FROM {$wpdb->posts} WHERE post_type = 'page'" );
+		// 创建用户下拉HTML内容。
 		wp_dropdown_users( array(
 			'include' => $authors,
 			'name' => 'page_author',
@@ -234,6 +250,7 @@ function export_date_options( $post_type = 'post' ) {
 		) ); ?>
 		</label>
 	</li>
+        <!--页面 开始日期 结束日期-->
 	<li>
 		<fieldset>
 		<legend class="screen-reader-text"><?php _e( 'Date range:' ); ?></legend>
@@ -249,6 +266,7 @@ function export_date_options( $post_type = 'post' ) {
 		</select>
 		</fieldset>
 	</li>
+        <!--页面-状态-->
 	<li>
 		<label for="page-status" class="label-responsive"><?php _e( 'Status:' ); ?></label>
 		<select name="page_status" id="page-status">
@@ -264,8 +282,10 @@ function export_date_options( $post_type = 'post' ) {
 <p><label><input type="radio" name="content" value="<?php echo esc_attr( $post_type->name ); ?>" /> <?php echo esc_html( $post_type->label ); ?></label></p>
 <?php endforeach; ?>
 
+    <!--媒体-->
 <p><label><input type="radio" name="content" value="attachment" /> <?php _e( 'Media' ); ?></label></p>
 <ul id="attachment-filters" class="export-filters">
+    <!--媒体-开始日期 结束日期-->
 	<li>
 		<fieldset>
 		<legend class="screen-reader-text"><?php _e( 'Date range:' ); ?></legend>

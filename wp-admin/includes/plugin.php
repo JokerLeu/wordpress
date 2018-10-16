@@ -1573,6 +1573,7 @@ function get_admin_page_parent( $parent = '' ) {
 }
 
 /**
+ * 获取管理员页面标题
  *
  * @global string $title
  * @global array $menu
@@ -1859,6 +1860,7 @@ function remove_option_whitelist( $del_options, $options = '' ) {
 }
 
 /**
+ * 设置页的输出nonce、action和option_page页字段。
  * Output nonce, action, and option_page fields for a settings page.
  *
  * @since 2.7.0

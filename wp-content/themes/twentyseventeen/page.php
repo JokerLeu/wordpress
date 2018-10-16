@@ -16,6 +16,7 @@
  * @version 1.0
  */
 
+// 加载头部模板
 get_header(); ?>
 
 <div class="wrap">
@@ -24,11 +25,14 @@ get_header(); ?>
 
 			<?php
 			while ( have_posts() ) :
+                // 在循环中迭代POST索引
 				the_post();
 
+			    // 将模板部件加载到模板中
 				get_template_part( 'template-parts/page/content', 'page' );
 
-				// If comments are open or we have at least one comment, load up the comment template.
+				// 如果评论是开放的，或者我们至少有一个评论，加载评论模板。
+                // If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) :
 					comments_template();
 				endif;
@@ -41,4 +45,5 @@ get_header(); ?>
 </div><!-- .wrap -->
 
 <?php
+// 加载页脚模板
 get_footer();

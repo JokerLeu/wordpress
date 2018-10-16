@@ -1,5 +1,6 @@
 <?php
 /**
+ * 设置-隐私 隐私设置屏幕
  * Privacy Settings Screen.
  *
  * @package WordPress

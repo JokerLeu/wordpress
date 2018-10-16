@@ -16,8 +16,10 @@
  * @version 1.0
  */
 
+// 加载头部模板header.php
 get_header(); ?>
 
+<!--此部分代码在模板的index.php中-->
 <div class="wrap">
 	<?php if ( is_home() && ! is_front_page() ) : ?>
 		<header class="page-header">
@@ -35,11 +37,16 @@ get_header(); ?>
 			<?php
 			if ( have_posts() ) :
 
-				/* Start the Loop */
+				/**
+                 * 启动循环
+                 * Start the Loop
+                 */
 				while ( have_posts() ) :
+                    // 在循环中迭代POST索引
 					the_post();
 
-					/*
+					/**
+                     * 包含内容的POST格式特定模板。
 					 * Include the Post-Format-specific template for the content.
 					 * If you want to override this in a child theme, then include a file
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
@@ -48,6 +55,7 @@ get_header(); ?>
 
 				endwhile;
 
+				// 在适用时，显示下一页/前一组帖子的分页导航。
 				the_posts_pagination(
 					array(
 						'prev_text'          => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
@@ -65,8 +73,12 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php get_sidebar(); ?>
+	<?php
+    // 加载侧边栏模板sidebar.php
+    get_sidebar();
+    ?>
 </div><!-- .wrap -->
 
 <?php
+// 加载页脚模板footer.php
 get_footer();

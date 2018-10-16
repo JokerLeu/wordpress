@@ -346,6 +346,7 @@ function wp_debug_mode() {
 }
 
 /**
+ * 设置语言目录的位置。
  * Set the location of the language directory.
  *
  * To set directory manually, define the `WP_LANG_DIR` constant
@@ -362,6 +363,7 @@ function wp_set_lang_dir() {
 	if ( !defined( 'WP_LANG_DIR' ) ) {
 		if ( file_exists( WP_CONTENT_DIR . '/languages' ) && @is_dir( WP_CONTENT_DIR . '/languages' ) || !@is_dir(ABSPATH . WPINC . '/languages') ) {
 			/**
+             * 语言目录的服务器路径。
 			 * Server path of the language directory.
 			 *
 			 * No leading slash, no trailing slash, full path, not relative to ABSPATH
@@ -375,6 +377,7 @@ function wp_set_lang_dir() {
 			}
 		} else {
 			/**
+             * 语言目录的服务器路径。
 			 * Server path of the language directory.
 			 *
 			 * No leading slash, no trailing slash, full path, not relative to `ABSPATH`.
@@ -383,7 +386,8 @@ function wp_set_lang_dir() {
 			 */
 			define( 'WP_LANG_DIR', ABSPATH . WPINC . '/languages' );
 			if ( !defined( 'LANGDIR' ) ) {
-				// Old relative path maintained for backward compatibility.
+				// 保持相对兼容性的旧相对路径。
+                // Old relative path maintained for backward compatibility.
 				define( 'LANGDIR', WPINC . '/languages' );
 			}
 		}
@@ -391,6 +395,7 @@ function wp_set_lang_dir() {
 }
 
 /**
+ * 加载数据库类文件并实例化“$wpdb”全局。
  * Load the database class file and instantiate the `$wpdb` global.
  *
  * @since 2.5.0

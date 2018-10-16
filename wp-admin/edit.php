@@ -16,6 +16,7 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 if ( ! $typenow )
 	wp_die( __( 'Invalid post type.' ) );
 
+// 获取所有已注册的POST类型对象的列表。
 if ( ! in_array( $typenow, get_post_types( array( 'show_ui' => true ) ) ) ) {
 	wp_die( __( 'Sorry, you are not allowed to edit posts in this post type.' ) );
 }
@@ -33,11 +34,14 @@ if ( 'attachment' === $typenow ) {
 global $post_type, $post_type_object;
 
 $post_type = $typenow;
+// 通过名称检索一个POST类型对象。
 $post_type_object = get_post_type_object( $post_type );
 
+// 若非post类型对象
 if ( ! $post_type_object )
 	wp_die( __( 'Invalid post type.' ) );
 
+// 用户权限检测
 if ( ! current_user_can( $post_type_object->cap->edit_posts ) ) {
 	wp_die(
 		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
@@ -46,6 +50,7 @@ if ( ! current_user_can( $post_type_object->cap->edit_posts ) ) {
 	);
 }
 
+// 获取一个WP_List_Table类的实例（核心类用于实现列表中的显示）
 $wp_list_table = _get_list_table('WP_Posts_List_Table');
 $pagenum = $wp_list_table->get_pagenum();
 
@@ -188,13 +193,16 @@ wp_enqueue_script('heartbeat');
 
 $title = $post_type_object->labels->name;
 
+//
 if ( 'post' == $post_type ) {
+    // 帮助-概述
 	get_current_screen()->add_help_tab( array(
 	'id'		=> 'overview',
 	'title'		=> __('Overview'),
 	'content'	=>
 		'<p>' . __('This screen provides access to all of your posts. You can customize the display of this screen to suit your workflow.') . '</p>'
 	) );
+	// 帮助-页面内容
 	get_current_screen()->add_help_tab( array(
 	'id'		=> 'screen-content',
 	'title'		=> __('Screen Content'),
@@ -207,6 +215,7 @@ if ( 'post' == $post_type ) {
 			'<li>' . __('You can refine the list to show only posts in a specific category or from a specific month by using the dropdown menus above the posts list. Click the Filter button after making your selection. You also can refine the list by clicking on the post author, category or tag in the posts list.') . '</li>' .
 		'</ul>'
 	) );
+	// 帮助-可进行的操作
 	get_current_screen()->add_help_tab( array(
 	'id'		=> 'action-links',
 	'title'		=> __('Available Actions'),
@@ -219,6 +228,7 @@ if ( 'post' == $post_type ) {
 			'<li>' . __('<strong>Preview</strong> will show you what your draft post will look like if you publish it. View will take you to your live site to view the post. Which link is available depends on your post&#8217;s status.') . '</li>' .
 		'</ul>'
 	) );
+	// 帮助-批量操作
 	get_current_screen()->add_help_tab( array(
 	'id'		=> 'bulk-actions',
 	'title'		=> __('Bulk Actions'),
@@ -227,6 +237,7 @@ if ( 'post' == $post_type ) {
 				'<p>' . __('When using Bulk Edit, you can change the metadata (categories, author, etc.) for all selected posts at once. To remove a post from the grouping, just click the x next to its name in the Bulk Edit area that appears.') . '</p>'
 	) );
 
+	// 帮助-更多信息
 	get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Posts_Screen">Documentation on Managing Posts</a>') . '</p>' .

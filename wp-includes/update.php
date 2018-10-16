@@ -585,6 +585,7 @@ function wp_get_translation_updates() {
 }
 
 /**
+ * 为可用的更新收集计数和UI字符串
  * Collect counts and UI strings for available updates
  *
  * @since 3.3.0

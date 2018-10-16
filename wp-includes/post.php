@@ -1,16 +1,18 @@
 <?php
 /**
+ * 核心帖子API
  * Core Post API
  *
  * @package WordPress
  * @subpackage Post
  */
 
-//
+// 帖子类型登记
 // Post Type Registration
 //
 
 /**
+ * 当启动“init”操作时，创建初始的帖子类型。
  * Creates the initial post types when 'init' action is fired.
  *
  * See {@see 'init'}.
@@ -18,6 +20,7 @@
  * @since 2.9.0
  */
 function create_initial_post_types() {
+    // 注册一个帖子类型。
 	register_post_type( 'post', array(
 		'labels' => array(
 			'name_admin_bar' => _x( 'Post', 'add new from admin bar' ),
@@ -87,6 +90,7 @@ function create_initial_post_types() {
 		'rest_base' => 'media',
 		'rest_controller_class' => 'WP_REST_Attachments_Controller',
 	) );
+	// 为帖子类型注册某些特性。
 	add_post_type_support( 'attachment:audio', 'thumbnail' );
 	add_post_type_support( 'attachment:video', 'thumbnail' );
 
@@ -553,6 +557,7 @@ function get_extended( $post ) {
 }
 
 /**
+ * 检索给定后ID或POST对象的POST数据。
  * Retrieves post data given a post ID or post object.
  *
  * See sanitize_post() for optional $filter values. Also, the parameter
@@ -918,6 +923,7 @@ function get_post_status_object( $post_status ) {
 }
 
 /**
+ * 获取文章状态列表。
  * Get a list of post statuses.
  *
  * @since 3.0.0
@@ -992,6 +998,7 @@ function get_post_type( $post = null ) {
 }
 
 /**
+ * 通过名称检索一个POST类型对象。
  * Retrieves a post type object by name.
  *
  * @since 3.0.0
@@ -1015,6 +1022,7 @@ function get_post_type_object( $post_type ) {
 }
 
 /**
+ * 获取所有已注册的POST类型对象的列表。
  * Get a list of all registered post type objects.
  *
  * @since 2.9.0
@@ -1041,6 +1049,7 @@ function get_post_types( $args = array(), $output = 'names', $operator = 'and' )
 }
 
 /**
+ * 注册一个帖子类型。
  * Registers a post type.
  *
  * Note: Post type registrations should not be hooked before the
@@ -1554,6 +1563,7 @@ function _add_post_type_submenus() {
 }
 
 /**
+ * 为帖子类型注册某些特性。
  * Register support of certain features for a post type.
  *
  * All core features are directly associated with a functional area of the edit

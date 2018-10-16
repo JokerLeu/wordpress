@@ -1,5 +1,6 @@
 <?php
 /**
+ * 设置-媒体选项 媒体设置管理面板。
  * Media settings administration panel.
  *
  * @package WordPress
@@ -9,37 +10,47 @@
 /** WordPress Administration Bootstrap */
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
+// 检测用户权限
 if ( ! current_user_can( 'manage_options' ) )
 	wp_die( __( 'Sorry, you are not allowed to manage options for this site.' ) );
 
+// 页面标题
 $title = __('Media Settings');
+// 父页面
 $parent_file = 'options-general.php';
 
+// 帮助内容
 $media_options_help = '<p>' . __('You can set maximum sizes for images inserted into your written content; you can also insert an image as Full Size.') . '</p>';
 
+// 多站点检测
 if ( ! is_multisite() && ( get_option('upload_url_path') || ( get_option('upload_path') != 'wp-content/uploads' && get_option('upload_path') ) ) ) {
 	$media_options_help .= '<p>' . __('Uploading Files allows you to choose the folder and path for storing your uploaded files.') . '</p>';
 }
 
 $media_options_help .= '<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>';
 
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
 	'title'   => __('Overview'),
 	'content' => $media_options_help,
 ) );
 
+// 帮助-更多信息：
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Settings_Media_Screen">Documentation on Media Settings</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/">Support Forums</a>') . '</p>'
 );
 
+// 添加页面头部
 include( ABSPATH . 'wp-admin/admin-header.php' );
 
 ?>
 
+<!--代码在wp-admin/options-media.php文件中-->
 <div class="wrap">
+    <!--标题 媒体选项-->
 <h1><?php echo esc_html( $title ); ?></h1>
 
 <form action="options.php" method="post">
@@ -49,6 +60,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 <p><?php _e( 'The sizes listed below determine the maximum dimensions in pixels to use when adding an image to the Media Library.' ); ?></p>
 
 <table class="form-table">
+    <!--缩略图大小-->
 <tr>
 <th scope="row"><?php _e('Thumbnail size') ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e( 'Thumbnail size' ); ?></span></legend>
@@ -63,6 +75,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 </td>
 </tr>
 
+    <!--中等大小-->
 <tr>
 <th scope="row"><?php _e('Medium size') ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Medium size'); ?></span></legend>
@@ -74,6 +87,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 </fieldset></td>
 </tr>
 
+    <!--大尺寸-->
 <tr>
 <th scope="row"><?php _e('Large size') ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Large size'); ?></span></legend>
@@ -85,7 +99,10 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 </fieldset></td>
 </tr>
 
-<?php do_settings_fields('media', 'default'); ?>
+<?php
+// 打印特定设置部分的设置字段
+do_settings_fields('media', 'default');
+?>
 </table>
 
 <?php
@@ -100,9 +117,11 @@ if ( isset( $GLOBALS['wp_settings']['media']['embeds'] ) ) : ?>
 <?php endif; ?>
 
 <?php if ( !is_multisite() ) : ?>
+<!--文件上传-->
 <h2 class="title"><?php _e('Uploading Files'); ?></h2>
 <table class="form-table">
 <?php
+// 如果upload_url_path不是默认的（空的），并且upload_path不是默认的（“wp-content/uploads”或空的）
 // If upload_url_path is not the default (empty), and upload_path is not the default ('wp-content/uploads' or empty)
 if ( get_option('upload_url_path') || ( get_option('upload_path') != 'wp-content/uploads' && get_option('upload_path') ) ) :
 ?>

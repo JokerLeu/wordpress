@@ -13,6 +13,7 @@
 
 <?php $unique_id = esc_attr( uniqid( 'search-form-' ) ); ?>
 
+<!--代码在模板的searchform.php文件中-->
 <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<label for="<?php echo $unique_id; ?>">
 		<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'twentyseventeen' ); ?></span>

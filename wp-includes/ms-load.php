@@ -1,5 +1,6 @@
 <?php
 /**
+ * 这些功能需要加载多站点。
  * These functions are needed to load Multisite.
  *
  * @since 3.0.0
@@ -9,6 +10,7 @@
  */
 
 /**
+ * 是否启用子域名配置。
  * Whether a subdomain configuration is enabled.
  *
  * @since 3.0.0
@@ -23,6 +25,7 @@ function is_subdomain_install() {
 }
 
 /**
+ * 返回要包含在全局范围内的网络插件文件的数组。
  * Returns array of network plugin files to be included in global scope.
  *
  * The default directory is wp-content/plugins. To change the default directory
@@ -53,6 +56,7 @@ function wp_get_active_network_plugins() {
 }
 
 /**
+ * 检查当前博客的状态。
  * Checks status of current blog.
  *
  * Checks if the blog is deleted, inactive, archived, or spammed.
@@ -118,6 +122,7 @@ function ms_site_check() {
 }
 
 /**
+ * 检索域和路径的最接近匹配网络。
  * Retrieve the closest matching network for a domain and path.
  *
  * @since 3.9.0
@@ -134,6 +139,7 @@ function get_network_by_path( $domain, $path, $segments = null ) {
 }
 
 /**
+ * 通过其域和路径检索最接近的匹配站点对象。
  * Retrieves the closest matching site object by its domain and path.
  *
  * This will not necessarily return an exact match for a domain and path. Instead, it
@@ -430,6 +436,7 @@ function ms_load_current_site_and_network( $domain, $path, $subdomain = false ) 
 }
 
 /**
+ * 显示失败消息。
  * Displays a failure message.
  *
  * Used when a blog's tables do not exist. Checks for a missing $wpdb->site table as well.
@@ -490,6 +497,7 @@ function ms_not_installed( $domain, $path ) {
 }
 
 /**
+ * 这个被弃用的函数以前设置了$current_site对象的site_name属性。
  * This deprecated function formerly set the site_name property of the $current_site object.
  *
  * This function simply returns the object, as before.
@@ -508,6 +516,7 @@ function get_current_site_name( $current_site ) {
 }
 
 /**
+ * 这个不受欢迎的函数管理多站点和多站点的网络加载。
  * This deprecated function managed much of the site and network loading in multisite.
  *
  * The current bootstrap code is now responsible for parsing the site and network load as
@@ -528,6 +537,7 @@ function wpmu_current_site() {
 }
 
 /**
+ * 检索包含关于所请求的网络的信息的对象。
  * Retrieve an object containing information about the requested network.
  *
  * @since 3.9.0

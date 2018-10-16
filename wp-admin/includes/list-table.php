@@ -1,5 +1,6 @@
 <?php
 /**
+ * 助手函数，用于显示Ajax化HTML表中的项目列表。
  * Helper functions for displaying a list of items in an ajaxified HTML table.
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 获取一个WP_List_Table类的实例。
  * Fetch an instance of a WP_List_Table class.
  *
  * @access private

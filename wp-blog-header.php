@@ -11,16 +11,16 @@ if ( !isset($wp_did_header) ) {
 
 	$wp_did_header = true;
 
+    // 加载WordPress库
 	// Load the WordPress library.
-	// 加载WordPress库
 	require_once( dirname(__FILE__) . '/wp-load.php' );
 
+    // 设置WordPress查询.
 	// Set up the WordPress query.
-	// 设置WordPress查询.
 	wp();
 
+    // 加载主题模板.
 	// Load the theme template.
-	// 加载主题模板.
 	require_once( ABSPATH . WPINC . '/template-loader.php' );
 
 }

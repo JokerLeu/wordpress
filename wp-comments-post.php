@@ -18,11 +18,16 @@ if ( 'POST' != $_SERVER['REQUEST_METHOD'] ) {
 	exit;
 }
 
-/** Sets up the WordPress Environment. */
+/**
+ * 设置WordPress环境。
+ * Sets up the WordPress Environment.
+ */
 require( dirname(__FILE__) . '/wp-load.php' );
 
+// 设置标题以防止不同浏览器的缓存。
 nocache_headers();
 
+// 处理评论的提交，通常通过评论表单提交给wp-comments-post.php（从字符串或字符串数组中删除斜杠。）
 $comment = wp_handle_comment_submission( wp_unslash( $_POST ) );
 if ( is_wp_error( $comment ) ) {
 	$data = intval( $comment->get_error_data() );
@@ -33,6 +38,7 @@ if ( is_wp_error( $comment ) ) {
 	}
 }
 
+// 实例化检索当前用户对象。
 $user = wp_get_current_user();
 $cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
 
@@ -49,6 +55,7 @@ $cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
  */
 do_action( 'set_comment_cookies', $comment, $user, $cookies_consent );
 
+// 检索到给定评论的链接。
 $location = empty( $_POST['redirect_to'] ) ? get_comment_link( $comment ) : $_POST['redirect_to'] . '#comment-' . $comment->comment_ID;
 
 /**
@@ -62,5 +69,6 @@ $location = empty( $_POST['redirect_to'] ) ? get_comment_link( $comment ) : $_PO
  */
 $location = apply_filters( 'comment_post_redirect', $location, $comment );
 
+// 使用wp_redirect()执行安全的（本地）重定向。
 wp_safe_redirect( $location );
 exit;

@@ -1,5 +1,6 @@
 <?php
 /**
+ * 文件系统API：顶层功能
  * Filesystem API: Top-level functionality
  *
  * Functions for reading, writing, modifying, and deleting files on the file system.
@@ -11,7 +12,10 @@
  * @since 2.3.0
  */
 
-/** The descriptions for theme files. */
+/**
+ *  wordpress文件的描述。
+ * The descriptions for theme files.
+ */
 $wp_file_descriptions = array(
 	'functions.php'         => __( 'Theme Functions' ),
 	'header.php'            => __( 'Theme Header' ),
@@ -21,7 +25,8 @@ $wp_file_descriptions = array(
 	'searchform.php'        => __( 'Search Form' ),
 	'404.php'               => __( '404 Template' ),
 	'link.php'              => __( 'Links Template' ),
-	// Archives
+	// 档案
+    // Archives
 	'index.php'             => __( 'Main Index Template' ),
 	'archive.php'           => __( 'Archives' ),
 	'author.php'            => __( 'Author Template' ),
@@ -31,32 +36,38 @@ $wp_file_descriptions = array(
 	'home.php'              => __( 'Posts Page' ),
 	'search.php'            => __( 'Search Results' ),
 	'date.php'              => __( 'Date Template' ),
-	// Content
+	// 内容
+    // Content
 	'singular.php'          => __( 'Singular Template' ),
 	'single.php'            => __( 'Single Post' ),
 	'page.php'              => __( 'Single Page' ),
 	'front-page.php'        => __( 'Homepage' ),
-	// Attachments
+	// 附件
+    // Attachments
 	'attachment.php'        => __( 'Attachment Template' ),
 	'image.php'             => __( 'Image Attachment Template' ),
 	'video.php'             => __( 'Video Attachment Template' ),
 	'audio.php'             => __( 'Audio Attachment Template' ),
 	'application.php'       => __( 'Application Attachment Template' ),
-	// Embeds
+	// 嵌入
+    // Embeds
 	'embed.php'             => __( 'Embed Template' ),
 	'embed-404.php'         => __( 'Embed 404 Template' ),
 	'embed-content.php'     => __( 'Embed Content Template' ),
 	'header-embed.php'      => __( 'Embed Header Template' ),
 	'footer-embed.php'      => __( 'Embed Footer Template' ),
-	// Stylesheets
+	// 样式表
+    // Stylesheets
 	'style.css'             => __( 'Stylesheet' ),
 	'editor-style.css'      => __( 'Visual Editor Stylesheet' ),
 	'editor-style-rtl.css'  => __( 'Visual Editor RTL Stylesheet' ),
 	'rtl.css'               => __( 'RTL Stylesheet' ),
-	// Other
+	// 其他
+    // Other
 	'my-hacks.php'          => __( 'my-hacks.php (legacy hacks support)' ),
 	'.htaccess'             => __( '.htaccess (for rewrite rules )' ),
-	// Deprecated files
+	// 弃用文件
+    // Deprecated files
 	'wp-layout.css'         => __( 'Stylesheet' ),
 	'wp-comments.php'       => __( 'Comments Template' ),
 	'wp-comments-popup.php' => __( 'Popup Comments Template' ),
@@ -64,6 +75,7 @@ $wp_file_descriptions = array(
 );
 
 /**
+ * 获取标准WordPress主题文件和其他各种标准WordPress文件的说明
  * Get the description for standard WordPress theme files and other various standard
  * WordPress files
  *
@@ -94,6 +106,7 @@ function get_file_description( $file ) {
 }
 
 /**
+ * 获取WordPress安装根目录的绝对文件系统路径
  * Get the absolute filesystem path to the root of the WordPress installation
  *
  * @since 1.5.0
@@ -230,6 +243,7 @@ function wp_get_plugin_file_editable_extensions( $plugin ) {
 }
 
 /**
+ * 获取可用于给定主题的文件扩展名列表。
  * Get list of file extensions that are editable for a given theme.
  *
  * @param WP_Theme $theme Theme.
@@ -273,6 +287,7 @@ function wp_get_theme_file_editable_extensions( $theme ) {
 	);
 
 	/**
+     * 在主题编辑器中筛选允许编辑的文件类型列表。
 	 * Filters the list of file types allowed for editing in the Theme editor.
 	 *
 	 * @since 4.4.0
@@ -287,6 +302,7 @@ function wp_get_theme_file_editable_extensions( $theme ) {
 }
 
 /**
+ * 打印文件编辑器模板（插件和主题）。
  * Print file editor templates (for plugins and themes).
  *
  * @since 4.9.0
@@ -329,6 +345,7 @@ function wp_print_file_editor_templates() {
 }
 
 /**
+ * 尝试编辑主题或插件的文件。
  * Attempt to edit a file for a theme or plugin.
  *
  * When editing a PHP file, loopback requests will be made to the admin and the homepage
@@ -654,6 +671,7 @@ function wp_tempnam( $filename = '', $dir = '' ) {
 }
 
 /**
+ * 确保被编辑的文件被允许编辑。
  * Makes sure that the file that was requested to be edited is allowed to be edited.
  *
  * Function will die if you are not allowed to edit the file.
@@ -1773,6 +1791,7 @@ foreach ( (array) $extra_fields as $field ) {
 }
 
 /**
+ * 在需要时打印文件系统凭据模式。
  * Print the filesystem credentials modal when needed.
  *
  * @since 4.2.0

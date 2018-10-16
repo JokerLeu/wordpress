@@ -1,5 +1,6 @@
 <?php
 /**
+ * 升级API：WPB自动更新器类
  * Upgrade API: WP_Automatic_Updater class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于处理自动后台更新的核心类。
  * Core class used for handling automatic background updates.
  *
  * @since 3.7.0
@@ -16,6 +18,7 @@
 class WP_Automatic_Updater {
 
 	/**
+     * 跟踪处理过程中的更新结果。
 	 * Tracks update results during processing.
 	 *
 	 * @var array
@@ -23,6 +26,7 @@ class WP_Automatic_Updater {
 	protected $update_results = array();
 
 	/**
+     * 是否禁用整个自动更新程序。
 	 * Whether the entire automatic updater is disabled.
 	 *
 	 * @since 3.7.0
@@ -54,6 +58,7 @@ class WP_Automatic_Updater {
 	}
 
 	/**
+     * 检查版本控制签出。
 	 * Check for version control checkouts.
 	 *
 	 * Checks for Subversion, Git, Mercurial, and Bazaar. It recursively looks up the
@@ -115,6 +120,7 @@ class WP_Automatic_Updater {
 	}
 
 	/**
+     * 测试，看看我们是否能够并且应该更新一个特定的项目。
 	 * Tests to see if we can and should update a specific item.
 	 *
 	 * @since 3.7.0
@@ -198,6 +204,7 @@ class WP_Automatic_Updater {
 	}
 
 	/**
+     * 通知管理员一个核心更新。
 	 * Notifies an administrator of a core update.
 	 *
 	 * @since 3.7.0
@@ -241,6 +248,7 @@ class WP_Automatic_Updater {
 	}
 
 	/**
+     * 如果合适的话，更新一个项目。
 	 * Update an item, if appropriate.
 	 *
 	 * @since 3.7.0

@@ -419,6 +419,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 设置屏幕的父信息。
 	 * Set the parent information for the screen.
 	 * This is called in admin-header.php after the menu parent for the screen has been determined.
 	 *
@@ -544,6 +545,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 在屏幕的上下文帮助中添加帮助选项卡。在load-$pagenow挂钩上调用相关屏幕。
 	 * Add a help tab to the contextual help for the screen.
 	 * Call this on the load-$pagenow hook for the relevant screen.
 	 *
@@ -572,11 +574,13 @@ final class WP_Screen {
 
 		$args['id'] = sanitize_html_class( $args['id'] );
 
-		// Ensure we have an ID and title.
+		// 确保我们有ID和标题
+        // Ensure we have an ID and title.
 		if ( ! $args['id'] || ! $args['title'] )
 			return;
 
-		// Allows for overriding an existing tab with that ID.
+		// 允许用ID覆盖现有的选项卡
+        // Allows for overriding an existing tab with that ID.
 		$this->_help_tabs[ $args['id'] ] = $args;
 	}
 
@@ -612,6 +616,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 将侧边栏添加到屏幕的上下文帮助中。
 	 * Add a sidebar to the contextual help for the screen.
 	 * Call this in template files after admin.php is loaded and before admin-header.php is loaded to add a sidebar to the contextual help.
 	 *
@@ -624,6 +629,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 获取用户已选择的布局列数。
 	 * Gets the number of layout columns the user has selected.
 	 *
 	 * The layout_columns option controls the max number and default number of
@@ -641,6 +647,7 @@ final class WP_Screen {
 	}
 
  	/**
+     * 获取屏幕上可用的隐藏标题和文本。
 	 * Get the accessible hidden headings and text used in the screen.
 	 *
 	 * @since 4.4.0
@@ -654,6 +661,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 获取屏幕阅读器文本字符串。
 	 * Get a screen reader text string.
 	 *
 	 * @since 4.4.0
@@ -669,6 +677,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 为屏幕添加可访问的隐藏标题和文本。
 	 * Add accessible hidden headings and text for the screen.
 	 *
 	 * @since 4.4.0
@@ -705,6 +714,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 渲染屏幕的帮助部分。
 	 * Render the screen's help section.
 	 *
 	 * This will trigger the deprecated filters for backward compatibility.
@@ -946,6 +956,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 呈现屏幕选项选项卡。
 	 * Render the screen options tab.
 	 *
 	 * @since 3.3.0
@@ -1001,6 +1012,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 渲染元框首选项。
 	 * Render the meta boxes preferences.
 	 *
 	 * @since 4.4.0
@@ -1251,6 +1263,7 @@ final class WP_Screen {
 	}
 
 	/**
+     * 渲染屏幕阅读器文本。
 	 * Render screen reader text.
 	 *
 	 * @since 4.4.0

@@ -2532,7 +2532,8 @@ function the_posts_navigation( $args = array() ) {
 function get_the_posts_pagination( $args = array() ) {
 	$navigation = '';
 
-	// Don't print empty markup if there's only one page.
+	// 如果只有一个页面，不要打印空标记。
+    // Don't print empty markup if there's only one page.
 	if ( $GLOBALS['wp_query']->max_num_pages > 1 ) {
 		$args = wp_parse_args( $args, array(
 			'mid_size'           => 1,
@@ -2571,6 +2572,7 @@ function the_posts_pagination( $args = array() ) {
 }
 
 /**
+ * 包装通过导航标记中的链接。
  * Wraps passed links in navigational markup.
  *
  * @since 4.1.0

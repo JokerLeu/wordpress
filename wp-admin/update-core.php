@@ -13,9 +13,11 @@
  */
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
+// 输入CSS样式表。
 wp_enqueue_style( 'plugin-install' );
 wp_enqueue_script( 'plugin-install' );
 wp_enqueue_script( 'updates' );
+// 输入默认的ThickBox js和CSS。
 add_thickbox();
 
 if ( is_multisite() && ! is_network_admin() ) {
@@ -39,11 +41,13 @@ function list_core_update( $update ) {
  	global $wp_local_package, $wpdb;
   	static $first_pass = true;
 
+  	// 检索有关当前站点的信息。（版本）
 	$wp_version = get_bloginfo( 'version' );
 
  	if ( 'en_US' == $update->locale && 'en_US' == get_locale() )
  		$version_string = $update->current;
- 	// If the only available update is a partial builds, it doesn't need a language-specific version string.
+ 	// 如果唯一可用的更新是部分生成，则不需要语言特定的版本字符串。
+    // If the only available update is a partial builds, it doesn't need a language-specific version string.
  	elseif ( 'en_US' == $update->locale && $update->packages->partial && $wp_version == $update->partial_version && ( $updates = get_core_updates() ) && 1 == count( $updates ) )
  		$version_string = $update->current;
  	else
@@ -92,6 +96,7 @@ function list_core_update( $update ) {
 	echo $message;
 	echo '</p>';
 	echo '<form method="post" action="' . $form_action . '" name="upgrade" class="upgrade">';
+	// 检索或显示窗体的隐藏字段。
 	wp_nonce_field('upgrade-core');
 	echo '<p>';
 	echo '<input name="version" value="'. esc_attr($update->current) .'" type="hidden"/>';
@@ -173,6 +178,7 @@ function core_upgrade_preamble() {
 
 		if ( wp_http_supports( array( 'ssl' ) ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			// 实例化用于处理自动后台更新的核心类。
 			$upgrader = new WP_Automatic_Updater;
 			$future_minor_update = (object) array(
 				'current'       => $wp_version . '.1.next.minor',
@@ -212,13 +218,15 @@ function core_upgrade_preamble() {
 		echo '</li>';
 	}
 	echo '</ul>';
-	// Don't show the maintenance mode notice when we are only showing a single re-install option.
+	// 当我们只显示一个重新安装选项时，不要显示维护模式通知。
+    // Don't show the maintenance mode notice when we are only showing a single re-install option.
 	if ( $updates && ( count( $updates ) > 1 || $updates[0]->response != 'latest' ) ) {
 		echo '<p>' . __( 'While your site is being updated, it will be in maintenance mode. As soon as your updates are complete, your site will return to normal.' ) . '</p>';
 	} elseif ( ! $updates ) {
 		list( $normalized_version ) = explode( '-', $wp_version );
 		echo '<p>' . sprintf( __( '<a href="%s">Learn more about WordPress %s</a>.' ), esc_url( self_admin_url( 'about.php' ) ), $normalized_version ) . '</p>';
 	}
+	// 取消更新
 	dismissed_updates();
 }
 
@@ -537,6 +545,7 @@ function do_core_upgrade( $reinstall = false ) {
 }
 
 /**
+ * 取消核心更新
  * @since 2.7.0
  */
 function do_dismiss_core_update() {
@@ -551,6 +560,7 @@ function do_dismiss_core_update() {
 }
 
 /**
+ * 恢复核心更新
  * @since 2.7.0
  */
 function do_undismiss_core_update() {
@@ -638,15 +648,19 @@ if ( 'upgrade-core' == $action ) {
 	echo '</p>';
 
 	if ( current_user_can( 'update_core' ) ) {
+	    // 显示升级WordPress下载最新或自动升级表单。
 		core_upgrade_preamble();
 	}
 	if ( current_user_can( 'update_plugins' ) ) {
+	    // 插件更新列表
 		list_plugin_updates();
 	}
 	if ( current_user_can( 'update_themes' ) ) {
+	    // 主题更新列表
 		list_theme_updates();
 	}
 	if ( current_user_can( 'update_languages' ) ) {
+	    // 翻译更新列表
 		list_translation_updates();
 	}
 
@@ -659,7 +673,9 @@ if ( 'upgrade-core' == $action ) {
 	do_action( 'core_upgrade_preamble' );
 	echo '</div>';
 
+	// 本地化脚本。
 	wp_localize_script( 'updates', '_wpUpdatesItemCounts', array(
+	        // 为可用的更新收集计数和UI字符串
 		'totals'  => wp_get_update_data(),
 	) );
 
@@ -670,12 +686,16 @@ if ( 'upgrade-core' == $action ) {
 	if ( ! current_user_can( 'update_core' ) )
 		wp_die( __( 'Sorry, you are not allowed to update this site.' ) );
 
+	// 确保用户从另一个管理页面中引用。
 	check_admin_referer('upgrade-core');
 
+	// 在头文件之前取消/恢复动作，以便它们可以重定向。
 	// Do the (un)dismiss actions before headers, so that they can redirect.
 	if ( isset( $_POST['dismiss'] ) )
+	    // 取消核心更新
 		do_dismiss_core_update();
 	elseif ( isset( $_POST['undismiss'] ) )
+	    // 恢复核心更新
 		do_undismiss_core_update();
 
 	require_once(ABSPATH . 'wp-admin/admin-header.php');
@@ -685,6 +705,7 @@ if ( 'upgrade-core' == $action ) {
 		$reinstall = false;
 
 	if ( isset( $_POST['upgrade'] ) )
+	    // 升级WordPress核心显示。
 		do_core_upgrade($reinstall);
 
 	wp_localize_script( 'updates', '_wpUpdatesItemCounts', array(
@@ -698,6 +719,7 @@ if ( 'upgrade-core' == $action ) {
 	if ( ! current_user_can( 'update_plugins' ) )
 		wp_die( __( 'Sorry, you are not allowed to update this site.' ) );
 
+	// 确保用户从另一个管理页面中引用。
 	check_admin_referer('upgrade-core');
 
 	if ( isset( $_GET['plugins'] ) ) {
@@ -710,6 +732,7 @@ if ( 'upgrade-core' == $action ) {
 	}
 
 	$url = 'update.php?action=update-selected&plugins=' . urlencode(implode(',', $plugins));
+	// 用URL检索URL添加到URL查询。
 	$url = wp_nonce_url($url, 'bulk-update-plugins');
 
 	$title = __('Update Plugins');

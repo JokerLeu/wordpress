@@ -1,5 +1,6 @@
 <?php
 /**
+ * 工具-可用工具 工具管理屏幕
  * Tools Administration Screen.
  *
  * @package WordPress
@@ -45,7 +46,10 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
 if ( $is_privacy_guide ) {
 	?>
 	<div class="wp-privacy-policy-guide">
-		<?php WP_Privacy_Policy_Content::privacy_policy_guide(); ?>
+		<?php
+        // 将隐私策略指南与主题和插件的内容一起输出。
+        WP_Privacy_Policy_Content::privacy_policy_guide();
+        ?>
 	</div>
 	<?php
 
@@ -64,6 +68,7 @@ if ( $is_privacy_guide ) {
 	endif;
 
 	/**
+     * 在工具管理屏幕的末尾触发
 	 * Fires at the end of the Tools Administration screen.
 	 *
 	 * @since 2.8.0

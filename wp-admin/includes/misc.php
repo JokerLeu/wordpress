@@ -1,5 +1,6 @@
 <?php
 /**
+ * MISC WordPress管理API。
  * Misc WordPress Administration API.
  *
  * @package WordPress
@@ -258,6 +259,7 @@ function iis7_save_url_rewrite_rules(){
 }
 
 /**
+ * 更新插件或主题编辑器的“最近编辑”文件。
  * Update the "recently-edited" file for the plugin or theme editor.
  *
  * @since 1.5.0
@@ -472,6 +474,7 @@ function update_home_siteurl( $old_value, $value ) {
 
 
 /**
+ * 基于$_GET和$_POST重置全局变量
  * Resets global variables based on $_GET and $_POST
  *
  * This function resets global variables based on the names passed
@@ -1076,6 +1079,7 @@ function heartbeat_autosave( $response, $data ) {
 }
 
 /**
+ * 删除单个使用的URL参数并创建基于新URL的规范链接。
  * Remove single-use URL parameters and create canonical link based on new URL.
  *
  * Remove specific query string parameters from a URL, create the canonical link,
@@ -1440,6 +1444,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
+     * 检查更新、添加或删除插件的隐私策略信息。
 	 * Check for updated, added or removed privacy policy information from plugins.
 	 *
 	 * Caches the current info in post_meta of the policy page.
@@ -1581,6 +1586,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
+     * 将隐私策略指南与主题和插件的内容一起输出。
 	 * Output the privacy policy guide together with content from the theme and plugins.
 	 *
 	 * @since 4.9.6

@@ -1,5 +1,6 @@
 <?php
 /**
+ * 选项管理屏幕。
  * Options Management Administration Screen.
  *
  * If accessed directly in a browser this page shows a list of all saved options
@@ -22,16 +23,19 @@ $title = __('Settings');
 $this_file = 'options.php';
 $parent_file = 'options-general.php';
 
+// 基于$_GET和$_POST重置全局变量
 wp_reset_vars(array('action', 'option_page'));
 
 $capability = 'manage_options';
 
+// 这是为后面的编译器，并最终将被删除。
 // This is for back compat and will eventually be removed.
 if ( empty($option_page) ) {
 	$option_page = 'options';
 } else {
 
 	/**
+     * 过滤使用设置API时所需的能力。
 	 * Filters the capability required when using the Settings API.
 	 *
 	 * By default, the options groups for all registered settings require the manage_options capability.
@@ -44,6 +48,7 @@ if ( empty($option_page) ) {
 	$capability = apply_filters( "option_page_capability_{$option_page}", $capability );
 }
 
+// 检测用户权限
 if ( ! current_user_can( $capability ) ) {
 	wp_die(
 		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
@@ -52,6 +57,7 @@ if ( ! current_user_can( $capability ) ) {
 	);
 }
 
+// 处理管理电子邮件更改请求
 // Handle admin email change requests
 if ( ! empty( $_GET[ 'adminhash' ] ) ) {
 	$new_admin_details = get_option( 'adminhash' );
@@ -72,6 +78,7 @@ if ( ! empty( $_GET[ 'adminhash' ] ) ) {
 	exit;
 }
 
+// 多站点检测
 if ( is_multisite() && ! current_user_can( 'manage_network_options' ) && 'update' != $action ) {
 	wp_die(
 		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
@@ -80,6 +87,7 @@ if ( is_multisite() && ! current_user_can( 'manage_network_options' ) && 'update
 	);
 }
 
+//白名单列表选项
 $whitelist_options = array(
 	'general' => array(
 		'blogname',
@@ -172,13 +180,15 @@ if ( !is_multisite() ) {
 
 	$whitelist_options['media'][] = 'uploads_use_yearmonth_folders';
 
-	// If upload_url_path and upload_path are both default values, they're locked.
+	// 如果upload_url_path和upload_path都是默认值，则它们被锁定。
+    // If upload_url_path and upload_path are both default values, they're locked.
 	if ( get_option( 'upload_url_path' ) || ( get_option('upload_path') != 'wp-content/uploads' && get_option('upload_path') ) ) {
 		$whitelist_options['media'][] = 'upload_path';
 		$whitelist_options['media'][] = 'upload_url_path';
 	}
 } else {
 	/**
+     * 通过电子邮件功能来过滤邮件是否已启用。
 	 * Filters whether the post-by-email functionality is enabled.
 	 *
 	 * @since 3.0.0
@@ -190,6 +200,7 @@ if ( !is_multisite() ) {
 }
 
 /**
+ * 过滤选项白名单。
  * Filters the options white list.
  *
  * @since 2.7.0
@@ -287,14 +298,17 @@ if ( 'update' == $action ) {
 	}
 
 	/**
+     * 处理设置错误并返回到选项页
 	 * Handle settings errors and return to options page
 	 */
-	// If no settings errors were registered add a general 'updated' message.
+	// 如果没有注册设置错误，添加一个通用的“更新”消息。
+    // If no settings errors were registered add a general 'updated' message.
 	if ( !count( get_settings_errors() ) )
 		add_settings_error('general', 'settings_updated', __('Settings saved.'), 'updated');
 	set_transient('settings_errors', get_settings_errors(), 30);
 
 	/**
+     * 重定向到提交的设置页
 	 * Redirect back to the settings page that was submitted
 	 */
 	$goback = add_query_arg( 'settings-updated', 'true',  wp_get_referer() );
@@ -302,8 +316,10 @@ if ( 'update' == $action ) {
 	exit;
 }
 
+// 添加页面头部
 include( ABSPATH . 'wp-admin/admin-header.php' ); ?>
 
+<!--代码在wp-admin/options.php文件-->
 <div class="wrap">
   <h1><?php esc_html_e( 'All Settings' ); ?></h1>
   <form name="form" action="options.php" method="post" id="all-options">
@@ -320,7 +336,8 @@ foreach ( (array) $options as $option ) :
 		continue;
 	if ( is_serialized( $option->option_value ) ) {
 		if ( is_serialized_string( $option->option_value ) ) {
-			// This is a serialized string, so we should display it.
+			// 这是一个序列化的字符串，所以我们应该显示它。
+            // This is a serialized string, so we should display it.
 			$value = maybe_unserialize( $option->option_value );
 			$options_to_update[] = $option->option_name;
 			$class = 'all-options';

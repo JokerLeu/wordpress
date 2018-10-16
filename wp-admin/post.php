@@ -16,8 +16,10 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 $parent_file = 'edit.php';
 $submenu_file = 'edit.php';
 
+// 基于$_GET和$_POST重置全局变量
 wp_reset_vars( array( 'action' ) );
 
+// 取得$post_id
 if ( isset( $_GET['post'] ) )
  	$post_id = $post_ID = (int) $_GET['post'];
 elseif ( isset( $_POST['post_ID'] ) )
@@ -33,10 +35,12 @@ else
 global $post_type, $post_type_object, $post;
 
 if ( $post_id )
+    // 检索给定后ID或POST对象的POST数据。
 	$post = get_post( $post_id );
 
 if ( $post ) {
 	$post_type = $post->post_type;
+	// 通过名称检索一个POST类型对象。
 	$post_type_object = get_post_type_object( $post_type );
 }
 
@@ -45,6 +49,7 @@ if ( isset( $_POST['deletepost'] ) )
 elseif ( isset($_POST['wp-preview']) && 'dopreview' == $_POST['wp-preview'] )
 	$action = 'preview';
 
+// 从“_wp_http_referer”或HTTP引用器检索引用者。
 $sendback = wp_get_referer();
 if ( ! $sendback ||
      strpos( $sendback, 'post.php' ) !== false ||
@@ -58,6 +63,7 @@ if ( ! $sendback ||
 		}
 	}
 } else {
+    // 从查询字符串中移除项或项。
 	$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), $sendback );
 }
 
@@ -147,6 +153,7 @@ case 'edit':
 	}
 
 	/**
+     * 允许编辑器的替换。
 	 * Allows replacement of the editor.
 	 *
 	 * @since 4.9.0
@@ -266,19 +273,23 @@ case 'delete':
 			wp_die( __( 'Error in deleting.' ) );
 	}
 
+	// 重定向到另一个页面
 	wp_redirect( add_query_arg('deleted', 1, $sendback) );
 	exit();
 
 case 'preview':
 	check_admin_referer( 'update-post_' . $post_id );
 
+	// 保存草稿或手动自动保存，以显示后预览的目的。返回字符串URL重定向以显示预览。
 	$url = post_preview();
 
+	// 重定向到另一个页面
 	wp_redirect($url);
 	exit();
 
 default:
 	/**
+     * 为给定的自定义POST动作请求触发。
 	 * Fires for a given custom post action request.
 	 *
 	 * The dynamic portion of the hook name, `$action`, refers to the custom post action.

@@ -1,6 +1,6 @@
 <?php
 /**
- * 编辑特定主题中的文件。
+ * 外观-编辑 编辑特定主题中的文件。
  * Theme editor administration panel.
  * 主题编辑器管理面板。
  *
@@ -22,6 +22,7 @@ if ( !current_user_can('edit_themes') )
 $title = __("Edit Themes");
 $parent_file = 'themes.php';
 
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 'id'		=> 'overview',
 'title'		=> __('Overview'),
@@ -42,6 +43,7 @@ get_current_screen()->add_help_tab( array(
 	( is_network_admin() ? '<p>' . __( 'Any edits to files from this screen will be reflected on all sites in the network.' ) . '</p>' : '' ),
 ) );
 
+// 帮助-更多信息
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Theme_Development">Documentation on Theme Development</a>') . '</p>' .
@@ -51,14 +53,17 @@ get_current_screen()->set_help_sidebar(
 	'<p>' . __('<a href="https://wordpress.org/support/">Support Forums</a>') . '</p>'
 );
 
+// 基于$_GET和$_POST重置全局变量
 wp_reset_vars( array( 'action', 'error', 'file', 'theme' ) );
 
 if ( $theme ) {
 	$stylesheet = $theme;
 } else {
+    // 检索当前样式表的名称。
 	$stylesheet = get_stylesheet();
 }
 
+// 获取一个主题的wp_theme对象。
 $theme = wp_get_theme( $stylesheet );
 
 if ( ! $theme->exists() ) {
@@ -72,6 +77,7 @@ if ( $theme->errors() && 'theme_no_stylesheet' == $theme->errors()->get_error_co
 $allowed_files = $style_files = array();
 $has_templates = false;
 
+// 获取可用于给定主题的文件扩展名列表。
 $file_types = wp_get_theme_file_editable_extensions( $theme );
 
 foreach ( $file_types as $type ) {
@@ -91,6 +97,7 @@ foreach ( $file_types as $type ) {
 	}
 }
 
+// 移动functions.php和style.css到顶部。
 // Move functions.php and style.css to the top.
 if ( isset( $allowed_files['functions.php'] ) ) {
 	$allowed_files = array( 'functions.php' => $allowed_files['functions.php'] ) + $allowed_files;
@@ -107,6 +114,7 @@ if ( empty( $file ) ) {
 	$file = $theme->get_stylesheet_directory() . '/' . $relative_file;
 }
 
+// 确保被编辑的文件被允许编辑。
 validate_file_to_edit( $file, $allowed_files );
 
 // 当JavaScript不可用时，处理文件的后备编辑。
@@ -114,16 +122,18 @@ validate_file_to_edit( $file, $allowed_files );
 $edit_error = null;
 $posted_content = null;
 if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+    // 尝试编辑主题或插件的文件。
 	$r = wp_edit_theme_plugin_file( wp_unslash( $_POST ) );
 	if ( is_wp_error( $r ) ) {
 		$edit_error = $r;
+		// 验证Ajax请求以防止博客外部处理请求。
 		if ( check_ajax_referer( 'edit-theme_' . $file . $stylesheet, 'nonce', false ) && isset( $_POST['newcontent'] ) ) {
 			$posted_content = wp_unslash( $_POST['newcontent'] );
 		}
 	} else {
 		wp_redirect( add_query_arg(
 			array(
-				'a' => 1, // This means "success" for some reason.
+				'a' => 1, // This means "success" for some reason.因为某种原因，这意味着“成功”。
 				'theme' => $stylesheet,
 				'file' => $relative_file,
 			),
@@ -134,14 +144,18 @@ if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
 }
 
 	$settings = array(
+	        // 为给定设置输入代码编辑器所需的内容
 		'codeEditor' => wp_enqueue_code_editor( compact( 'file' ) ),
 	);
+    // 编排脚本。
 	wp_enqueue_script( 'wp-theme-plugin-editor' );
+	// 向注册脚本添加额外代码。
 	wp_add_inline_script( 'wp-theme-plugin-editor', sprintf( 'jQuery( function( $ ) { wp.themePluginEditor.init( $( "#template" ), %s ); } )', wp_json_encode( $settings ) ) );
 	wp_add_inline_script( 'wp-theme-plugin-editor', 'wp.themePluginEditor.themeOrPlugin = "theme";' );
 
 	require_once( ABSPATH . 'wp-admin/admin-header.php' );
 
+	// 更新插件或主题编辑器的“最近编辑”文件。
 	update_recently_edited( $file );
 
 	if ( ! is_file( $file ) )
@@ -168,6 +182,7 @@ if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
 		$content = esc_textarea( $content );
 	}
 
+	// 获取标准WordPress主题文件和其他各种标准WordPress文件的说明
 $file_description = get_file_description( $relative_file );
 $file_show = array_search( $file, array_filter( $allowed_files ) );
 $description = esc_html( $file_description );
@@ -175,6 +190,7 @@ if ( $file_description != $file_show ) {
 	$description .= ' <span>(' . esc_html( $file_show ) . ')</span>';
 }
 ?>
+<!--代码在wp-admin/theme-editor.php文件中-->
 <div class="wrap">
 <h1><?php echo esc_html( $title ); ?></h1>
 
@@ -207,11 +223,13 @@ if ( $file_description != $file_show ) {
 <div class="alignleft">
 <h2><?php echo $theme->display( 'Name' ); if ( $description ) echo ': ' . $description; ?></h2>
 </div>
+    <!--选择要编辑的主题-->
 <div class="alignright">
 	<form action="theme-editor.php" method="get">
 		<strong><label for="theme"><?php _e('Select theme to edit:'); ?> </label></strong>
 		<select name="theme" id="theme">
 <?php
+// 返回一个基于参数的wp_theme对象数组。
 foreach ( wp_get_themes( array( 'errors' => null ) ) as $a_stylesheet => $a_theme ) {
 	if ( $a_theme->errors() && 'theme_no_stylesheet' == $a_theme->errors()->get_error_code() )
 		continue;
@@ -230,6 +248,7 @@ foreach ( wp_get_themes( array( 'errors' => null ) ) as $a_stylesheet => $a_them
 if ( $theme->errors() )
 	echo '<div class="error"><p><strong>' . __( 'This theme is broken.' ) . '</strong> ' . $theme->errors()->get_error_message() . '</p></div>';
 ?>
+    <!--主题文件-->
 <div id="templateside">
 	<h2 id="theme-files-label"><?php _e( 'Theme Files' ); ?></h2>
 	<ul role="tree" aria-labelledby="theme-files-label">
@@ -294,7 +313,10 @@ else : ?>
 		<p><em><?php _e('You need to make this file writable before you can save your changes. See <a href="https://codex.wordpress.org/Changing_File_Permissions">the Codex</a> for more information.'); ?></em></p>
 	<?php endif; ?>
 	</div>
-	<?php wp_print_file_editor_templates(); ?>
+	<?php
+    // 打印文件编辑器模板（插件和主题）。
+    wp_print_file_editor_templates();
+    ?>
 	</form>
 <?php
 endif; // $error

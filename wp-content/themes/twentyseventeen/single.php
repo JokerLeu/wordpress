@@ -11,8 +11,10 @@
  * @version 1.0
  */
 
+// 加载头部模板
 get_header(); ?>
 
+<!--代码在模板的single.php文件中-->
 <div class="wrap">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">

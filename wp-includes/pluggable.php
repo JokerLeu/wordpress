@@ -1,5 +1,6 @@
 <?php
 /**
+ * 这些功能可以通过插件替换。如果插件不重新定义这些函数，那么这些将被使用。
  * These functions can be replaced via plugins. If plugins do not redefine these
  * functions, then these will be used instead.
  *
@@ -8,6 +9,7 @@
 
 if ( !function_exists('wp_set_current_user') ) :
 /**
+ * 用ID或名称更改当前用户。
  * Changes the current user by ID or name.
  *
  * Set $id to null and specify a name if you do not know a user's ID.
@@ -26,7 +28,8 @@ if ( !function_exists('wp_set_current_user') ) :
 function wp_set_current_user($id, $name = '') {
 	global $current_user;
 
-	// If `$id` matches the user who's already current, there's nothing to do.
+	// 如果‘$id’与已经是当前的用户匹配，那就没什么可做的了。
+    // If `$id` matches the user who's already current, there's nothing to do.
 	if ( isset( $current_user )
 		&& ( $current_user instanceof WP_User )
 		&& ( $id == $current_user->ID )
@@ -40,6 +43,7 @@ function wp_set_current_user($id, $name = '') {
 	setup_userdata( $current_user->ID );
 
 	/**
+     * 设置当前用户之后触发
 	 * Fires after the current user is set.
 	 *
 	 * @since 2.0.1
@@ -1112,6 +1116,7 @@ endif;
 
 if ( !function_exists('check_ajax_referer') ) :
 /**
+ * 验证Ajax请求以防止博客外部处理请求。
  * Verifies the Ajax request to prevent processing requests external of the blog.
  *
  * @since 2.0.3

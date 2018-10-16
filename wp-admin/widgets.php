@@ -1,17 +1,25 @@
 <?php
 /**
+ * 外观-小工具管理面板
  * Widget administration panel
  *
  * @package WordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/**
+ * WordPress管理引导
+ * WordPress Administration Bootstrap
+ */
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
-/** WordPress Administration Widgets API */
+/**
+ * 管理小部件API
+ * WordPress Administration Widgets API
+ */
 require_once(ABSPATH . 'wp-admin/includes/widgets.php');
 
+// 用户权限检测（编辑主题选项）
 if ( ! current_user_can( 'edit_theme_options' ) ) {
 	wp_die(
 		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
@@ -20,6 +28,7 @@ if ( ! current_user_can( 'edit_theme_options' ) ) {
 	);
 }
 
+// 实例化基于设置名称检索用户界面设置值。
 $widgets_access = get_user_setting( 'widgets_access' );
 if ( isset($_GET['widgets-access']) ) {
 	check_admin_referer( 'widgets-access' );
@@ -38,6 +47,7 @@ if ( 'on' == $widgets_access ) {
 }
 
 /**
+ * 在小工具管理屏幕加载之后，在脚本被排队后，就提前触发。
  * Fires early before the Widgets administration screen loads,
  * after scripts are enqueued.
  *
@@ -48,6 +58,7 @@ do_action( 'sidebar_admin_setup' );
 $title = __( 'Widgets' );
 $parent_file = 'themes.php';
 
+// 获取当前屏幕对象 帮助-概述
 get_current_screen()->add_help_tab( array(
 'id'		=> 'overview',
 'title'		=> __('Overview'),
@@ -55,6 +66,7 @@ get_current_screen()->add_help_tab( array(
 	'<p>' . __('Widgets are independent sections of content that can be placed into any widgetized area provided by your theme (commonly called sidebars). To populate your sidebars/widget areas with individual widgets, drag and drop the title bars into the desired area. By default, only the first widget area is expanded. To populate additional widget areas, click on their title bars to expand them.') . '</p>
 	<p>' . __('The Available Widgets section contains all the widgets you can choose from. Once you drag a widget into a sidebar, it will open to allow you to configure its settings. When you are happy with the widget settings, click the Save button and the widget will go live on your site. If you click Delete, it will remove the widget.') . '</p>'
 ) );
+// 帮助-移除后重新使用
 get_current_screen()->add_help_tab( array(
 'id'		=> 'removing-reusing',
 'title'		=> __('Removing and Reusing'),
@@ -63,6 +75,7 @@ get_current_screen()->add_help_tab( array(
 	<p>' . __('Widgets may be used multiple times. You can give each widget a title, to display on your site, but it&#8217;s not required.') . '</p>
 	<p>' . __('Enabling Accessibility Mode, via Screen Options, allows you to use Add and Edit buttons instead of using drag and drop.') . '</p>'
 ) );
+// 帮助-丢失的小工具
 get_current_screen()->add_help_tab( array(
 'id'		=> 'missing-widgets',
 'title'		=> __('Missing Widgets'),
@@ -71,16 +84,19 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('When changing themes, there is often some variation in the number and setup of widget areas/sidebars and sometimes these conflicts make the transition a bit less smooth. If you changed themes and seem to be missing widgets, scroll down on this screen to the Inactive Widgets area, where all of your widgets and their settings will have been saved.') . '</p>'
 ) );
 
+// 帮助-更多信息：
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Appearance_Widgets_Screen">Documentation on Widgets</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/">Support Forums</a>') . '</p>'
 );
 
+// 检查主题对给定特征的支持（小工具）
 if ( ! current_theme_supports( 'widgets' ) ) {
 	wp_die( __( 'The theme you are currently using isn&#8217;t widget-aware, meaning that it has no sidebars that you are able to change. For information on making your theme widget-aware, please <a href="https://codex.wordpress.org/Widgetizing_Themes">follow these instructions</a>.' ) );
 }
 
+// 这些是由侧边栏分组的小部件。
 // These are the widgets grouped by sidebar
 $sidebars_widgets = wp_get_sidebars_widgets();
 
@@ -91,8 +107,10 @@ foreach ( $sidebars_widgets as $sidebar_id => $widgets ) {
 	if ( 'wp_inactive_widgets' == $sidebar_id )
 		continue;
 
+	// 检查是否注册了侧栏。如果没有
 	if ( ! is_registered_sidebar( $sidebar_id ) ) {
-		if ( ! empty( $widgets ) ) { // register the inactive_widgets area as sidebar
+		if ( ! empty( $widgets ) ) { // 将不活动的小部件区域注册为边栏
+		    // register the inactive_widgets area as sidebar
 			register_sidebar(array(
 				'name' => __( 'Inactive Sidebar (not used)' ),
 				'id' => $sidebar_id,
@@ -109,6 +127,7 @@ foreach ( $sidebars_widgets as $sidebar_id => $widgets ) {
 	}
 }
 
+// 将不活动的小部件区域注册为边栏
 // register the inactive_widgets area as sidebar
 register_sidebar(array(
 	'name' => __('Inactive Widgets'),
@@ -121,11 +140,14 @@ register_sidebar(array(
 	'after_title' => '',
 ));
 
+// 寻找“丢失”小部件
 retrieve_widgets();
 
+// 我们在没有JS的情况下保存小部件
 // We're saving a widget without js
 if ( isset($_POST['savewidget']) || isset($_POST['removewidget']) ) {
 	$widget_id = $_POST['widget-id'];
+	// 确保用户从另一个管理页面中引用。
 	check_admin_referer("save-delete-widget-$widget_id");
 
 	$number = isset($_POST['multi_number']) ? (int) $_POST['multi_number'] : '';
@@ -156,6 +178,7 @@ if ( isset($_POST['savewidget']) || isset($_POST['removewidget']) ) {
 		$_POST = array('sidebar' => $sidebar_id, 'widget-' . $id_base => array(), 'the-widget-id' => $widget_id, 'delete_widget' => '1');
 
 		/**
+         * 小部件后立即进行标记删除。
 		 * Fires immediately after a widget has been marked for deletion.
 		 *
 		 * @since 4.4.0
@@ -182,7 +205,8 @@ if ( isset($_POST['savewidget']) || isset($_POST['removewidget']) ) {
 
 	$sidebars_widgets[$sidebar_id] = $sidebar;
 
-	// Remove old position.
+	// 移除旧位置。
+    // Remove old position.
 	if ( !isset($_POST['delete_widget']) ) {
 		foreach ( $sidebars_widgets as $key => $sb ) {
 			if ( is_array($sb) )
@@ -191,11 +215,14 @@ if ( isset($_POST['savewidget']) || isset($_POST['removewidget']) ) {
 		array_splice( $sidebars_widgets[$sidebar_id], $position, 0, $widget_id );
 	}
 
+	// 设置侧栏控件选项来更新边栏。
 	wp_set_sidebars_widgets($sidebars_widgets);
+	// 重定向到另一个页面
 	wp_redirect( admin_url('widgets.php?message=0') );
 	exit;
 }
 
+// 不带JS删除非活动控件
 // Remove inactive widgets without js
 if ( isset( $_POST['removeinactivewidgets'] ) ) {
 	check_admin_referer( 'remove-inactive-widgets', '_wpnonce_remove_inactive_widgets' );
@@ -218,6 +245,7 @@ if ( isset( $_POST['removeinactivewidgets'] ) ) {
 	exit;
 }
 
+// 在没有JS的情况下输出小部件窗体
 // Output the widget form without js
 if ( isset($_GET['editwidget']) && $_GET['editwidget'] ) {
 	$widget_id = $_GET['editwidget'];
@@ -260,11 +288,13 @@ if ( isset($_GET['editwidget']) && $_GET['editwidget'] ) {
 
 	$id_base = isset($control['id_base']) ? $control['id_base'] : $control['id'];
 
-	// Show the widget form.
+	// 显示小部件窗体。
+    // Show the widget form.
 	$width = ' style="width:' . max($control['width'], 350) . 'px"';
 	$key = isset($_GET['key']) ? (int) $_GET['key'] : 0;
 
 	require_once( ABSPATH . 'wp-admin/admin-header.php' ); ?>
+    <!--代码在wp-admin/widgets.php文件中-->
 	<div class="wrap">
 	<h1><?php echo esc_html( $title ); ?></h1>
 	<div class="editwidget"<?php echo $width; ?>>
@@ -377,12 +407,14 @@ if ( current_user_can( 'customize' ) ) {
 
 <?php
 /**
+ * 在小部件管理页内容加载之前触发。
  * Fires before the Widgets administration page content loads.
  *
  * @since 3.0.0
  */
 do_action( 'widgets_admin_page' ); ?>
 
+    <!--代码在wp-admin/widgets.php文件中-->
 <div class="widget-liquid-left">
 <div id="widgets-left">
 	<div id="available-widgets" class="widgets-holder-wrap">
@@ -500,7 +532,10 @@ foreach ( $theme_sidebars as $sidebar => $registered_sidebar ) {
 </div>
 </div>
 <form method="post">
-<?php wp_nonce_field( 'save-sidebar-widgets', '_wpnonce_widgets', false ); ?>
+<?php
+// 检索或显示窗体的隐藏字段。
+wp_nonce_field( 'save-sidebar-widgets', '_wpnonce_widgets', false );
+?>
 </form>
 <br class="clear" />
 </div>
@@ -516,6 +551,7 @@ foreach ( $theme_sidebars as $sidebar => $registered_sidebar ) {
 <?php
 
 /**
+ * 在可用的小部件和边栏加载之后，在管理员页脚之前加载。
  * Fires after the available widgets and sidebars have loaded, before the admin footer.
  *
  * @since 2.2.0

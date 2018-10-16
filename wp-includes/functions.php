@@ -324,6 +324,7 @@ function get_weekstartend( $mysqlstring, $start_of_week = '' ) {
 }
 
 /**
+ * 只有序列化时才行序列化值。
  * Unserialize value only if it was serialized.
  *
  * @since 2.0.0
@@ -843,6 +844,7 @@ function add_query_arg() {
 }
 
 /**
+ * 从查询字符串中移除项或项。
  * Removes an item or items from a query string.
  *
  * @since 1.5.0
@@ -970,6 +972,7 @@ function wp( $query_vars = '' ) {
 }
 
 /**
+ * 检索HTTP状态的描述。
  * Retrieve the description for the HTTP status.
  *
  * @since 2.3.0
@@ -1098,6 +1101,7 @@ function status_header( $code, $description = '' ) {
 }
 
 /**
+ * 获取头信息以防止缓存。
  * Get the header information to prevent caching.
  *
  * The several different headers cover the different ways cache prevention
@@ -1115,6 +1119,7 @@ function wp_get_nocache_headers() {
 
 	if ( function_exists('apply_filters') ) {
 		/**
+         * 筛选缓存控制头。
 		 * Filters the cache-controlling headers.
 		 *
 		 * @since 2.8.0
@@ -1435,6 +1440,7 @@ function is_blog_installed() {
 }
 
 /**
+ * 用URL检索URL添加到URL查询。
  * Retrieve URL with nonce added to URL query.
  *
  * @since 2.0.4
@@ -1535,6 +1541,7 @@ function wp_original_referer_field( $echo = true, $jump_back_to = 'current' ) {
 }
 
 /**
+ * 从“_wp_http_referer”或HTTP引用器检索引用者。
  * Retrieve referer from '_wp_http_referer' or HTTP referer.
  *
  * If it's the same as the current request URL, will return false.
@@ -1558,6 +1565,7 @@ function wp_get_referer() {
 }
 
 /**
+ * 从“_wp_http_referer”或HTTP引用器检索未经验证的引用程序。
  * Retrieves unvalidated referer from '_wp_http_referer' or HTTP referer.
  *
  * Do not use for redirects, use wp_get_referer() instead.
@@ -4235,6 +4243,7 @@ function apache_mod_loaded($mod, $default = false) {
 }
 
 /**
+ * 检查IIS 7是否支持漂亮的固定链接
  * Check if IIS 7+ supports pretty permalinks.
  *
  * @since 2.8.0
@@ -4271,6 +4280,7 @@ function iis7_supports_permalinks() {
 }
 
 /**
+ * 根据允许的一组规则验证文件名和路径。
  * Validates a file name and path against an allowed set of rules.
  *
  * A return value of `1` means the file path contains directory traversal.

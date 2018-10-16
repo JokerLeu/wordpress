@@ -40,6 +40,7 @@ function ms_upload_constants() {
 }
 
 /**
+ * 定义多站点Cookie常数。
  * Defines Multisite cookie constants.
  *
  * @since 3.0.0

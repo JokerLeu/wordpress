@@ -1,5 +1,6 @@
 <?php
 /**
+ * 管理更新API
  * WordPress Administration Update API
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 从update_core选项中选择第一个更新版本。
  * Selects the first update version from the update_core option.
  *
  * @return object|array|false The response from the API on success, false on failure.
@@ -21,6 +23,7 @@ function get_preferred_from_update_core() {
 }
 
 /**
+ * 获取可用的核心更新。
  * Get available core updates.
  *
  * @param array $options Set $options['dismissed'] to true to show dismissed upgrades too,
@@ -34,6 +37,7 @@ function get_core_updates( $options = array() ) {
 	if ( ! is_array( $dismissed ) )
 		$dismissed = array();
 
+	// 获取站点瞬时值。
 	$from_api = get_site_transient( 'update_core' );
 
 	if ( ! isset( $from_api->updates ) || ! is_array( $from_api->updates ) )
@@ -61,6 +65,7 @@ function get_core_updates( $options = array() ) {
 }
 
 /**
+ * 获取WordPress核心的最佳可用（启用）自动更新。
  * Gets the best available (and enabled) Auto-Update for WordPress Core.
  *
  * If there's 1.2.3 and 1.3 on offer, it'll choose 1.3 if the installation allows it, else, 1.2.3
@@ -77,6 +82,7 @@ function find_core_auto_update() {
 	include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
 	$auto_update = false;
+	// 实例化用于处理自动后台更新的核心类。
 	$upgrader = new WP_Automatic_Updater;
 	foreach ( $updates->updates as $update ) {
 		if ( 'autoupdate' != $update->response )
@@ -92,6 +98,7 @@ function find_core_auto_update() {
 }
 
 /**
+ * 获取并缓存给定版本的WordPress的校验和。
  * Gets and caches the checksums for the given version of WordPress.
  *
  * @since 3.7.0
@@ -621,6 +628,7 @@ function maintenance_nag() {
 }
 
 /**
+ * 打印更新管理通知的JavaScript模板。
  * Prints the JavaScript templates for update admin notices.
  *
  * Template takes one argument with four values:

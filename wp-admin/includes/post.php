@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress文章管理API。
  * WordPress Post Administration API.
  *
  * @package WordPress
@@ -1093,6 +1094,7 @@ function get_available_post_mime_types($type = 'attachment') {
 }
 
 /**
+ * 获取当前附件请求的查询变量。
  * Get the query variables for the current attachments request.
  *
  * @since 4.2.0
@@ -1729,11 +1731,12 @@ function wp_create_post_autosave( $post_data ) {
 }
 
 /**
+ * 保存草稿或手动自动保存，以显示后预览的目的。
  * Saves a draft or manually autosaves for the purpose of showing a post preview.
  *
  * @since 2.7.0
  *
- * @return string URL to redirect to show the preview.
+ * @return string URL to redirect to show the preview.字符串URL重定向以显示预览。
  */
 function post_preview() {
 

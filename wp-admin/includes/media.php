@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress管理媒体API。
  * WordPress Administration Media API.
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 定义默认媒体上传选项卡
  * Defines the default media upload tabs
  *
  * @since 2.5.0
@@ -22,6 +24,7 @@ function media_upload_tabs() {
 	);
 
 	/**
+     * 过滤遗留（3.5.0以前）媒体弹出窗口中可用的选项卡。
 	 * Filters the available tabs in the legacy (pre-3.5.0) media popup.
 	 *
 	 * @since 2.5.0
@@ -1791,6 +1794,7 @@ function media_upload_header() {
 }
 
 /**
+ * 输出遗留媒体上传表单。
  * Outputs the legacy media upload form.
  *
  * @since 2.5.0

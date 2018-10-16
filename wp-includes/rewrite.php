@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress重写API
  * WordPress Rewrite API
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 默认 端点掩模，没有什么。
  * Endpoint Mask for default, which is nothing.
  *
  * @since 2.1.0
@@ -14,6 +16,7 @@
 define('EP_NONE', 0);
 
 /**
+ * 永久链接 终点掩模。
  * Endpoint Mask for Permalink.
  *
  * @since 2.1.0
@@ -21,6 +24,7 @@ define('EP_NONE', 0);
 define('EP_PERMALINK', 1);
 
 /**
+ * 附件 终点掩模
  * Endpoint Mask for Attachment.
  *
  * @since 2.1.0
@@ -28,6 +32,7 @@ define('EP_PERMALINK', 1);
 define('EP_ATTACHMENT', 2);
 
 /**
+ * 日期 终点掩模
  * Endpoint Mask for date.
  *
  * @since 2.1.0
@@ -35,6 +40,7 @@ define('EP_ATTACHMENT', 2);
 define('EP_DATE', 4);
 
 /**
+ * 年份的终点掩模
  * Endpoint Mask for year
  *
  * @since 2.1.0
@@ -42,6 +48,7 @@ define('EP_DATE', 4);
 define('EP_YEAR', 8);
 
 /**
+ * 月份的终点掩模
  * Endpoint Mask for month.
  *
  * @since 2.1.0
@@ -49,6 +56,7 @@ define('EP_YEAR', 8);
 define('EP_MONTH', 16);
 
 /**
+ * 天的终点掩模
  * Endpoint Mask for day.
  *
  * @since 2.1.0
@@ -56,6 +64,7 @@ define('EP_MONTH', 16);
 define('EP_DAY', 32);
 
 /**
+ * 根的终点掩模
  * Endpoint Mask for root.
  *
  * @since 2.1.0
@@ -63,6 +72,7 @@ define('EP_DAY', 32);
 define('EP_ROOT', 64);
 
 /**
+ * 评论的终点掩模
  * Endpoint Mask for comments.
  *
  * @since 2.1.0
@@ -70,6 +80,7 @@ define('EP_ROOT', 64);
 define('EP_COMMENTS', 128);
 
 /**
+ * 搜索 终点掩模
  * Endpoint Mask for searches.
  *
  * @since 2.1.0
@@ -77,6 +88,7 @@ define('EP_COMMENTS', 128);
 define('EP_SEARCH', 256);
 
 /**
+ * 类别的终点掩模
  * Endpoint Mask for categories.
  *
  * @since 2.1.0
@@ -84,6 +96,7 @@ define('EP_SEARCH', 256);
 define('EP_CATEGORIES', 512);
 
 /**
+ * 标签的终点掩模
  * Endpoint Mask for tags.
  *
  * @since 2.3.0
@@ -91,6 +104,7 @@ define('EP_CATEGORIES', 512);
 define('EP_TAGS', 1024);
 
 /**
+ * 作者的终点掩模
  * Endpoint Mask for authors.
  *
  * @since 2.1.0
@@ -98,6 +112,7 @@ define('EP_TAGS', 1024);
 define('EP_AUTHORS', 2048);
 
 /**
+ * 页面的终点掩模
  * Endpoint Mask for pages.
  *
  * @since 2.1.0
@@ -105,6 +120,7 @@ define('EP_AUTHORS', 2048);
 define('EP_PAGES', 4096);
 
 /**
+ * 所有归档视图的终点掩模
  * Endpoint Mask for all archive views.
  *
  * @since 3.7.0
@@ -112,6 +128,7 @@ define('EP_PAGES', 4096);
 define( 'EP_ALL_ARCHIVES', EP_DATE | EP_YEAR | EP_MONTH | EP_DAY | EP_CATEGORIES | EP_TAGS | EP_AUTHORS );
 
 /**
+ * 全部的终点掩模
  * Endpoint Mask for everything.
  *
  * @since 2.1.0
@@ -119,6 +136,7 @@ define( 'EP_ALL_ARCHIVES', EP_DATE | EP_YEAR | EP_MONTH | EP_DAY | EP_CATEGORIES
 define( 'EP_ALL', EP_PERMALINK | EP_ATTACHMENT | EP_ROOT | EP_COMMENTS | EP_SEARCH | EP_PAGES | EP_ALL_ARCHIVES );
 
 /**
+ * 添加将URL结构转换为查询变量的重写规则。
  * Adds a rewrite rule that transforms a URL structure to a set of query vars.
  *
  * Any value in the $after parameter that isn't 'bottom' will result in the rule
@@ -141,6 +159,7 @@ function add_rewrite_rule( $regex, $query, $after = 'bottom' ) {
 }
 
 /**
+ * 添加一个新的改写标签（如%postname%）。
  * Add a new rewrite tag (like %postname%).
  *
  * The $query parameter is optional. If it is omitted you must ensure that
@@ -173,6 +192,7 @@ function add_rewrite_tag( $tag, $regex, $query = '' ) {
 }
 
 /**
+ * 移除现有的重写标记（如%postname%）。
  * Removes an existing rewrite tag (like %postname%).
  *
  * @since 4.5.0
@@ -187,6 +207,7 @@ function remove_rewrite_tag( $tag ) {
 }
 
 /**
+ * 添加固定链接结构。
  * Add permalink structure.
  *
  * @since 3.0.0
@@ -212,6 +233,7 @@ function add_permastruct( $name, $struct, $args = array() ) {
 }
 
 /**
+ * 删除一个固定链接结构
  * Removes a permalink structure.
  *
  * Can only be used to remove permastructs that were added using add_permastruct().
@@ -231,6 +253,7 @@ function remove_permastruct( $name ) {
 }
 
 /**
+ * 添加一个新的进给类型类似/atom1/
  * Add a new feed type like /atom1/.
  *
  * @since 2.1.0
@@ -259,6 +282,7 @@ function add_feed( $feedname, $function ) {
 }
 
 /**
+ * 删除重写规则，然后重新创建重写规则。
  * Remove rewrite rules and then recreate rewrite rules.
  *
  * @since 3.0.0
@@ -274,6 +298,7 @@ function flush_rewrite_rules( $hard = true ) {
 }
 
 /**
+ * 添加端点，类似/trackback/。
  * Add an endpoint, like /trackback/.
  *
  * Adding an endpoint creates extra rewrite rules for each of the matching
@@ -311,6 +336,7 @@ function add_rewrite_endpoint( $name, $places, $query_var = true ) {
 }
 
 /**
+ * 筛选分类法的URL基础。
  * Filters the URL base for taxonomies.
  *
  * To remove any manually prepended /index.php/.
@@ -447,6 +473,7 @@ function wp_resolve_numeric_slug_conflicts( $query_vars = array() ) {
 }
 
 /**
+ * 检查URL并尝试确定它所代表的后ID。
  * Examine a URL and try to determine the post ID it represents.
  *
  * Checks are supposedly from the hosted site blog.

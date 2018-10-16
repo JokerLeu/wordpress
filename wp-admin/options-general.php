@@ -1,6 +1,6 @@
 <?php
 /**
- * 一般设置管理面板。设置-常规
+ * 一般设置管理面板。设置-常规选项
  * General settings administration panel.
  *
  * @package WordPress
@@ -27,6 +27,7 @@ $timezone_format = _x('Y-m-d H:i:s', 'timezone date format');
 
 add_action('admin_head', 'options_general_add_js');
 
+// 帮助文字
 $options_help = '<p>' . __('The fields on this screen determine some of the basics of your site setup.') . '</p>' .
 	'<p>' . __('Most themes display the site title at the top of every page, in the title bar of the browser, and as the identifying name for syndicated feeds. The tagline is also displayed by many themes.') . '</p>';
 
@@ -39,12 +40,14 @@ $options_help .= '<p>' . __( 'You can set the language, and the translation file
 	'<p>' . __( 'UTC means Coordinated Universal Time.' ) . '</p>' .
 	'<p>' . __( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.' ) . '</p>';
 
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
 	'title'   => __('Overview'),
 	'content' => $options_help,
 ) );
 
+// 帮助-更多信息：
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Settings_General_Screen">Documentation on General Settings</a>') . '</p>' .
@@ -54,7 +57,9 @@ get_current_screen()->set_help_sidebar(
 include( ABSPATH . 'wp-admin/admin-header.php' );
 ?>
 
+<!--代码在wp-admin/options-general.php文件中-->
 <div class="wrap">
+    <!--页面标题-->
 <h1><?php echo esc_html( $title ); ?></h1>
 
 <form method="post" action="options.php" novalidate="novalidate">
@@ -62,24 +67,31 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 
 <table class="form-table">
 
+    <!--站点标题-->
 <tr>
 <th scope="row"><label for="blogname"><?php _e('Site Title') ?></label></th>
 <td><input name="blogname" type="text" id="blogname" value="<?php form_option('blogname'); ?>" class="regular-text" /></td>
 </tr>
 
+    <!--副标题-->
 <tr>
 <th scope="row"><label for="blogdescription"><?php _e('Tagline') ?></label></th>
 <td><input name="blogdescription" type="text" id="blogdescription" aria-describedby="tagline-description" value="<?php form_option('blogdescription'); ?>" class="regular-text" />
 <p class="description" id="tagline-description"><?php _e( 'In a few words, explain what this site is about.' ) ?></p></td>
 </tr>
 
-<?php if ( !is_multisite() ) { ?>
+<?php
+// 非多站点
+if ( !is_multisite() ) {
+    ?>
 
+    <!--WordPress地址（URL）-->
 <tr>
 <th scope="row"><label for="siteurl"><?php _e('WordPress Address (URL)') ?></label></th>
 <td><input name="siteurl" type="url" id="siteurl" value="<?php form_option( 'siteurl' ); ?>"<?php disabled( defined( 'WP_SITEURL' ) ); ?> class="regular-text code<?php if ( defined( 'WP_SITEURL' ) ) echo ' disabled' ?>" /></td>
 </tr>
 
+    <!--站点地址（URL）-->
 <tr>
 <th scope="row"><label for="home"><?php _e('Site Address (URL)') ?></label></th>
 <td><input name="home" type="url" id="home" aria-describedby="home-description" value="<?php form_option( 'home' ); ?>"<?php disabled( defined( 'WP_HOME' ) ); ?> class="regular-text code<?php if ( defined( 'WP_HOME' ) ) echo ' disabled' ?>" />
@@ -97,6 +109,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 
 <?php } ?>
 
+    <!--电子邮件地址-->
 <tr>
 <th scope="row"><label for="new_admin_email"><?php _e( 'Email Address' ); ?></label></th>
 <td><input name="new_admin_email" type="email" id="new_admin_email" aria-describedby="new-admin-email-description" value="<?php form_option( 'admin_email' ); ?>" class="regular-text ltr" />
@@ -124,6 +137,7 @@ if ( $new_admin_email && $new_admin_email != get_option( 'admin_email' ) ) : ?>
 
 <?php if ( ! is_multisite() ) { ?>
 
+    <!--成员资格-->
 <tr>
 <th scope="row"><?php _e('Membership') ?></th>
 <td> <fieldset><legend class="screen-reader-text"><span><?php _e('Membership') ?></span></legend><label for="users_can_register">
@@ -132,6 +146,7 @@ if ( $new_admin_email && $new_admin_email != get_option( 'admin_email' ) ) : ?>
 </fieldset></td>
 </tr>
 
+    <!--新用户默认角色-->
 <tr>
 <th scope="row"><label for="default_role"><?php _e('New User Default Role') ?></label></th>
 <td>
@@ -141,22 +156,27 @@ if ( $new_admin_email && $new_admin_email != get_option( 'admin_email' ) ) : ?>
 
 <?php }
 
+// 基于给定目录中*.mo文件的存在，获取所有可用语言。
 $languages = get_available_languages();
+// 从WordPress.org API获得可用的翻译。
 $translations = wp_get_available_translations();
 if ( ! is_multisite() && defined( 'WPLANG' ) && '' !== WPLANG && 'en_US' !== WPLANG && ! in_array( WPLANG, $languages ) ) {
 	$languages[] = WPLANG;
 }
 if ( ! empty( $languages ) || ! empty( $translations ) ) {
 	?>
+    <!--站点语言-->
 	<tr>
 		<th scope="row"><label for="WPLANG"><?php _e( 'Site Language' ); ?></label></th>
 		<td>
 			<?php
+            // 检索当前语言环境。
 			$locale = get_locale();
 			if ( ! in_array( $locale, $languages ) ) {
 				$locale = '';
 			}
 
+			// 语言选择器
 			wp_dropdown_languages( array(
 				'name'         => 'WPLANG',
 				'id'           => 'WPLANG',
@@ -166,7 +186,8 @@ if ( ! empty( $languages ) || ! empty( $translations ) ) {
 				'show_available_translations' => current_user_can( 'install_languages' ) && wp_can_install_language_pack(),
 			) );
 
-			// Add note about deprecated WPLANG constant.
+			// 添加关于弃用WPLANK常数的注释。
+            // Add note about deprecated WPLANG constant.
 			if ( defined( 'WPLANG' ) && ( '' !== WPLANG ) && $locale !== WPLANG ) {
 				if ( is_multisite() && current_user_can( 'manage_network_options' )
 					|| ! is_multisite() && current_user_can( 'manage_options' ) ) {
@@ -176,6 +197,7 @@ if ( ! empty( $languages ) || ! empty( $translations ) ) {
 					</p>
 					<?php
 				}
+				// 标记一个函数参数，当它被使用时就被禁止并通知它。
 				_deprecated_argument( 'define()', '4.0.0', sprintf( __( 'The %s constant in your %s file is no longer needed.' ), 'WPLANG', 'wp-config.php' ) );
 			}
 			?>
@@ -191,6 +213,7 @@ $tzstring = get_option('timezone_string');
 
 $check_zone_info = true;
 
+// 删除旧的ETC映射。回落到gmt_offset。
 // Remove old Etc mappings. Fallback to gmt_offset.
 if ( false !== strpos($tzstring,'Etc/GMT') )
 	$tzstring = '';
@@ -206,6 +229,7 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 }
 
 ?>
+    <!--时区-->
 <th scope="row"><label for="timezone_string"><?php _e('Timezone') ?></label></th>
 <td>
 
@@ -237,7 +261,8 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 <p class="timezone-info">
 <span>
 	<?php
-	// Set TZ so localtime works.
+	// 设置时区所以本地时间工作了
+    // Set TZ so localtime works.
 	date_default_timezone_set($tzstring);
 	$now = localtime(time(), true);
 	if ( $now['tm_isdst'] )
@@ -279,7 +304,8 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 			_e( 'This timezone does not observe daylight saving time.' );
 		}
 	}
-	// Set back to UTC.
+	// 回到UTC。PHP内置
+    // Set back to UTC.
 	date_default_timezone_set('UTC');
 	?>
 	</span>
@@ -287,6 +313,7 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 <?php endif; ?>
 </td>
 
+    <!--日期格式-->
 </tr>
 <tr>
 <th scope="row"><?php _e('Date Format') ?></th>
@@ -327,6 +354,7 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 	</fieldset>
 </td>
 </tr>
+    <!--时间格式-->
 <tr>
 <th scope="row"><?php _e('Time Format') ?></th>
 <td>
@@ -367,6 +395,7 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 	</fieldset>
 </td>
 </tr>
+    <!--一星期开始于-->
 <tr>
 <th scope="row"><label for="start_of_week"><?php _e('Week Starts On') ?></label></th>
 <td><select name="start_of_week" id="start_of_week">
@@ -383,12 +412,21 @@ endfor;
 ?>
 </select></td>
 </tr>
-<?php do_settings_fields('general', 'default'); ?>
+<?php
+// 打印特定设置部分的设置字段
+do_settings_fields('general', 'default');
+?>
 </table>
 
-<?php do_settings_sections('general'); ?>
+<?php
+// 打印添加到特定设置页的所有设置部分
+do_settings_sections('general');
+?>
 
-<?php submit_button(); ?>
+<?php
+// 用提交的文本和适当的类回送提交按钮。
+submit_button();
+?>
 </form>
 
 </div>

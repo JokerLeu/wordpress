@@ -55,7 +55,8 @@ if ( file_exists( ABSPATH . 'wp-config.php') ) {
 	define( 'WPINC', 'wp-includes' );
 	require_once( ABSPATH . WPINC . '/load.php' );
 
-	// Standardize $_SERVER variables across setups.
+	// 为各种设置修复$_SERVER变量 通过设置标准化$_SERVER变量。
+    // Standardize $_SERVER variables across setups.
 	wp_fix_server_vars();
 
 	require_once( ABSPATH . WPINC . '/functions.php' );
@@ -75,7 +76,9 @@ if ( file_exists( ABSPATH . 'wp-config.php') ) {
 	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
 	require_once( ABSPATH . WPINC . '/version.php' );
 
+	// 检查所需的PHP版本，以及MySQL扩展或数据库插件。
 	wp_check_php_mysql_versions();
+	// 尝试翻译早期加载
 	wp_load_translations_early();
 
     // 结束并输出错误信息

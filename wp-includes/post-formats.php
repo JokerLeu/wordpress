@@ -1,5 +1,6 @@
 <?php
 /**
+ * 文章格式功能。
  * Post format functions.
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 检索帖子的格式段
  * Retrieve the format slug for a post
  *
  * @since 3.1.0
@@ -32,6 +34,7 @@ function get_post_format( $post = null ) {
 }
 
 /**
+ * 检查一个帖子是否有任何给定的格式，或者任何格式。
  * Check if a post has any of the given formats, or any format.
  *
  * @since 3.1.0
@@ -53,6 +56,7 @@ function has_post_format( $format = array(), $post = null ) {
 }
 
 /**
+ * 给帖子分配格式
  * Assign a format to a post
  *
  * @since 3.1.0
@@ -79,6 +83,7 @@ function set_post_format( $post, $format ) {
 }
 
 /**
+ * 获取文章格式字符串
  * Returns an array of post format slugs to their translated and pretty display versions
  *
  * @since 3.1.0
@@ -102,6 +107,7 @@ function get_post_format_strings() {
 }
 
 /**
+ * 检索邮政格式小段的数组。
  * Retrieves the array of post format slugs.
  *
  * @since 3.1.0
@@ -114,6 +120,7 @@ function get_post_format_slugs() {
 }
 
 /**
+ * 获取文章格式字符串
  * Returns a pretty, translated version of a post format slug
  *
  * @since 3.1.0
@@ -130,6 +137,7 @@ function get_post_format_string( $slug ) {
 }
 
 /**
+ * 返回一个指向文章格式索引的链接。
  * Returns a link to a post format index.
  *
  * @since 3.1.0
@@ -145,6 +153,7 @@ function get_post_format_link( $format ) {
 }
 
 /**
+ * 过滤请求以允许格式前缀。
  * Filters the request to allow for the format prefix.
  *
  * @access private
@@ -166,6 +175,7 @@ function _post_format_request( $qvs ) {
 }
 
 /**
+ * 过滤后格式术语链接以移除格式前缀。
  * Filters the post format term link to remove the format prefix.
  *
  * @access private

@@ -19,8 +19,10 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
  */
 require_once(ABSPATH . 'wp-admin/includes/dashboard.php');
 
+// 注册仪表盘小部件
 wp_dashboard_setup();
 
+// 编排脚本（仪表盘）。
 wp_enqueue_script( 'dashboard' );
 
 if ( current_user_can( 'install_plugins' ) ) {
@@ -29,6 +31,7 @@ if ( current_user_can( 'install_plugins' ) ) {
 }
 if ( current_user_can( 'upload_files' ) )
 	wp_enqueue_script( 'media-upload' );
+// 输入默认的ThickBox js和CSS。
 add_thickbox();
 
 if ( wp_is_mobile() )
@@ -37,6 +40,7 @@ if ( wp_is_mobile() )
 $title = __('Dashboard');
 $parent_file = 'index.php';
 
+// 帮助-概述
 $help = '<p>' . __( 'Welcome to your WordPress Dashboard! This is the screen you will see when you log in to your site, and gives you access to all the site management features of WordPress. You can get help for any screen by clicking the Help tab above the screen title.' ) . '</p>';
 
 $screen = get_current_screen();
@@ -47,8 +51,10 @@ $screen->add_help_tab( array(
 	'content' => $help,
 ) );
 
+// 帮助标签
 // Help tabs
 
+// 帮助-导航
 $help  = '<p>' . __( 'The left-hand navigation menu provides links to all of the WordPress administration screens, with submenu items displayed on hover. You can minimize this menu to a narrow icon strip by clicking on the Collapse Menu arrow at the bottom.' ) . '</p>';
 $help .= '<p>' . __( 'Links in the Toolbar at the top of the screen connect your dashboard and the front end of your site, and provide access to your profile and helpful WordPress information.' ) . '</p>';
 
@@ -58,6 +64,7 @@ $screen->add_help_tab( array(
 	'content' => $help,
 ) );
 
+// 帮助-布局
 $help  = '<p>' . __( 'You can use the following controls to arrange your Dashboard screen to suit your workflow. This is true on most other administration screens as well.' ) . '</p>';
 $help .= '<p>' . __( '<strong>Screen Options</strong> &mdash; Use the Screen Options tab to choose which Dashboard boxes to show.' ) . '</p>';
 $help .= '<p>' . __( '<strong>Drag and Drop</strong> &mdash; To rearrange the boxes, drag and drop by clicking on the title bar of the selected box and releasing when you see a gray dotted-line rectangle appear in the location you want to place the box.' ) . '</p>';
@@ -69,6 +76,7 @@ $screen->add_help_tab( array(
 	'content' => $help,
 ) );
 
+// 帮助-内容
 $help  = '<p>' . __( 'The boxes on your Dashboard screen are:' ) . '</p>';
 if ( current_user_can( 'edit_posts' ) )
 	$help .= '<p>' . __( '<strong>At A Glance</strong> &mdash; Displays a summary of the content on your site and identifies which theme and version of WordPress you are using.' ) . '</p>';
@@ -96,8 +104,10 @@ $screen->add_help_tab( array(
 	'content' => $help,
 ) );
 
+// 销毁变量
 unset( $help );
 
+// 帮助-更多信息
 $screen->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
 	'<p>' . __( '<a href="https://codex.wordpress.org/Dashboard_Screen">Documentation on Dashboard</a>' ) . '</p>' .
@@ -172,6 +182,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 </div><!-- wrap -->
 
 <?php
+// 渲染模板的事件的事件和新闻的部件。
 wp_print_community_events_templates();
 
 require( ABSPATH . 'wp-admin/admin-footer.php' );

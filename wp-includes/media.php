@@ -1,5 +1,6 @@
 <?php
 /**
+ * 用于媒体显示的WordPress API。
  * WordPress API for media display.
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 检索额外的图像大小。
  * Retrieve additional image sizes.
  *
  * @since 4.7.0
@@ -24,6 +26,7 @@ function wp_get_additional_image_sizes() {
 }
 
 /**
+ * 缩小图像的默认大小。
  * Scale down the default size of an image.
  *
  * This is so that the image is a better fit for the editor and theme.
@@ -132,6 +135,7 @@ function image_constrain_size_for_editor( $width, $height, $size = 'medium', $co
 }
 
 /**
+ * 使用给定的宽度和高度值检索宽度和高度属性。
  * Retrieve width and height attributes using given width and height values.
  *
  * Both attributes are required in the sense that both parameters must have a
@@ -158,6 +162,7 @@ function image_hwstring( $width, $height ) {
 }
 
 /**
+ * 缩放图像以适应特定的大小（如“拇指”或“中等”）。
  * Scale an image to fit a particular size (such as 'thumb' or 'medium').
  *
  * Array with image url, width, height, and whether is intermediate size, in
@@ -254,6 +259,7 @@ function image_downsize( $id, $size = 'medium' ) {
 }
 
 /**
+ * 注册一个新的图像大小。
  * Register a new image size.
  *
  * Cropping behavior for the image size is dependent on the value of $crop:
@@ -285,6 +291,7 @@ function add_image_size( $name, $width = 0, $height = 0, $crop = false ) {
 }
 
 /**
+ * 检查图像大小是否存在。
  * Check if an image size exists.
  *
  * @since 3.9.0
@@ -298,6 +305,7 @@ function has_image_size( $name ) {
 }
 
 /**
+ * 删除一个新的图像大小。
  * Remove a new image size.
  *
  * @since 3.9.0
@@ -3293,6 +3301,7 @@ function wp_prepare_attachment_for_js( $attachment ) {
 }
 
 /**
+ * 排队使用所有媒体JS API所需的所有脚本、样式、设置和模板。
  * Enqueues all scripts, styles, settings, and templates necessary to use
  * all media JS APIs.
  *

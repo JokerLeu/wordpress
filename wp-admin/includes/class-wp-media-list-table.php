@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表表API：WP_Media_List_Table表类
  * List Table API: WP_Media_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于在列表中显示媒体项的核心类。
  * Core class used to implement displaying media items in a list table.
  *
  * @since 3.1.0
@@ -17,6 +19,7 @@
  */
 class WP_Media_List_Table extends WP_List_Table {
 	/**
+     * 保持每个职位的未决评论数量。
 	 * Holds the number of pending comments for each post.
 	 *
 	 * @since 4.4.0

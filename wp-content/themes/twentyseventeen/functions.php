@@ -268,6 +268,7 @@ function twentyseventeen_content_width() {
 add_action( 'template_redirect', 'twentyseventeen_content_width', 0 );
 
 /**
+ * 注册自定义字体。
  * Register custom fonts.
  */
 function twentyseventeen_fonts_url() {
@@ -297,6 +298,7 @@ function twentyseventeen_fonts_url() {
 }
 
 /**
+ * 为谷歌字体添加预连接。
  * Add preconnect for Google Fonts.
  *
  * @since Twenty Seventeen 1.0
@@ -318,6 +320,7 @@ function twentyseventeen_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
 
 /**
+ * 注册小部件区域。
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
@@ -591,6 +594,7 @@ function twentyseventeen_widget_tag_cloud_args( $args ) {
 add_filter( 'widget_tag_cloud_args', 'twentyseventeen_widget_tag_cloud_args' );
 
 /**
+ * 实现自定义标题功能。
  * Implement the Custom Header feature.
  */
 require get_parent_theme_file_path( '/inc/custom-header.php' );
@@ -601,16 +605,19 @@ require get_parent_theme_file_path( '/inc/custom-header.php' );
 require get_parent_theme_file_path( '/inc/template-tags.php' );
 
 /**
+ * 允许模板样式化的附加特性。
  * Additional features to allow styling of the templates.
  */
 require get_parent_theme_file_path( '/inc/template-functions.php' );
 
 /**
+ * 定制添加。
  * Customizer additions.
  */
 require get_parent_theme_file_path( '/inc/customizer.php' );
 
 /**
+ * SVG图标功能和过滤器。
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );

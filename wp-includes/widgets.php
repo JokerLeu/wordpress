@@ -19,7 +19,6 @@
  * @since 2.2.0
  */
 
-//
 // 全局变量
 // Global Variables
 //
@@ -46,6 +45,7 @@ $wp_registered_sidebars = array();
 $wp_registered_widgets = array();
 
 /**
+ * 存储已注册的控件控件（选项）。
  * Stores the registered widget control (options).
  *
  * @global array $wp_registered_widget_controls
@@ -94,11 +94,12 @@ $GLOBALS['_wp_deprecated_widgets_callbacks'] = array(
 	'wp_widget_recent_comments_control'
 );
 
-//
+// 模板标签和API函数
 // Template tags & API functions
 //
 
 /**
+ * 注册小部件
  * Register a widget
  *
  * Registers a WP_Widget widget
@@ -120,6 +121,7 @@ function register_widget( $widget ) {
 }
 
 /**
+ * 取消注册小部件。
  * Unregisters a widget.
  *
  * Unregisters a WP_Widget widget. Useful for un-registering default widgets.
@@ -142,6 +144,7 @@ function unregister_widget( $widget ) {
 }
 
 /**
+ * 创建多个侧栏。
  * Creates multiple sidebars.
  *
  * If you wanted to quickly create multiple sidebars for a theme or internally.
@@ -201,6 +204,7 @@ function register_sidebars( $number = 1, $args = array() ) {
 }
 
 /**
+ * 为单个侧边栏建立定义并返回ID。
  * Builds the definition for a single sidebar and returns the ID.
  *
  * Accepts either a string or an array and then parses that against a set
@@ -298,6 +302,7 @@ function unregister_sidebar( $sidebar_id ) {
 }
 
 /**
+ * 检查是否注册了侧栏。
  * Checks if a sidebar is registered.
  *
  * @since 4.4.0
@@ -605,6 +610,7 @@ function wp_unregister_widget_control($id) {
 }
 
 /**
+ * 显示动态侧栏。
  * Display dynamic sidebar.
  *
  * By default this displays the default sidebar or 'sidebar-1'. If your theme specifies the 'id' or
@@ -779,6 +785,7 @@ function dynamic_sidebar( $index = 1 ) {
 }
 
 /**
+ * 窗口小部件是否显示在前端。
  * Whether widget is displayed on the front end.
  *
  * Either $callback or $id_base can be used
@@ -826,6 +833,7 @@ function is_active_widget( $callback = false, $widget_id = false, $id_base = fal
 }
 
 /**
+ * 主题是否启用和使用动态边栏。
  * Whether the dynamic sidebar is enabled and used by theme.
  *
  * @since 2.2.0
@@ -874,7 +882,7 @@ function is_active_sidebar( $index ) {
 	return apply_filters( 'is_active_sidebar', $is_active_sidebar, $index );
 }
 
-//
+// 内部功能
 // Internal Functions
 //
 
@@ -924,6 +932,7 @@ function wp_get_sidebars_widgets( $deprecated = true ) {
 }
 
 /**
+ * 设置侧栏控件选项来更新边栏。
  * Set the sidebar widget option to update sidebars.
  *
  * @since 2.2.0
@@ -935,17 +944,20 @@ function wp_get_sidebars_widgets( $deprecated = true ) {
 function wp_set_sidebars_widgets( $sidebars_widgets ) {
 	global $_wp_sidebars_widgets;
 
-	// Clear cached value used in wp_get_sidebars_widgets().
+	// 清除缓存值在wp_get_sidebars_widgets()中使用。
+    // Clear cached value used in wp_get_sidebars_widgets().
 	$_wp_sidebars_widgets = null;
 
 	if ( ! isset( $sidebars_widgets['array_version'] ) ) {
 		$sidebars_widgets['array_version'] = 3;
 	}
 
+	// 更新已添加的选项的值。
 	update_option( 'sidebars_widgets', $sidebars_widgets );
 }
 
 /**
+ * 检索默认注册边栏列表。
  * Retrieve default registered sidebars list.
  *
  * @since 2.2.0
@@ -967,6 +979,7 @@ function wp_get_widget_defaults() {
 }
 
 /**
+ * 将小部件设置从单个窗口转换为多窗口小部件格式。
  * Convert the widget settings from single to multi-widget format.
  *
  * @since 2.8.0
@@ -1121,6 +1134,7 @@ function _wp_sidebars_changed() {
 }
 
 /**
+ * 寻找“丢失”小部件，这必须至少在每个主题更改中运行。
  * Look for "lost" widgets, this has to run at least on each theme change.
  *
  * @since 2.8.0
@@ -1597,6 +1611,7 @@ function wp_widget_rss_process( $widget_rss, $check_feed = true ) {
 }
 
 /**
+ * 在启动时注册所有缺省的WordPress小部件。
  * Registers all of the default WordPress widgets on startup.
  *
  * Calls {@see 'widgets_init'} action after all of the WordPress widgets have been registered.

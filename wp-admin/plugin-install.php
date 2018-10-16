@@ -21,10 +21,12 @@ if ( ! current_user_can('install_plugins') )
 	wp_die(__('Sorry, you are not allowed to install plugins on this site.'));
 
 if ( is_multisite() && ! is_network_admin() ) {
+    // 检索网络的管理区域的URL
 	wp_redirect( network_admin_url( 'plugin-install.php' ) );
 	exit();
 }
 
+// 获取一个WP_List_Table类的实例。核心类用于实现在列表表中安装插件的显示。
 $wp_list_table = _get_list_table('WP_Plugin_Install_List_Table');
 $pagenum = $wp_list_table->get_pagenum();
 
@@ -82,7 +84,7 @@ if ( 'upload' !== $tab ) {
      */
 	do_action( 'install_plugins_pre_upload' );
 }
-// 帮助
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 'id'		=> 'overview',
 'title'		=> __('Overview'),
@@ -91,6 +93,7 @@ get_current_screen()->add_help_tab( array(
 	'<p>' . __( 'You can find new plugins to install by searching or browsing the directory right here in your own Plugins section.' ) . ' <span id="live-search-desc" class="hide-if-no-js">' . __( 'The search results will be updated as you type.' ) . '</span></p>'
 
 ) );
+// 帮助-插件的添加
 get_current_screen()->add_help_tab( array(
 'id'		=> 'adding-plugins',
 'title'		=> __('Adding Plugins'),
@@ -101,6 +104,7 @@ get_current_screen()->add_help_tab( array(
 	'<p>' . __( 'If you want to install a plugin that you&#8217;ve downloaded elsewhere, click the Upload Plugin button above the plugins list. You will be prompted to upload the .zip package, and once uploaded, you can activate the new plugin.' ) . '</p>'
 ) );
 
+// 帮助-更多信息：
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Plugins_Add_New_Screen">Documentation on Installing Plugins</a>') . '</p>' .
@@ -172,10 +176,13 @@ do_action( "install_plugins_{$tab}", $paged ); ?>
 </div>
 
 <?php
+// 在需要时打印文件系统凭据模式。
 wp_print_request_filesystem_credentials_modal();
+// 打印更新管理通知的JavaScript模板。
 wp_print_admin_notice_templates();
 
 /**
+ * WordPress管理模板页脚。
  * WordPress Administration Template Footer.
  */
 include(ABSPATH . 'wp-admin/admin-footer.php');

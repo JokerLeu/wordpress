@@ -16,6 +16,7 @@ if ( ! current_user_can( 'manage_options' ) )
 $title = __('Permalink Settings');
 $parent_file = 'options-general.php';
 
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
 	'title'   => __('Overview'),
@@ -24,6 +25,7 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>',
 ) );
 
+// 帮助-固定链接设置
 get_current_screen()->add_help_tab( array(
 	'id'      => 'permalink-settings',
 	'title'   => __('Permalink Settings'),
@@ -33,6 +35,7 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>',
 ) );
 
+// 帮助-自定义结构
 get_current_screen()->add_help_tab( array(
 	'id'      => 'custom-structures',
 	'title'   => __('Custom Structures'),
@@ -40,6 +43,7 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>',
 ) );
 
+// 帮助-更多信息：
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Settings_Permalinks_Screen">Documentation on Permalinks Settings</a>') . '</p>' .
@@ -47,7 +51,9 @@ get_current_screen()->set_help_sidebar(
 	'<p>' . __('<a href="https://wordpress.org/support/">Support Forums</a>') . '</p>'
 );
 
+// 获取WordPress安装根目录的绝对文件系统路径
 $home_path = get_home_path();
+// 检查IIS 7是否支持漂亮的固定链接
 $iis7_permalinks = iis7_supports_permalinks();
 $permalink_structure = get_option( 'permalink_structure' );
 
@@ -82,11 +88,12 @@ if ( $iis7_permalinks ) {
 	} else {
 		$writable = false;
 		$existing_rules  = array_filter( extract_from_markers( $home_path . '.htaccess', 'WordPress' ) );
+		// 检索mod_rewrite-formatted重写规则以写入.htaccess。
 		$new_rules       = array_filter( explode( "\n", $wp_rewrite->mod_rewrite_rules() ) );
 		$update_required = ( $new_rules !== $existing_rules );
 	}
 }
-
+// 确定是否正在使用固定链接和重写模块未启用。
 $using_index_permalinks = $wp_rewrite->using_index_permalinks();
 
 if ( isset($_POST['permalink_structure']) || isset($_POST['category_base']) ) {
@@ -147,10 +154,13 @@ if ( isset($_POST['permalink_structure']) || isset($_POST['category_base']) ) {
 	exit;
 }
 
+// 删除重写规则，然后重新创建重写规则。
 flush_rewrite_rules();
 
+// 添加管理页面头部
 require( ABSPATH . 'wp-admin/admin-header.php' );
 ?>
+<!--代码在wp-admin/options-permalink.php文件中-->
 <div class="wrap">
 <h1><?php echo esc_html( $title ); ?></h1>
 
@@ -180,28 +190,35 @@ $structures = array(
 	4 => $prefix . '/%postname%/',
 );
 ?>
+    <!--常用设置-->
 <h2 class="title"><?php _e('Common Settings'); ?></h2>
 <table class="form-table permalink-structure">
-	<tr>
+	<!--朴素-->
+    <tr>
 		<th><label><input name="selection" type="radio" value="" <?php checked('', $permalink_structure); ?> /> <?php _e( 'Plain' ); ?></label></th>
 		<td><code><?php echo get_option('home'); ?>/?p=123</code></td>
 	</tr>
+    <!--日期和名称型-->
 	<tr>
 		<th><label><input name="selection" type="radio" value="<?php echo esc_attr($structures[1]); ?>" <?php checked($structures[1], $permalink_structure); ?> /> <?php _e('Day and name'); ?></label></th>
 		<td><code><?php echo get_option('home') . $blog_prefix . $prefix . '/' . date('Y') . '/' . date('m') . '/' . date('d') . '/' . _x( 'sample-post', 'sample permalink structure' ) . '/'; ?></code></td>
 	</tr>
+    <!--月份和名称型-->
 	<tr>
 		<th><label><input name="selection" type="radio" value="<?php echo esc_attr($structures[2]); ?>" <?php checked($structures[2], $permalink_structure); ?> /> <?php _e('Month and name'); ?></label></th>
 		<td><code><?php echo get_option('home') . $blog_prefix . $prefix . '/' . date('Y') . '/' . date('m') . '/' . _x( 'sample-post', 'sample permalink structure' ) . '/'; ?></code></td>
 	</tr>
+    <!--数字型-->
 	<tr>
 		<th><label><input name="selection" type="radio" value="<?php echo esc_attr($structures[3]); ?>" <?php checked($structures[3], $permalink_structure); ?> /> <?php _e('Numeric'); ?></label></th>
 		<td><code><?php echo get_option('home') . $blog_prefix . $prefix . '/' . _x( 'archives', 'sample permalink base' ) . '/123'; ?></code></td>
 	</tr>
+    <!--文章名-->
 	<tr>
 		<th><label><input name="selection" type="radio" value="<?php echo esc_attr($structures[4]); ?>" <?php checked($structures[4], $permalink_structure); ?> /> <?php _e('Post name'); ?></label></th>
 		<td><code><?php echo get_option('home') . $blog_prefix . $prefix . '/' . _x( 'sample-post', 'sample permalink structure' ) . '/'; ?></code></td>
 	</tr>
+    <!--自定义结构-->
 	<tr>
 		<th>
 			<label><input name="selection" id="custom_selection" type="radio" value="custom" <?php checked( !in_array($permalink_structure, $structures) ); ?> />
@@ -214,6 +231,7 @@ $structures = array(
 			<div class="available-structure-tags hide-if-no-js">
 				<div id="custom_selection_updated" aria-live="assertive" class="screen-reader-text"></div>
 				<?php
+                // 可用标签列表
 				$available_tags = array(
 					/* translators: %s: permalink structure tag */
 					'year'     => __( '%s (The year of the post, four digits, for example 2004.)' ),
@@ -238,6 +256,7 @@ $structures = array(
 				);
 
 				/**
+                 * 在固定链接设置页面上筛选可用的固定链接结构标签列表。
 				 * Filters the list of available permalink structure tags on the Permalinks settings page.
 				 *
 				 * @since 4.8.0
@@ -278,16 +297,19 @@ $structures = array(
 	</tr>
 </table>
 
+    <!--可选-->
 <h2 class="title"><?php _e('Optional'); ?></h2>
 <p><?php
 /* translators: %s: placeholder that must come at the start of the URL */
 printf( __( 'If you like, you may enter custom structures for your category and tag URLs here. For example, using <code>topics</code> as your category base would make your category links like <code>%s/topics/uncategorized/</code>. If you leave these blank the defaults will be used.' ), get_option( 'home' ) . $blog_prefix . $prefix ); ?></p>
 
 <table class="form-table">
+    <!--分类目录前缀-->
 	<tr>
 		<th><label for="category_base"><?php /* translators: prefix for category permalinks */ _e('Category base'); ?></label></th>
 		<td><?php echo $blog_prefix; ?> <input name="category_base" id="category_base" type="text" value="<?php echo esc_attr( $category_base ); ?>" class="regular-text code" /></td>
 	</tr>
+    <!--标签前缀-->
 	<tr>
 		<th><label for="tag_base"><?php _e('Tag base'); ?></label></th>
 		<td><?php echo $blog_prefix; ?> <input name="tag_base" id="tag_base" type="text" value="<?php echo esc_attr($tag_base); ?>" class="regular-text code" /></td>

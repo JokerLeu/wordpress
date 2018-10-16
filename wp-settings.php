@@ -12,15 +12,16 @@
  */
 
 /**
- * Stores the location of the WordPress directory of functions, classes, and core content.
  * 常量定义：存储函数、类和核心内容的WordPress目录的位置。
+ * Stores the location of the WordPress directory of functions, classes, and core content.
+ *
  *
  * @since 1.0.0
  */
 define( 'WPINC', 'wp-includes' );
 
-// Include files required for initialization.
 // 引入初始化所需的文件。
+// Include files required for initialization.
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
 require_once( ABSPATH . WPINC . '/plugin.php' );
@@ -84,6 +85,7 @@ timer_start();
 wp_debug_mode();
 
 /**
+ * 筛选是否启用加载的advanced-cache.php插入。
  * Filters whether to enable loading of the advanced-cache.php drop-in.
  *
  * This filter runs before it can be used by plugins. It is designed for non-web
@@ -95,15 +97,18 @@ wp_debug_mode();
  *                                    Default true.
  */
 if ( WP_CACHE && apply_filters( 'enable_loading_advanced_cache_dropin', true ) ) {
-	// For an advanced caching plugin to use. Uses a static drop-in because you would only want one.
+	// 一个先进的缓存插件使用。使用静态插入，因为您只需要一个。
+    // For an advanced caching plugin to use. Uses a static drop-in because you would only want one.
 	WP_DEBUG ? include( WP_CONTENT_DIR . '/advanced-cache.php' ) : @include( WP_CONTENT_DIR . '/advanced-cache.php' );
 
-	// Re-initialize any hooks added manually by advanced-cache.php
+	// 重新初始化由advanced-cache.php手工添加的任何钩子
+    // Re-initialize any hooks added manually by advanced-cache.php
 	if ( $wp_filter ) {
 		$wp_filter = WP_Hook::build_preinitialized_hooks( $wp_filter );
 	}
 }
 
+// 设置语言目录的位置。
 // Define WP_LANG_DIR if not set.
 wp_set_lang_dir();
 
@@ -117,24 +122,27 @@ require( ABSPATH . WPINC . '/class-wp.php' );
 require( ABSPATH . WPINC . '/class-wp-error.php' );
 require( ABSPATH . WPINC . '/pomo/mo.php' );
 
+// 包括WPDB类，如果存在，则将删除一个db.php数据库。
 // Include the wpdb class and, if present, a db.php database drop-in.
 global $wpdb;
+// 加载数据库类文件并实例化“$wpdb”全局。
 require_wp_db();
 
-// Set the database table prefix and the format specifiers for database table columns.
 // 设置数据库表前缀和数据库表列的格式说明符。
+// Set the database table prefix and the format specifiers for database table columns.
 $GLOBALS['table_prefix'] = $table_prefix;
 wp_set_wpdb_vars();
 
+// 启动WordPress对象缓存
 // Start the WordPress object cache, or an external object cache if the drop-in is present.
 wp_start_object_cache();
 
-// Attach the default filters.
 // 附上默认的过滤器。
+// Attach the default filters.
 require( ABSPATH . WPINC . '/default-filters.php' );
 
-// Initialize multisite if enabled.
 // 初始化多站点如果启用了。
+// Initialize multisite if enabled.
 if ( is_multisite() ) {
 	require( ABSPATH . WPINC . '/class-wp-site-query.php' );
 	require( ABSPATH . WPINC . '/class-wp-network-query.php' );
@@ -144,6 +152,7 @@ if ( is_multisite() ) {
 	define( 'MULTISITE', false );
 }
 
+// 在停机时注册一个执行函数
 register_shutdown_function( 'shutdown_action_hook' );
 
 // 如果我们只需要基本的东西，停止WordPress的大部分加载。
@@ -263,6 +272,7 @@ require( ABSPATH . WPINC . '/rest-api/fields/class-wp-rest-post-meta-fields.php'
 require( ABSPATH . WPINC . '/rest-api/fields/class-wp-rest-term-meta-fields.php' );
 require( ABSPATH . WPINC . '/rest-api/fields/class-wp-rest-user-meta-fields.php' );
 
+// 实例化富媒体类，如视频和图片到内容。
 $GLOBALS['wp_embed'] = new WP_Embed();
 
 // 加载多站点特定文件。
@@ -273,6 +283,7 @@ if ( is_multisite() ) {
 	require( ABSPATH . WPINC . '/ms-deprecated.php' );
 }
 
+// 定义插件目录的WordPress常量。
 // Define constants that rely on the API to obtain the default value.
 // Define must-use plugin directory constants, which may be overridden in the sunrise.php drop-in.
 wp_plugin_directory_constants();
@@ -305,6 +316,7 @@ if ( is_multisite() ) {
 do_action( 'muplugins_loaded' );
 
 if ( is_multisite() )
+    // 定义多站点Cookie常数。
 	ms_cookie_constants(  );
 
 // 在加载多站点后定义常量
@@ -355,6 +367,7 @@ if ( WP_CACHE && function_exists( 'wp_cache_postload' ) )
 	wp_cache_postload();
 
 /**
+ * 激活插件被加载时触发
  * Fires once activated plugins have loaded.
  *
  * Pluggable functions are also available at this point in the loading order.
@@ -363,6 +376,7 @@ if ( WP_CACHE && function_exists( 'wp_cache_postload' ) )
  */
 do_action( 'plugins_loaded' );
 
+// 定义与功能相关的WordPress常量。
 // Define constants which affect functionality if not already defined.
 wp_functionality_constants();
 
@@ -371,6 +385,7 @@ wp_functionality_constants();
 wp_magic_quotes();
 
 /**
+ * 当评论cookie被清除时触发
  * Fires when comment cookies are sanitized.
  *
  * @since 2.0.11
@@ -427,12 +442,15 @@ $GLOBALS['wp_roles'] = new WP_Roles();
  */
 do_action( 'setup_theme' );
 
+// 定义模板相关的WordPress常量。
 // Define the template related constants.
 wp_templating_constants(  );
 
+// 加载默认文本本地化域。
 // Load the default text localization domain.
 load_default_textdomain();
 
+// 检索当前语言环境。
 $locale = get_locale();
 $locale_file = WP_LANG_DIR . "/$locale.php";
 if ( ( 0 === validate_file( $locale ) ) && is_readable( $locale_file ) )
@@ -440,22 +458,27 @@ if ( ( 0 === validate_file( $locale ) ) && is_readable( $locale_file ) )
 unset( $locale_file );
 
 /**
+ * 用于加载区域设置域日期和各种字符串的WordPress区域设置对象。
  * WordPress Locale object for loading locale domain date and various strings.
  * @global WP_Locale $wp_locale
  * @since 2.1.0
  */
+// 实例化存储地区的翻译数据类。
 $GLOBALS['wp_locale'] = new WP_Locale();
 
 /**
- *  WordPress Locale Switcher object for switching locales.
+ * 用于切换区域的WordPress本地切换对象。
+ * WordPress Locale Switcher object for switching locales.
  *
  * @since 4.7.0
  *
  * @global WP_Locale_Switcher $wp_locale_switcher WordPress locale switcher object.
  */
+// 实例化切换地区类
 $GLOBALS['wp_locale_switcher'] = new WP_Locale_Switcher();
 $GLOBALS['wp_locale_switcher']->init();
 
+// 加载活动主题的函数，适用于父主题和子主题。
 // Load the functions for the active theme, for both parent and child theme if applicable.
 if ( ! wp_installing() || 'wp-activate.php' === $pagenow ) {
 	if ( TEMPLATEPATH !== STYLESHEETPATH && file_exists( STYLESHEETPATH . '/functions.php' ) )
@@ -465,16 +488,19 @@ if ( ! wp_installing() || 'wp-activate.php' === $pagenow ) {
 }
 
 /**
+ * 主题加载后触发
  * Fires after the theme is loaded.
  *
  * @since 3.0.0
  */
 do_action( 'after_setup_theme' );
 
+// 设置当前用户。
 // Set up current user.
 $GLOBALS['wp']->init();
 
 /**
+ * 在WordPress完成加载之后，但在发送任何报头之前触发
  * Fires after WordPress has finished loading but before any headers are sent.
  *
  * Most of WP is loaded at this stage, and the user is authenticated. WP continues
@@ -487,6 +513,7 @@ $GLOBALS['wp']->init();
  */
 do_action( 'init' );
 
+// 检查站点状态，多站点？
 // Check site status
 if ( is_multisite() ) {
 	if ( true !== ( $file = ms_site_check() ) ) {
@@ -497,6 +524,7 @@ if ( is_multisite() ) {
 }
 
 /**
+ * 这个钩子被激发WP，所有插件，并且主题被完全加载和实例化。
  * This hook is fired once WP, all plugins, and the theme are fully loaded and instantiated.
  *
  * Ajax requests should use wp-admin/admin-ajax.php. admin-ajax.php can handle requests for

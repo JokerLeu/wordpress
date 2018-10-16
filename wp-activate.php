@@ -24,6 +24,7 @@ nocache_headers();
 if ( is_object( $wp_object_cache ) )
 	$wp_object_cache->cache_enabled = false;
 
+// 修复页面标题
 // Fix for page title
 $wp_query->is_404 = false;
 
@@ -56,12 +57,14 @@ function do_activate_header() {
 add_action( 'wp_head', 'do_activate_header' );
 
 /**
+ * 加载特定于此页的样式。
  * Loads styles specific to this page.
  *
  * @since MU (3.0.0)
  */
 function wpmu_activate_stylesheet() {
 	?>
+    <!--特定用于此页面的样式代码在wp-activate.php文件中-->
 	<style type="text/css">
 		form { margin-top: 2em; }
 		#submit, #key { width: 90%; font-size: 24px; }
@@ -76,6 +79,7 @@ add_action( 'wp_head', 'wpmu_activate_stylesheet' );
 get_header( 'wp-activate' );
 ?>
 
+<!--代码在wp-activate.php文件中-->
 <div id="signup-content" class="widecolumn">
 	<div class="wp-activate-container">
 	<?php if ( empty($_GET['key']) && empty($_POST['key']) ) { ?>

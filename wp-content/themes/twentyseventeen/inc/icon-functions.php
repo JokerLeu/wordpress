@@ -9,6 +9,7 @@
  */
 
 /**
+ * 向页脚添加SVG定义。
  * Add SVG definitions to the footer.
  */
 function twentyseventeen_include_svg_icons() {
@@ -36,17 +37,20 @@ add_action( 'wp_footer', 'twentyseventeen_include_svg_icons', 9999 );
  * @return string SVG markup.
  */
 function twentyseventeen_get_svg( $args = array() ) {
-	// Make sure $args are an array.
+	// 确保$args是一个数组。
+    // Make sure $args are an array.
 	if ( empty( $args ) ) {
 		return __( 'Please define default parameters in the form of an array.', 'twentyseventeen' );
 	}
 
-	// Define an icon.
+	// 定义一个图标。
+    // Define an icon.
 	if ( false === array_key_exists( 'icon', $args ) ) {
 		return __( 'Please define an SVG icon filename.', 'twentyseventeen' );
 	}
 
-	// Set defaults.
+	// 设置默认值。
+    // Set defaults.
 	$defaults = array(
 		'icon'     => '',
 		'title'    => '',
@@ -54,10 +58,12 @@ function twentyseventeen_get_svg( $args = array() ) {
 		'fallback' => false,
 	);
 
-	// Parse args.
+	// 解析参数
+    // Parse args.
 	$args = wp_parse_args( $args, $defaults );
 
-	// Set aria hidden.
+	// 设置隐藏
+    // Set aria hidden.
 	$aria_hidden = ' aria-hidden="true"';
 
 	// Set ARIA.
@@ -117,6 +123,7 @@ function twentyseventeen_get_svg( $args = array() ) {
 }
 
 /**
+ * 在社交链接菜单中显示SVG图标。
  * Display SVG icons in social links menu.
  *
  * @param  string  $item_output The menu item output.
@@ -143,6 +150,7 @@ function twentyseventeen_nav_menu_social_icons( $item_output, $item, $depth, $ar
 add_filter( 'walker_nav_menu_start_el', 'twentyseventeen_nav_menu_social_icons', 10, 4 );
 
 /**
+ * 如果菜单项有子项，则添加下拉图标。
  * Add dropdown icon if menu item has children.
  *
  * @param  string  $title The menu item's title.
@@ -165,12 +173,14 @@ function twentyseventeen_dropdown_icon_to_menu_link( $title, $item, $args, $dept
 add_filter( 'nav_menu_item_title', 'twentyseventeen_dropdown_icon_to_menu_link', 10, 4 );
 
 /**
+ * 返回支持的社交链接数组（URL和图标名称）。
  * Returns an array of supported social links (URL and icon name).
  *
  * @return array $social_links_icons
  */
 function twentyseventeen_social_links_icons() {
-	// Supported social links icons.
+	// 支持社交链接图标。
+    // Supported social links icons.
 	$social_links_icons = array(
 		'behance.net'     => 'behance',
 		'codepen.io'      => 'codepen',

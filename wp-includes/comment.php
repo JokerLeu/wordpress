@@ -2959,6 +2959,7 @@ function _close_comments_for_old_post( $open, $post_id ) {
 }
 
 /**
+ * 处理评论的提交，通常通过评论表单提交给wp-comments-post.php
  * Handles the submission of a comment, usually posted to wp-comments-post.php via a comment form.
  *
  * This function expects unslashed data, as opposed to functions such as `wp_new_comment()` which

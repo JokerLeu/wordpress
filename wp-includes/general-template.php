@@ -3140,6 +3140,7 @@ function wp_enqueue_editor() {
 }
 
 /**
+ * 为给定设置输入代码编辑器所需的内容
  * Enqueue assets needed by the code editor for the given settings.
  *
  * @since 4.9.0
@@ -3579,6 +3580,7 @@ function the_search_query() {
 }
 
 /**
+ * 获取HTML标记的语言属性。
  * Gets the language attributes for the html tag.
  *
  * Builds up a set of html attributes containing the text direction and language
@@ -3619,6 +3621,7 @@ function get_language_attributes( $doctype = 'html' ) {
 }
 
 /**
+ * 显示HTML标记的语言属性。
  * Displays the language attributes for the html tag.
  *
  * Builds up a set of html attributes containing the text direction and language
@@ -4040,6 +4043,7 @@ function wp_admin_css( $file = 'wp-admin', $force_echo = false ) {
 }
 
 /**
+ * 输入默认的ThickBox js和CSS。
  * Enqueues the default ThickBox js and css.
  *
  * If any of the settings need to be changed, this can be done with another js

@@ -1,5 +1,6 @@
 <?php
 /**
+ * 依赖API：脚本函数
  * Dependencies API: Scripts functions
  *
  * @since 2.6.0
@@ -9,6 +10,7 @@
  */
 
 /**
+ * 如果没有设置$wp_scripts，则初始化它。
  * Initialize $wp_scripts if it has not been set.
  *
  * @global WP_Scripts $wp_scripts
@@ -49,6 +51,7 @@ function _wp_scripts_maybe_doing_it_wrong( $function ) {
 }
 
 /**
+ * 在文档头中打印$handles句柄队列中的脚本。
  * Prints scripts in document head that are in the $handles queue.
  *
  * Called by admin-header.php and {@see 'wp_head'} hook. Since it is called by wp_head on every page load,
@@ -88,6 +91,7 @@ function wp_print_scripts( $handles = false ) {
 }
 
 /**
+ * 向注册脚本添加额外代码。
  * Adds extra code to a registered script.
  *
  * Code will only be added if the script in already in the queue.
@@ -122,6 +126,7 @@ function wp_add_inline_script( $handle, $data, $position = 'after' ) {
 }
 
 /**
+ * 注册一个新的脚本。
  * Register a new script.
  *
  * Registers a script to be enqueued later using the wp_enqueue_script() function.
@@ -156,8 +161,10 @@ function wp_register_script( $handle, $src, $deps = array(), $ver = false, $in_f
 }
 
 /**
+ * 本地化脚本。
  * Localize a script.
  *
+ * 仅当脚本已被添加时才工作。
  * Works only if the script has already been added.
  *
  * Accepts an associative array $l10n and creates a JavaScript object:
@@ -194,6 +201,7 @@ function wp_localize_script( $handle, $object_name, $l10n ) {
 }
 
 /**
+ * 删除已注册的脚本。
  * Remove a registered script.
  *
  * Note: there are intentional safeguards in place to prevent critical admin scripts,
@@ -285,6 +293,7 @@ function wp_enqueue_script( $handle, $src = '', $deps = array(), $ver = false, $
 }
 
 /**
+ * 删除先前已排队的脚本。
  * Remove a previously enqueued script.
  *
  * @see WP_Dependencies::dequeue()
@@ -300,6 +309,7 @@ function wp_dequeue_script( $handle ) {
 }
 
 /**
+ * 检查脚本是否已添加到队列中。
  * Check whether a script has been added to the queue.
  *
  * @since 2.8.0
@@ -317,6 +327,7 @@ function wp_script_is( $handle, $list = 'enqueued' ) {
 }
 
 /**
+ * 向脚本中添加元数据。
  * Add metadata to a script.
  *
  * Works only if the script has already been added.

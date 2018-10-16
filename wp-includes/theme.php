@@ -140,6 +140,7 @@ function is_child_theme() {
 }
 
 /**
+ * 检索当前样式表的名称。
  * Retrieve name of the current stylesheet.
  *
  * The theme name that the administrator has currently set the front end theme
@@ -2609,6 +2610,7 @@ function _remove_theme_support( $feature ) {
 }
 
 /**
+ * 检查主题对给定特征的支持
  * Checks a theme's support for a given feature
  *
  * @since 2.9.0

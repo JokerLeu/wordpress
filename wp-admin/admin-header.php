@@ -12,8 +12,9 @@ if ( ! defined( 'WP_ADMIN' ) )
 	require_once( dirname( __FILE__ ) . '/admin.php' );
 
 /**
+ * 防止admin-header.php已经包含在函数中。
  * In case admin-header.php is included in a function.
- *2
+ *
  * @global string    $title
  * @global string    $hook_suffix
  * @global WP_Screen $current_screen
@@ -29,8 +30,10 @@ global $title, $hook_suffix, $current_screen, $wp_locale, $pagenow,
 // 在admin.php完成之前捕获包含admin-header.php的插件.
 // Catch plugins that include admin-header.php before admin.php completes.
 if ( empty( $current_screen ) )
+    // 设置当前屏幕对象
 	set_current_screen();
 
+// 获取管理员页面标题
 get_admin_page_title();
 $title = esc_html( strip_tags( $title ) );
 
@@ -63,13 +66,16 @@ if ( $admin_title == $title ) {
  */
 $admin_title = apply_filters( 'admin_title', $admin_title, $title );
 
+// 保存和恢复存储在Cookie中的用户界面设置。
 wp_user_settings();
 
+// wordpress后台html文件开始
 _wp_admin_html_begin();
 ?>
 <title><?php echo $admin_title; ?></title>
 <?php
 
+// 输入CSS样式表。
 wp_enqueue_style( 'colors' );
 wp_enqueue_style( 'ie' );
 wp_enqueue_script('utils');
@@ -77,6 +83,7 @@ wp_enqueue_script( 'svg-painter' );
 
 $admin_body_class = preg_replace('/[^a-z0-9_-]+/i', '-', $hook_suffix);
 ?>
+<!--此段在代码wp-admin/admin-header.php文件中-->
 <script type="text/javascript">
 addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!='function'){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
 var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
@@ -101,6 +108,7 @@ var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
 do_action( 'admin_enqueue_scripts', $hook_suffix );
 
 /**
+ * 当样式打印到特定的管理页面时，基于$hook_suffix触发
  * Fires when styles are printed for a specific admin page based on $hook_suffix.
  *
  * @since 2.6.0
@@ -108,6 +116,7 @@ do_action( 'admin_enqueue_scripts', $hook_suffix );
 do_action( "admin_print_styles-{$hook_suffix}" );
 
 /**
+ * 为所有管理页面打印样式时触发
  * Fires when styles are printed for all admin pages.
  *
  * @since 2.6.0
@@ -115,6 +124,7 @@ do_action( "admin_print_styles-{$hook_suffix}" );
 do_action( 'admin_print_styles' );
 
 /**
+ * 当脚本基于$hook_suffix打印到特定的管理页面时触发
  * Fires when scripts are printed for a specific admin page based on $hook_suffix.
  *
  * @since 2.1.0
@@ -122,6 +132,7 @@ do_action( 'admin_print_styles' );
 do_action( "admin_print_scripts-{$hook_suffix}" );
 
 /**
+ * 当脚本为所有管理页面打印时触发
  * Fires when scripts are printed for all admin pages.
  *
  * @since 2.1.0
@@ -129,6 +140,7 @@ do_action( "admin_print_scripts-{$hook_suffix}" );
 do_action( 'admin_print_scripts' );
 
 /**
+ * 在一个特定的管理页面头部触发
  * Fires in head section for a specific admin page.
  *
  * The dynamic portion of the hook, `$hook_suffix`, refers to the hook suffix
@@ -139,6 +151,7 @@ do_action( 'admin_print_scripts' );
 do_action( "admin_head-{$hook_suffix}" );
 
 /**
+ * 在所有管理页面的头部触发
  * Fires in head section for all admin pages.
  *
  * @since 2.1.0
@@ -180,7 +193,7 @@ if ( is_network_admin() )
 $admin_body_class .= ' no-customize-support no-svg';
 
 ?>
-</head>
+</head><!--头部结束 代码在wp-admin/admin-header.php>
 <?php
 /**
  * 在admin中为body标签过滤CSS类。
@@ -199,12 +212,14 @@ $admin_body_class .= ' no-customize-support no-svg';
  */
 $admin_body_classes = apply_filters( 'admin_body_class', '' );
 ?>
+<!--代码在wp-admin/admin-header.php-->
 <body class="wp-admin wp-core-ui no-js <?php echo $admin_body_classes . ' ' . $admin_body_class; ?>">
 <script type="text/javascript">
 	document.body.className = document.body.className.replace('no-js','js');
 </script>
 
 <?php
+// 确保自定义的类越早越好。
 // Make sure the customize body classes are correct as early as possible.
 if ( current_user_can( 'customize' ) ) {
 	wp_customize_support_script();
@@ -217,6 +232,7 @@ if ( current_user_can( 'customize' ) ) {
 
 <?php
 /**
+ * 在管理页面的内容部分开始时触发
  * Fires at the beginning of the content section in an admin page.
  *
  * @since 3.0.0
@@ -228,6 +244,7 @@ do_action( 'in_admin_header' );
 <?php
 unset($title_class, $blog_name, $total_update_count, $update_title);
 
+// 当前屏幕->设置屏幕的父信息。
 $current_screen->set_parentage( $parent_file );
 
 ?>
@@ -235,10 +252,12 @@ $current_screen->set_parentage( $parent_file );
 <div id="wpbody-content" aria-label="<?php esc_attr_e('Main content'); ?>" tabindex="0">
 <?php
 
+// 当前屏幕->渲染屏幕的帮助部分。
 $current_screen->render_screen_meta();
 
 if ( is_network_admin() ) {
 	/**
+     * 打印网络管理员屏幕通知。
 	 * Prints network admin screen notices.
 	 *
 	 * @since 3.1.0
@@ -246,6 +265,7 @@ if ( is_network_admin() ) {
 	do_action( 'network_admin_notices' );
 } elseif ( is_user_admin() ) {
 	/**
+     * 打印用户管理屏幕通知。
 	 * Prints user admin screen notices.
 	 *
 	 * @since 3.1.0
@@ -253,6 +273,7 @@ if ( is_network_admin() ) {
 	do_action( 'user_admin_notices' );
 } else {
 	/**
+     * 打印管理员屏幕通知
 	 * Prints admin screen notices.
 	 *
 	 * @since 3.1.0
@@ -261,6 +282,7 @@ if ( is_network_admin() ) {
 }
 
 /**
+ * 打印通用管理员屏幕通知
  * Prints generic admin screen notices.
  *
  * @since 3.1.0

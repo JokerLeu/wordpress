@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress管理导入者API。
  * WordPress Administration Importer API.
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 检索导入者列表。
  * Retrieve list of importers.
  *
  * @since 2.0.0
@@ -23,6 +25,7 @@ function get_importers() {
 }
 
 /**
+ * 通过每个顶级成员的第一成员对多维数组进行排序
  * Sorts a multidimensional array by first member of each top level member
  *
  * Used by uasort() as a callback, should not be used directly.

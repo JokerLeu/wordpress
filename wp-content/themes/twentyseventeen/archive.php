@@ -35,7 +35,8 @@ get_header(); ?>
 			while ( have_posts() ) :
 				the_post();
 
-				/*
+				/**
+                 * 将模板部件加载到模板中
 				 * Include the Post-Format-specific template for the content.
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
@@ -44,6 +45,7 @@ get_header(); ?>
 
 			endwhile;
 
+			// 在适用时，显示下一页/前一组帖子的分页导航。
 			the_posts_pagination(
 				array(
 					'prev_text'          => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',

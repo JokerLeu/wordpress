@@ -10,14 +10,18 @@
 /** WordPress Administration Bootstrap */
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
+// 检测用户权限
 if ( ! current_user_can( 'manage_options' ) )
 	wp_die( __( 'Sorry, you are not allowed to manage options for this site.' ) );
 
+// 页面标题 阅读设置
 $title = __( 'Reading Settings' );
+// 父页面
 $parent_file = 'options-general.php';
 
 add_action('admin_head', 'options_reading_add_js');
 
+// 帮助-概述
 get_current_screen()->add_help_tab( array(
 	'id'      => 'overview',
 	'title'   => __('Overview'),
@@ -27,6 +31,7 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>',
 ) );
 
+// 帮助-对搜索引擎的可见性
 get_current_screen()->add_help_tab( array(
 	'id'      => 'site-visibility',
 	'title'   => has_action( 'blog_privacy_selector' ) ? __( 'Site Visibility' ) : __( 'Search Engine Visibility' ),
@@ -34,12 +39,14 @@ get_current_screen()->add_help_tab( array(
 		'<p>' . __( 'When this setting is in effect, a reminder is shown in the At a Glance box of the Dashboard that says, &#8220;Search Engines Discouraged,&#8221; to remind you that your site is not being crawled.' ) . '</p>',
 ) );
 
+// 帮助-更多信息
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
 	'<p>' . __('<a href="https://codex.wordpress.org/Settings_Reading_Screen">Documentation on Reading Settings</a>') . '</p>' .
 	'<p>' . __('<a href="https://wordpress.org/support/">Support Forums</a>') . '</p>'
 );
 
+// 包含页面头部
 include( ABSPATH . 'wp-admin/admin-header.php' );
 ?>
 
@@ -67,14 +74,17 @@ else :
 		update_option( 'show_on_front', 'posts' );
 ?>
 <table class="form-table">
+    <!--您的主页显示-->
 <tr>
 <th scope="row"><?php _e( 'Your homepage displays' ); ?></th>
 <td id="front-static-pages"><fieldset><legend class="screen-reader-text"><span><?php _e( 'Your homepage displays' ); ?></span></legend>
+        <!--您的最新文章-->
 	<p><label>
 		<input name="show_on_front" type="radio" value="posts" class="tog" <?php checked( 'posts', get_option( 'show_on_front' ) ); ?> />
 		<?php _e( 'Your latest posts' ); ?>
 	</label>
 	</p>
+        <!--一个静态页面-->
 	<p><label>
 		<input name="show_on_front" type="radio" value="page" class="tog" <?php checked( 'page', get_option( 'show_on_front' ) ); ?> />
 		<?php printf( __( 'A <a href="%s">static page</a> (select below)' ), 'edit.php?post_type=page' ); ?>
@@ -90,16 +100,19 @@ else :
 </fieldset></td>
 </tr>
 <?php endif; ?>
+    <!--博客页面至多显示-->
 <tr>
 <th scope="row"><label for="posts_per_page"><?php _e( 'Blog pages show at most' ); ?></label></th>
 <td>
 <input name="posts_per_page" type="number" step="1" min="1" id="posts_per_page" value="<?php form_option( 'posts_per_page' ); ?>" class="small-text" /> <?php _e( 'posts' ); ?>
 </td>
 </tr>
+    <!--feed中显示最近-->
 <tr>
 <th scope="row"><label for="posts_per_rss"><?php _e( 'Syndication feeds show the most recent' ); ?></label></th>
 <td><input name="posts_per_rss" type="number" step="1" min="1" id="posts_per_rss" value="<?php form_option( 'posts_per_rss' ); ?>" class="small-text" /> <?php _e( 'items' ); ?></td>
 </tr>
+    <!--对于feed中的每篇文章，显示-->
 <tr>
 <th scope="row"><?php _e( 'For each article in a feed, show' ); ?> </th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e( 'For each article in a feed, show' ); ?> </span></legend>
@@ -108,6 +121,7 @@ else :
 </fieldset></td>
 </tr>
 
+    <!--对搜索引擎的可见性-->
 <tr class="option-site-visibility">
 <th scope="row"><?php has_action( 'blog_privacy_selector' ) ? _e( 'Site Visibility' ) : _e( 'Search Engine Visibility' ); ?> </th>
 <td><fieldset><legend class="screen-reader-text"><span><?php has_action( 'blog_privacy_selector' ) ? _e( 'Site Visibility' ) : _e( 'Search Engine Visibility' ); ?> </span></legend>
@@ -142,12 +156,24 @@ else :
 </fieldset></td>
 </tr>
 
-<?php do_settings_fields( 'reading', 'default' ); ?>
+<?php
+// 打印特定设置部分的设置字段
+do_settings_fields( 'reading', 'default' );
+?>
 </table>
 
-<?php do_settings_sections( 'reading' ); ?>
+<?php
+// 打印添加到特定设置页的所有设置部分
+do_settings_sections( 'reading' );
+?>
 
-<?php submit_button(); ?>
+<?php
+// 用提交的文本和适当的类回送提交按钮。
+submit_button();
+?>
 </form>
 </div>
-<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+<?php
+// 添加页脚
+include( ABSPATH . 'wp-admin/admin-footer.php' );
+?>

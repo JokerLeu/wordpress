@@ -660,6 +660,7 @@ function unload_textdomain( $domain ) {
 }
 
 /**
+ * 加载默认的基于区域设置的字符串。
  * Load default translated strings based on locale.
  *
  * Loads the .mo file in WP_LANG_DIR constant path from WordPress root.
@@ -1006,6 +1007,7 @@ function translate_user_role( $name ) {
 }
 
 /**
+ * 基于给定目录中*.mo文件的存在，获取所有可用语言。
  * Get all available languages based on the presence of *.mo files in a given directory.
  *
  * The default directory is WP_LANG_DIR.

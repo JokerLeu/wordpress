@@ -1,5 +1,6 @@
 <?php
 /**
+ * 主题的头部
  * The header for our theme
  *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
@@ -13,6 +14,7 @@
  */
 
 ?><!DOCTYPE html>
+<!--代码在模板的header.php文件-->
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -42,7 +44,8 @@
 
 	<?php
 
-	/*
+	/**
+     * 如果一个普通的帖子或网页，而不是首页，显示特色的形象。
 	 * If a regular post or page, and not the front page, show the featured image.
 	 * Using get_queried_object_id() here since the $post global may not be set before a call to the_post().
 	 */

@@ -546,6 +546,7 @@ function get_post_class( $class = '', $post_id = null ) {
 }
 
 /**
+ * 显示体元素的类。
  * Display the classes for the body element.
  *
  * @since 2.8.0
@@ -553,7 +554,8 @@ function get_post_class( $class = '', $post_id = null ) {
  * @param string|array $class One or more classes to add to the class list.
  */
 function body_class( $class = '' ) {
-	// Separates classes with a single space, collates classes for body element
+	// 用单个空间分隔类，为体元素排序类
+    // Separates classes with a single space, collates classes for body element
 	echo 'class="' . join( ' ', get_body_class( $class ) ) . '"';
 }
 
