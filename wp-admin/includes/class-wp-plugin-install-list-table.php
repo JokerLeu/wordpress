@@ -1,6 +1,6 @@
 <?php
 /**
- * 列表API：WP_Plugin_Install_List_Table类
+ * 列表API：WP_插件_安装_列表_表类
  * List Table API: WP_Plugin_Install_List_Table class
  *
  * @package WordPress
@@ -34,6 +34,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	}
 
 	/**
+     * 返回已知插件的列表。
 	 * Return the list of known plugins.
 	 *
 	 * Uses the transient data from the updates API to determine the known
@@ -66,6 +67,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	}
 
 	/**
+     * 如果已知，返回已安装插件的少量列表。
 	 * Return a list of slugs of installed plugins, if known.
 	 *
 	 * Uses the transient data from the updates API to determine the slugs of
@@ -81,7 +83,8 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 *
+	 * 准备项
+     *
 	 * @global array  $tabs
 	 * @global string $tab
 	 * @global int    $paged
@@ -93,34 +96,47 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 
 		global $tabs, $tab, $paged, $type, $term;
 
+		// 基于$_GET和$_POST重置全局变量
 		wp_reset_vars( array( 'tab' ) );
 
+		// 获取当前页码
 		$paged = $this->get_pagenum();
 
 		$per_page = 30;
 
-		// These are the tabs which are shown on the page
+		// 这些是页面上显示的标签。
+        // These are the tabs which are shown on the page
 		$tabs = array();
 
 		if ( 'search' === $tab ) {
+		    // 插件-搜索插件
 			$tabs['search'] = __( 'Search Results' );
 		}
 		if ( $tab === 'beta' || false !== strpos( get_bloginfo( 'version' ), '-' ) ) {
 			$tabs['beta'] = _x( 'Beta Testing', 'Plugin Installer' );
 		}
+		// 插件-特色
 		$tabs['featured']    = _x( 'Featured', 'Plugin Installer' );
+		// 插件-热门
 		$tabs['popular']     = _x( 'Popular', 'Plugin Installer' );
+		// 插件-推荐
 		$tabs['recommended'] = _x( 'Recommended', 'Plugin Installer' );
+		// 插件-收藏
 		$tabs['favorites']   = _x( 'Favorites', 'Plugin Installer' );
 		if ( current_user_can( 'upload_plugins' ) ) {
-			// No longer a real tab. Here for filter compatibility.
-			// Gets skipped in get_views().
+			// 不再是真正的制表符。这里是过滤器兼容性。
+            // No longer a real tab. Here for filter compatibility.
+			// 在get_views()中跳过。
+            // Gets skipped in get_views().
+            // 插件-上传插件
 			$tabs['upload'] = __( 'Upload Plugin' );
 		}
 
+		// 执行不具有菜单项的有效操作。
 		$nonmenu_tabs = array( 'plugin-information' ); // Valid actions to perform which do not have a Menu item.
 
 		/**
+         * 过滤插件安装屏幕上显示的选项卡。
 		 * Filters the tabs shown on the Plugin Install screen.
 		 *
 		 * @since 2.7.0
@@ -131,6 +147,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		$tabs = apply_filters( 'install_plugins_tabs', $tabs );
 
 		/**
+         * 过滤器插件不与插件安装屏幕上的菜单项相关联。
 		 * Filters tabs not associated with a menu item on the Plugin Install screen.
 		 *
 		 * @since 2.7.0
@@ -139,10 +156,12 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		 */
 		$nonmenu_tabs = apply_filters( 'install_plugins_nonmenu_tabs', $nonmenu_tabs );
 
-		// If a non-valid menu tab has been selected, And it's not a non-menu action.
+		// 如果已选择非有效菜单选项卡，则它不是非菜单操作。
+        // If a non-valid menu tab has been selected, And it's not a non-menu action.
 		if ( empty( $tab ) || ( !isset( $tabs[ $tab ] ) && !in_array( $tab, (array) $nonmenu_tabs ) ) )
 			$tab = key( $tabs );
 
+		// 返回已知插件的列表。
 		$installed_plugins = $this->get_installed_plugins();
 
 		$args = array(
@@ -153,11 +172,15 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 				'icons' => true,
 				'active_installs' => true
 			),
-			// Send the locale and installed plugin slugs to the API so it can provide context-sensitive results.
+			// 将区域设置和安装的插件SLUG发送到API，以便它可以提供上下文敏感的结果。
+            // Send the locale and installed plugin slugs to the API so it can provide context-sensitive results.
+            // 检索用户的区域设置。
 			'locale' => get_user_locale(),
+			// 已知插件的列表。
 			'installed_plugins' => array_keys( $installed_plugins ),
 		);
 
+		// 在URL中类似于tab=xxx&type=xxx
 		switch ( $tab ) {
 			case 'search':
 				$type = isset( $_REQUEST['type'] ) ? wp_unslash( $_REQUEST['type'] ) : 'term';
@@ -210,6 +233,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		}
 
 		/**
+         * 为每个插件安装屏幕选项卡过滤API请求参数。
 		 * Filters API request arguments for each Plugin Install screen tab.
 		 *
 		 * The dynamic portion of the hook name, `$tab`, refers to the plugin install tabs.
@@ -302,6 +326,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	}
 
 	/**
+     * 重写父视图，以便可以使用筛选条显示。
 	 * Override parent views so we can use the filter bar display.
 	 */
 	public function views() {
@@ -330,6 +355,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	}
 
 	/**
+     * 重写父display()，这样我们可以提供一个不同的容器。
 	 * Override the parent display() so we can provide a different container.
 	 */
 	public function display() {
@@ -462,7 +488,8 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 					$group_name = $plugin['group'];
 				}
 
-				// Starting a new group, close off the divs of the last one
+				// 启动一个新的组，关闭最后一个的div
+                // Starting a new group, close off the divs of the last one
 				if ( ! empty( $group ) ) {
 					echo '</div></div>';
 				}
@@ -475,7 +502,8 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 			}
 			$title = wp_kses( $plugin['name'], $plugins_allowedtags );
 
-			// Remove any HTML from the description.
+			// 从描述中删除任何HTML。
+            // Remove any HTML from the description.
 			$description = strip_tags( $plugin['short_description'] );
 			$version = wp_kses( $plugin['version'], $plugins_allowedtags );
 
@@ -543,7 +571,10 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 			$details_link   = self_admin_url( 'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
 								'&amp;TB_iframe=true&amp;width=600&amp;height=550' );
 
-			/* translators: 1: Plugin name and version. */
+			/**
+             * 译者：1：插件名称和版本。
+             * translators: 1: Plugin name and version.
+             */
 			$action_links[] = '<a href="' . esc_url( $details_link ) . '" class="thickbox open-plugin-details-modal" aria-label="' . esc_attr( sprintf( __( 'More information about %s' ), $name ) ) . '" data-title="' . esc_attr( $name ) . '">' . __( 'More Details' ) . '</a>';
 
 			if ( !empty( $plugin['icons']['svg'] ) ) {
@@ -557,6 +588,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 			}
 
 			/**
+             * 过滤插件的安装操作链接。
 			 * Filters the install action links for a plugin.
 			 *
 			 * @since 2.7.0
@@ -628,7 +660,8 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		<?php
 		}
 
-		// Close off the group divs of the last one
+		// 关闭最后一组的div
+        // Close off the group divs of the last one
 		if ( ! empty( $group ) ) {
 			echo '</div></div>';
 		}

@@ -20,6 +20,7 @@ function get_post_format( $post = null ) {
 	if ( ! $post = get_post( $post ) )
 		return false;
 
+	// 检查POST类型对给定特征的支持。
 	if ( ! post_type_supports( $post->post_type, 'post-formats' ) )
 		return false;
 

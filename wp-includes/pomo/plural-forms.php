@@ -1,12 +1,14 @@
 <?php
 
 /**
+ * 获取文本复数形式解析器。
  * A gettext Plural-Forms parser.
  *
  * @since 4.9.0
  */
 class Plural_Forms {
 	/**
+     * 操作符字符。
 	 * Operator characters.
 	 *
 	 * @since 4.9.0
@@ -15,6 +17,7 @@ class Plural_Forms {
 	const OP_CHARS = '|&><!=%?:';
 
 	/**
+     * 有效数字字符。
 	 * Valid number characters.
 	 *
 	 * @since 4.9.0
@@ -23,8 +26,10 @@ class Plural_Forms {
 	const NUM_CHARS = '0123456789';
 
 	/**
+     * 算符优先权。
 	 * Operator precedence.
 	 *
+     * 运算符优先级从最高到最低。较高的数字表示较高的优先级，并首先执行。
 	 * Operator precedence from highest to lowest. Higher numbers indicate
 	 * higher precedence, and are executed first.
 	 *
@@ -56,6 +61,7 @@ class Plural_Forms {
 	);
 
 	/**
+     * 由字符串生成的令牌。
 	 * Tokens generated from the string.
 	 *
 	 * @since 4.9.0
@@ -64,6 +70,7 @@ class Plural_Forms {
 	protected $tokens = array();
 
 	/**
+     * 缓存以重复调用函数。
 	 * Cache for repeated calls to the function.
 	 *
 	 * @since 4.9.0
@@ -72,6 +79,7 @@ class Plural_Forms {
 	protected $cache = array();
 
 	/**
+     * 构造函数
 	 * Constructor.
 	 *
 	 * @since 4.9.0
@@ -83,6 +91,7 @@ class Plural_Forms {
 	}
 
 	/**
+     * 将多个表单字符串解析为令牌。
 	 * Parse a Plural-Forms string into tokens.
 	 *
 	 * Uses the shunting-yard algorithm to convert the string to Reverse Polish
@@ -96,26 +105,30 @@ class Plural_Forms {
 		$pos = 0;
 		$len = strlen( $str );
 
-		// Convert infix operators to postfix using the shunting-yard algorithm.
+		// 使用调车场算法将中缀运算符转换为后缀。
+        // Convert infix operators to postfix using the shunting-yard algorithm.
 		$output = array();
 		$stack = array();
 		while ( $pos < $len ) {
 			$next = substr( $str, $pos, 1 );
 
 			switch ( $next ) {
-				// Ignore whitespace
+				// 忽略空白
+                // Ignore whitespace
 				case ' ':
 				case "\t":
 					$pos++;
 					break;
 
-				// Variable (n)
+				// 变量（n）
+                // Variable (n)
 				case 'n':
 					$output[] = array( 'var' );
 					$pos++;
 					break;
 
-				// Parentheses
+				// 圆括号
+                // Parentheses
 				case '(':
 					$stack[] = $next;
 					$pos++;
@@ -143,7 +156,8 @@ class Plural_Forms {
 					$pos++;
 					break;
 
-				// Operators
+				// 算子
+                // Operators
 				case '|':
 				case '&':
 				case '>':
@@ -177,7 +191,8 @@ class Plural_Forms {
 					$pos += $end_operator;
 					break;
 
-				// Ternary "else"
+				// 三元“其他”
+                // Ternary "else"
 				case ':':
 					$found = false;
 					$s_pos = count( $stack ) - 1;
@@ -201,7 +216,8 @@ class Plural_Forms {
 					$pos++;
 					break;
 
-				// Default - number or invalid
+				// 默认数或无效
+                // Default - number or invalid
 				default:
 					if ( $next >= '0' && $next <= '9' ) {
 						$span = strspn( $str, self::NUM_CHARS, $pos );
@@ -227,6 +243,7 @@ class Plural_Forms {
 	}
 
 	/**
+     * 得到一个数字的复数形式。
 	 * Get the plural form for a number.
 	 *
 	 * Caches the value for repeated calls.
@@ -244,6 +261,7 @@ class Plural_Forms {
 	}
 
 	/**
+     * 执行复数形式函数。
 	 * Execute the plural form function.
 	 *
 	 * @since 4.9.0

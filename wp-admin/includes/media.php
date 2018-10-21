@@ -35,6 +35,7 @@ function media_upload_tabs() {
 }
 
 /**
+ * 如果POST具有图像附件，则将画廊选项卡添加到选项卡数组
  * Adds the gallery tab back to the tabs array if post has image attachments
  *
  * @since 2.5.0
@@ -748,6 +749,7 @@ function media_upload_form_handler() {
 }
 
 /**
+ * 处理上传媒体的过程。
  * Handles the process of uploading media.
  *
  * @since 2.5.0
@@ -914,6 +916,7 @@ function media_sideload_image( $file, $post_id, $desc = null, $return = 'html' )
 }
 
 /**
+ * 在iframe中检索传统媒体上传表单
  * Retrieves the legacy media uploader form in an iframe.
  *
  * @since 2.5.0
@@ -937,6 +940,7 @@ function media_upload_gallery() {
 }
 
 /**
+ * 在iframe中检索传统媒体库。
  * Retrieves the legacy media library form in an iframe.
  *
  * @since 2.5.0
@@ -1147,6 +1151,7 @@ function media_post_single_attachment_fields_to_edit( $form_fields, $post ) {
 }
 
 /**
+ * 从media_upload_form_handler()中输入过滤器，如果没有提供，则从文件名中分配默认的POST标题。
  * Filters input from media_upload_form_handler() and assigns a default
  * post_title from the file name if none supplied.
  *
@@ -1356,6 +1361,7 @@ function get_media_items( $post_id, $errors ) {
 }
 
 /**
+ * 检索HTML表单以修改图像附件。
  * Retrieve HTML form for modifying the image attachment.
  *
  * @since 2.5.0
@@ -2641,6 +2647,7 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 }
 
 /**
+ * 显示多文件上传消息。
  * Displays the multi-file uploader message.
  *
  * @since 2.6.0
@@ -2663,6 +2670,7 @@ function media_upload_flash_bypass() {
 }
 
 /**
+ * 显示浏览器内置的上传消息。
  * Displays the browser's built-in uploader message.
  *
  * @since 2.6.0
@@ -2846,6 +2854,7 @@ function edit_form_image_editor( $post ) {
 }
 
 /**
+ * 在发布元框中显示不可编辑的附件元数据。
  * Displays non-editable attachment metadata in the publish meta box.
  *
  * @since 3.5.0

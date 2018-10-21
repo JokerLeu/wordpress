@@ -165,6 +165,7 @@ function get_stylesheet() {
 }
 
 /**
+ * 检索当前主题的样式表目录路径。
  * Retrieve stylesheet directory path for current theme.
  *
  * @since 1.5.0
@@ -280,6 +281,7 @@ function get_locale_stylesheet_uri() {
 }
 
 /**
+ * 检索当前主题的名称。
  * Retrieve name of the current theme.
  *
  * @since 1.5.0
@@ -288,6 +290,7 @@ function get_locale_stylesheet_uri() {
  */
 function get_template() {
 	/**
+     * 筛选当前主题的名称。
 	 * Filters the name of the current theme.
 	 *
 	 * @since 1.5.0
@@ -298,6 +301,7 @@ function get_template() {
 }
 
 /**
+ * 检索当前主题目录。
  * Retrieve current theme directory.
  *
  * @since 1.5.0
@@ -533,6 +537,7 @@ function search_theme_directories( $force = false ) {
 }
 
 /**
+ * 检索路径到主题目录。
  * Retrieve path to themes directory.
  *
  * Does not have trailing slash.
@@ -557,6 +562,7 @@ function get_theme_root( $stylesheet_or_template = false ) {
 	}
 
 	/**
+     * 过滤主题目录的绝对路径。
 	 * Filters the absolute path to the themes directory.
 	 *
 	 * @since 1.5.0
@@ -567,6 +573,7 @@ function get_theme_root( $stylesheet_or_template = false ) {
 }
 
 /**
+ * 检索主题目录的URI。
  * Retrieve URI for themes directory.
  *
  * Does not have trailing slash.
@@ -618,6 +625,7 @@ function get_theme_root_uri( $stylesheet_or_template = false, $theme_root = fals
 }
 
 /**
+ * 在没有应用筛选器的情况下，获取与内容目录相对的原始主题根。
  * Get the raw theme root relative to the content directory with no filters applied.
  *
  * @since 3.1.0
@@ -858,10 +866,12 @@ function get_theme_mods() {
  * @return string
  */
 function get_theme_mod( $name, $default = false ) {
+    // 检索所有主题修改
 	$mods = get_theme_mods();
 
 	if ( isset( $mods[$name] ) ) {
 		/**
+         * 过滤主题修改，或“theme_mod”，值。
 		 * Filters the theme modification, or 'theme_mod', value.
 		 *
 		 * The dynamic portion of the hook name, `$name`, refers to
@@ -955,6 +965,7 @@ function remove_theme_mods() {
 }
 
 /**
+ * 检索3或6位十六进制形式的自定义头文本颜色。
  * Retrieves the custom header text color in 3- or 6-digit hexadecimal form.
  *
  * @since 2.1.0
@@ -990,6 +1001,7 @@ function display_header_text() {
 }
 
 /**
+ * 检查是否设置了标题图像。
  * Check whether a header image is set or not.
  *
  * @since 4.2.0
@@ -1003,7 +1015,7 @@ function has_header_image() {
 }
 
 /**
- * 为自定义标题检索头图像。
+ * 为自定义标题检索标题图像。
  * Retrieve header image for custom header.
  *
  * @since 2.1.0
@@ -1283,6 +1295,7 @@ function get_custom_header() {
 }
 
 /**
+ * 注册由自定义标题管理界面显示的默认标题的选择。
  * Register a selection of default headers to be displayed by the custom header admin UI.
  *
  * @since 3.0.0
@@ -2213,6 +2226,7 @@ function get_theme_starter_content() {
 }
 
 /**
+ * 为给定的特征注册主题支持。
  * Registers theme support for a given feature.
  *
  * Must be called in the theme's functions.php file to work.
@@ -2556,6 +2570,7 @@ function remove_theme_support( $feature ) {
 }
 
 /**
+ * 不要使用。在内部删除主题支持，对黑名单一无所知。
  * Do not use. Removes theme support internally, ignorant of the blacklist.
  *
  * @access private
@@ -3054,6 +3069,7 @@ function wp_customize_support_script() {
 }
 
 /**
+ * 在定制程序中是否正在预览站点。
  * Whether the site is being previewed in the Customizer.
  *
  * @since 4.0.0

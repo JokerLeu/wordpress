@@ -1,11 +1,13 @@
 <?php
 /**
+ * 生成管理菜单。
  * Build Administration Menu.
  *
  * @package WordPress
  * @subpackage Administration
  */
 
+// 当前请求是否为网络管理接口。
 if ( is_network_admin() ) {
 
 	/**
@@ -41,6 +43,7 @@ if ( is_network_admin() ) {
 	do_action( '_admin_menu' );
 }
 
+// 创建页面插件钩子名称列表。
 // Create list of page plugin hook names.
 foreach ($menu as $menu_page) {
 	if ( false !== $pos = strpos($menu_page[2], '?') ) {
@@ -70,6 +73,7 @@ unset($menu_page, $compat);
 
 $_wp_submenu_nopriv = array();
 $_wp_menu_nopriv = array();
+// 循环子菜单并删除用户没有私有的页面。
 // Loop over submenus and remove pages for which the user does not have privs.
 foreach ($submenu as $parent => $sub) {
 	foreach ($sub as $index => $data) {
@@ -85,7 +89,9 @@ foreach ($submenu as $parent => $sub) {
 }
 unset($sub, $parent);
 
-/*
+/**
+ * 在顶级菜单上循环。
+ * 由于缺乏特权，无法访问原始父菜单的菜单将具有行中的下一个子菜单作为新菜单父菜单。
  * Loop over the top-level menu.
  * Menus for which the original parent is not accessible due to lack of privileges
  * will have the next submenu in line be assigned as the new menu parent.
@@ -97,7 +103,8 @@ foreach ( $menu as $id => $data ) {
 	$first_sub = reset( $subs );
 	$old_parent = $data[2];
 	$new_parent = $first_sub[2];
-	/*
+	/**
+     * 如果第一个子菜单与所分配的父类不相同，则将第一子菜单设为新父级。
 	 * If the first submenu is not the same as the assigned parent,
 	 * make the first submenu the new parent.
 	 */
@@ -149,7 +156,8 @@ if ( is_network_admin() ) {
 	do_action( 'admin_menu', '' );
 }
 
-/*
+/**
+ * 删除没有可访问子菜单并要求用户没有特权的菜单。再次运行父父循环。
  * Remove menus that have no accessible submenus and require privileges
  * that the user does not have. Run re-parent loop again.
  */
@@ -157,7 +165,8 @@ foreach ( $menu as $id => $data ) {
 	if ( ! current_user_can($data[1]) )
 		$_wp_menu_nopriv[$data[2]] = true;
 
-	/*
+	/**
+     * 如果只有一个子菜单，并且它与父对象具有相同的目的地，则删除子菜单。
 	 * If there is only one submenu and it is has same destination as the parent,
 	 * remove the submenu.
 	 */
@@ -229,6 +238,7 @@ function add_menu_classes($menu) {
 	}
 
 	/**
+     * 筛选器管理菜单数组，其中添加了用于顶级项目的类。
 	 * Filters administration menus array with classes added for top-level items.
 	 *
 	 * @since 2.7.0
@@ -241,6 +251,7 @@ function add_menu_classes($menu) {
 uksort($menu, "strnatcasecmp"); // make it all pretty
 
 /**
+ * 筛选是否启用管理菜单的自定义排序。
  * Filters whether to enable custom ordering of the administration menu.
  *
  * See the {@see 'menu_order'} filter for reordering menu items.
@@ -258,6 +269,7 @@ if ( apply_filters( 'custom_menu_order', false ) ) {
 	$default_menu_order = $menu_order;
 
 	/**
+     * 过滤管理菜单项的顺序。
 	 * Filters the order of administration menu items.
 	 *
 	 * A truthy value must first be passed to the {@see 'custom_menu_order'} filter
@@ -303,6 +315,7 @@ if ( apply_filters( 'custom_menu_order', false ) ) {
 	unset($menu_order, $default_menu_order);
 }
 
+// 防止相邻分离器
 // Prevent adjacent separators
 $prev_menu_was_separator = false;
 foreach ( $menu as $id => $data ) {
@@ -312,7 +325,8 @@ foreach ( $menu as $id => $data ) {
 		$prev_menu_was_separator = false;
 	} else {
 
-		// The previous item was a separator, so unset this one
+		// 前一项是分隔符，因此取消此项。
+        // The previous item was a separator, so unset this one
 		if ( true === $prev_menu_was_separator ) {
 			unset( $menu[ $id ] );
 		}
@@ -323,6 +337,7 @@ foreach ( $menu as $id => $data ) {
 }
 unset( $id, $data, $prev_menu_was_separator );
 
+// 如果最后一个菜单项是分隔符，则删除它。
 // Remove the last menu item if it is a separator.
 $last_menu_key = array_keys( $menu );
 $last_menu_key = array_pop( $last_menu_key );
@@ -333,8 +348,10 @@ unset( $last_menu_key );
 if ( !user_can_access_admin_page() ) {
 
 	/**
+     * 拒绝访问管理页面时触发
 	 * Fires when access to an admin page is denied.
 	 *
+     * 管理员页面访问被拒绝。输出WordPress链接管理器的“禁用”消息。
 	 * @since 2.5.0
 	 */
 	do_action( 'admin_page_access_denied' );

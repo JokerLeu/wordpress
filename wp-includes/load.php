@@ -759,6 +759,7 @@ function is_blog_admin() {
 }
 
 /**
+ * 当前请求是否为网络管理接口。
  * Whether the current request is for the network administrative interface.
  *
  * e.g. `/wp-admin/network/`

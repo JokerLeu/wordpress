@@ -1,5 +1,6 @@
 <?php
 /**
+ * 用户API：WP用户类
  * User API: WP_User class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于实现WP_用户对象的核心类。
  * Core class used to implement the WP_User object.
  *
  * @since 2.0.0
@@ -37,6 +39,7 @@
  */
 class WP_User {
 	/**
+     * 用户数据容器。
 	 * User data container.
 	 *
 	 * @since 2.0.0
@@ -45,6 +48,7 @@ class WP_User {
 	public $data;
 
 	/**
+     * 用户的ID。
 	 * The user's ID.
 	 *
 	 * @since 2.1.0
@@ -53,6 +57,7 @@ class WP_User {
 	public $ID = 0;
 
 	/**
+     * 用户已经给出的个人能力。
 	 * The individual capabilities the user has been given.
 	 *
 	 * @since 2.0.0
@@ -61,6 +66,7 @@ class WP_User {
 	public $caps = array();
 
 	/**
+     * 用户元数据选项名称。
 	 * User metadata option name.
 	 *
 	 * @since 2.0.0
@@ -69,6 +75,7 @@ class WP_User {
 	public $cap_key;
 
 	/**
+     * 角色是用户的一部分。
 	 * The roles the user is part of.
 	 *
 	 * @since 2.0.0
@@ -77,6 +84,7 @@ class WP_User {
 	public $roles = array();
 
 	/**
+     * 用户拥有的所有能力，包括个人和基于角色的能力。
 	 * All capabilities the user has, including individual and role based.
 	 *
 	 * @since 2.0.0
@@ -85,6 +93,7 @@ class WP_User {
 	public $allcaps = array();
 
 	/**
+     * 应用于用户数据字段的筛选器上下文。
 	 * The filter context applied to user data fields.
 	 *
 	 * @since 2.9.0
@@ -93,6 +102,7 @@ class WP_User {
 	public $filter = null;
 
 	/**
+     * 初始化此用户的能力的站点ID。
 	 * The site ID the capabilities of this user are initialized for.
 	 *
 	 * @since 4.9.0
@@ -101,6 +111,7 @@ class WP_User {
 	private $site_id = 0;
 
 	/**
+     * 向后兼容键
 	 * @static
 	 * @since 3.3.0
 	 * @var array
@@ -108,6 +119,7 @@ class WP_User {
 	private static $back_compat_keys;
 
 	/**
+     * 构造函数。
 	 * Constructor.
 	 *
 	 * Retrieves the userdata and passes it to WP_User::init().
@@ -160,6 +172,7 @@ class WP_User {
 	}
 
 	/**
+     * 设置对象属性，包括能力。
 	 * Sets up object properties, including capabilities.
 	 *
 	 * @since  3.3.0
@@ -175,6 +188,7 @@ class WP_User {
 	}
 
 	/**
+     * 只返回主用户字段
 	 * Return only the main user fields
 	 *
 	 * @since 3.3.0
@@ -249,6 +263,7 @@ class WP_User {
 	}
 
 	/**
+     * 检验某个自定义字段存在的魔术方法。
 	 * Magic method for checking the existence of a certain custom field.
 	 *
 	 * @since 3.3.0

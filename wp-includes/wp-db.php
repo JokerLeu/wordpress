@@ -1204,6 +1204,7 @@ class wpdb {
 	}
 
 	/**
+     * 为安全执行准备SQL查询。使用sprintf()类语法。
 	 * Prepares a SQL query for safe execution. Uses sprintf()-like syntax.
 	 *
 	 * The following placeholders can be used in the query string:

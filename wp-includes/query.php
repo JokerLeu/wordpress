@@ -31,6 +31,7 @@ function get_query_var( $var, $default = '' ) {
 }
 
 /**
+ * 检索当前查询的对象。
  * Retrieve the currently-queried object.
  *
  * Wrapper for WP_Query::get_queried_object().
@@ -47,6 +48,7 @@ function get_queried_object() {
 }
 
 /**
+ * 检索当前查询对象的ID。
  * Retrieve ID of the current queried object.
  *
  * Wrapper for WP_Query::get_queried_object_id().
@@ -63,6 +65,7 @@ function get_queried_object_id() {
 }
 
 /**
+ * 设置查询变量。
  * Set query variable.
  *
  * @since 2.2.0
@@ -78,6 +81,7 @@ function set_query_var( $var, $value ) {
 }
 
 /**
+ * 设置具有查询参数的循环。
  * Sets up The Loop with query parameters.
  *
  * Note: This function will completely override the main query and isn't intended for use
@@ -101,6 +105,7 @@ function query_posts($query) {
 }
 
 /**
+ * 销毁先前的查询并设置一个新查询。
  * Destroys the previous query and sets up a new query.
  *
  * This should be used after query_posts() and before another query_posts().
@@ -118,6 +123,7 @@ function wp_reset_query() {
 }
 
 /**
+ * 在循环一个单独的查询之后，这个函数将$POST全局恢复到主查询中的当前POST。
  * After looping through a separate query, this function restores
  * the $post global to the current post in the main query.
  *
@@ -133,11 +139,13 @@ function wp_reset_postdata() {
 	}
 }
 
-/*
+/**
+ * 查询类型检查。
  * Query type checks.
  */
 
 /**
+ * 是否存在对现有存档页的查询？
  * Is the query for an existing archive page?
  *
  * Month, Year, Category, Author, Post Type archive...
@@ -160,6 +168,7 @@ function is_archive() {
 }
 
 /**
+ * 是否存在对现有帖子类型归档页面的查询？
  * Is the query for an existing post type archive page?
  *
  * @since 3.1.0
@@ -181,6 +190,7 @@ function is_post_type_archive( $post_types = '' ) {
 }
 
 /**
+ * 是否存在对现有附件页的查询？
  * Is the query for an existing attachment page?
  *
  * @since 2.0.0
@@ -202,6 +212,7 @@ function is_attachment( $attachment = '' ) {
 }
 
 /**
+ * 是否存在对现有作者档案页的查询？
  * Is the query for an existing author archive page?
  *
  * If the $author parameter is specified, this function will additionally
@@ -226,6 +237,7 @@ function is_author( $author = '' ) {
 }
 
 /**
+ * 是否存在对现有分类存档页的查询？
  * Is the query for an existing category archive page?
  *
  * If the $category parameter is specified, this function will additionally
@@ -250,6 +262,7 @@ function is_category( $category = '' ) {
 }
 
 /**
+ * 是否存在对现有标记存档页的查询？
  * Is the query for an existing tag archive page?
  *
  * If the $tag parameter is specified, this function will additionally
@@ -274,6 +287,7 @@ function is_tag( $tag = '' ) {
 }
 
 /**
+ * 是否存在对现有自定义分类目录页的查询？
  * Is the query for an existing custom taxonomy archive page?
  *
  * If the $taxonomy parameter is specified, this function will additionally
@@ -303,6 +317,7 @@ function is_tax( $taxonomy = '', $term = '' ) {
 }
 
 /**
+ * 是否存在对现有日期存档的查询？
  * Is the query for an existing date archive?
  *
  * @since 1.5.0
@@ -323,6 +338,7 @@ function is_date() {
 }
 
 /**
+ * 是否对现有的日存档进行查询？
  * Is the query for an existing day archive?
  *
  * @since 1.5.0
@@ -343,6 +359,7 @@ function is_day() {
 }
 
 /**
+ * 是对feed的查询吗？
  * Is the query for a feed?
  *
  * @since 1.5.0
@@ -364,6 +381,7 @@ function is_feed( $feeds = '' ) {
 }
 
 /**
+ * 查询注释的查询是什么？
  * Is the query for a comments feed?
  *
  * @since 3.0.0
@@ -414,6 +432,7 @@ function is_front_page() {
 }
 
 /**
+ * 确定查询是否适用于博客主页。
  * Determines if the query is for the blog homepage.
  *
  * The blog homepage is the page that shows the time-based blog content of the site.
@@ -443,6 +462,7 @@ function is_home() {
 }
 
 /**
+ * 是否对现有的月份存档进行查询？
  * Is the query for an existing month archive?
  *
  * @since 1.5.0
@@ -463,6 +483,7 @@ function is_month() {
 }
 
 /**
+ * 是否对现有的单个页面进行查询？
  * Is the query for an existing single page?
  *
  * If the $page parameter is specified, this function will additionally
@@ -490,6 +511,7 @@ function is_page( $page = '' ) {
 }
 
 /**
+ * 是页面结果的查询，而不是第一页的查询？
  * Is the query for paged result and not for the first page?
  *
  * @since 1.5.0
@@ -510,6 +532,7 @@ function is_paged() {
 }
 
 /**
+ * 是对POST或页面预览的查询吗？
  * Is the query for a post or page preview?
  *
  * @since 2.0.0
@@ -530,6 +553,7 @@ function is_preview() {
 }
 
 /**
+ * 是机器人文件的查询吗？
  * Is the query for the robots file?
  *
  * @since 2.1.0
@@ -550,6 +574,7 @@ function is_robots() {
 }
 
 /**
+ * 是搜索的查询吗？
  * Is the query for a search?
  *
  * @since 1.5.0
@@ -600,6 +625,7 @@ function is_single( $post = '' ) {
 }
 
 /**
+ * 是对任何POST类型（POST、附件、页面、自定义POST类型）的现有单个POST的查询吗？
  * Is the query for an existing single post of any post type (post, attachment, page,
  * custom post types)?
  *
@@ -628,6 +654,7 @@ function is_singular( $post_types = '' ) {
 }
 
 /**
+ * 是查询特定时间吗？
  * Is the query for a specific time?
  *
  * @since 1.5.0
@@ -648,6 +675,7 @@ function is_time() {
 }
 
 /**
+ * 查询回溯端点调用吗？
  * Is the query for a trackback endpoint call?
  *
  * @since 1.5.0
@@ -668,6 +696,7 @@ function is_trackback() {
 }
 
 /**
+ * 是否对现有的年份存档进行查询？
  * Is the query for an existing year archive?
  *
  * @since 1.5.0
@@ -688,6 +717,7 @@ function is_year() {
 }
 
 /**
+ * 查询是404（返回没有结果）吗？
  * Is the query a 404 (returns no results)?
  *
  * @since 1.5.0
@@ -708,6 +738,7 @@ function is_404() {
 }
 
 /**
+ * 是对嵌入式帖子的查询吗？
  * Is the query for an embedded post?
  *
  * @since 4.4.0
@@ -728,6 +759,7 @@ function is_embed() {
 }
 
 /**
+ * 查询是主查询吗？
  * Is the query the main query?
  *
  * @since 3.3.0
@@ -753,7 +785,8 @@ function is_main_query() {
 	return $wp_query->is_main_query();
 }
 
-/*
+/**
+ * 循环。帖子循环控制。
  * The Loop. Post loop control.
  */
 
@@ -788,6 +821,7 @@ function in_the_loop() {
 }
 
 /**
+ * 倒回循环posts
  * Rewind the loop posts.
  *
  * @since 1.5.0
@@ -812,12 +846,13 @@ function the_post() {
 	$wp_query->the_post();
 }
 
-/*
+/**
+ * 评论循环。
  * Comments loop.
  */
 
 /**
- * 是否有注释循环。
+ * 是否有评论循环。
  * Whether there are comments to loop over.
  *
  * @since 2.2.0
@@ -832,6 +867,7 @@ function have_comments() {
 }
 
 /**
+ * 在注释循环中迭代评论索引。
  * Iterate comment index in the comment loop.
  *
  * @since 2.2.0
@@ -846,6 +882,7 @@ function the_comment() {
 }
 
 /**
+ * 将旧片段重定向到正确的永久位置。
  * Redirect old slugs to the correct permalink.
  *
  * Attempts to find the current slug from the past slugs.
@@ -923,6 +960,7 @@ function wp_old_slug_redirect() {
 }
 
 /**
+ * 找到用于重新引导旧片段的帖子ID。
  * Find the post ID for redirecting an old slug.
  *
  * @see wp_old_slug_redirect()
@@ -958,6 +996,7 @@ function _find_post_by_old_slug( $post_type ) {
 }
 
 /**
+ * 查找用于重定向旧日期的帖子 ID。
  * Find the post ID for redirecting an old date.
  *
  * @see wp_old_slug_redirect()
@@ -998,6 +1037,7 @@ function _find_post_by_old_date( $post_type ) {
 }
 
 /**
+ * 建立全局帖子数据。
  * Set up global post data.
  *
  * @since 1.5.0

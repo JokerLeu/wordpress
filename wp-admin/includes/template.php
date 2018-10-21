@@ -1620,6 +1620,7 @@ function _admin_search_query() {
 }
 
 /**
+ * 与粗体框一起使用的通用Iframe报头
  * Generic Iframe header for use with Thickbox
  *
  * @since 2.7.0

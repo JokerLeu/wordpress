@@ -1,5 +1,6 @@
 <?php
 /**
+ * 多站点管理功能。
  * Multisite administration functions.
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 确定上传文件是否超过空间配额。
  * Determine if uploaded file exceeds space quota.
  *
  * @since 3.0.0
@@ -50,6 +52,7 @@ function check_upload_size( $file ) {
 }
 
 /**
+ * 删除网站。
  * Delete a site.
  *
  * @since 3.0.0
@@ -188,6 +191,7 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 }
 
 /**
+ * 从网络中删除用户并从所有站点中删除。
  * Delete a user from the network and remove from all sites.
  *
  * @since 3.0.0
@@ -266,6 +270,7 @@ function wpmu_delete_user( $id ) {
 }
 
 /**
+ * 检查站点是否已使用其分配的上传空间。
  * Check whether a site has used its allotted upload space.
  *
  * @since MU (3.0.0)

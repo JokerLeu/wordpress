@@ -10,6 +10,7 @@
  */
 
 ?>
+<!--顶部导航 代码在主题的\template-parts\navigation\navigation-top.php-->
 <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Top Menu', 'twentyseventeen' ); ?>">
 	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">
 		<?php
@@ -20,6 +21,7 @@
 	</button>
 
 	<?php
+    // 显示导航菜单
 	wp_nav_menu(
 		array(
 			'theme_location' => 'top',

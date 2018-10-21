@@ -1,5 +1,6 @@
 <?php
 /**
+ * 管理API：核心AJAX处理程序
  * Administration API: Core Ajax handlers
  *
  * @package WordPress
@@ -7,14 +8,16 @@
  * @since 2.1.0
  */
 
-//
+// 没有特权Ajax处理程序。
 // No-privilege Ajax handlers.
 //
 
 /**
+ * 无特权上下文中的心跳API的Ajax处理程序。
  * Ajax handler for the Heartbeat API in
  * the no-privilege context.
  *
+ * 当用户未登录时运行。
  * Runs when the user is not logged in.
  *
  * @since 3.6.0
@@ -71,11 +74,12 @@ function wp_ajax_nopriv_heartbeat() {
 	wp_send_json($response);
 }
 
-//
+// 基于Ajax处理程序。
 // GET-based Ajax handlers.
 //
 
 /**
+ * 用于获取列表表的Ajax处理程序。
  * Ajax handler for fetching a list table.
  *
  * @since 3.1.0

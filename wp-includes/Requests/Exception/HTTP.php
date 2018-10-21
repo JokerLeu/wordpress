@@ -1,17 +1,20 @@
 <?php
 /**
+ * 基于HTTP响应的异常
  * Exception based on HTTP response
  *
  * @package Requests
  */
 
 /**
+ * 基于HTTP响应的异常 继承 HTTP请求异常 继承 异常
  * Exception based on HTTP response
  *
  * @package Requests
  */
 class Requests_Exception_HTTP extends Requests_Exception {
 	/**
+     * HTTP状态码
 	 * HTTP status code
 	 *
 	 * @var integer
@@ -19,6 +22,7 @@ class Requests_Exception_HTTP extends Requests_Exception {
 	protected $code = 0;
 
 	/**
+     * 原因短语
 	 * Reason phrase
 	 *
 	 * @var string
@@ -26,6 +30,7 @@ class Requests_Exception_HTTP extends Requests_Exception {
 	protected $reason = 'Unknown';
 
 	/**
+     * 创建新异常
 	 * Create a new exception
 	 *
 	 * There is no mechanism to pass in the status code, as this is set by the
@@ -44,6 +49,7 @@ class Requests_Exception_HTTP extends Requests_Exception {
 	}
 
 	/**
+     * 获取状态消息
 	 * Get the status message
 	 */
 	public function getReason() {
@@ -51,6 +57,7 @@ class Requests_Exception_HTTP extends Requests_Exception {
 	}
 
 	/**
+     * 为给定的错误代码获得正确的异常类
 	 * Get the correct exception class for a given error code
 	 *
 	 * @param int|bool $code HTTP status code, or false if unavailable

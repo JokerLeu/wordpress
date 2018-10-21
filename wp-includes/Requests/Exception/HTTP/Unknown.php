@@ -1,17 +1,20 @@
 <?php
 /**
+ * 未知状态响应异常
  * Exception for unknown status responses
  *
  * @package Requests
  */
 
 /**
+ * 未知状态响应异常 继承 基于HTTP响应的异常 继承 HTTP请求异常 继承 异常
  * Exception for unknown status responses
  *
  * @package Requests
  */
 class Requests_Exception_HTTP_Unknown extends Requests_Exception_HTTP {
 	/**
+     * HTTP状态码
 	 * HTTP status code
 	 *
 	 * @var integer|bool Code if available, false if an error occurred
@@ -19,6 +22,7 @@ class Requests_Exception_HTTP_Unknown extends Requests_Exception_HTTP {
 	protected $code = 0;
 
 	/**
+     * 原因短语
 	 * Reason phrase
 	 *
 	 * @var string
@@ -26,6 +30,7 @@ class Requests_Exception_HTTP_Unknown extends Requests_Exception_HTTP {
 	protected $reason = 'Unknown';
 
 	/**
+     * 创建新异常
 	 * Create a new exception
 	 *
 	 * If `$data` is an instance of {@see Requests_Response}, uses the status

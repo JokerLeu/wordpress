@@ -1,5 +1,6 @@
 <?php
 /**
+ * 导航菜单功能
  * Navigation Menu functions
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 返回导航菜单对象。
  * Returns a navigation menu object.
  *
  * @since 3.0.0
@@ -50,6 +52,7 @@ function wp_get_nav_menu_object( $menu ) {
 }
 
 /**
+ * 检查给定的ID是否是导航菜单。
  * Check if the given ID is a navigation menu.
  *
  * Returns true if it is; false otherwise.
@@ -77,6 +80,7 @@ function is_nav_menu( $menu ) {
 }
 
 /**
+ * 为主题注册导航菜单位置。
  * Registers navigation menu locations for a theme.
  *
  * @since 3.0.0
@@ -88,12 +92,14 @@ function is_nav_menu( $menu ) {
 function register_nav_menus( $locations = array() ) {
 	global $_wp_registered_nav_menus;
 
+	// 为给定的特征注册主题支持。
 	add_theme_support( 'menus' );
 
 	$_wp_registered_nav_menus = array_merge( (array) $_wp_registered_nav_menus, $locations );
 }
 
 /**
+ * 取消注册主题的导航菜单位置。
  * Unregisters a navigation menu location for a theme.
  *
  * @since 3.1.0
@@ -116,6 +122,7 @@ function unregister_nav_menu( $location ) {
 }
 
 /**
+ * 为主题注册导航菜单位置。
  * Registers a navigation menu location for a theme.
  *
  * @since 3.0.0
@@ -127,6 +134,7 @@ function register_nav_menu( $location, $description ) {
 	register_nav_menus( array( $location => $description ) );
 }
 /**
+ * 检索主题中的所有已注册导航菜单位置。
  * Retrieves all registered navigation menu locations in a theme.
  *
  * @since 3.0.0
@@ -143,6 +151,7 @@ function get_registered_nav_menus() {
 }
 
 /**
+ * 检索所有已注册的导航菜单位置和分配给它们的菜单。
  * Retrieves all registered navigation menu locations and the menus assigned to them.
  *
  * @since 3.0.0
@@ -157,6 +166,7 @@ function get_nav_menu_locations() {
 }
 
 /**
+ * 确定注册的导航菜单位置是否有分配给它的菜单。
  * Determines whether a registered nav menu location has a menu assigned to it.
  *
  * @since 3.0.0
@@ -185,6 +195,7 @@ function has_nav_menu( $location ) {
 }
 
 /**
+ * 返回导航菜单的名称。
  * Returns the name of a navigation menu.
  *
  * @since 4.9.0
@@ -217,6 +228,7 @@ function wp_get_nav_menu_name( $location ) {
 }
 
 /**
+ * 确定给定ID是否为导航菜单项。
  * Determines whether the given ID is a nav menu item.
  *
  * @since 3.0.0
@@ -229,6 +241,7 @@ function is_nav_menu_item( $menu_item_id = 0 ) {
 }
 
 /**
+ * 创建导航菜单。
  * Creates a navigation menu.
  *
  * Note that `$menu_name` is expected to be pre-slashed.
@@ -244,6 +257,7 @@ function wp_create_nav_menu( $menu_name ) {
 }
 
 /**
+ * 删除导航菜单。
  * Delete a Navigation Menu.
  *
  * @since 3.0.0
@@ -288,6 +302,7 @@ function wp_delete_nav_menu( $menu ) {
 }
 
 /**
+ * 保存菜单的属性或创建具有这些属性的新菜单。
  * Save the properties of a menu or create a new menu with those properties.
  *
  * Note that `$menu_data` is expected to be pre-slashed.
@@ -383,6 +398,7 @@ function wp_update_nav_menu_object( $menu_id = 0, $menu_data = array() ) {
 }
 
 /**
+ * 保存菜单项的属性或创建新的菜单项。
  * Save the properties of a menu item or create a new one.
  *
  * The menu-item-title, menu-item-description, and menu-item-attr-title are expected
@@ -563,6 +579,7 @@ function wp_update_nav_menu_item( $menu_id = 0, $menu_item_db_id = 0, $menu_item
 }
 
 /**
+ * 返回所有导航菜单对象。
  * Returns all navigation menu objects.
  *
  * @since 3.0.0
@@ -591,6 +608,7 @@ function wp_get_nav_menus( $args = array() ) {
 }
 
 /**
+ * 如果菜单项有效，则返回。
  * Return if a menu item is valid.
  *
  * @link https://core.trac.wordpress.org/ticket/13958
@@ -606,6 +624,7 @@ function _is_valid_nav_menu_item( $item ) {
 }
 
 /**
+ * 检索导航菜单中的所有菜单项。
  * Retrieves all menu items of a navigation menu.
  *
  * Note: Most arguments passed to the `$args` parameter – save for 'output_key' – are
@@ -725,6 +744,7 @@ function wp_get_nav_menu_items( $menu, $args = array() ) {
 }
 
 /**
+ * 使用共享导航菜单项属性来装饰菜单项对象。
  * Decorates a menu item object with the shared navigation menu item properties.
  *
  * Properties:
@@ -907,6 +927,7 @@ function wp_setup_nav_menu_item( $menu_item ) {
 }
 
 /**
+ * 获取与特定对象关联的菜单项。
  * Get the menu items associated with a particular object.
  *
  * @since 3.0.0
@@ -952,6 +973,7 @@ function wp_get_associated_nav_menu_items( $object_id = 0, $object_type = 'post_
 }
 
 /**
+ * 当菜单对象被删除时，用于处理菜单项的回调。
  * Callback for handling a menu item when its original object is deleted.
  *
  * @since 3.0.0
@@ -971,6 +993,7 @@ function _wp_delete_post_menu_item( $object_id = 0 ) {
 }
 
 /**
+ * 作为一个回调来处理一个菜单项，当它的原始对象被删除时。
  * Serves as a callback for handling a menu item when its original object is deleted.
  *
  * @since 3.0.0
@@ -991,6 +1014,7 @@ function _wp_delete_tax_menu_item( $object_id = 0, $tt_id, $taxonomy ) {
 }
 
 /**
+ * 将新发布的页面对象自动添加到菜单中，并将其作为选项。
  * Automatically add newly published page objects to menus with that as an option.
  *
  * @since 3.0.0
@@ -1032,6 +1056,7 @@ function _wp_auto_add_pages_to_menu( $new_status, $old_status, $post ) {
 }
 
 /**
+ * 删除与提供的变更集相关的自动草稿。
  * Delete auto-draft posts associated with the supplied changeset.
  *
  * @since 4.8.0
@@ -1066,6 +1091,7 @@ function _wp_delete_customize_changeset_dependent_auto_drafts( $post_id ) {
 }
 
 /**
+ * 主题更改后处理菜单配置。
  * Handle menu config after theme change.
  *
  * @access private
@@ -1081,6 +1107,7 @@ function _wp_menus_changed() {
 }
 
 /**
+ * 根据先前活动主题中的作业映射导航菜单位置。
  * Maps nav menu locations according to assignments in previously active theme.
  *
  * @since 4.9.0

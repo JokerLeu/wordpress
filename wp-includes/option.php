@@ -37,6 +37,7 @@ function get_option( $option, $default = false ) {
 		return false;
 
 	/**
+     * 在检索现有选项之前，对其值进行筛选。
 	 * Filters the value of an existing option before it is retrieved.
 	 *
 	 * The dynamic portion of the hook name, `$option`, refers to the option name.
@@ -524,6 +525,7 @@ function add_option( $option, $value = '', $deprecated = '', $autoload = 'yes' )
 }
 
 /**
+ * 按名称移除选项。防止删除受保护的WordPress选项。
  * Removes option by name. Prevents removal of protected WordPress options.
  *
  * @since 1.2.0

@@ -1,6 +1,6 @@
 <?php
 /**
- * 显示标题站点品牌
+ * 显示标题站点标牌
  * Displays header site branding
  *
  * @package WordPress
@@ -10,10 +10,14 @@
  */
 
 ?>
+<!--站点标牌 代码在主题\template-parts\header\site-branding.php-->
 <div class="site-branding">
 	<div class="wrap">
 
-		<?php the_custom_logo(); ?>
+		<?php
+        // 显示与主页链接的自定义徽标
+        the_custom_logo();
+        ?>
 
 		<div class="site-branding-text">
 			<?php if ( is_front_page() ) : ?>
@@ -25,6 +29,7 @@
 			<?php
 			$description = get_bloginfo( 'description', 'display' );
 
+			// 在定制程序中是否正在预览站点。
 			if ( $description || is_customize_preview() ) :
 			?>
 				<p class="site-description"><?php echo $description; ?></p>

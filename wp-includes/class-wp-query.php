@@ -8,6 +8,7 @@
  */
 
 /**
+ * WordPress查询类。
  * The WordPress Query class.
  *
  * @link https://codex.wordpress.org/Function_Reference/WP_Query Codex page.
@@ -18,6 +19,7 @@
 class WP_Query {
 
 	/**
+     * 用户设置的查询变量
 	 * Query vars set by the user
 	 *
 	 * @since 1.5.0
@@ -26,6 +28,7 @@ class WP_Query {
 	public $query;
 
 	/**
+     * 查询变量，解析后
 	 * Query vars, after parsing
 	 *
 	 * @since 1.5.0
@@ -439,6 +442,7 @@ class WP_Query {
 	private $compat_methods = array( 'init_query_flags', 'parse_tax_query' );
 
 	/**
+     * 将查询标志重置为false。
 	 * Resets query flags to false.
 	 *
 	 * The query flags are what page info WordPress was able to figure out.

@@ -1,5 +1,6 @@
 <?php
 /**
+ * 图像编辑器
  * WordPress Image Editor
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 加载WP图像编辑界面。
  * Loads the WP image-editing interface.
  *
  * @param int         $post_id Post ID.
@@ -230,6 +232,7 @@ function wp_image_editor($post_id, $msg = false) {
 }
 
 /**
+ * 流图像在WP_Image_Editor编辑器中为浏览器。
  * Streams image in WP_Image_Editor to browser.
  *
  * @param WP_Image_Editor $image         The image editor instance.
@@ -285,6 +288,7 @@ function wp_stream_image( $image, $mime_type, $attachment_id ) {
 }
 
 /**
+ * 保存图像到文件
  * Saves Image to File
  *
  * @param string $filename
@@ -361,6 +365,7 @@ function wp_save_image_file( $filename, $image, $mime_type, $post_id ) {
 }
 
 /**
+ * 图像预览比。仅供内部使用。
  * Image preview ratio. Internal use only.
  *
  * @since 2.9.0
@@ -376,6 +381,7 @@ function _image_get_preview_ratio($w, $h) {
 }
 
 /**
+ * 返回图像资源。仅供内部使用。
  * Returns an image resource. Internal use only.
  *
  * @since 2.9.0
@@ -400,6 +406,7 @@ function _rotate_image_resource($img, $angle) {
 }
 
 /**
+ * 翻转图像资源。仅供内部使用。
  * Flips an image resource. Internal use only.
  *
  * @since 2.9.0
@@ -432,6 +439,7 @@ function _flip_image_resource($img, $horz, $vert) {
 }
 
 /**
+ * 一群图像资源。仅供内部使用。
  * Crops an image resource. Internal use only.
  *
  * @since 2.9.0
@@ -456,6 +464,7 @@ function _crop_image_resource($img, $x, $y, $w, $h) {
 }
 
 /**
+ * 在指定的编辑器上执行更改组。
  * Performs group of changes on Editor specified.
  *
  * @since 2.9.0
@@ -579,6 +588,7 @@ function image_edit_apply_changes( $image, $changes ) {
 
 
 /**
+ * 在POST到浏览器中的流图像，以及$_REQUEST['history']中的队列更改
  * Streams image in post to browser, along with enqueued changes
  * in $_REQUEST['history']
  *
@@ -616,6 +626,7 @@ function stream_preview_image( $post_id ) {
 }
 
 /**
+ * 恢复给定附件的元数据。
  * Restores the metadata for a given attachment.
  *
  * @since 2.9.0
@@ -700,6 +711,7 @@ function wp_restore_image($post_id) {
 }
 
 /**
+ * 将图像保存到与$_REQUEST['history']中的队列更改一起发布
  * Saves image to post along with enqueued changes
  * in $_REQUEST['history']
  *

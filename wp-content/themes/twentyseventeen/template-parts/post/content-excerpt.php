@@ -15,6 +15,7 @@
 
 ?>
 
+<!--摘录内容 代码在模板的\template-parts\post\content-excerpt.php-->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="entry-header">
@@ -34,7 +35,8 @@
 		<?php
 		if ( is_front_page() && ! is_home() ) {
 
-			// The excerpt is being displayed within a front page section, so it's a lower hierarchy than h2.
+			// 摘录正显示在首页部分，因此它的层次比H2低。
+            // The excerpt is being displayed within a front page section, so it's a lower hierarchy than h2.
 			the_title( sprintf( '<h3 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h3>' );
 		} else {
 			the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
@@ -43,7 +45,10 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-summary">
-		<?php the_excerpt(); ?>
+		<?php
+        // 显示帖子摘录。
+        the_excerpt();
+        ?>
 	</div><!-- .entry-summary -->
 
 </article><!-- #post-## -->

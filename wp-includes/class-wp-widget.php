@@ -8,6 +8,7 @@
  */
 
 /**
+ * 核心基类扩展到注册小部件。
  * Core base class extended to register widgets.
  *
  * This class must be extended for each widget, and WP_Widget::widget() must be overridden.
@@ -20,6 +21,7 @@
 class WP_Widget {
 
 	/**
+     * 此类型的所有小部件的根ID。
 	 * Root ID for all widgets of this type.
 	 *
 	 * @since 2.8.0
@@ -28,6 +30,7 @@ class WP_Widget {
 	public $id_base;
 
 	/**
+     * 此小部件类型的名称。
 	 * Name for this widget type.
 	 *
 	 * @since 2.8.0
@@ -36,6 +39,7 @@ class WP_Widget {
 	public $name;
 
 	/**
+     * 此小部件类型的选项名称。
 	 * Option name for this widget type.
 	 *
 	 * @since 2.8.0
@@ -44,6 +48,7 @@ class WP_Widget {
 	public $option_name;
 
 	/**
+     * 这个小部件类型的备用选项名。
 	 * Alt option name for this widget type.
 	 *
 	 * @since 2.8.0
@@ -52,6 +57,7 @@ class WP_Widget {
 	public $alt_option_name;
 
 	/**
+     * 选项数组传递给WP注册侧栏小部件。
 	 * Option array passed to wp_register_sidebar_widget().
 	 *
 	 * @since 2.8.0
@@ -60,6 +66,7 @@ class WP_Widget {
 	public $widget_options;
 
 	/**
+     * 传递到WP寄存器控件的选项数组
 	 * Option array passed to wp_register_widget_control().
 	 *
 	 * @since 2.8.0
@@ -68,6 +75,7 @@ class WP_Widget {
 	public $control_options;
 
 	/**
+     * 当前实例的唯一ID号。
 	 * Unique ID number of the current instance.
 	 *
 	 * @since 2.8.0
@@ -76,6 +84,7 @@ class WP_Widget {
 	public $number = false;
 
 	/**
+     * 当前实例的唯一ID字符串（ID基数）。
 	 * Unique ID string of the current instance (id_base-number).
 	 *
 	 * @since 2.8.0
@@ -84,6 +93,7 @@ class WP_Widget {
 	public $id = false;
 
 	/**
+     * 是否已更新小部件数据。
 	 * Whether the widget data has been updated.
 	 *
 	 * Set to true when the data is updated after a POST submit - ensures it does
@@ -94,11 +104,12 @@ class WP_Widget {
 	 */
 	public $updated = false;
 
-	//
+	// 必须由子类重写的成员函数。
 	// Member functions that must be overridden by subclasses.
 	//
 
 	/**
+     * 与小部件内容相呼应。
 	 * Echoes the widget content.
 	 *
 	 * Sub-classes should over-ride this function to generate their widget code.
@@ -114,6 +125,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 更新控件的特定实例。
 	 * Updates a particular instance of a widget.
 	 *
 	 * This function should check that `$new_instance` is set correctly. The newly-calculated
@@ -132,6 +144,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 输出设置更新表单。
 	 * Outputs the settings update form.
 	 *
 	 * @since 2.8.0
@@ -144,9 +157,11 @@ class WP_Widget {
 		return 'noform';
 	}
 
-	// Functions you'll need to call.
+	// 你需要调用的函数。
+    // Functions you'll need to call.
 
 	/**
+     * PHP5构造函数。
 	 * PHP5 constructor.
 	 *
 	 * @since 2.8.0
@@ -168,6 +183,7 @@ class WP_Widget {
 	}
 
 	/**
+     * PHP4构造函数。
 	 * PHP4 constructor.
 	 *
 	 * @since 2.8.0
@@ -188,6 +204,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 构造在form()字段中使用的名称属性
 	 * Constructs name attributes for use in form() fields
 	 *
 	 * This function should be used in form() methods to create name attributes for fields
@@ -208,6 +225,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 构造用于WP_Widget::form()字段的ID属性。
 	 * Constructs id attributes for use in WP_Widget::form() fields.
 	 *
 	 * This function should be used in form() methods to create id attributes
@@ -224,6 +242,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 注册此控件类的所有小部件实例。
 	 * Register all widget instances of this widget class.
 	 *
 	 * @since 2.8.0
@@ -255,6 +274,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 设置控件实例的内部订单号。
 	 * Sets the internal order number for the widget instance.
 	 *
 	 * @since 2.8.0
@@ -268,6 +288,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 检索小部件显示回调。
 	 * Retrieves the widget display callback.
 	 *
 	 * @since 2.8.0
@@ -279,6 +300,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 检索小部件更新回调。
 	 * Retrieves the widget update callback.
 	 *
 	 * @since 2.8.0
@@ -290,6 +312,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 检索窗体回调。
 	 * Retrieves the form callback.
 	 *
 	 * @since 2.8.0
@@ -301,6 +324,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 确定当前请求是否在自定义程序预览内。
 	 * Determines whether the current request is inside the Customizer preview.
 	 *
 	 * If true -- the current request is inside the Customizer preview, then
@@ -320,8 +344,10 @@ class WP_Widget {
 	}
 
 	/**
+     * 生成实际的小部件内容（不重写）。
 	 * Generates the actual widget content (Do NOT override).
 	 *
+     * 查找实例并调用WP_Widget::widget()
 	 * Finds the instance and calls WP_Widget::widget().
 	 *
 	 * @since 2.8.0
@@ -378,6 +404,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 处理更改的设置（不重写）。
 	 * Handles changed settings (Do NOT override).
 	 *
 	 * @since 2.8.0
@@ -462,6 +489,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 生成控件控件窗体（不要覆盖）。
 	 * Generates the widget control form (Do NOT override).
 	 *
 	 * @since 2.8.0
@@ -528,6 +556,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 注册小部件类的实例。
 	 * Registers an instance of the widget class.
 	 *
 	 * @since 2.8.0
@@ -542,6 +571,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 保存小部件类的所有实例的设置。
 	 * Saves the settings for all instances of the widget class.
 	 *
 	 * @since 2.8.0
@@ -554,6 +584,7 @@ class WP_Widget {
 	}
 
 	/**
+     * 检索控件类的所有实例的设置。
 	 * Retrieves the settings for all instances of the widget class.
 	 *
 	 * @since 2.8.0

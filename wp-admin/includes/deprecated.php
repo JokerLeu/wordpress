@@ -1,5 +1,6 @@
 <?php
 /**
+ * 从过去的WordPress版本中删除管理员函数。你不应该使用这些功能，而是寻找替代品。这些功能将在以后的版本中删除。
  * Deprecated admin functions from past WordPress versions. You shouldn't use these
  * functions and look for the alternatives instead. The functions will be removed
  * in a later version.
@@ -8,7 +9,8 @@
  * @subpackage Deprecated
  */
 
-/*
+/**
+ * 过时的功能会死在这里。
  * Deprecated functions come here to die.
  */
 

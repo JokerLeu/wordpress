@@ -8,6 +8,7 @@
  */
 
 /**
+ * 注册嵌入的处理程序。
  * Registers an embed handler.
  *
  * Should probably only be used for sites that do not support oEmbed.

@@ -1,7 +1,9 @@
 <?php
 /**
+ * 翻译API：时区选择的大陆和城市翻译
  * Translation API: Continent and city translations for timezone selection
  *
+ * 此文件不包含在任何地方。它仅供xgettext使用。
  * This file is not included anywhere. It exists solely for use by xgettext.
  *
  * @package WordPress

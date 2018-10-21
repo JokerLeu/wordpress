@@ -13,6 +13,7 @@
 
 ?>
 
+<!--帖子的音频内容 代码在模板的\template-parts\post\content-audio.php-->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( is_sticky() && is_home() ) {
@@ -24,9 +25,12 @@
 		if ( 'post' === get_post_type() ) {
 			echo '<div class="entry-meta">';
 			if ( is_single() ) {
+			    // 为当前的发布日期/时间和作者打印具有元信息的HTML。
 				twentyseventeen_posted_on();
 			} else {
+			    // 为已发布日期获取一个格式良好的字符串。
 				echo twentyseventeen_time_link();
+				// 返回一个便于访问的链接来编辑帖子或页面。
 				twentyseventeen_edit_link();
 			};
 				echo '</div><!-- .entry-meta -->';
@@ -46,7 +50,8 @@
 		$content = apply_filters( 'the_content', get_the_content() );
 		$audio   = false;
 
-		// Only get audio from the content if a playlist isn't present.
+		// 如果播放列表不存在，只能从内容中获取音频。
+    // Only get audio from the content if a playlist isn't present.
 	if ( false === strpos( $content, 'wp-playlist-script' ) ) {
 		$audio = get_media_embedded_in_content( $content, array( 'audio' ) );
 	}
@@ -66,7 +71,8 @@
 		<?php
 		if ( ! is_single() ) {
 
-			// If not a single post, highlight the audio file.
+			// 如果不是单个帖子，则突出显示音频文件。
+            // If not a single post, highlight the audio file.
 			if ( ! empty( $audio ) ) {
 				foreach ( $audio as $audio_html ) {
 					echo '<div class="entry-audio">';
@@ -103,6 +109,7 @@
 
 	<?php
 	if ( is_single() ) {
+	    // 打印HTML与元信息的类别，标签和评论。
 		twentyseventeen_entry_footer();
 	}
 	?>

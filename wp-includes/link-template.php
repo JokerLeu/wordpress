@@ -2445,6 +2445,7 @@ function get_the_post_navigation( $args = array() ) {
 }
 
 /**
+ * 在适用时显示导航到下一个/上一个帖子。
  * Displays the navigation to next/previous post, when applicable.
  *
  * @since 4.1.0
@@ -2860,6 +2861,7 @@ function the_comments_navigation( $args = array() ) {
 }
 
 /**
+ * 在适用时，检索到下一个/先前评论集的分页导航。
  * Retrieves a paginated navigation to next/previous set of comments, when applicable.
  *
  * @since 4.4.0
@@ -2895,6 +2897,7 @@ function get_the_comments_pagination( $args = array() ) {
 }
 
 /**
+ * 在适用时，显示下一个/先前评论集的分页导航。
  * Displays a paginated navigation to next/previous set of comments, when applicable.
  *
  * @since 4.4.0
@@ -4089,6 +4092,7 @@ function get_theme_file_path( $file = '' ) {
 }
 
 /**
+ * 检索父主题中的文件路径。
  * Retrieves the path of a file in the parent theme.
  *
  * @since 4.7.0
@@ -4144,6 +4148,7 @@ function get_privacy_policy_url() {
 }
 
 /**
+ * 在适用时显示带有格式设置的隐私策略链接。
  * Displays the privacy policy link with formatting, when applicable.
  *
  * @since 4.9.6

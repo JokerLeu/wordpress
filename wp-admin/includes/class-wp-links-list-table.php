@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表API：WP_Links_List_Table表类
  * List Table API: WP_Links_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于在列表表中显示链接的核心类。
  * Core class used to implement displaying links in a list table.
  *
  * @since 3.1.0

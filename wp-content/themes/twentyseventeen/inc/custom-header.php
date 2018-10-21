@@ -11,6 +11,7 @@
  */
 
 /**
+ * 设置WordPress核心自定义标题功能。
  * Set up the WordPress core custom header feature.
  *
  * @uses twentyseventeen_header_style()
@@ -18,6 +19,7 @@
 function twentyseventeen_custom_header_setup() {
 
 	/**
+     * 过滤器2017自定义页眉支持参数。
 	 * Filter Twenty Seventeen custom-header support arguments.
 	 *
 	 * @since Twenty Seventeen 1.0
@@ -34,6 +36,7 @@ function twentyseventeen_custom_header_setup() {
 	 *     @type string $flex-height            Flex support for height of header.
 	 * }
 	 */
+	// 为给定的特征注册主题支持。
 	add_theme_support(
 		'custom-header', apply_filters(
 			'twentyseventeen_custom_header_args', array(
@@ -47,6 +50,7 @@ function twentyseventeen_custom_header_setup() {
 		)
 	);
 
+	// 注册由自定义标题管理界面显示的默认标题的选择。
 	register_default_headers(
 		array(
 			'default-image' => array(
@@ -61,6 +65,7 @@ add_action( 'after_setup_theme', 'twentyseventeen_custom_header_setup' );
 
 if ( ! function_exists( 'twentyseventeen_header_style' ) ) :
 	/**
+     * 在博客上显示标题图像和文本。
 	 * Styles the header image and text displayed on the blog.
 	 *
 	 * @see twentyseventeen_custom_header_setup().
@@ -87,6 +92,7 @@ if ( ! function_exists( 'twentyseventeen_header_style' ) ) :
 			clip: rect(1px, 1px, 1px, 1px);
 		}
 	<?php
+		// 如果用户为文本设置了自定义颜色，则使用该颜色。
 		// If the user has set a custom color for the text use that.
 		else :
 	?>
@@ -117,6 +123,7 @@ if ( ! function_exists( 'twentyseventeen_header_style' ) ) :
 endif; // End of twentyseventeen_header_style.
 
 /**
+ * 自定义自定义标题中的视频播放/暂停按钮。
  * Customize video play/pause button in the custom header.
  *
  * @param array $settings Video settings.

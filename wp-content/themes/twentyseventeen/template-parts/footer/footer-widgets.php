@@ -16,6 +16,7 @@ if ( is_active_sidebar( 'sidebar-2' ) ||
 	is_active_sidebar( 'sidebar-3' ) ) :
 ?>
 
+<!--页脚控件 代码在主题\template-parts\footer\footer-widgets.php-->
 	<aside class="widget-area" role="complementary" aria-label="<?php esc_attr_e( 'Footer', 'twentyseventeen' ); ?>">
 		<?php
 		if ( is_active_sidebar( 'sidebar-2' ) ) {

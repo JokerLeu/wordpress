@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress插件安装管理API
  * WordPress Plugin Install Administration API
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 从WordPress.org插件API中检索插件安装程序页面。
  * Retrieves plugin installer pages from the WordPress.org Plugins API.
  *
  * It is possible for a plugin to override the Plugin API result with three
@@ -209,6 +211,7 @@ function plugins_api( $action, $args = array() ) {
 }
 
 /**
+ * 检索流行的WordPress插件标签。
  * Retrieve popular WordPress plugin tags.
  *
  * @since 2.7.0
@@ -296,11 +299,13 @@ function install_search_form( $deprecated = true ) {
 }
 
 /**
+ * 从zip上传
  * Upload from zip
  * @since 2.8.0
  */
 function install_plugins_upload() {
 ?>
+    <!--从zip上传 plugin-install.php->install_plugins_upload()-->
 <div class="upload-plugin">
 	<p class="install-help"><?php _e('If you have a plugin in a .zip format, you may install it by uploading it here.'); ?></p>
 	<form method="post" enctype="multipart/form-data" class="wp-upload-form" action="<?php echo self_admin_url('update.php?action=upload-plugin'); ?>">
@@ -314,6 +319,7 @@ function install_plugins_upload() {
 }
 
 /**
+ * 为收藏夹页面显示用户名格式
  * Show a username form for the favorites page
  * @since 3.5.0
  *
@@ -322,6 +328,7 @@ function install_plugins_favorites_form() {
 	$user   = get_user_option( 'wporg_favorites' );
 	$action = 'save_wporg_username_' . get_current_user_id();
 	?>
+    <!--为收藏夹页面显示用户名格式 plugin-install.php->install_plugins_favorites_form()-->
 	<p class="install-help"><?php _e( 'If you have marked plugins as favorites on WordPress.org, you can browse them here.' ); ?></p>
 	<form method="get">
 		<input type="hidden" name="tab" value="favorites" />
@@ -336,6 +343,7 @@ function install_plugins_favorites_form() {
 }
 
 /**
+ * 基于插件列表显示插件内容。
  * Display plugin content based on plugin list.
  *
  * @since 2.7.0
@@ -370,6 +378,7 @@ function display_plugins_table() {
 }
 
 /**
+ * 确定我们可以在插件上执行的状态。
  * Determine the status we can perform on a plugin.
  *
  * @since 3.0.0
@@ -386,16 +395,19 @@ function display_plugins_table() {
  * }
  */
 function install_plugin_install_status($api, $loop = false) {
-	// This function is called recursively, $loop prevents further loops.
+	// 这个函数被递归调用，$loop阻止其他循环。
+    // This function is called recursively, $loop prevents further loops.
 	if ( is_array($api) )
 		$api = (object) $api;
 
-	// Default to a "new" plugin
+	// 默认为“新”插件
+    // Default to a "new" plugin
 	$status = 'install';
 	$url = false;
 	$update_file = false;
 
-	/*
+	/**
+     * 检查这个插件是否被安装，并等待更新。
 	 * Check to see if this plugin is known to be installed,
 	 * and has an update awaiting it.
 	 */
@@ -451,6 +463,7 @@ function install_plugin_install_status($api, $loop = false) {
 }
 
 /**
+ * 在对话框窗体中显示插件信息。
  * Display plugin information in dialog box form.
  *
  * @since 2.7.0
@@ -479,6 +492,7 @@ function install_plugin_information() {
 		wp_die( $api );
 	}
 
+	// 插件允许标签
 	$plugins_allowedtags = array(
 		'a' => array( 'href' => array(), 'title' => array(), 'target' => array() ),
 		'abbr' => array( 'title' => array() ), 'acronym' => array( 'title' => array() ),
@@ -490,6 +504,7 @@ function install_plugin_information() {
 		'blockquote' => array( 'cite' => true ),
 	);
 
+	// 插件部分标题
 	$plugins_section_titles = array(
 		'description'  => _x( 'Description',  'Plugin installer section title' ),
 		'installation' => _x( 'Installation', 'Plugin installer section title' ),
@@ -500,7 +515,8 @@ function install_plugin_information() {
 		'other_notes'  => _x( 'Other Notes',  'Plugin installer section title' )
 	);
 
-	// Sanitize HTML
+	// 净化HTML
+    // Sanitize HTML
 	foreach ( (array) $api->sections as $section_name => $content ) {
 		$api->sections[$section_name] = wp_kses( $content, $plugins_allowedtags );
 	}
@@ -519,6 +535,7 @@ function install_plugin_information() {
 		$section = reset( $section_titles );
 	}
 
+	// 与粗体框一起使用的通用Iframe报头
 	iframe_header( __( 'Plugin Installation' ) );
 
 	$_with_banner = '';

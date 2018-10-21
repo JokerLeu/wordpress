@@ -17,6 +17,7 @@ class MO extends Gettext_Translations {
 	var $_nplurals = 2;
 
 	/**
+     * 加载MO文件。
 	 * Loaded MO file.
 	 *
 	 * @var string
@@ -24,6 +25,7 @@ class MO extends Gettext_Translations {
 	private $filename = '';
 
 	/**
+     * 返回加载的MO文件。
 	 * Returns the loaded MO file.
 	 *
 	 * @return string The loaded MO file.
@@ -33,6 +35,7 @@ class MO extends Gettext_Translations {
 	}
 
 	/**
+     * 填充MO文件$filename的条目
 	 * Fills up with the entries from MO file $filename
 	 *
 	 * @param string $filename MO file to load
@@ -277,6 +280,7 @@ class MO extends Gettext_Translations {
 	}
 
 	/**
+     * 在MO文件中找到原始字符串和转换字符串的平移项
 	 * Build a Translation_Entry from original string and translation strings,
 	 * found in a MO file
 	 *

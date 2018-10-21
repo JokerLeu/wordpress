@@ -1,5 +1,6 @@
 <?php
 /**
+ * 适用于HTTP报头的不区分大小写的字典
  * Case-insensitive dictionary, suitable for HTTP headers
  *
  * @package Requests
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 适用于HTTP报头的不区分大小写的字典
  * Case-insensitive dictionary, suitable for HTTP headers
  *
  * @package Requests
@@ -14,6 +16,7 @@
  */
 class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, IteratorAggregate {
 	/**
+     * 实际项目数据
 	 * Actual item data
 	 *
 	 * @var array
@@ -21,6 +24,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	protected $data = array();
 
 	/**
+     * 创建一个不区分大小写的字典。
 	 * Creates a case insensitive dictionary.
 	 *
 	 * @param array $data Dictionary/map to convert to case-insensitive
@@ -32,6 +36,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	}
 
 	/**
+     * 检查给定项目是否存在
 	 * Check if the given item exists
 	 *
 	 * @param string $key Item key
@@ -43,6 +48,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	}
 
 	/**
+     * 获取项目的值
 	 * Get the value for the item
 	 *
 	 * @param string $key Item key
@@ -58,6 +64,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	}
 
 	/**
+     * 设置给定项
 	 * Set the given item
 	 *
 	 * @throws Requests_Exception On attempting to use dictionary as list (`invalidset`)
@@ -75,6 +82,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	}
 
 	/**
+     * 取消设置给定的头部
 	 * Unset the given header
 	 *
 	 * @param string $key
@@ -84,6 +92,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	}
 
 	/**
+     * 获取数据的迭代器
 	 * Get an iterator for the data
 	 *
 	 * @return ArrayIterator
@@ -93,6 +102,7 @@ class Requests_Utility_CaseInsensitiveDictionary implements ArrayAccess, Iterato
 	}
 
 	/**
+     * 将标题作为数组
 	 * Get the headers as an array
 	 *
 	 * @return array Header data

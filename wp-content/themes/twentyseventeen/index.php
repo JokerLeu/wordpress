@@ -64,8 +64,10 @@ get_header(); ?>
 					)
 				);
 
+
 			else :
 
+                //否则返回一个没有帖子内容的页面
 				get_template_part( 'template-parts/post/content', 'none' );
 
 			endif;

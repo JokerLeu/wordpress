@@ -1,16 +1,18 @@
 <?php
 /**
+ * WordPress分类管理API。
  * WordPress Taxonomy Administration API.
  *
  * @package WordPress
  * @subpackage Administration
  */
 
-//
+// 类别
 // Category
 //
 
 /**
+ * 检查某类别是否存在。
  * Check whether a category exists.
  *
  * @since 2.0.0
@@ -29,6 +31,7 @@ function category_exists( $cat_name, $parent = null ) {
 }
 
 /**
+ * 获取给定ID的类别对象和“编辑”过滤上下文。
  * Get category object for given ID and 'edit' filter context.
  *
  * @since 2.0.0
@@ -43,6 +46,7 @@ function get_category_to_edit( $id ) {
 }
 
 /**
+ * 如果数据库不存在，则向数据库添加新的类别。
  * Add a new category to the database if it does not already exist.
  *
  * @since 2.0.0
@@ -59,6 +63,7 @@ function wp_create_category( $cat_name, $parent = 0 ) {
 }
 
 /**
+ * 为给定的帖子创建类别。
  * Create categories for the given post.
  *
  * @since 2.0.0
@@ -84,6 +89,7 @@ function wp_create_categories( $categories, $post_id = '' ) {
 }
 
 /**
+ * 更新现有类别或创建新类别。
  * Updates an existing Category or creates a new Category.
  *
  * @since 2.0.0
@@ -155,6 +161,7 @@ function wp_insert_category( $catarr, $wp_error = false ) {
 }
 
 /**
+ * 别名：具有最小参数的wp_insert_category()插入类别。
  * Aliases wp_insert_category() with minimal args.
  *
  * If you want to update only some fields of an existing category, call this
@@ -184,11 +191,12 @@ function wp_update_category($catarr) {
 	return wp_insert_category($catarr);
 }
 
-//
+// 标签
 // Tags
 //
 
-/**
+/**、
+ * 检查是否存在带有给定名称的帖子标签。
  * Check whether a post tag with a given name exists.
  *
  * @since 2.3.0
@@ -201,6 +209,7 @@ function tag_exists($tag_name) {
 }
 
 /**
+ * 如果数据库不存在，则向数据库添加新的标签。
  * Add a new tag to the database if it does not already exist.
  *
  * @since 2.3.0
@@ -213,6 +222,7 @@ function wp_create_tag($tag_name) {
 }
 
 /**
+ * 获取可编辑的标签的逗号分隔列表。
  * Get comma-separated list of tags available to edit.
  *
  * @since 2.3.0
@@ -226,6 +236,7 @@ function get_tags_to_edit( $post_id, $taxonomy = 'post_tag' ) {
 }
 
 /**
+ * 获取逗号分隔的列表，用于编辑给定的帖子ID。
  * Get comma-separated list of terms available to edit for the given post ID.
  *
  * @since 2.8.0
@@ -274,6 +285,7 @@ function get_terms_to_edit( $post_id, $taxonomy = 'post_tag' ) {
 }
 
 /**
+ * 如果数据库不存在，则向数据库添加一个新的术语。
  * Add a new term to the database if it does not already exist.
  *
  * @since 2.8.0

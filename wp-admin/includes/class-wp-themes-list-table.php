@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表API：WP_Themes_List_Table类
  * List Table API: WP_Themes_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 核心类用于实现在列表表中显示已安装的主题。
  * Core class used to implement displaying installed themes in a list table.
  *
  * @since 3.1.0

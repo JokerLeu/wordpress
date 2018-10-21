@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表API：WP_MS_Sites_List_Table类
  * List Table API: WP_MS_Sites_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 核心类用于在网络管理的列表表中实现显示站点。
  * Core class used to implement displaying sites in a list table for the network admin.
  *
  * @since 3.1.0

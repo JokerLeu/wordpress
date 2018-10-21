@@ -1,5 +1,6 @@
 <?php
 /**
+ * 文件包含所有的管理图像处理功能。
  * File contains all the administration image manipulation functions.
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 将图像裁剪到给定大小。
  * Crop an Image to a given size.
  *
  * @since 2.1.0
@@ -63,6 +65,7 @@ function wp_crop_image( $src, $src_x, $src_y, $src_w, $src_h, $dst_w, $dst_h, $s
 }
 
 /**
+ * 生成后缩略图附件元数据。
  * Generate post thumbnail attachment meta data.
  *
  * @since 2.1.0
@@ -294,6 +297,7 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 }
 
 /**
+ * 将分数字符串转换为十进制。
  * Convert a fraction string to a decimal.
  *
  * @since 2.5.0
@@ -309,6 +313,7 @@ function wp_exif_frac2dec($str) {
 }
 
 /**
+ * 将exif日期格式转换为UNIX时间戳。
  * Convert the exif date format to a unix timestamp.
  *
  * @since 2.5.0
@@ -324,6 +329,7 @@ function wp_exif_date2ts($str) {
 }
 
 /**
+ * 获取可用的扩展图像元数据、exif或iptc。
  * Get extended image metadata, exif or iptc as available.
  *
  * Retrieves the EXIF metadata aperture, credit, camera, caption, copyright, iso
@@ -516,6 +522,7 @@ function wp_read_image_metadata( $file ) {
 }
 
 /**
+ * 验证文件是否是图像。
  * Validate that file is an image.
  *
  * @since 2.5.0
@@ -529,6 +536,7 @@ function file_is_valid_image($path) {
 }
 
 /**
+ * 验证文件是否适合在网页中显示。
  * Validate that file is suitable for displaying within a web page.
  *
  * @since 2.5.0
@@ -560,6 +568,7 @@ function file_is_displayable_image($path) {
 }
 
 /**
+ * 加载图像资源进行编辑。
  * Load an image resource for editing.
  *
  * @since 2.9.0
@@ -608,6 +617,7 @@ function load_image_to_edit( $attachment_id, $mime_type, $size = 'full' ) {
 }
 
 /**
+ * 检索附件附件文件的路径或URL。
  * Retrieve the path or url of an attachment's attached file.
  *
  * If the attached file is not present on the local filesystem (usually due to replication plugins),
@@ -666,6 +676,7 @@ function _load_image_to_edit_path( $attachment_id, $size = 'full' ) {
 }
 
 /**
+ * 复制现有的图像文件。
  * Copy an existing image file.
  *
  * @since 3.4.0

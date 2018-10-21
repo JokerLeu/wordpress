@@ -54,6 +54,7 @@ get_header(); ?>
             // Create a setting and control for each of the sections available in the theme.
 			for ( $i = 1; $i < ( 1 + $num_sections ); $i++ ) {
 				$twentyseventeencounter = $i;
+				// 显示首页部分。
 				twentyseventeen_front_page_section( null, $i );
 			}
 

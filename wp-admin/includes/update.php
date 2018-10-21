@@ -14,6 +14,7 @@
  * @return object|array|false The response from the API on success, false on failure.
  */
 function get_preferred_from_update_core() {
+    // 获取可用的核心更新。
 	$updates = get_core_updates();
 	if ( ! is_array( $updates ) )
 		return false;
@@ -75,6 +76,7 @@ function get_core_updates( $options = array() ) {
  * @return array|false False on failure, otherwise the core update offering.
  */
 function find_core_auto_update() {
+    // 获取站点瞬时值。
 	$updates = get_site_transient( 'update_core' );
 	if ( ! $updates || empty( $updates->updates ) )
 		return false;
@@ -127,6 +129,7 @@ function get_core_checksums( $version, $locale ) {
 			) . ' ' . __( '(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)' ),
 			headers_sent() || WP_DEBUG ? E_USER_WARNING : E_USER_NOTICE
 		);
+		// 使用GET方法从HTTP请求检索原始响应。
 		$response = wp_remote_get( $http_url, $options );
 	}
 
@@ -273,6 +276,7 @@ function update_nag() {
 	echo "<div class='update-nag'>$msg</div>";
 }
 
+// 直接从仪表板调用
 // Called directly from dashboard
 function update_right_now_message() {
 	$theme_name = wp_get_theme();
@@ -344,6 +348,7 @@ function wp_plugin_update_rows() {
 }
 
 /**
+ * 显示插件的更新信息。
  * Displays update information for a plugin.
  *
  * @param string $file        Plugin basename.
@@ -500,6 +505,7 @@ function wp_theme_update_rows() {
 }
 
 /**
+ * 显示主题的更新信息。
  * Displays update information for a theme.
  *
  * @param string   $theme_key Theme stylesheet.
@@ -710,8 +716,10 @@ function wp_print_admin_notice_templates() {
 }
 
 /**
+ * 打印列表表中的更新和删除行的JavaScript模板。
  * Prints the JavaScript templates for update and deletion rows in list tables.
  *
+ * 更新模板采用四个值的一个参数：
  * The update template takes one argument with four values:
  *
  *     param {object} data {

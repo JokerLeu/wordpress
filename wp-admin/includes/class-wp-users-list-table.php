@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表表API：WP_Users_List_Table类
  * List Table API: WP_Users_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于在列表表中显示用户的核心类。
  * Core class used to implement displaying users in a list table.
  *
  * @since 3.1.0
@@ -18,6 +20,7 @@
 class WP_Users_List_Table extends WP_List_Table {
 
 	/**
+     * 站点ID以生成用户列表表。
 	 * Site ID to generate the Users list table for.
 	 *
 	 * @since 3.1.0
@@ -26,6 +29,7 @@ class WP_Users_List_Table extends WP_List_Table {
 	public $site_id;
 
 	/**
+     * 当前用户列表表是否为多站点。
 	 * Whether or not the current Users list table is for Multisite.
 	 *
 	 * @since 3.1.0

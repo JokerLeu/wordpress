@@ -13,6 +13,7 @@
 
 ?>
 
+<!--帖子内容 代码模板在\template-parts\post\content.php-->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( is_sticky() && is_home() ) :
@@ -26,7 +27,9 @@
 			if ( is_single() ) {
 				twentyseventeen_posted_on();
 			} else {
+			    // 为已发布日期获取一个格式良好的字符串。
 				echo twentyseventeen_time_link();
+				// 返回一个便于访问的链接来编辑帖子或页面。
 				twentyseventeen_edit_link();
 			};
 			echo '</div><!-- .entry-meta -->';
@@ -60,6 +63,7 @@
 			)
 		);
 
+		// 页面列表的格式化输出。
 		wp_link_pages(
 			array(
 				'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
@@ -73,6 +77,7 @@
 
 	<?php
 	if ( is_single() ) {
+	    // 打印HTML与元信息的类别，标签和评论。
 		twentyseventeen_entry_footer();
 	}
 	?>

@@ -1,14 +1,19 @@
 <?php
 /**
+ * WordPress升级API
  * WordPress Upgrade API
  *
+ * 大多数函数都是可插入的，可以覆盖。
  * Most of the functions are pluggable and can be overwritten.
  *
  * @package WordPress
  * @subpackage Administration
  */
 
-/** Include user installation customization script. */
+/**
+ * 包括用户安装自定义脚本。
+ * Include user installation customization script.
+ */
 if ( file_exists(WP_CONTENT_DIR . '/install.php') )
 	require (WP_CONTENT_DIR . '/install.php');
 
@@ -20,8 +25,10 @@ require_once(ABSPATH . 'wp-admin/includes/schema.php');
 
 if ( !function_exists('wp_install') ) :
 /**
+ * 安装站点。
  * Installs the site.
  *
+ * 运行所需的函数来设置和填充数据库，包括主管理用户和初始选项。
  * Runs the required functions to set up and populate the database,
  * including primary admin user and initial options.
  *
@@ -38,19 +45,26 @@ if ( !function_exists('wp_install') ) :
  */
 function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated = '', $user_password = '', $language = '' ) {
 	if ( !empty( $deprecated ) )
+	    // 标记一个函数参数，当它被使用时就被禁止并通知它。
 		_deprecated_argument( __FUNCTION__, '2.6.0' );
 
+	// 检查已安装的MySQL二进制版本。
 	wp_check_mysql_version();
+	// 删除所有缓存项。
 	wp_cache_flush();
+	// 将数据库表更新为新架构，但不显示结果。
 	make_db_current_silent();
+	// 创建WordPress选项并设置默认值。
 	populate_options();
+	// 为各种WordPress版本执行WordPress角色创建。
 	populate_roles();
 
 	update_option('blogname', $blog_title);
 	update_option('admin_email', $user_email);
 	update_option('blog_public', $public);
 
-	// Freshness of site - in the future, this could get more specific about actions taken, perhaps.
+	// 网站的新鲜度-在未来，这可能会得到更具体的行动，也许。
+    // Freshness of site - in the future, this could get more specific about actions taken, perhaps.
 	update_option( 'fresh_site', 1 );
 
 	if ( $language ) {
@@ -2544,6 +2558,7 @@ function make_db_current( $tables = 'all' ) {
 }
 
 /**
+ * 将数据库表更新为新架构，但不显示结果。
  * Updates the database tables to a new schema, but without displaying results.
  *
  * By default, updates all the tables to use the latest defined schema, but can
@@ -2787,6 +2802,7 @@ function translate_level_to_role($level) {
 }
 
 /**
+ * 检查已安装的MySQL二进制版本。
  * Checks the version of the installed MySQL binary.
  *
  * @since 2.1.0

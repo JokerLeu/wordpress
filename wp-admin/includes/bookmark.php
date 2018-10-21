@@ -1,5 +1,6 @@
 <?php
 /**
+ * 书签管理API
  * WordPress Bookmark Administration API
  *
  * @package WordPress
@@ -291,6 +292,7 @@ function wp_update_link( $linkdata ) {
 }
 
 /**
+ * 输出WordPress链接管理器的“禁用”消息。
  * Outputs the 'disabled' message for the WordPress Link Manager.
  *
  * @since 3.5.0

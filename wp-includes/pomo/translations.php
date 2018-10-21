@@ -166,6 +166,7 @@ class Translations {
 
 class Gettext_Translations extends Translations {
 	/**
+     * 选择复数形式的获取文本实现。
 	 * The gettext implementation of select_plural_form.
 	 *
 	 * It lives in this class, because there are more than one descendand, which will use it and
@@ -278,6 +279,7 @@ endif;
 
 if ( ! class_exists( 'NOOP_Translations', false ) ):
 /**
+ * 提供与翻译相同的接口，但不做任何事情。
  * Provides the same interface as Translations, but doesn't do anything
  */
 class NOOP_Translations {

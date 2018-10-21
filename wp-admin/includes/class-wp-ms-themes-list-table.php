@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表API：WP_MS_Themes_List_Table类
  * List Table API: WP_MS_Themes_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于在网络管理表列表中显示主题的核心类。
  * Core class used to implement displaying themes in a list table for the network admin.
  *
  * @since 3.1.0

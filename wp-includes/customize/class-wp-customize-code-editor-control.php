@@ -19,6 +19,7 @@
 class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 
 	/**
+     * 自定义控件类型。
 	 * Customize control type.
 	 *
 	 * @since 4.9.0
@@ -27,6 +28,7 @@ class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 	public $type = 'code_editor';
 
 	/**
+     * 正在编辑的代码类型。
 	 * Type of code that is being edited.
 	 *
 	 * @since 4.9.0
@@ -35,6 +37,7 @@ class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 	public $code_type = '';
 
 	/**
+     * 代码编辑器设置。
 	 * Code editor settings.
 	 *
 	 * @see wp_enqueue_code_editor()
@@ -44,6 +47,7 @@ class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 	public $editor_settings = array();
 
 	/**
+     * 输入与控件相关的脚本/样式。
 	 * Enqueue control related scripts/styles.
 	 *
 	 * @since 4.9.0
@@ -62,6 +66,7 @@ class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 	}
 
 	/**
+     * 通过JSON刷新传递给JavaScript的参数。
 	 * Refresh the parameters passed to the JavaScript via JSON.
 	 *
 	 * @since 4.9.0
@@ -77,6 +82,7 @@ class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 	}
 
 	/**
+     * 不要将控制内容从PHP呈现出来，因为它是通过JS加载来呈现的。
 	 * Don't render the control content from PHP, as it's rendered via JS on load.
 	 *
 	 * @since 4.9.0
@@ -84,6 +90,7 @@ class WP_Customize_Code_Editor_Control extends WP_Customize_Control {
 	public function render_content() {}
 
 	/**
+     * 渲染控件显示的JS模板。
 	 * Render a JS template for control display.
 	 *
 	 * @since 4.9.0

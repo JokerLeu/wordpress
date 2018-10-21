@@ -8,6 +8,7 @@
  */
 
 /**
+ * 用于通过REST API访问附件的核心控制器。
  * Core controller used to access attachments via the REST API.
  *
  * @since 4.7.0
@@ -17,6 +18,7 @@
 class WP_REST_Attachments_Controller extends WP_REST_Posts_Controller {
 
 	/**
+     * 为get_items()响应确定允许的query_vars，并为WP_Query查询做好准备。
 	 * Determines the allowed query_vars for a get_items() response and
 	 * prepares for WP_Query.
 	 *

@@ -13,6 +13,7 @@
 
 ?>
 
+<!--没有内容 代码在模板的\template-parts\post\content-none.php-->
 <section class="no-results not-found">
 	<header class="page-header">
 		<h1 class="page-title"><?php _e( 'Nothing Found', 'twentyseventeen' ); ?></h1>
@@ -28,6 +29,7 @@
 
 			<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'twentyseventeen' ); ?></p>
 			<?php
+                // 显示搜索表单
 				get_search_form();
 
 		endif;

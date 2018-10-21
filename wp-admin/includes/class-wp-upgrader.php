@@ -10,40 +10,74 @@
  * @since 2.8.0
  */
 
-/** WP_Upgrader_Skin class */
+/**
+ * WP升级皮肤类
+ * WP_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader-skin.php';
 
-/** Plugin_Upgrader_Skin class */
+/**
+ * 插件升级皮肤类
+ * Plugin_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader-skin.php';
 
-/** Theme_Upgrader_Skin class */
+/**
+ * 主题升级皮肤类
+ * Theme_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-theme-upgrader-skin.php';
 
-/** Bulk_Upgrader_Skin class */
+/**
+ * 批量升级皮肤类
+ * Bulk_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-bulk-upgrader-skin.php';
 
-/** Bulk_Plugin_Upgrader_Skin class */
+/**
+ * 批量插件升级皮肤类
+ * Bulk_Plugin_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-bulk-plugin-upgrader-skin.php';
 
-/** Bulk_Theme_Upgrader_Skin class */
+/**
+ * 批量主题升级皮肤类
+ * Bulk_Theme_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-bulk-theme-upgrader-skin.php';
 
-/** Plugin_Installer_Skin class */
+/**
+ * 插件安装器皮肤类
+ * Plugin_Installer_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-plugin-installer-skin.php';
 
-/** Theme_Installer_Skin class */
+/**
+ * 主题安装器皮肤类
+ * Theme_Installer_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-theme-installer-skin.php';
 
-/** Language_Pack_Upgrader_Skin class */
+/**
+ * 语言包升级皮肤类
+ * Language_Pack_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-language-pack-upgrader-skin.php';
 
-/** Automatic_Upgrader_Skin class */
+/**
+ * 自动升级皮肤类
+ * Automatic_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 
-/** WP_Ajax_Upgrader_Skin class */
+/**
+ * WP Ajax升级皮肤类
+ * WP_Ajax_Upgrader_Skin class
+ */
 require_once ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php';
 
 /**
+ * 核心类，用于通过zip文件中的文件系统抽象类升级/安装本地文件集。
  * Core class used for upgrading/installing a local set of files via
  * the Filesystem Abstraction classes from a Zip file.
  *

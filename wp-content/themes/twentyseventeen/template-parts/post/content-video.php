@@ -13,6 +13,7 @@
 
 ?>
 
+<!--视频内容 代码在模板的\template-parts\post\content-video.php-->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( is_sticky() && is_home() ) {

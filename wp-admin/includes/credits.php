@@ -50,6 +50,7 @@ function wp_credits() {
 }
 
 /**
+ * 检索链接到贡献者的WordPress.org个人资料页。
  * Retrieve the link to a contributor's WordPress.org profile page.
  *
  * @access private
@@ -64,6 +65,7 @@ function _wp_credits_add_profile_link( &$display_name, $username, $profiles ) {
 }
 
 /**
+ * 检索到WordPress中使用的外部库的链接。
  * Retrieve the link to an external library used in WordPress.
  *
  * @access private

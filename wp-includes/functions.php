@@ -1152,6 +1152,7 @@ function wp_get_nocache_headers() {
  * @see wp_get_nocache_headers()
  */
 function nocache_headers() {
+    // 获取头信息以防止缓存。
 	$headers = wp_get_nocache_headers();
 
 	unset( $headers['Last-Modified'] );
@@ -1219,6 +1220,7 @@ function bool_from_yn( $yn ) {
 }
 
 /**
+ * 使用动作钩子加载进给模板。
  * Load the feed template from the use of an action hook.
  *
  * If the feed action does not have a hook, then the function will die with a
@@ -1355,6 +1357,7 @@ function do_robots() {
 }
 
 /**
+ * 测试是否已经安装了WordPress。
  * Test whether WordPress is already installed.
  *
  * The cache will be checked first. If you have a cache plugin, which saves
@@ -1373,6 +1376,7 @@ function is_blog_installed() {
 	global $wpdb;
 
 	/*
+	 * 首先检查缓存。如果选项表消失了，我们真的缓存了，哦，好吧。
 	 * Check cache first. If options table goes away and we have true
 	 * cached, oh well.
 	 */
@@ -1383,7 +1387,8 @@ function is_blog_installed() {
 	if ( ! wp_installing() ) {
 		$alloptions = wp_load_alloptions();
 	}
-	// If siteurl is not set to autoload, check it specifically
+	// 如果站点URL没有设置为AutoLoad，请具体检查。
+    // If siteurl is not set to autoload, check it specifically
 	if ( !isset( $alloptions['siteurl'] ) )
 		$installed = $wpdb->get_var( "SELECT option_value FROM $wpdb->options WHERE option_name = 'siteurl'" );
 	else
@@ -1585,6 +1590,7 @@ function wp_get_raw_referer() {
 }
 
 /**
+ * 检索已发布的原始引用者（如果存在）。
  * Retrieve original referer that was posted, if it exists.
  *
  * @since 2.0.4
@@ -1598,6 +1604,7 @@ function wp_get_original_referer() {
 }
 
 /**
+ * 基于完整路径的递归目录创建。
  * Recursive directory creation based on full path.
  *
  * Will attempt to set permissions on folders.
@@ -1667,6 +1674,7 @@ function wp_mkdir_p( $target ) {
 }
 
 /**
+ * 测试给定文件系统路径是否为绝对值。
  * Test if a given filesystem path is absolute.
  *
  * For example, '/foo/bar', or 'c:\windows'.
@@ -1696,6 +1704,7 @@ function path_is_absolute( $path ) {
 }
 
 /**
+ * 将两个文件系统路径连接在一起。
  * Join two filesystem paths together.
  *
  * For example, 'give me $path relative to $base'. If the $path is absolute,
@@ -1715,6 +1724,7 @@ function path_join( $base, $path ) {
 }
 
 /**
+ * 规范文件系统路径。
  * Normalize a filesystem path.
  *
  * On windows systems, replaces backslashes with forward slashes
@@ -3819,6 +3829,7 @@ function dead_db() {
 }
 
 /**
+ * 将一个值转换为非负整数。
  * Convert a value to non-negative integer.
  *
  * @since 2.5.0
@@ -3831,6 +3842,7 @@ function absint( $maybeint ) {
 }
 
 /**
+ * 标记一个函数，当它被使用时就被禁止和通知。
  * Mark a function as deprecated and inform when it has been used.
  *
  * There is a {@see 'hook deprecated_function_run'} that will be called that can be used
@@ -4323,6 +4335,7 @@ function validate_file( $file, $allowed_files = array() ) {
 }
 
 /**
+ * 是否强制SSL用于管理屏幕。
  * Whether to force SSL used for the Administration Screens.
  *
  * @since 2.6.0
@@ -4345,8 +4358,10 @@ function force_ssl_admin( $force = null ) {
 }
 
 /**
+ * 猜测站点的URL。
  * Guess the URL for the site.
  *
+ * 将删除WP管理链接，以便只检索不在WP管理目录中的返回URL。
  * Will remove wp-admin links to retrieve only return URLs not in the wp-admin
  * directory.
  *
@@ -4851,6 +4866,7 @@ function wp_scheduled_delete() {
 }
 
 /**
+ * 从文件检索元数据。
  * Retrieve metadata from a file.
  *
  * Searches for metadata in the first 8kiB of a file, such as a plugin or theme.
@@ -4911,6 +4927,7 @@ function get_file_data( $file, $default_headers, $context = '' ) {
 }
 
 /**
+ * 返回true。
  * Returns true.
  *
  * Useful for returning true to filters easily.
@@ -4926,6 +4943,7 @@ function __return_true() {
 }
 
 /**
+ * 返回false。
  * Returns false.
  *
  * Useful for returning false to filters easily.
@@ -4941,6 +4959,7 @@ function __return_false() {
 }
 
 /**
+ * 返回0
  * Returns 0.
  *
  * Useful for returning 0 to filters easily.
@@ -4954,6 +4973,7 @@ function __return_zero() {
 }
 
 /**
+ * 返回空数组。
  * Returns an empty array.
  *
  * Useful for returning an empty array to filters easily.
@@ -5529,6 +5549,7 @@ function wp_validate_boolean( $var ) {
 }
 
 /**
+ * 删除文件
  * Delete a file
  *
  * @since 4.2.0
@@ -5537,6 +5558,7 @@ function wp_validate_boolean( $var ) {
  */
 function wp_delete_file( $file ) {
 	/**
+     * 筛选要删除的文件的路径。
 	 * Filters the path of the file to delete.
 	 *
 	 * @since 2.1.0
@@ -5550,6 +5572,7 @@ function wp_delete_file( $file ) {
 }
 
 /**
+ * 如果路径位于给定目录内，则删除文件。
  * Deletes a file if its path is within the given directory.
  *
  * @since 4.9.7
@@ -6005,6 +6028,7 @@ function wp_privacy_anonymize_data( $type, $data = '' ) {
 }
 
 /**
+ * 返回用于存储个人数据导出文件的目录。
  * Returns the directory used to store personal data export files.
  *
  * @since 4.9.6
@@ -6066,6 +6090,7 @@ function wp_schedule_delete_old_privacy_export_files() {
 }
 
 /**
+ * 清理超过三天的出口文件。
  * Cleans up export files older than three days old.
  *
  * The export files are stored in `wp-content/uploads`, and are therefore publicly
@@ -6079,10 +6104,12 @@ function wp_schedule_delete_old_privacy_export_files() {
 function wp_privacy_delete_old_export_files() {
 	require_once( ABSPATH . 'wp-admin/includes/file.php' );
 
+	// 返回用于存储个人数据导出文件的目录。
 	$exports_dir  = wp_privacy_exports_dir();
 	$export_files = list_files( $exports_dir, 100, array( 'index.html' ) );
 
 	/**
+     * 过滤个人数据导出文件的生命周期（秒）。
 	 * Filters the lifetime, in seconds, of a personal data export file.
 	 *
 	 * By default, the lifetime is 3 days. Once the file reaches that age, it will automatically

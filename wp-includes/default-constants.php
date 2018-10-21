@@ -21,6 +21,7 @@ function wp_initial_constants() {
 	global $blog_id;
 
 	/**#@+
+     * 用于在各自字节数中表示人类可读数据大小的常量。
 	 * Constants for expressing human-readable data sizes in their respective number of bytes.
 	 *
 	 * @since 4.4.0
@@ -32,10 +33,13 @@ function wp_initial_constants() {
 	/**#@-*/
 
 	$current_limit     = @ini_get( 'memory_limit' );
+	// 将速记字节值转换为整数字节值。
 	$current_limit_int = wp_convert_hr_to_bytes( $current_limit );
 
-	// Define memory limits.
+	// 定义内存限制。
+    // Define memory limits.
 	if ( ! defined( 'WP_MEMORY_LIMIT' ) ) {
+	    // 确定PHP ini值在运行时是否可更改。
 		if ( false === wp_is_ini_value_changeable( 'memory_limit' ) ) {
 			define( 'WP_MEMORY_LIMIT', $current_limit );
 		} elseif ( is_multisite() ) {
@@ -55,7 +59,9 @@ function wp_initial_constants() {
 		}
 	}
 
-	// Set memory limits.
+	// 设置内存限制。
+    // Set memory limits.
+    // 将速记字节值转换为整数字节值。
 	$wp_limit_int = wp_convert_hr_to_bytes( WP_MEMORY_LIMIT );
 	if ( -1 !== $current_limit_int && ( -1 === $wp_limit_int || $wp_limit_int > $current_limit_int ) ) {
 		@ini_set( 'memory_limit', WP_MEMORY_LIMIT );
@@ -83,7 +89,8 @@ function wp_initial_constants() {
 	if ( !defined('WP_CACHE') )
 		define('WP_CACHE', false);
 
-	// Add define('SCRIPT_DEBUG', true); to wp-config.php to enable loading of non-minified,
+	// 添加define('SCRIPT_DEBUG', true);对wp-config.php启用非缩写、非级联脚本和样式表的加载。
+    // Add define('SCRIPT_DEBUG', true); to wp-config.php to enable loading of non-minified,
 	// non-concatenated scripts and stylesheets.
 	if ( ! defined( 'SCRIPT_DEBUG' ) ) {
 		if ( ! empty( $GLOBALS['wp_version'] ) ) {
@@ -96,6 +103,7 @@ function wp_initial_constants() {
 	}
 
 	/**
+     * 私有
 	 * Private
 	 */
 	if ( !defined('MEDIA_TRASH') )
@@ -104,10 +112,12 @@ function wp_initial_constants() {
 	if ( !defined('SHORTINIT') )
 		define('SHORTINIT', false);
 
-	// Constants for features added to WP that should short-circuit their plugin implementations
+	// 添加到WP的特性的常数，它们应该使插件实现短路。
+    // Constants for features added to WP that should short-circuit their plugin implementations
 	define( 'WP_FEATURE_BETTER_PASSWORDS', true );
 
 	/**#@+
+     * 用于在各自的秒数中表示人类可读间隔的常数。
 	 * Constants for expressing human-readable intervals
 	 * in their respective number of seconds.
 	 *
@@ -120,11 +130,17 @@ function wp_initial_constants() {
 	 * @since 3.5.0
 	 * @since 4.4.0 Introduced `MONTH_IN_SECONDS`.
 	 */
+	    // 1分种=60秒
 	define( 'MINUTE_IN_SECONDS', 60 );
+	    // 1小时=秒
 	define( 'HOUR_IN_SECONDS',   60 * MINUTE_IN_SECONDS );
+	    // 1天=秒
 	define( 'DAY_IN_SECONDS',    24 * HOUR_IN_SECONDS   );
+	    // 1星期=秒
 	define( 'WEEK_IN_SECONDS',    7 * DAY_IN_SECONDS    );
+	    // 1月=秒
 	define( 'MONTH_IN_SECONDS',  30 * DAY_IN_SECONDS    );
+	    // 1年=秒
 	define( 'YEAR_IN_SECONDS',  365 * DAY_IN_SECONDS    );
 	/**#@-*/
 }
@@ -142,14 +158,16 @@ function wp_plugin_directory_constants() {
 		define( 'WP_CONTENT_URL', get_option('siteurl') . '/wp-content'); // full url - WP_CONTENT_DIR is defined further up
 
 	/**
+     * 允许插件目录从默认位置移动。
 	 * Allows for the plugins directory to be moved from the default location.
 	 *
 	 * @since 2.6.0
 	 */
 	if ( !defined('WP_PLUGIN_DIR') )
-		define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' ); // full path, no trailing slash
+		define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' ); // 全路径，无尾随斜线full path, no trailing slash
 
 	/**
+     * 允许插件目录从默认位置移动。
 	 * Allows for the plugins directory to be moved from the default location.
 	 *
 	 * @since 2.6.0
@@ -158,6 +176,7 @@ function wp_plugin_directory_constants() {
 		define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' ); // full url, no trailing slash
 
 	/**
+     * 允许插件目录从默认位置移动。
 	 * Allows for the plugins directory to be moved from the default location.
 	 *
 	 * @since 2.1.0
@@ -167,6 +186,7 @@ function wp_plugin_directory_constants() {
 		define( 'PLUGINDIR', 'wp-content/plugins' ); // Relative to ABSPATH. For back compat.
 
 	/**
+     * 允许多插件目录从默认位置移动。
 	 * Allows for the mu-plugins directory to be moved from the default location.
 	 *
 	 * @since 2.8.0
@@ -175,6 +195,7 @@ function wp_plugin_directory_constants() {
 		define( 'WPMU_PLUGIN_DIR', WP_CONTENT_DIR . '/mu-plugins' ); // full path, no trailing slash
 
 	/**
+     * 允许多插件目录从默认位置移动。
 	 * Allows for the mu-plugins directory to be moved from the default location.
 	 *
 	 * @since 2.8.0
@@ -183,6 +204,7 @@ function wp_plugin_directory_constants() {
 		define( 'WPMU_PLUGIN_URL', WP_CONTENT_URL . '/mu-plugins' ); // full url, no trailing slash
 
 	/**
+     * 允许多插件目录从默认位置移动。
 	 * Allows for the mu-plugins directory to be moved from the default location.
 	 *
 	 * @since 2.8.0
@@ -201,6 +223,7 @@ function wp_plugin_directory_constants() {
  */
 function wp_cookie_constants() {
 	/**
+     * 用于保证独特的哈希cookies
 	 * Used to guarantee unique hash cookies
 	 *
 	 * @since 1.5.0
@@ -281,6 +304,7 @@ function wp_cookie_constants() {
 }
 
 /**
+ * 定义Cookie相关的WordPress常数
  * Defines cookie related WordPress constants
  *
  * @since 3.0.0
@@ -296,6 +320,7 @@ function wp_ssl_constants() {
 			define( 'FORCE_SSL_ADMIN', false );
 		}
 	}
+	// 是否强制SSL用于管理屏幕。
 	force_ssl_admin( FORCE_SSL_ADMIN );
 
 	/**
@@ -344,18 +369,21 @@ function wp_functionality_constants() {
  */
 function wp_templating_constants() {
 	/**
+     * 当前活动模板目录的文件系统路径
 	 * Filesystem path to the current active template directory
 	 * @since 1.5.0
 	 */
 	define('TEMPLATEPATH', get_template_directory());
 
 	/**
+     * 当前活动模板样式表目录的文件系统路径
 	 * Filesystem path to the current active template stylesheet directory
 	 * @since 2.1.0
 	 */
 	define('STYLESHEETPATH', get_stylesheet_directory());
 
 	/**
+     * 此安装的默认主题的弹头。在安装新站点时用作默认主题。如果当前主题不存在，它将用作回退。
 	 * Slug of the default theme for this installation.
 	 * Used as the default theme when installing new sites.
 	 * It will be used as the fallback if the current theme doesn't exist.

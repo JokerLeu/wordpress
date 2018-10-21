@@ -810,6 +810,7 @@ function get_intermediate_image_sizes() {
 }
 
 /**
+ * 检索图像以表示附件。
  * Retrieve an image to represent an attachment.
  *
  * A mime icon for files, thumbnail or intermediate size for images.
@@ -1826,6 +1827,7 @@ function gallery_shortcode( $attr ) {
 }
 
 /**
+ * 输出播放列表所使用的模板。
  * Outputs the templates used by playlists.
  *
  * @since 3.9.0
@@ -1870,6 +1872,7 @@ function wp_underscore_playlist_templates() {
 }
 
 /**
+ * 输出和输入播放列表的默认脚本和样式。
  * Outputs and enqueue default scripts and styles for playlists.
  *
  * @since 3.9.0
@@ -1887,6 +1890,7 @@ function wp_playlist_scripts( $type ) {
 }
 
 /**
+ * 建立播放列表短代码输出。
  * Builds the Playlist shortcode output.
  *
  * This implements the functionality of the playlist shortcode for displaying

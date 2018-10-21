@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress核心升级功能。
  * WordPress core upgrade functionality.
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 存储要删除的文件。
  * Stores files to be deleted.
  *
  * @since 2.7.0
@@ -782,6 +784,7 @@ $_old_files = array(
 );
 
 /**
+ * 将新文件存储在WP内容中以复制
  * Stores new files in wp-content to copy
  *
  * The contents of this array indicate any new bundled plugins/themes which
@@ -804,6 +807,7 @@ $_old_files = array(
  */
 global $_new_bundled_files;
 
+// 新的捆绑文件
 $_new_bundled_files = array(
 	'plugins/akismet/'        => '2.0',
 	'themes/twentyten/'       => '3.0',
@@ -817,6 +821,7 @@ $_new_bundled_files = array(
 );
 
 /**
+ * 升级WordPress的核心。
  * Upgrades the core of WordPress.
  *
  * This will create a .maintenance file at the base of the WordPress directory
@@ -1204,6 +1209,8 @@ function update_core($from, $to) {
 }
 
 /**
+ * 通过WordPress文件系统抽象将目录从一个位置复制到另一个位置。
+ * 假定已经调用并设置WP_Filesystem()。
  * Copies a directory from one location to another via the WordPress Filesystem Abstraction.
  * Assumes that WP_Filesystem() has already been called and setup.
  *
@@ -1266,6 +1273,7 @@ function _copy_dir($from, $to, $skip_list = array() ) {
 }
 
 /**
+ * 成功升级后重定向到WordPress页面。
  * Redirect to the About WordPress page after a successful upgrade.
  *
  * This function is only needed when the existing installation is older than 3.4.0.
@@ -1313,6 +1321,7 @@ window.location = 'about.php?updated';
 }
 
 /**
+ * 清除通用示例文件。
  * Cleans up Genericons example files.
  *
  * @since 4.2.2
@@ -1356,6 +1365,7 @@ function _upgrade_422_remove_genericons() {
 }
 
 /**
+ * 递归地查找给定文件夹中的通用示例文件。
  * Recursively find Genericons example files in a given folder.
  *
  * @ignore
@@ -1388,6 +1398,7 @@ function _upgrade_422_find_genericons_files_in_folder( $directory ) {
  */
 function _upgrade_440_force_deactivate_incompatible_plugins() {
 	if ( defined( 'REST_API_VERSION' ) && version_compare( REST_API_VERSION, '2.0-beta4', '<=' ) ) {
+	    // 停用单个插件或多个插件。
 		deactivate_plugins( array( 'rest-api/plugin.php' ), true );
 	}
 }

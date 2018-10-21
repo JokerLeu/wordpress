@@ -17,7 +17,7 @@ if ( ! defined( 'PO_MAX_LINE_LEN' ) ) {
 ini_set('auto_detect_line_endings', 1);
 
 /**
- * 使用PO文件的工作程序
+ * 使用PO文件工作的程序
  * Routines for working with PO files
  */
 if ( ! class_exists( 'PO', false ) ):
@@ -26,6 +26,7 @@ class PO extends Gettext_Translations {
 	var $comments_before_headers = '';
 
 	/**
+     * 输出到PO入口
 	 * Exports headers to a PO entry
 	 *
 	 * @return string msgid/msgstr PO entry for this PO file headers, doesn't contain newline at the end
@@ -44,6 +45,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 将所有条目导出到PO格式
 	 * Exports all entries to PO format
 	 *
 	 * @return string sequence of mgsgid/msgstr PO strings, doesn't containt newline at the end
@@ -54,6 +56,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 将整个PO文件作为字符串导出
 	 * Exports the whole PO file as a string
 	 *
 	 * @param bool $include_headers whether to include the headers in the export
@@ -70,6 +73,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 与{@link export}相同，但将结果写入文件
 	 * Same as {@link export}, but writes the result to a file
 	 *
 	 * @param string $filename where to write the PO string
@@ -86,8 +90,10 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 在PO内容开始之前包含注释的文本
 	 * Text to include as a comment before the start of the PO contents
 	 *
+     * 不需要在行的开头包含#，这些是自动添加的。
 	 * Doesn't need to include # in the beginning of lines, these are added automatically
 	 */
 	function set_comment_before_headers( $text ) {
@@ -95,6 +101,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 以PO样式格式化字符串
 	 * Formats a string in PO-style
 	 *
 	 * @static
@@ -126,6 +133,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 从PO格式化字符串返回原始字符串
 	 * Gives back the original string from a PO-formatted string
 	 *
 	 * @static
@@ -161,6 +169,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 在$string的每一行中插入$with并返回修改后的字符串
 	 * Inserts $with in the beginning of every new line of $string and
 	 * returns the modified string
 	 *
@@ -186,6 +195,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 准备一个文本作为注释——将线条和预置和每行的一个特殊字符包装起来。
 	 * Prepare a text as a comment -- wraps the lines and prepends #
 	 * and a special character to each line
 	 *
@@ -200,6 +210,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 从条目中构建包含在PO文件中的字符串
 	 * Builds a string from the entry for inclusion in PO file
 	 *
 	 * @static
@@ -288,6 +299,7 @@ class PO extends Gettext_Translations {
 	}
 
 	/**
+     * 读取项的辅助函数
 	 * Helper function for read_entry
 	 * @param string $context
 	 * @return bool

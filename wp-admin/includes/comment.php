@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress评论管理API。
  * WordPress Comment Administration API.
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 根据作者和日期确定是否存在评论。
  * Determine if a comment exists based on author and date.
  *
  * For best performance, use `$timezone = 'gmt'`, which queries a field that is properly indexed. The default value
@@ -32,6 +34,7 @@ function comment_exists( $comment_author, $comment_date, $timezone = 'blog' ) {
 		$date_field = 'comment_date_gmt';
 	}
 
+	// prepare：为安全执行准备SQL查询。使用sprintf()类语法。
 	return $wpdb->get_var( $wpdb->prepare("SELECT comment_post_ID FROM $wpdb->comments
 			WHERE comment_author = %s AND $date_field = %s",
 			stripslashes( $comment_author ),
@@ -40,6 +43,7 @@ function comment_exists( $comment_author, $comment_date, $timezone = 'blog' ) {
 }
 
 /**
+ * 用$POST提供的值更新评论。
  * Update a comment with values provided in $_POST.
  *
  * @since 2.0.0
@@ -86,6 +90,7 @@ function edit_comment() {
 }
 
 /**
+ * 返回基于注释ID的WP_Comment对象。
  * Returns a WP_Comment object based on comment ID.
  *
  * @since 2.0.0
@@ -119,6 +124,7 @@ function get_comment_to_edit( $id ) {
 }
 
 /**
+ * 获取文章或文章上的未决评论数量
  * Get the number of pending comments on a post or posts
  *
  * @since 2.3.0
@@ -164,6 +170,7 @@ function get_pending_comments_num( $post_id ) {
 }
 
 /**
+ * 在管理中添加头像到相关的地方，或者尝试。
  * Add avatars to relevant places in admin, or try to.
  *
  * @since 2.5.0
@@ -177,6 +184,8 @@ function floated_admin_avatar( $name ) {
 }
 
 /**
+ * 排队评论热键JS
+ *
  * @since 2.7.0
  */
 function enqueue_comment_hotkeys_js() {
@@ -185,6 +194,7 @@ function enqueue_comment_hotkeys_js() {
 }
 
 /**
+ * 在评论底部显示错误信息。
  * Display error message at bottom of comments.
  *
  * @param string $msg Error Message. Assumed to contain HTML and be sanitized.

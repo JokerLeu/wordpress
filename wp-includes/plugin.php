@@ -23,6 +23,7 @@
  * @since 1.5.0
  */
 
+// 初始化过滤器全局。
 // Initialize the filter globals.
 require( dirname( __FILE__ ) . '/class-wp-hook.php' );
 
@@ -646,12 +647,12 @@ function do_action_deprecated( $tag, $args, $version, $replacement = false, $mes
 	do_action_ref_array( $tag, $args );
 }
 
-//
 // 为了处理插件的函数。
 // Functions for handling plugins.
 //
 
 /**
+ * 获取插件的基本名称。
  * Gets the basename of a plugin.
  *
  * This method extracts the name of a plugin from its filename.

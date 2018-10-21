@@ -1,5 +1,6 @@
 <?php
 /**
+ * 帖子API：WP_Post类
  * Post API: WP_Post class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 用于实现WP_Post对象的核心类。
  * Core class used to implement the WP_Post object.
  *
  * @since 3.5.0
@@ -22,6 +24,7 @@
 final class WP_Post {
 
 	/**
+     * 帖子ID
 	 * Post ID.
 	 *
 	 * @since 3.5.0
@@ -30,6 +33,7 @@ final class WP_Post {
 	public $ID;
 
 	/**
+     * 帖子作者的ID
 	 * ID of post author.
 	 *
 	 * A numeric string, for compatibility reasons.
@@ -40,6 +44,7 @@ final class WP_Post {
 	public $post_author = 0;
 
 	/**
+     * 该帖子的本地出版时间。
 	 * The post's local publication time.
 	 *
 	 * @since 3.5.0
@@ -48,6 +53,7 @@ final class WP_Post {
 	public $post_date = '0000-00-00 00:00:00';
 
 	/**
+     * 该帖子的GMT出版时间。
 	 * The post's GMT publication time.
 	 *
 	 * @since 3.5.0
@@ -56,6 +62,7 @@ final class WP_Post {
 	public $post_date_gmt = '0000-00-00 00:00:00';
 
 	/**
+     * 该帖子的内容。
 	 * The post's content.
 	 *
 	 * @since 3.5.0
@@ -64,6 +71,7 @@ final class WP_Post {
 	public $post_content = '';
 
 	/**
+     * 该帖子的标题
 	 * The post's title.
 	 *
 	 * @since 3.5.0
@@ -72,6 +80,7 @@ final class WP_Post {
 	public $post_title = '';
 
 	/**
+     * 这篇文章摘录。
 	 * The post's excerpt.
 	 *
 	 * @since 3.5.0
@@ -80,6 +89,7 @@ final class WP_Post {
 	public $post_excerpt = '';
 
 	/**
+     * 该帖子的状态
 	 * The post's status.
 	 *
 	 * @since 3.5.0
@@ -88,6 +98,7 @@ final class WP_Post {
 	public $post_status = 'publish';
 
 	/**
+     * 是否允许发表评论。
 	 * Whether comments are allowed.
 	 *
 	 * @since 3.5.0
@@ -96,6 +107,7 @@ final class WP_Post {
 	public $comment_status = 'open';
 
 	/**
+     * 是否允许ping。
 	 * Whether pings are allowed.
 	 *
 	 * @since 3.5.0
@@ -104,6 +116,7 @@ final class WP_Post {
 	public $ping_status = 'open';
 
 	/**
+     * 在纯文本中该帖子的密码。
 	 * The post's password in plain text.
 	 *
 	 * @since 3.5.0
@@ -112,6 +125,7 @@ final class WP_Post {
 	public $post_password = '';
 
 	/**
+     * 该帖子的片段。
 	 * The post's slug.
 	 *
 	 * @since 3.5.0
@@ -120,6 +134,7 @@ final class WP_Post {
 	public $post_name = '';
 
 	/**
+     * 排队等候的URL。
 	 * URLs queued to be pinged.
 	 *
 	 * @since 3.5.0
@@ -128,6 +143,7 @@ final class WP_Post {
 	public $to_ping = '';
 
 	/**
+     * 已经被ping过的URL。
 	 * URLs that have been pinged.
 	 *
 	 * @since 3.5.0
@@ -136,6 +152,7 @@ final class WP_Post {
 	public $pinged = '';
 
 	/**
+     * 该帖子的本地修改时间。
 	 * The post's local modified time.
 	 *
 	 * @since 3.5.0
@@ -144,6 +161,7 @@ final class WP_Post {
 	public $post_modified = '0000-00-00 00:00:00';
 
 	/**
+     * 该帖子的GMT修改时间。
 	 * The post's GMT modified time.
 	 *
 	 * @since 3.5.0
@@ -152,6 +170,7 @@ final class WP_Post {
 	public $post_modified_gmt = '0000-00-00 00:00:00';
 
 	/**
+     * 用于帖子内容的实用数据库字段。
 	 * A utility DB field for post content.
 	 *
 	 * @since 3.5.0
@@ -160,6 +179,7 @@ final class WP_Post {
 	public $post_content_filtered = '';
 
 	/**
+     * 一个帖子的父帖子的ID。
 	 * ID of a post's parent post.
 	 *
 	 * @since 3.5.0
@@ -168,6 +188,7 @@ final class WP_Post {
 	public $post_parent = 0;
 
 	/**
+     * 用于POST GUID的POST的唯一标识符，不一定是URL。
 	 * The unique identifier for a post, not necessarily a URL, used as the feed GUID.
 	 *
 	 * @since 3.5.0
@@ -176,6 +197,7 @@ final class WP_Post {
 	public $guid = '';
 
 	/**
+     * 用于排序帖子的领域。
 	 * A field used for ordering posts.
 	 *
 	 * @since 3.5.0
@@ -184,6 +206,7 @@ final class WP_Post {
 	public $menu_order = 0;
 
 	/**
+     * 帖子的类型，如文章或页面。
 	 * The post's type, like post or page.
 	 *
 	 * @since 3.5.0
@@ -192,6 +215,7 @@ final class WP_Post {
 	public $post_type = 'post';
 
 	/**
+     * 附件的MIME类型。
 	 * An attachment's mime type.
 	 *
 	 * @since 3.5.0
@@ -200,8 +224,10 @@ final class WP_Post {
 	public $post_mime_type = '';
 
 	/**
+     * 缓存评论计数。
 	 * Cached comment count.
 	 *
+     * 一个数字字符串，出于兼容性原因。
 	 * A numeric string, for compatibility reasons.
 	 *
 	 * @since 3.5.0
@@ -210,6 +236,7 @@ final class WP_Post {
 	public $comment_count = 0;
 
 	/**
+     * 存储帖子对象的消毒级别。
 	 * Stores the post object's sanitization level.
 	 *
 	 * Does not correspond to a DB field.
@@ -220,6 +247,7 @@ final class WP_Post {
 	public $filter;
 
 	/**
+     * 检索WP_Post实例。
 	 * Retrieve WP_Post instance.
 	 *
 	 * @since 3.5.0
@@ -256,6 +284,7 @@ final class WP_Post {
 	}
 
 	/**
+     * 构造函数。
 	 * Constructor.
 	 *
 	 * @since 3.5.0
@@ -268,6 +297,7 @@ final class WP_Post {
 	}
 
 	/**
+     * 是定位器
 	 * Isset-er.
 	 *
 	 * @since 3.5.0
@@ -292,6 +322,7 @@ final class WP_Post {
 	}
 
 	/**
+     *  获得者
 	 * Getter.
 	 *
 	 * @since 3.5.0
@@ -355,6 +386,7 @@ final class WP_Post {
 	}
 
 	/**
+     * 将对象转换为数组。
 	 * Convert object to array.
 	 *
 	 * @since 3.5.0

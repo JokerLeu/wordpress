@@ -13,6 +13,7 @@
 
 ?>
 
+<!--画廊内容 代码在模板的\template-parts\post\content-gallery.php-->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( is_sticky() && is_home() ) {
@@ -55,7 +56,8 @@
 		<?php
 		if ( ! is_single() ) {
 
-			// If not a single post, highlight the gallery.
+			// 如果不是一个帖子，突出画廊。
+            // If not a single post, highlight the gallery.
 			if ( get_post_gallery() ) {
 				echo '<div class="entry-gallery">';
 					echo get_post_gallery();
@@ -74,6 +76,7 @@
 				)
 			);
 
+			// 页面列表的格式化输出。
 			wp_link_pages(
 				array(
 					'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),

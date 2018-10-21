@@ -1,7 +1,9 @@
 <?php
 /**
+ * 核心HTTP请求API
  * Core HTTP Request API
  *
+ * 为WordPress标准化HTTP请求。处理cookie、gzip编码和解码、块解码（如果HTTP 1.1和其他各种困难的HTTP协议实现）。
  * Standardizes the HTTP requests for WordPress. Handles cookies, gzip encoding and decoding, chunk
  * decoding, if HTTP 1.1 and various other difficult HTTP protocol implementations.
  *
@@ -10,6 +12,7 @@
  */
 
 /**
+ * 返回初始化的WP_Http对象
  * Returns the initialized WP_Http Object
  *
  * @since 2.7.0
@@ -29,6 +32,7 @@ function _wp_http_get_object() {
 }
 
 /**
+ * 从安全的HTTP请求检索原始响应。
  * Retrieve the raw response from a safe HTTP request.
  *
  * This function is ideal when the HTTP request is being made to an arbitrary
@@ -45,11 +49,13 @@ function _wp_http_get_object() {
  */
 function wp_safe_remote_request( $url, $args = array() ) {
 	$args['reject_unsafe_urls'] = true;
+	// 返回初始化的WP_Http对象
 	$http = _wp_http_get_object();
 	return $http->request( $url, $args );
 }
 
 /**
+ * 使用GET方法从安全HTTP请求检索原始响应。
  * Retrieve the raw response from a safe HTTP request using the GET method.
  *
  * This function is ideal when the HTTP request is being made to an arbitrary
@@ -154,6 +160,7 @@ function wp_remote_request($url, $args = array()) {
 }
 
 /**
+ * 使用GET方法从HTTP请求检索原始响应。
  * Retrieve the raw response from the HTTP request using the GET method.
  *
  * @since 2.7.0

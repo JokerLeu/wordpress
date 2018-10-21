@@ -10,6 +10,7 @@
 /** WordPress Administration Bootstrap */
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
+// 编排脚本。
 wp_enqueue_script( 'underscore' );
 
 /* translators: Page title of the About WordPress page in the admin. */
@@ -397,7 +398,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 				var $sections = $( '.floating-header-section' );
 				var offset = 0;
 
-				// Account for Admin bar.
+				// 帐户管理栏。
+                // Account for Admin bar.
 				if ( $adminbar.length ) {
 					offset += $adminbar.height();
 				}
@@ -405,7 +407,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 				function setup() {
 					$sections.each( function( i, section ) {
 						var $section = $( section );
-						// If the title is long, switch the layout
+						// 如果标题长，切换布局
+                        // If the title is long, switch the layout
 						var $title = $section.find( 'h2' );
 						if ( $title.innerWidth() > 300 ) {
 							$section.addClass( 'has-long-title' );
@@ -428,7 +431,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 						var sectionEnd = sectionStart + $section.innerHeight();
 						var scrollPos = $window.scrollTop();
 
-						// If we're scrolled into a section, stick the header
+						// 如果我们滚动到一个区段，请粘贴标题
+                        // If we're scrolled into a section, stick the header
 						if ( scrollPos >= sectionStart && scrollPos < sectionEnd - height ) {
 							$header.css( {
 								position: 'fixed',
@@ -436,7 +440,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								bottom: 'auto',
 								width: width + 'px'
 							} );
-						// If we're at the end of the section, stick the header to the bottom
+						// 如果我们在章节的末尾，将标题插入底部。
+                            // If we're at the end of the section, stick the header to the bottom
 						} else if ( scrollPos >= sectionEnd - height && scrollPos < sectionEnd ) {
 							$header.css( {
 								position: 'absolute',
@@ -444,7 +449,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								bottom: 0,
 								width: width + 'px'
 							} );
-						// Unstick the header
+						// 解开标头
+                            // Unstick the header
 						} else {
 							$header.css( {
 								position: 'static',
@@ -486,6 +492,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 
 include( ABSPATH . 'wp-admin/admin-footer.php' );
 
+// 这些字符串可以用来描述维护/安全发布，我们不希望有新的字符串。
 // These are strings we may use to describe maintenance/security releases, where we aim for no new strings.
 return;
 

@@ -1,5 +1,6 @@
 <?php
 /**
+ * 主题管理API
  * WordPress Theme Administration API
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 删除主题
  * Remove a theme
  *
  * @since 2.8.0
@@ -99,6 +101,7 @@ function delete_theme($stylesheet, $redirect = '') {
 }
 
 /**
+ * 获取此主题中可用的页面模板
  * Get the Page Templates available in this theme
  *
  * @since 1.5.0
@@ -113,6 +116,7 @@ function get_page_templates( $post = null, $post_type = 'page' ) {
 }
 
 /**
+ * 通过主题编辑器整理URL显示的文件名。
  * Tidies a filename for url display by the theme editor.
  *
  * @since 2.9.0
@@ -127,8 +131,10 @@ function _get_template_edit_filename($fullpath, $containingfolder) {
 }
 
 /**
+ * 检查是否有可用的主题更新。
  * Check if there is an update for a theme available.
  *
+ * 将显示链接，如果有可用的更新。
  * Will display link, if there is an update available.
  *
  * @since 2.7.0
@@ -141,8 +147,10 @@ function theme_update_available( $theme ) {
 }
 
 /**
+ * 如果有可用的主题更新，请检索更新链接。
  * Retrieve the update link if there is a theme update available.
  *
+ * 如果有可用的更新，将返回一个链接。
  * Will return a link if there is an update available.
  *
  * @since 3.8.0
@@ -223,6 +231,7 @@ function get_theme_update_available( $theme ) {
 }
 
 /**
+ * 检索WordPress主题特征列表（又名主题标签）
  * Retrieve list of WordPress theme features (aka theme tags)
  *
  * @since 3.1.0
@@ -316,6 +325,7 @@ function get_theme_feature_list( $api = true ) {
 }
 
 /**
+ * 从WordPress.org主题API检索主题安装程序页。
  * Retrieves theme installer pages from the WordPress.org Themes API.
  *
  * It is possible for a theme to override the Themes API result with three
@@ -509,6 +519,7 @@ function themes_api( $action, $args = array() ) {
 }
 
 /**
+ * 为JavaScript编写主题。
  * Prepare themes for JavaScript.
  *
  * @since 3.8.0
@@ -624,6 +635,7 @@ function wp_prepare_themes_for_js( $themes = null ) {
 }
 
 /**
+ * 在定制器中打印主题浏览UI的JS模板。
  * Print JS templates for the theme-browsing UI in the Customizer.
  *
  * @since 4.2.0

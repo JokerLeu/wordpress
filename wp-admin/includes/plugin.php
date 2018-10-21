@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress插件管理API
  * WordPress Plugin Administration API
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 解析插件内容来检索插件的元数据。
  * Parses the plugin contents to retrieve plugin's metadata.
  *
  * The metadata of the plugin's data searches for the following in the plugin's
@@ -67,6 +69,7 @@
  */
 function get_plugin_data( $plugin_file, $markup = true, $translate = true ) {
 
+    // 默认头部
 	$default_headers = array(
 		'Name' => 'Plugin Name',
 		'PluginURI' => 'Plugin URI',
@@ -77,13 +80,16 @@ function get_plugin_data( $plugin_file, $markup = true, $translate = true ) {
 		'TextDomain' => 'Text Domain',
 		'DomainPath' => 'Domain Path',
 		'Network' => 'Network',
-		// Site Wide Only is deprecated in favor of Network.
+		// 站点范围仅限于网络。
+        // Site Wide Only is deprecated in favor of Network.
 		'_sitewide' => 'Site Wide Only',
 	);
 
+	// 从文件检索元数据。
 	$plugin_data = get_file_data( $plugin_file, $default_headers, 'plugin' );
 
-	// Site Wide Only is the old header for Network
+	// 站点范围仅为网络的旧报头
+    // Site Wide Only is the old header for Network
 	if ( ! $plugin_data['Network'] && $plugin_data['_sitewide'] ) {
 		/* translators: 1: Site Wide Only: true, 2: Network: true */
 		_deprecated_argument( __FUNCTION__, '3.0.0', sprintf( __( 'The %1$s plugin header is deprecated. Use %2$s instead.' ), '<code>Site Wide Only: true</code>', '<code>Network: true</code>' ) );
@@ -92,7 +98,8 @@ function get_plugin_data( $plugin_file, $markup = true, $translate = true ) {
 	$plugin_data['Network'] = ( 'true' == strtolower( $plugin_data['Network'] ) );
 	unset( $plugin_data['_sitewide'] );
 
-	// If no text domain is defined fall back to the plugin slug.
+	// 如果没有定义文本域，则回到插件简介
+    // If no text domain is defined fall back to the plugin slug.
 	if ( ! $plugin_data['TextDomain'] ) {
 		$plugin_slug = dirname( plugin_basename( $plugin_file ) );
 		if ( '.' !== $plugin_slug && false === strpos( $plugin_slug, '/' ) ) {
@@ -111,6 +118,7 @@ function get_plugin_data( $plugin_file, $markup = true, $translate = true ) {
 }
 
 /**
+ * 净化插件数据，可选地添加标记，可选地翻译。
  * Sanitizes plugin data, optionally adds markup, optionally translates.
  *
  * @since 2.7.0
@@ -119,10 +127,12 @@ function get_plugin_data( $plugin_file, $markup = true, $translate = true ) {
  */
 function _get_plugin_data_markup_translate( $plugin_file, $plugin_data, $markup = true, $translate = true ) {
 
-	// Sanitize the plugin filename to a WP_PLUGIN_DIR relative path
+	// 将插件文件命名为WP_PLUGIN_DIR插件的相对路径
+    // Sanitize the plugin filename to a WP_PLUGIN_DIR relative path
 	$plugin_file = plugin_basename( $plugin_file );
 
-	// Translate fields
+	// 转换字段
+    // Translate fields
 	if ( $translate ) {
 		if ( $textdomain = $plugin_data['TextDomain'] ) {
 			if ( ! is_textdomain_loaded( $textdomain ) ) {
@@ -141,7 +151,8 @@ function _get_plugin_data_markup_translate( $plugin_file, $plugin_data, $markup 
 		}
 	}
 
-	// Sanitize fields
+	// 净化场
+    // Sanitize fields
 	$allowed_tags = $allowed_tags_in_links = array(
 		'abbr'    => array( 'title' => true ),
 		'acronym' => array( 'title' => true ),
@@ -183,6 +194,7 @@ function _get_plugin_data_markup_translate( $plugin_file, $plugin_data, $markup 
 }
 
 /**
+ * 获取插件的文件列表。
  * Get a list of a plugin's files.
  *
  * @since 2.8.0
@@ -199,6 +211,7 @@ function get_plugin_files( $plugin ) {
 	if ( is_dir( $dir ) && WP_PLUGIN_DIR !== $dir ) {
 
 		/**
+         * 在扫描文件夹时过滤被排除的目录和文件的数组。
 		 * Filters the array of excluded directories and files while scanning the folder.
 		 *
 		 * @since 4.9.0
@@ -218,6 +231,7 @@ function get_plugin_files( $plugin ) {
 }
 
 /**
+ * 检查插件目录并用插件数据检索所有插件文件。
  * Check the plugins directory and retrieve all plugin files with plugin data.
  *
  * WordPress only supports plugin files in the base plugins directory
@@ -300,6 +314,7 @@ function get_plugins($plugin_folder = '') {
 }
 
 /**
+ * 检查mu-plugins插件目录，并用任何插件数据检索所有mu-plugin插件文件。
  * Check the mu-plugins directory and retrieve all mu-plugin files with any plugin data.
  *
  * WordPress only includes mu-plugin files in the base mu-plugins directory (wp-content/mu-plugins).
@@ -349,6 +364,7 @@ function get_mu_plugins() {
 }
 
 /**
+ * 通过“名称”键对排序数组进行回调。
  * Callback to sort array by a 'Name' key.
  *
  * @since 3.1.0
@@ -624,6 +640,7 @@ function activate_plugin( $plugin, $redirect = '', $network_wide = false, $silen
 }
 
 /**
+ * 停用单个插件或多个插件。
  * Deactivate a single plugin or multiple plugins.
  *
  * The deactivation hook is disabled by the plugin upgrader by using the $silent
@@ -904,6 +921,7 @@ function delete_plugins( $plugins, $deprecated = '' ) {
 }
 
 /**
+ * 验证活动插件
  * Validate active plugins
  *
  * Validate all active plugins, deactivates invalid and
@@ -942,6 +960,7 @@ function validate_active_plugins() {
 }
 
 /**
+ * 验证插件路径。
  * Validate the plugin path.
  *
  * Checks that the main plugin file exists and is a valid plugin. See validate_file().
@@ -964,6 +983,7 @@ function validate_plugin($plugin) {
 }
 
 /**
+ * 是否可以卸载插件。
  * Whether the plugin can be uninstalled.
  *
  * @since 2.7.0
@@ -982,6 +1002,7 @@ function is_uninstallable_plugin($plugin) {
 }
 
 /**
+ * 卸载单个插件。
  * Uninstall a single plugin.
  *
  * Calls the uninstall hook, if it is available.
@@ -992,6 +1013,7 @@ function is_uninstallable_plugin($plugin) {
  * @return true True if a plugin's uninstall.php file has been found and included.
  */
 function uninstall_plugin($plugin) {
+    // 获取插件的基本名称。
 	$file = plugin_basename($plugin);
 
 	$uninstallable_plugins = (array) get_option('uninstall_plugins');
@@ -1043,11 +1065,12 @@ function uninstall_plugin($plugin) {
 	}
 }
 
-//
+// 餐单
 // Menu
 //
 
 /**
+ * 添加顶级菜单页。
  * Add a top-level menu page.
  *
  * This function takes a capability which will be used to determine whether
@@ -1117,6 +1140,7 @@ function add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $func
 }
 
 /**
+ * 添加子菜单页。
  * Add a submenu page.
  *
  * This function takes a capability which will be used to determine whether
@@ -1501,7 +1525,7 @@ function menu_page_url($menu_slug, $echo = true) {
 	return $url;
 }
 
-//
+// 可插入菜单支持——私有
 // Pluggable Menu Support -- Private
 //
 /**
@@ -1773,7 +1797,10 @@ function user_can_access_admin_page() {
 	return true;
 }
 
-/* Whitelist functions */
+/**
+ * 白名单函数
+ * Whitelist functions
+ */
 
 /**
  * Refreshes the value of the options whitelist available via the 'whitelist_options' hook.

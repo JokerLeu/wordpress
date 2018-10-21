@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress支持XML- RPC协议
  * XML-RPC protocol support for WordPress
  *
  * @package WordPress

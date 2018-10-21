@@ -41,6 +41,7 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
+				// 将模板部件加载到模板中 template-parts/post/content_检索帖子的格式段
 				get_template_part( 'template-parts/post/content', get_post_format() );
 
 			endwhile;
@@ -56,6 +57,7 @@ get_header(); ?>
 
 		else :
 
+            // 将模板部件加载到模板中 显示无法找到帖子的消息的模板\template-parts\post\content-none.php
 			get_template_part( 'template-parts/post/content', 'none' );
 
 		endif;

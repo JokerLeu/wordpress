@@ -2,6 +2,9 @@
 /**
  * SimplePie
  *
+ * SimplePie是一个非常简单、实用的Syndication数据处理工具包。
+ * 使用SimplePie，可以快速的分析阅读RSS或Atom格式数据。
+ *
  * A PHP-Based RSS and Atom Feed Framework.
  * Takes the hard work out of managing a complete RSS/Atom solution.
  *

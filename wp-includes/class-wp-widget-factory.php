@@ -8,6 +8,7 @@
  */
 
 /**
+ * 注册和实例化WP_Widget类的Singleton（独生子女）。
  * Singleton that registers and instantiates WP_Widget classes.
  *
  * @since 2.8.0
@@ -16,6 +17,7 @@
 class WP_Widget_Factory {
 
 	/**
+     * 控件数组。
 	 * Widgets array.
 	 *
 	 * @since 2.8.0
@@ -24,6 +26,7 @@ class WP_Widget_Factory {
 	public $widgets = array();
 
 	/**
+     * PHP5构造函数。
 	 * PHP5 constructor.
 	 *
 	 * @since 4.3.0
@@ -33,6 +36,7 @@ class WP_Widget_Factory {
 	}
 
 	/**
+     * PHP4构造函数。
 	 * PHP4 constructor.
 	 *
 	 * @since 2.8.0
@@ -43,8 +47,10 @@ class WP_Widget_Factory {
 	}
 
 	/**
+     * 内存的唯一类实例已被哈希的次数。
 	 * Memory for the number of times unique class instances have been hashed.
 	 *
+     * 当5.3是PHP的最低要求时，可以取消直接spl_object_hash()。
 	 * This can be eliminated in favor of straight spl_object_hash() when 5.3
 	 * is the minimum requirement for PHP.
 	 *
@@ -85,6 +91,7 @@ class WP_Widget_Factory {
 	}
 
 	/**
+     * 注册小部件子类。
 	 * Registers a widget subclass.
 	 *
 	 * @since 2.8.0
@@ -102,6 +109,7 @@ class WP_Widget_Factory {
 	}
 
 	/**
+     * 取消注册小部件子类。
 	 * Un-registers a widget subclass.
 	 *
 	 * @since 2.8.0
@@ -119,6 +127,7 @@ class WP_Widget_Factory {
 	}
 
 	/**
+     * 用作将小部件添加到已注册小部件全局的实用方法。
 	 * Serves as a utility method for adding widgets to the registered widgets global.
 	 *
 	 * @since 2.8.0

@@ -21,6 +21,7 @@
 		<footer id="colophon" class="site-footer" role="contentinfo">
 			<div class="wrap">
 				<?php
+                // 将模板部件加载到模板中
 				get_template_part( 'template-parts/footer/footer', 'widgets' );
 
 				if ( has_nav_menu( 'social' ) ) :

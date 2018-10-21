@@ -77,6 +77,7 @@ endif;
 
 if ( !function_exists('get_userdata') ) :
 /**
+ * 通过用户ID检索用户信息。
  * Retrieve user info by user ID.
  *
  * @since 0.71

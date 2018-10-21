@@ -23,21 +23,37 @@
  */
 function _get_list_table( $class, $args = array() ) {
 	$core_classes = array(
-		//Site Admin
+		// 站点管理
+        // Site Admin
+            // 核心类用于实现列表中的显示。
 		'WP_Posts_List_Table' => 'posts',
+		    // 用于在列表中显示媒体项的核心类。
 		'WP_Media_List_Table' => 'media',
+		    // 核心类实现一个列表显示术语。
 		'WP_Terms_List_Table' => 'terms',
+		    // 用于在列表表中显示用户的核心类。
 		'WP_Users_List_Table' => 'users',
+		    // 用于在列表表中显示注释的核心类。
 		'WP_Comments_List_Table' => 'comments',
+		    // 用于在列表表中显示注释的核心类。
 		'WP_Post_Comments_List_Table' => array( 'comments', 'post-comments' ),
-		'WP_Links_List_Table' => 'links',
+		    // 用于在列表表中显示链接的核心类。
+        'WP_Links_List_Table' => 'links',
+		    // 核心类用于实现在列表表中安装插件的显示。
 		'WP_Plugin_Install_List_Table' => 'plugin-install',
+		    // 核心类用于实现在列表表中显示已安装的主题。
 		'WP_Themes_List_Table' => 'themes',
-		'WP_Theme_Install_List_Table' => array( 'themes', 'theme-install' ),
-		'WP_Plugins_List_Table' => 'plugins',
-		// Network Admin
+		    // 用于实现在列表表中安装显示主题的核心类。
+        'WP_Theme_Install_List_Table' => array( 'themes', 'theme-install' ),
+		    // 核心类用于实现在列表表中显示已安装的插件。
+        'WP_Plugins_List_Table' => 'plugins',
+		// 网络管理
+        // Network Admin
+            // 核心类用于在网络管理的列表表中实现显示站点。
 		'WP_MS_Sites_List_Table' => 'ms-sites',
+		    // 核心类用于在网络管理表列表中实现显示用户。
 		'WP_MS_Users_List_Table' => 'ms-users',
+		    // 用于在网络管理表列表中显示主题的核心类。
 		'WP_MS_Themes_List_Table' => 'ms-themes',
 	);
 
@@ -59,6 +75,7 @@ function _get_list_table( $class, $args = array() ) {
 }
 
 /**
+ * 为特定屏幕注册列标题。
  * Register column headers for a particular screen.
  *
  * @since 2.7.0
@@ -72,6 +89,7 @@ function register_column_headers($screen, $columns) {
 }
 
 /**
+ * 打印特定屏幕的列标题。
  * Prints column headers for a particular screen.
  *
  * @since 2.7.0

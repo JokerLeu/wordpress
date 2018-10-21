@@ -1,5 +1,6 @@
 <?php
 /**
+ * 类，帮助从文件读取数据流。
  * Classes, which help reading streams of data from files.
  * Based on the classes from Danilo Segan <danilo@kvota.net>
  *
@@ -15,6 +16,7 @@ class POMO_Reader {
 	var $_post = '';
 
 	/**
+     * PHP5构造函数。
 	 * PHP5 constructor.
 	 */
 	function __construct() {
@@ -23,6 +25,7 @@ class POMO_Reader {
 	}
 
 	/**
+     * PHP4构造函数。
 	 * PHP4 constructor.
 	 */
 	public function POMO_Reader() {
@@ -30,6 +33,7 @@ class POMO_Reader {
 	}
 
 	/**
+     * 设置文件的字节顺序。
 	 * Sets the endianness of the file.
 	 *
 	 * @param $endian string 'big' or 'little'
@@ -39,6 +43,7 @@ class POMO_Reader {
 	}
 
 	/**
+     * 从流读取32位整数
 	 * Reads a 32bit Integer from the Stream
 	 *
 	 * @return mixed The integer, corresponding to the next 32 bits from
@@ -54,6 +59,7 @@ class POMO_Reader {
 	}
 
 	/**
+     * 从流中读取32位整数数组。
 	 * Reads an array of 32-bit Integers from the Stream
 	 *
 	 * @param integer count How many elements should be read
@@ -206,6 +212,7 @@ endif;
 
 if ( ! class_exists( 'POMO_StringReader', false ) ):
 /**
+ * 提供类似于操作字符串的文件类方法，而不是物理文件。
  * Provides file-like methods for manipulating a string instead
  * of a physical file.
  */
@@ -269,6 +276,7 @@ endif;
 
 if ( ! class_exists( 'POMO_CachedFileReader', false ) ):
 /**
+ * 在开始时读取文件的内容。
  * Reads the contents of the file in the beginning.
  */
 class POMO_CachedFileReader extends POMO_StringReader {
@@ -294,6 +302,7 @@ endif;
 
 if ( ! class_exists( 'POMO_CachedIntFileReader', false ) ):
 /**
+ * 在开始时读取文件的内容。
  * Reads the contents of the file in the beginning.
  */
 class POMO_CachedIntFileReader extends POMO_CachedFileReader {

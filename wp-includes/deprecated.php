@@ -1,5 +1,6 @@
 <?php
 /**
+ * 从过去的WordPress版本中删除功能。你不应该使用这些功能，而是寻找替代品。这些功能将在以后的版本中删除。
  * Deprecated functions from past WordPress versions. You shouldn't use these
  * functions and look for the alternatives instead. The functions will be
  * removed in a later version.
@@ -8,11 +9,13 @@
  * @subpackage Deprecated
  */
 
-/*
+/**
+ * 贬低的功能来这里死亡。
  * Deprecated functions come here to die.
  */
 
 /**
+ * 检索给定帖子的所有帖子数据。
  * Retrieves all post data for a given post.
  *
  * @since 0.71
@@ -23,10 +26,13 @@
  * @return array Post data.
  */
 function get_postdata($postid) {
+    // 标记一个函数，当它被使用时就被禁止和通知。
 	_deprecated_function( __FUNCTION__, '1.5.1', 'get_post()' );
 
+	// 给定帖子
 	$post = get_post($postid);
 
+	// 帖子数据
 	$postdata = array (
 		'ID' => $post->ID,
 		'Author_ID' => $post->post_author,
@@ -49,6 +55,7 @@ function get_postdata($postid) {
 }
 
 /**
+ * 设置WordPress循环。
  * Sets up the WordPress Loop.
  *
  * Use The Loop instead.
@@ -70,6 +77,7 @@ function start_wp() {
 }
 
 /**
+ * 返回或打印类别ID。
  * Returns or prints a category ID.
  *
  * @since 0.71

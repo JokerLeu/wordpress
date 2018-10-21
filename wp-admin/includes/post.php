@@ -8,6 +8,7 @@
  */
 
 /**
+ * 将$_POST数据从表单名称重命名为DB POST列。
  * Rename $_POST data from form names to DB post columns.
  *
  * Manipulates $_POST directly.
@@ -176,6 +177,7 @@ function _wp_translate_postdata( $update = false, $post_data = null ) {
 }
 
 /**
+ * 用$_POST提供的值更新现有的帖子。
  * Update an existing post with values provided in $_POST.
  *
  * @since 1.5.0
@@ -405,6 +407,7 @@ function edit_post( $post_data = null ) {
 }
 
 /**
+ * 处理POST数据以批量编辑帖子。
  * Process the post data for the bulk editing of posts.
  *
  * Updates all bulk edited posts/pages, adding (but not removing) tags and
@@ -584,6 +587,7 @@ function bulk_edit_posts( $post_data = null ) {
 }
 
 /**
+ * 当填充“写文章”表单时使用默认的邮件信息。
  * Default post information to use when populating the "Write Post" form.
  *
  * @since 2.0.0
@@ -666,6 +670,7 @@ function get_default_post_to_edit( $post_type = 'post', $create_in_db = false ) 
 }
 
 /**
+ * 根据标题、内容和日期确定帖子是否存在
  * Determine if a post exists based on title, content, and date
  *
  * @since 2.0.0
@@ -709,6 +714,7 @@ function post_exists($title, $content = '', $date = '') {
 }
 
 /**
+ * 使用$_POST信息从“写文章”表单创建新帖子。
  * Creates a new post from the "Write Post" form using $_POST information.
  *
  * @since 2.1.0
@@ -780,6 +786,7 @@ function wp_write_post() {
 }
 
 /**
+ * 调用wp_write_post()并处理错误。
  * Calls wp_write_post() and handles the errors.
  *
  * @since 2.0.0
@@ -1786,6 +1793,7 @@ function post_preview() {
 }
 
 /**
+ * 保存XHR提交的帖子
  * Save a post submitted with XHR
  *
  * Intended for use with heartbeat and autosave.js
@@ -1830,6 +1838,7 @@ function wp_autosave( $post_data ) {
 }
 
 /**
+ * 重定向到上一页。
  * Redirect to previous page.
  *
  * @param int $post_id Optional. Post ID.
@@ -1867,6 +1876,7 @@ function redirect_post($post_id = '') {
 	}
 
 	/**
+     * 过滤后重定向目的地URL。
 	 * Filters the post redirect destination URL.
 	 *
 	 * @since 2.9.0

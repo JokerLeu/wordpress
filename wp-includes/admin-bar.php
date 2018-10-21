@@ -1027,7 +1027,8 @@ function show_admin_bar( $show ) {
 function is_admin_bar_showing() {
 	global $show_admin_bar, $pagenow;
 
-	// For all these types of requests, we never want an admin bar.
+	// 对于所有这些类型的请求，我们永远不需要管理栏。
+    // For all these types of requests, we never want an admin bar.
 	if ( defined('XMLRPC_REQUEST') || defined('DOING_AJAX') || defined('IFRAME_REQUEST') )
 		return false;
 
@@ -1035,7 +1036,8 @@ function is_admin_bar_showing() {
 		return false;
 	}
 
-	// Integrated into the admin.
+	// 集成到管理员。
+    // Integrated into the admin.
 	if ( is_admin() )
 		return true;
 

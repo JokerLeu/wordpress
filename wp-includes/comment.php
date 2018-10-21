@@ -41,7 +41,8 @@
 function check_comment($author, $email, $url, $comment, $user_ip, $user_agent, $comment_type) {
 	global $wpdb;
 
-	// If manual moderation is enabled, skip all checks and return false.
+	// 如果启用手动调节，跳过所有检查并返回false。
+    // If manual moderation is enabled, skip all checks and return false.
 	if ( 1 == get_option('comment_moderation') )
 		return false;
 
@@ -53,6 +54,7 @@ function check_comment($author, $email, $url, $comment, $user_ip, $user_agent, $
 		$num_links = preg_match_all( '/<a [^>]*href/i', $comment, $out );
 
 		/**
+         * 筛选评论中发现的链接数量。
 		 * Filters the number of links found in a comment.
 		 *
 		 * @since 3.0.0
@@ -64,7 +66,8 @@ function check_comment($author, $email, $url, $comment, $user_ip, $user_agent, $
 		 */
 		$num_links = apply_filters( 'comment_max_links_url', $num_links, $url, $comment );
 
-		/*
+		/**
+         * 如果注释中的链接数量超过允许的数量，则返回错误的检查失败。
 		 * If the number of links in the comment exceeds the allowed amount,
 		 * fail the check by returning false.
 		 */
@@ -74,7 +77,8 @@ function check_comment($author, $email, $url, $comment, $user_ip, $user_agent, $
 
 	$mod_keys = trim(get_option('moderation_keys'));
 
-	// If moderation 'keys' (keywords) are set, process them.
+	// 如果设置了“键值”（关键字），则对它们进行处理。
+    // If moderation 'keys' (keywords) are set, process them.
 	if ( !empty($mod_keys) ) {
 		$words = explode("\n", $mod_keys );
 
@@ -91,7 +95,9 @@ function check_comment($author, $email, $url, $comment, $user_ip, $user_agent, $
 			 */
 			$word = preg_quote($word, '#');
 
-			/*
+			/**
+             * 检查注释字段是否有限制关键字。
+             * 如果找到任何一个，则通过返回false对给定字段进行检查失败。
 			 * Check the comment fields for moderation keywords. If any are found,
 			 * fail the check for the given field by returning false.
 			 */
@@ -105,7 +111,8 @@ function check_comment($author, $email, $url, $comment, $user_ip, $user_agent, $
 		}
 	}
 
-	/*
+	/**
+     * 检查是否启用了先前批准作者的评论选项。
 	 * Check if the option to approve comments by previously-approved authors is enabled.
 	 *
 	 * If it is enabled, check whether the comment author has a previously-approved comment,
@@ -215,8 +222,10 @@ function get_comment( &$comment = null, $output = OBJECT ) {
 }
 
 /**
+ * 检索评论列表。
  * Retrieve a list of comments.
  *
+ * 评论列表可以用于博客作为一个整体或为一个单独的帖子。
  * The comment list can be for the blog as a whole or for an individual post.
  *
  * @since 2.7.0
@@ -231,8 +240,10 @@ function get_comments( $args = '' ) {
 }
 
 /**
+ * 检索所有WordPress支持的评论状态。
  * Retrieve all of the WordPress supported comment statuses.
  *
+ * 注释有一组有限的有效状态值，它提供注释状态值和描述。
  * Comments have a limited set of valid status values, this provides the comment
  * status values and descriptions.
  *
@@ -252,6 +263,7 @@ function get_comment_statuses() {
 }
 
 /**
+ * 获取POST类型的默认评论状态。
  * Gets the default comment status for a post type.
  *
  * @since 4.3.0
@@ -295,6 +307,7 @@ function get_default_comment_status( $post_type = 'post', $comment_type = 'comme
 }
 
 /**
+ * 修改最后一个评论的日期。
  * The date the last comment was modified.
  *
  * @since 1.5.0
@@ -341,6 +354,7 @@ function get_lastcommentmodified( $timezone = 'server' ) {
 }
 
 /**
+ * 帖子或全部评论中的评论量。
  * The amount of comments in a post or total comments.
  *
  * A lot like wp_count_comments(), in that they both return comment stats (albeit with different types).
@@ -410,11 +424,12 @@ function get_comment_count( $post_id = 0 ) {
 	return $comment_count;
 }
 
-//
+// 注释元函数
 // Comment meta functions
 //
 
 /**
+ * 将元数据字段添加到评论中。
  * Add meta data field to a comment.
  *
  * @since 2.9.0
@@ -435,8 +450,11 @@ function add_comment_meta($comment_id, $meta_key, $meta_value, $unique = false) 
 }
 
 /**
+ * 从评论中删除元数据匹配标准。
  * Remove metadata matching criteria from a comment.
  *
+ * 可以根据键、键和值进行匹配。基于键和值的删除将避免用相同的密钥删除重复的元数据。
+ * 它还允许删除所有匹配元数据的密钥，如果需要的话。
  * You can match based on the key, or key and value. Removing based on key and
  * value, will keep from removing duplicate metadata with the same key. It also
  * allows removing all metadata matching key, if needed.
@@ -458,6 +476,7 @@ function delete_comment_meta($comment_id, $meta_key, $meta_value = '') {
 }
 
 /**
+ * 为评论检索评论元字段。
  * Retrieve comment meta field for a comment.
  *
  * @since 2.9.0
@@ -474,11 +493,14 @@ function get_comment_meta($comment_id, $key = '', $single = false) {
 }
 
 /**
+ * 基于评论ID更新评论元字段。
  * Update comment meta field based on comment ID.
  *
+ * 使用$prev_value参数来区分具有相同键和注释ID的元字段。
  * Use the $prev_value parameter to differentiate between meta fields with the
  * same key and comment ID.
  *
+ * 如果注释的元字段不存在，则将添加该字段。
  * If the meta field for the comment does not exist, it will be added.
  *
  * @since 2.9.0
@@ -499,6 +521,7 @@ function update_comment_meta($comment_id, $meta_key, $meta_value, $prev_value = 
 }
 
 /**
+ * 对元数据惰性加载的排队评论。
  * Queues comments for metadata lazy-loading.
  *
  * @since 4.5.0
@@ -523,6 +546,7 @@ function wp_queue_comments_for_comment_meta_lazyload( $comments ) {
 }
 
 /**
+ * 设置用于存储未经身份验证的评论员身份的Cookie。通常用于回忆以前评论员的评论，这些评论仍然保持适度。
  * Sets the cookies used to store an unauthenticated commentator's identity. Typically used
  * to recall previous comments by this commentator that are still held in moderation.
  *
@@ -534,13 +558,15 @@ function wp_queue_comments_for_comment_meta_lazyload( $comments ) {
  * @param boolean    $cookies_consent Optional. Comment author's consent to store cookies. Default true.
  */
 function wp_set_comment_cookies( $comment, $user, $cookies_consent = true ) {
-	// If the user already exists, or the user opted out of cookies, don't set cookies.
+	// 如果用户已经存在，或者用户选择了Cookie，不要设置Cookie。
+    // If the user already exists, or the user opted out of cookies, don't set cookies.
 	if ( $user->exists() ) {
 		return;
 	}
 
 	if ( false === $cookies_consent ) {
-		// Remove any existing cookies.
+		// 删除任何现有的Cookie。
+        // Remove any existing cookies.
 		$past = time() - YEAR_IN_SECONDS;
 		setcookie( 'comment_author_' . COOKIEHASH, ' ', $past, COOKIEPATH, COOKIE_DOMAIN );
 		setcookie( 'comment_author_email_' . COOKIEHASH, ' ', $past, COOKIEPATH, COOKIE_DOMAIN );
@@ -564,6 +590,7 @@ function wp_set_comment_cookies( $comment, $user, $cookies_consent = true ) {
 }
 
 /**
+ * 净化已经发送给用户的cookies。
  * Sanitizes the cookies sent to the user already.
  *
  * Will only do anything if the cookies have already been created for the user.
@@ -574,6 +601,7 @@ function wp_set_comment_cookies( $comment, $user, $cookies_consent = true ) {
 function sanitize_comment_cookies() {
 	if ( isset( $_COOKIE['comment_author_' . COOKIEHASH] ) ) {
 		/**
+         * 在设置之前过滤评论作者名字的cookie。
 		 * Filters the comment author's name cookie before it is set.
 		 *
 		 * When this filter hook is evaluated in wp_filter_comment(),
@@ -624,6 +652,7 @@ function sanitize_comment_cookies() {
 }
 
 /**
+ * 验证是否允许进行此评论。
  * Validates whether this comment is allowed to be made.
  *
  * @since 2.0.0
@@ -2413,7 +2442,7 @@ function wp_update_comment_count_now($post_id) {
 	return true;
 }
 
-//
+// ping和跟踪功能。
 // Ping and trackback functions.
 //
 
@@ -2800,11 +2829,12 @@ function xmlrpc_pingback_error( $ixr_error ) {
 	return new IXR_Error( 0, '' );
 }
 
-//
+// 缓存
 // Cache
 //
 
 /**
+ * 从对象缓存中删除注释。
  * Removes a comment from the object cache.
  *
  * @since 2.3.0
@@ -2829,6 +2859,7 @@ function clean_comment_cache($ids) {
 }
 
 /**
+ * 更新给定评论的评论缓存。
  * Updates the comment cache of given comments.
  *
  * Will add the comments in $comments to the cache. If comment ID already exists
@@ -2856,6 +2887,7 @@ function update_comment_cache( $comments, $update_meta_cache = true ) {
 }
 
 /**
+ * 将给定的ID中的任何注释添加到缓存中不存在的缓存中。
  * Adds any comments from the given IDs to the cache that do not already exist in cache.
  *
  * @since 4.4.0
@@ -2878,11 +2910,12 @@ function _prime_comment_caches( $comment_ids, $update_meta_cache = true ) {
 	}
 }
 
-//
+// 内部的
 // Internal
 //
 
 /**
+ * 在没有任何额外的DB查询的情况下，关闭对旧邮件的评论。钩住the_posts
  * Close comments on old posts on the fly, without any extra DB queries. Hooked to the_posts.
  *
  * @access private
@@ -2920,6 +2953,7 @@ function _close_comments_for_old_posts( $posts, $query ) {
 }
 
 /**
+ * 对旧帖子的评论关闭。打开钩子comments_open和pings_open。
  * Close comments on an old post. Hooked to comments_open and pings_open.
  *
  * @access private
@@ -2947,7 +2981,8 @@ function _close_comments_for_old_post( $open, $post_id ) {
 	if ( ! in_array( $post->post_type, $post_types ) )
 		return $open;
 
-	// Undated drafts should not show up as comments closed.
+	// 未注明日期的草稿不应在评论结束时出现。
+    // Undated drafts should not show up as comments closed.
 	if ( '0000-00-00 00:00:00' === $post->post_date_gmt ) {
 		return $open;
 	}
@@ -3166,6 +3201,7 @@ function wp_handle_comment_submission( $comment_data ) {
 }
 
 /**
+ * 注册个人数据导出者进行评论。
  * Registers the personal data exporter for comments.
  *
  * @since 4.9.6
@@ -3183,6 +3219,7 @@ function wp_register_comment_personal_data_exporter( $exporters ) {
 }
 
 /**
+ * 从评论表中查找并导出与电子邮件地址相关的个人数据。
  * Finds and exports personal data associated with an email address from the comments table.
  *
  * @since 4.9.6
@@ -3275,6 +3312,7 @@ function wp_comments_personal_data_exporter( $email_address, $page = 1 ) {
 }
 
 /**
+ * 注册个人数据橡评论的皮擦。
  * Registers the personal data eraser for comments.
  *
  * @since 4.9.6
@@ -3292,6 +3330,7 @@ function wp_register_comment_personal_data_eraser( $erasers ) {
 }
 
 /**
+ * 从注释表中删除与电子邮件地址相关的个人数据。
  * Erases personal data associated with an email address from the comments table.
  *
  * @since 4.9.6

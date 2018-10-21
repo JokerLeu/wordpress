@@ -27,6 +27,7 @@ class WP_Customize_Background_Position_Control extends WP_Customize_Control {
 	public $type = 'background_position';
 
 	/**
+     * 不要将控制内容从PHP呈现出来，因为它是通过JS加载来呈现的。
 	 * Don't render the control content from PHP, as it's rendered via JS on load.
 	 *
 	 * @since 4.7.0
@@ -34,6 +35,7 @@ class WP_Customize_Background_Position_Control extends WP_Customize_Control {
 	public function render_content() {}
 
 	/**
+     * 为位置控件的内容绘制一个JS模板。
 	 * Render a JS template for the content of the position control.
 	 *
 	 * @since 4.7.0

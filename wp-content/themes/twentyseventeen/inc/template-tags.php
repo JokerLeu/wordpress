@@ -12,6 +12,7 @@
 
 if ( ! function_exists( 'twentyseventeen_posted_on' ) ) :
 	/**
+     * 为当前的发布日期/时间和作者打印具有元信息的HTML。
 	 * Prints HTML with meta information for the current post-date/time and author.
 	 */
 	function twentyseventeen_posted_on() {
@@ -31,6 +32,7 @@ endif;
 
 if ( ! function_exists( 'twentyseventeen_time_link' ) ) :
 	/**
+     * 为已发布日期获取一个格式良好的字符串。
 	 * Gets a nicely formatted string for the published date.
 	 */
 	function twentyseventeen_time_link() {
@@ -59,6 +61,7 @@ endif;
 
 if ( ! function_exists( 'twentyseventeen_entry_footer' ) ) :
 	/**
+     * 打印HTML与元信息的类别，标签和评论。
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 */
 	function twentyseventeen_entry_footer() {
@@ -104,6 +107,7 @@ endif;
 
 if ( ! function_exists( 'twentyseventeen_edit_link' ) ) :
 	/**
+     * 返回一个便于访问的链接来编辑帖子或页面。
 	 * Returns an accessibility-friendly link to edit a post or page.
 	 *
 	 * This also gives us a little context about what exactly we're editing
@@ -125,6 +129,7 @@ if ( ! function_exists( 'twentyseventeen_edit_link' ) ) :
 endif;
 
 /**
+ * 显示首页部分。
  * Display a front page section.
  *
  * @param WP_Customize_Partial $partial Partial associated with a selective refresh request.
@@ -132,7 +137,8 @@ endif;
  */
 function twentyseventeen_front_page_section( $partial = null, $id = 0 ) {
 	if ( is_a( $partial, 'WP_Customize_Partial' ) ) {
-		// Find out the id and set it up during a selective refresh.
+		// 在选择刷新时找出ID并设置它。
+        // Find out the id and set it up during a selective refresh.
 		global $twentyseventeencounter;
 		$id                     = str_replace( 'panel_', '', $partial->id );
 		$twentyseventeencounter = $id;
@@ -154,6 +160,7 @@ function twentyseventeen_front_page_section( $partial = null, $id = 0 ) {
 }
 
 /**
+ * 如果博客有超过1个类别，则返回true。
  * Returns true if a blog has more than 1 category.
  *
  * @return bool
@@ -188,6 +195,7 @@ function twentyseventeen_categorized_blog() {
 
 
 /**
+ * 刷新在2017分类博客中使用的瞬变。
  * Flush out the transients used in twentyseventeen_categorized_blog.
  */
 function twentyseventeen_category_transient_flusher() {

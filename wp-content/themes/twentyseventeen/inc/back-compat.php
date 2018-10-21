@@ -13,6 +13,7 @@
  */
 
 /**
+ * 防止在旧版本的WordPress上切换到2017。
  * Prevent switching to Twenty Seventeen on old versions of WordPress.
  *
  * Switches to the default theme.
@@ -27,6 +28,7 @@ function twentyseventeen_switch_theme() {
 add_action( 'after_switch_theme', 'twentyseventeen_switch_theme' );
 
 /**
+ * 为主题切换不成功添加消息。
  * Adds a message for unsuccessful theme switch.
  *
  * Prints an update nag after an unsuccessful attempt to switch to
@@ -42,6 +44,7 @@ function twentyseventeen_upgrade_notice() {
 }
 
 /**
+ * 防止定制器在4.7之前加载到WordPress版本上。
  * Prevents the Customizer from being loaded on WordPress versions prior to 4.7.
  *
  * @since Twenty Seventeen 1.0
@@ -58,6 +61,7 @@ function twentyseventeen_customize() {
 add_action( 'load-customize.php', 'twentyseventeen_customize' );
 
 /**
+ * 防止主题预览在4.7之前加载到WordPress版本上。
  * Prevents the Theme Preview from being loaded on WordPress versions prior to 4.7.
  *
  * @since Twenty Seventeen 1.0

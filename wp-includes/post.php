@@ -983,6 +983,7 @@ function post_type_exists( $post_type ) {
 }
 
 /**
+ * 检索当前帖子或给定帖子的POST类型。
  * Retrieves the post type of the current post or of a given post.
  *
  * @since 2.1.0
@@ -1631,6 +1632,7 @@ function get_all_post_type_supports( $post_type ) {
 }
 
 /**
+ * 检查POST类型对给定特征的支持。
  * Check a post type's support for a given feature.
  *
  * @since 3.0.0

@@ -42,6 +42,7 @@ function _usort_by_first_member( $a, $b ) {
 }
 
 /**
+ * WordPress注册引入者。
  * Register importer for WordPress.
  *
  * @since 2.0.0
@@ -62,6 +63,7 @@ function register_importer( $id, $name, $description, $callback ) {
 }
 
 /**
+ * 清除引入者。
  * Cleanup importer.
  *
  * Removes attachment based on ID.
@@ -75,6 +77,7 @@ function wp_import_cleanup( $id ) {
 }
 
 /**
+ * 处理引入者上传并添加附件。
  * Handle importer uploading and add attachment.
  *
  * @since 2.0.0
@@ -119,6 +122,7 @@ function wp_import_handle_upload() {
 }
 
 /**
+ * 从流行的引入者插件的WordPress.org返回一个列表。
  * Returns a list from WordPress.org of popular importer plugins.
  *
  * @since 3.5.0
@@ -130,6 +134,7 @@ function wp_get_popular_importers() {
 
 	$locale = get_user_locale();
 	$cache_key = 'popular_importers_' . md5( $locale . $wp_version );
+	// 获取站点瞬时值。
 	$popular_importers = get_site_transient( $cache_key );
 
 	if ( ! $popular_importers ) {

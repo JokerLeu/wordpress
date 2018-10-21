@@ -9,12 +9,15 @@
  */
 
 /**
+ * 为当前自定义配色方案生成CSS。
  * Generate the CSS for the current custom color scheme.
  */
 function twentyseventeen_custom_colors_css() {
+    // 将一个值转换为非负整数。检索当前主题的主题修改值
 	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
 
 	/**
+     * 过滤器2017默认饱和水平。
 	 * Filter Twenty Seventeen default saturation level.
 	 *
 	 * @since Twenty Seventeen 1.0
@@ -24,6 +27,7 @@ function twentyseventeen_custom_colors_css() {
 	$saturation         = absint( apply_filters( 'twentyseventeen_custom_colors_saturation', 50 ) );
 	$reduced_saturation = ( .8 * $saturation ) . '%';
 	$saturation         = $saturation . '%';
+	// 2017：色彩模式。颜色从暗到亮排列。
 	$css                = '
 /**
  * Twenty Seventeen: Color Patterns
@@ -569,6 +573,7 @@ body.colors-custom,
 }';
 
 	/**
+     * 过滤2017自定义颜色CSS。
 	 * Filters Twenty Seventeen custom colors CSS.
 	 *
 	 * @since Twenty Seventeen 1.0

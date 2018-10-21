@@ -8,6 +8,7 @@
  */
 
 /**
+ * 返回服务器是否加载加载了mod_rewrite模块的Apache。
  * Returns whether the server is running Apache with the mod_rewrite module loaded.
  *
  * @since 2.0.0
@@ -454,6 +455,7 @@ function wp_print_plugin_file_tree( $tree, $label = '', $level = 2, $size = 1, $
 }
 
 /**
+ * 如果位置、首页或页面在前面改变，刷新重写规则。
  * Flushes rewrite rules if siteurl, home or page_on_front changed.
  *
  * @since 2.1.0
@@ -878,6 +880,7 @@ function admin_color_scheme_picker( $user_id ) {
 }
 
 /**
+ * WP颜色方案设置
  *
  * @global array $_wp_admin_css_colors
  */
@@ -904,6 +907,7 @@ function wp_color_scheme_settings() {
 }
 
 /**
+ * ipad元
  * @since 3.3.0
  */
 function _ipad_meta() {
@@ -1108,6 +1112,7 @@ function wp_admin_canonical_url() {
 }
 
 /**
+ * 发送引用策略头，以便不从管理屏幕外部发送引用者。
  * Send a referrer policy header so referrers are not sent externally from administration screens.
  *
  * @since 4.9.0
@@ -1131,6 +1136,7 @@ function wp_admin_headers() {
 }
 
 /**
+ * 如果用户用后退或前进按钮导航到页面，则输出重新加载页面的JS。
  * Outputs JS that reloads the page if the user navigated to it with the Back or Forward button.
  *
  * Used on the Edit Post and Add New Post screens. Needed to ensure the page is not loaded from browser cache,

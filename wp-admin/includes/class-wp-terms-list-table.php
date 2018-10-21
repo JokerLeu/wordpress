@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表表API：WP_Terms_List_Table类
  * List Table API: WP_Terms_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 核心类实现一个列表显示术语。
  * Core class used to implement displaying terms in a list table.
  *
  * @since 3.1.0

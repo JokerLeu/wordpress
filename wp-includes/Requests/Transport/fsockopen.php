@@ -1,12 +1,16 @@
 <?php
 /**
+ * fsockopen HTTP传输
  * fsockopen HTTP transport
+ *
+ * fsockopen — 打开一个网络连接或者一个Unix套接字连接
  *
  * @package Requests
  * @subpackage Transport
  */
 
 /**
+ * fsockopen HTTP传输
  * fsockopen HTTP transport
  *
  * @package Requests
@@ -14,6 +18,7 @@
  */
 class Requests_Transport_fsockopen implements Requests_Transport {
 	/**
+     * 秒转换到微秒
 	 * Second to microsecond conversion
 	 *
 	 * @var integer
@@ -21,6 +26,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	const SECOND_IN_MICROSECONDS = 1000000;
 
 	/**
+     * 原始HTTP数据
 	 * Raw HTTP data
 	 *
 	 * @var string
@@ -28,6 +34,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	public $headers = '';
 
 	/**
+     * 流元数据
 	 * Stream metadata
 	 *
 	 * @var array Associative array of properties, see {@see https://secure.php.net/stream_get_meta_data}
@@ -35,6 +42,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	public $info;
 
 	/**
+     * 我们应该保留的最大字节数是多少？
 	 * What's the maximum number of bytes we should keep?
 	 *
 	 * @var int|bool Byte count, or false if no limit.
@@ -44,6 +52,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	protected $connect_error = '';
 
 	/**
+     * 执行请求
 	 * Perform a request
 	 *
 	 * @throws Requests_Exception On failure to connect to socket (`fsockopenerror`)
@@ -292,6 +301,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	}
 
 	/**
+     * 同时发送多个请求
 	 * Send multiple requests simultaneously
 	 *
 	 * @param array $requests Request data (array of 'url', 'headers', 'data', 'options') as per {@see Requests_Transport::request}
@@ -321,6 +331,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	}
 
 	/**
+     * 检索我们可以接受的编码
 	 * Retrieve the encodings we can accept
 	 *
 	 * @return string Accept-Encoding header value
@@ -341,6 +352,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	}
 
 	/**
+     * 设置GET数据的URL格式
 	 * Format a URL given GET data
 	 *
 	 * @param array $url_parts
@@ -371,6 +383,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	}
 
 	/**
+     * 流套接字客户端的错误处理程序
 	 * Error handler for stream_socket_client()
 	 *
 	 * @param int $errno Error number (e.g. E_WARNING)
@@ -388,8 +401,10 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	}
 
 	/**
+     * 用普通名称和主题替代名称验证证书
 	 * Verify the certificate against common name and subject alternative names
 	 *
+     * 不幸的是，PHP没有根据替代名称检查证书，导致“https://www.github.com/”等内容无效。相反
 	 * Unfortunately, PHP doesn't check the certificate against the alternative
 	 * names, leading things like 'https://www.github.com/' to be invalid.
 	 * Instead
@@ -417,6 +432,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	}
 
 	/**
+     * 此传输是否有效
 	 * Whether this transport is valid
 	 *
 	 * @codeCoverageIgnore

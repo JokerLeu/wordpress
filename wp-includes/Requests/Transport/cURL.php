@@ -1,12 +1,17 @@
 <?php
 /**
+ * cURL HTTP传输
  * cURL HTTP transport
+ *
+ * cURL是一个利用URL语法在命令行下工作的文件传输工具，1997年首次发行。
+ * 它支持文件上传和下载，所以是综合传输工具，但按传统，习惯称cURL为下载工具。
  *
  * @package Requests
  * @subpackage Transport
  */
 
 /**
+ * cURL HTTP传输
  * cURL HTTP transport
  *
  * @package Requests
@@ -17,6 +22,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	const CURL_7_16_2 = 0x071002;
 
 	/**
+     * 原始HTTP数据
 	 * Raw HTTP data
 	 *
 	 * @var string
@@ -24,6 +30,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	public $headers = '';
 
 	/**
+     * 原始体数据
 	 * Raw body data
 	 *
 	 * @var string
@@ -31,6 +38,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	public $response_data = '';
 
 	/**
+     * 当前请求的信息
 	 * Information on the current request
 	 *
 	 * @var array cURL information array, see {@see https://secure.php.net/curl_getinfo}
@@ -38,6 +46,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	public $info;
 
 	/**
+     * 版本字符串
 	 * Version string
 	 *
 	 * @var long
@@ -45,6 +54,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	public $version;
 
 	/**
+     * cURL句柄
 	 * cURL handle
 	 *
 	 * @var resource
@@ -52,6 +62,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	protected $handle;
 
 	/**
+     * 钩子调度实例
 	 * Hook dispatcher instance
 	 *
 	 * @var Requests_Hooks
@@ -59,6 +70,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	protected $hooks;
 
 	/**
+     * 我们完成了头部了吗？
 	 * Have we finished the headers yet?
 	 *
 	 * @var boolean
@@ -66,6 +78,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	protected $done_headers = false;
 
 	/**
+     * 如果流到文件，保持文件指针
 	 * If streaming to a file, keep the file pointer
 	 *
 	 * @var resource
@@ -73,6 +86,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	protected $stream_handle;
 
 	/**
+     * 响应体中有多少字节？
 	 * How many bytes are in the response body?
 	 *
 	 * @var int
@@ -80,6 +94,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	protected $response_bytes;
 
 	/**
+     * 我们应该保留的最大字节数是多少？
 	 * What's the maximum number of bytes we should keep?
 	 *
 	 * @var int|bool Byte count, or false if no limit.
@@ -87,6 +102,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	protected $response_byte_limit;
 
 	/**
+     * 构造函数
 	 * Constructor
 	 */
 	public function __construct() {
@@ -108,6 +124,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 析构函数
 	 * Destructor
 	 */
 	public function __destruct() {
@@ -117,6 +134,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 执行请求
 	 * Perform a request
 	 *
 	 * @throws Requests_Exception On a cURL error (`curlerror`)
@@ -185,6 +203,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 同时发送多个请求
 	 * Send multiple requests simultaneously
 	 *
 	 * @param array $requests Request data
@@ -272,6 +291,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 获取用于多请求的cURL句柄
 	 * Get the cURL handle for use in a multi-request
 	 *
 	 * @param string $url URL to request
@@ -299,6 +319,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 为给定数据设置cURL句柄
 	 * Setup the cURL handle for the given data
 	 *
 	 * @param string $url URL to request
@@ -393,6 +414,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 处理响应
 	 * Process a response
 	 *
 	 * @param string $response Response data from the body
@@ -428,6 +450,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 收集收到的头部
 	 * Collect the headers as they are received
 	 *
 	 * @param resource $handle cURL resource
@@ -451,6 +474,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 接收数据
 	 * Collect data as it's received
 	 *
 	 * @since 1.6.1
@@ -489,6 +513,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 设置获取数据的URL格式
 	 * Format a URL given GET data
 	 *
 	 * @param string $url
@@ -519,6 +544,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+     * 此传输是否有效
 	 * Whether this transport is valid
 	 *
 	 * @codeCoverageIgnore
@@ -529,7 +555,8 @@ class Requests_Transport_cURL implements Requests_Transport {
 			return false;
 		}
 
-		// If needed, check that our installed curl version supports SSL
+		// 如果需要，请检查我们安装的curl版本支持SSL。
+        // If needed, check that our installed curl version supports SSL
 		if (isset($capabilities['ssl']) && $capabilities['ssl']) {
 			$curl_version = curl_version();
 			if (!(CURL_VERSION_SSL & $curl_version['features'])) {

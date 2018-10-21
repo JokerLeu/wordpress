@@ -17,6 +17,7 @@
  */
 class WP_Date_Query {
 	/**
+     * 日期查询数组。
 	 * Array of date queries.
 	 *
 	 * See WP_Date_Query::__construct() for information on date query arguments.
@@ -27,6 +28,7 @@ class WP_Date_Query {
 	public $queries = array();
 
 	/**
+     * 顶级查询之间的默认关系。可以是'和'或'或'。
 	 * The default relation between top-level queries. Can be either 'AND' or 'OR'.
 	 *
 	 * @since 3.7.0
@@ -35,6 +37,7 @@ class WP_Date_Query {
 	public $relation = 'AND';
 
 	/**
+     * 要查询的列。可以通过查询参数进行更改。
 	 * The column to query against. Can be changed via the query arguments.
 	 *
 	 * @since 3.7.0
@@ -43,6 +46,7 @@ class WP_Date_Query {
 	public $column = 'post_date';
 
 	/**
+     * 值比较运算符。可以通过查询参数进行更改。
 	 * The value comparison operator. Can be changed via the query arguments.
 	 *
 	 * @since 3.7.0
@@ -51,6 +55,7 @@ class WP_Date_Query {
 	public $compare = '=';
 
 	/**
+     * 支持与时间相关的参数键。
 	 * Supported time-related parameter keys.
 	 *
 	 * @since 4.1.0
@@ -59,6 +64,7 @@ class WP_Date_Query {
 	public $time_keys = array( 'after', 'before', 'year', 'month', 'monthnum', 'week', 'w', 'dayofyear', 'day', 'dayofweek', 'dayofweek_iso', 'hour', 'minute', 'second' );
 
 	/**
+     * 构造函数。
 	 * Constructor.
 	 *
 	 * Time-related parameters that normally require integer values ('year', 'month', 'week', 'dayofyear', 'day',
@@ -179,6 +185,7 @@ class WP_Date_Query {
 	}
 
 	/**
+     * 递归友好查询消除器。
 	 * Recursive-friendly query sanitizer.
 	 *
 	 * Ensures that each query-level clause has a 'relation' key, and that

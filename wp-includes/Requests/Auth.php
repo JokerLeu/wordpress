@@ -11,6 +11,7 @@
  * 身份验证提供者接口
  * Authentication provider interface
  *
+ * 实现此接口以充当身份验证提供程序。
  * Implement this interface to act as an authentication provider.
  *
  * Parameters should be passed via the constructor where possible, as this

@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress用户管理API。
  * WordPress user administration API.
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 使用“$_POST”信息从“用户”表单创建新用户。
  * Creates a new user from the "Users" form using $_POST information.
  *
  * @since 2.0.0
@@ -18,6 +20,7 @@ function add_user() {
 }
 
 /**
+ * 基于$_POST的内容编辑用户设置
  * Edit user settings based on contents of $_POST
  *
  * Used on user-edit.php and profile.php to manage and process user options, passwords etc.
@@ -214,6 +217,7 @@ function edit_user( $user_id = 0 ) {
 }
 
 /**
+ * 获取当前用户被允许编辑的用户角色的筛选列表。
  * Fetch a filtered list of user roles that the current user is
  * allowed to edit.
  *
@@ -233,6 +237,7 @@ function get_editable_roles() {
 	$all_roles = wp_roles()->roles;
 
 	/**
+     * 筛选可编辑角色的列表。
 	 * Filters the list of editable roles.
 	 *
 	 * @since 2.8.0
@@ -245,6 +250,7 @@ function get_editable_roles() {
 }
 
 /**
+ * 检索用户数据并对其进行筛选。
  * Retrieve user data and filter it.
  *
  * @since 2.0.5
@@ -262,6 +268,7 @@ function get_user_to_edit( $user_id ) {
 }
 
 /**
+ * 检索用户的草稿。
  * Retrieve the user's drafts.
  *
  * @since 2.0.0
@@ -287,6 +294,7 @@ function get_users_drafts( $user_id ) {
 }
 
 /**
+ * 删除用户，并可选地重新分配帖子和链接到另一个用户。
  * Remove user and optionally reassign posts and links to another user.
  *
  * If the $reassign parameter is not assigned to a User ID, then all posts will
@@ -409,6 +417,7 @@ function wp_delete_user( $id, $reassign = null ) {
 }
 
 /**
+ * 从用户中删除所有功能。
  * Remove all capabilities from user.
  *
  * @since 2.1.0
@@ -540,6 +549,7 @@ Please click the following link to activate your user account:
 }
 
 /**
+ * 重新发送一个现有的请求并返回结果。
  * Resend an existing request and return the result.
  *
  * @since 4.9.6
@@ -568,6 +578,7 @@ function _wp_privacy_resend_request( $request_id ) {
 }
 
 /**
+ * 标记管理员完成的请求并记录当前时间戳。
  * Marks a request as completed by the admin and logs the current timestamp.
  *
  * @since 4.9.6
@@ -595,6 +606,7 @@ function _wp_privacy_completed_request( $request_id ) {
 }
 
 /**
+ * 处理列表表操作。
  * Handle list table actions.
  *
  * @since 4.9.6
@@ -705,6 +717,7 @@ function _wp_personal_data_handle_actions() {
 }
 
 /**
+ * 在显示列表表之前清理失败的和过期的请求。
  * Cleans up failed and expired requests before displaying the list table.
  *
  * @since 4.9.6
@@ -739,6 +752,7 @@ function _wp_personal_data_cleanup_requests() {
 }
 
 /**
+ * 个人资料输出。
  * Personal data export.
  *
  * @since 4.9.6
@@ -804,6 +818,7 @@ function _wp_personal_data_export_page() {
 }
 
 /**
+ * 个人数据匿名化。
  * Personal data anonymization.
  *
  * @since 4.9.6
@@ -954,6 +969,7 @@ function wp_privacy_process_personal_data_erasure_page( $response, $eraser_index
 }
 
 /**
+ * 添加请求页。
  * Add requests pages.
  *
  * @since 4.9.6
@@ -965,6 +981,7 @@ function _wp_privacy_hook_requests_page() {
 }
 
 /**
+ * 为隐私请求屏幕添加选项。
  * Add options for the privacy requests screens.
  *
  * @since 4.9.8

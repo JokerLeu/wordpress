@@ -15,7 +15,10 @@
 
 ?><!DOCTYPE html>
 <!--代码在模板的header.php文件-->
-<html <?php language_attributes(); ?> class="no-js no-svg">
+<html <?php
+// 显示HTML标记的语言属性。
+language_attributes();
+?> class="no-js no-svg">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +35,10 @@
 
 		<?php get_template_part( 'template-parts/header/header', 'image' ); ?>
 
-		<?php if ( has_nav_menu( 'top' ) ) : ?>
+		<?php if (
+		        // 确定注册的导航菜单位置是否有分配给它的菜单。
+		        has_nav_menu( 'top' ) ) :
+            ?>
 			<div class="navigation-top">
 				<div class="wrap">
 					<?php get_template_part( 'template-parts/navigation/navigation', 'top' ); ?>

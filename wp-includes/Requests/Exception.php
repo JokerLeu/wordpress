@@ -1,13 +1,13 @@
 <?php
 /**
- * 异常,HTTP请求
+ * HTTP请求异常
  * Exception for HTTP requests
  *
  * @package Requests
  */
 
 /**
- * 异常,HTTP请求
+ * HTTP请求异常 继承 异常
  * Exception for HTTP requests
  *
  * @package Requests

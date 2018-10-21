@@ -36,7 +36,8 @@ function twentyseventeen_setup() {
 	 */
 	load_theme_textdomain( 'twentyseventeen' );
 
-	// Add default posts and comments RSS feed links to head.
+	// 添加默认帖子和评论RSS馈送链接到头。
+    // Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 
 	/*
@@ -47,21 +48,26 @@ function twentyseventeen_setup() {
 	 */
 	add_theme_support( 'title-tag' );
 
-	/*
+	/**
+     * 启用对帖子和页面上的缩略图的支持。
 	 * Enable support for Post Thumbnails on posts and pages.
 	 *
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
 	add_theme_support( 'post-thumbnails' );
 
+	// 注册一个新的图像大小。
 	add_image_size( 'twentyseventeen-featured-image', 2000, 1200, true );
 
 	add_image_size( 'twentyseventeen-thumbnail-avatar', 100, 100, true );
 
-	// Set the default content width.
+	// 设置默认内容宽度。
+    // Set the default content width.
 	$GLOBALS['content_width'] = 525;
 
-	// This theme uses wp_nav_menu() in two locations.
+	// 这个主题在两个位置使用wp_nav_menu()。
+    // This theme uses wp_nav_menu() in two locations.
+    // 为主题注册导航菜单位置。
 	register_nav_menus(
 		array(
 			'top'    => __( 'Top Menu', 'twentyseventeen' ),
@@ -69,10 +75,12 @@ function twentyseventeen_setup() {
 		)
 	);
 
-	/*
+	/**
+     * 切换搜索表单、注释表单和注释的默认核心标记，以输出有效的HTML5。
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
 	 */
+	// 为给定的特征注册主题支持。
 	add_theme_support(
 		'html5', array(
 			'comment-form',
@@ -82,11 +90,13 @@ function twentyseventeen_setup() {
 		)
 	);
 
-	/*
+	/**
+     * 启用对帖子格式的支持。
 	 * Enable support for Post Formats.
 	 *
 	 * See: https://codex.wordpress.org/Post_Formats
 	 */
+	// 为给定的特征注册主题支持。
 	add_theme_support(
 		'post-formats', array(
 			'aside',
@@ -99,7 +109,9 @@ function twentyseventeen_setup() {
 		)
 	);
 
-	// Add theme support for Custom Logo.
+	// 为自定义徽标添加主题支持。
+    // Add theme support for Custom Logo.
+    // 为给定的特征注册主题支持。
 	add_theme_support(
 		'custom-logo', array(
 			'width'      => 250,
@@ -108,38 +120,45 @@ function twentyseventeen_setup() {
 		)
 	);
 
-	// Add theme support for selective refresh for widgets.
+	// 为小部件添加选择性刷新的主题支持。
+    // Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
-	/*
+	/**
+     * 这个主题使视觉编辑器风格类似主题样式，特别是字体、颜色和列宽。
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
 	  */
 	add_editor_style( array( 'assets/css/editor-style.css', twentyseventeen_fonts_url() ) );
 
-	// Define and register starter content to showcase the theme on new sites.
+	// 定义和注册启动内容，以显示新网站上的主题。
+    // Define and register starter content to showcase the theme on new sites.
 	$starter_content = array(
 		'widgets'     => array(
-			// Place three core-defined widgets in the sidebar area.
+			// 在边栏区域中放置三个核心定义的小部件。
+            // Place three core-defined widgets in the sidebar area.
 			'sidebar-1' => array(
 				'text_business_info',
 				'search',
 				'text_about',
 			),
 
-			// Add the core-defined business info widget to the footer 1 area.
+			// 将核心定义的业务信息控件添加到页脚1区域。
+            // Add the core-defined business info widget to the footer 1 area.
 			'sidebar-2' => array(
 				'text_business_info',
 			),
 
-			// Put two core-defined widgets in the footer 2 area.
+			// 在页脚2区域中放置两个核心定义的小部件。
+            // Put two core-defined widgets in the footer 2 area.
 			'sidebar-3' => array(
 				'text_about',
 				'search',
 			),
 		),
 
-		// Specify the core-defined pages to create and add custom thumbnails to some of them.
+		// 指定创建的核心定义页并向其中一些添加自定义缩略图。
+        // Specify the core-defined pages to create and add custom thumbnails to some of them.
 		'posts'       => array(
 			'home',
 			'about'            => array(
@@ -156,7 +175,8 @@ function twentyseventeen_setup() {
 			),
 		),
 
-		// Create the custom image attachments used as post thumbnails for pages.
+		// 创建用于页面的帖子缩略图的自定义图像附件。
+        // Create the custom image attachments used as post thumbnails for pages.
 		'attachments' => array(
 			'image-espresso' => array(
 				'post_title' => _x( 'Espresso', 'Theme starter content', 'twentyseventeen' ),
@@ -172,14 +192,16 @@ function twentyseventeen_setup() {
 			),
 		),
 
-		// Default to a static front page and assign the front and posts pages.
+		// 默认为静态首页，并分配首页和帖子页。
+        // Default to a static front page and assign the front and posts pages.
 		'options'     => array(
 			'show_on_front'  => 'page',
 			'page_on_front'  => '{{home}}',
 			'page_for_posts' => '{{blog}}',
 		),
 
-		// Set the front page section theme mods to the IDs of the core-registered pages.
+		// 将首页主题部分模式设置为核心注册页面的ID。
+        // Set the front page section theme mods to the IDs of the core-registered pages.
 		'theme_mods'  => array(
 			'panel_1' => '{{homepage-section}}',
 			'panel_2' => '{{about}}',
@@ -187,9 +209,11 @@ function twentyseventeen_setup() {
 			'panel_4' => '{{contact}}',
 		),
 
-		// Set up nav menus for each of the two areas registered in the theme.
+		// 为主题中注册的两个区域中的每一个设置导航菜单。
+        // Set up nav menus for each of the two areas registered in the theme.
 		'nav_menus'   => array(
-			// Assign a menu to the "top" location.
+			// 将菜单分配到“顶部”位置。
+            // Assign a menu to the "top" location.
 			'top'    => array(
 				'name'  => __( 'Top Menu', 'twentyseventeen' ),
 				'items' => array(
@@ -200,7 +224,8 @@ function twentyseventeen_setup() {
 				),
 			),
 
-			// Assign a menu to the "social" location.
+			// 将菜单分配到“社交”位置。
+            // Assign a menu to the "social" location.
 			'social' => array(
 				'name'  => __( 'Social Links Menu', 'twentyseventeen' ),
 				'items' => array(
@@ -215,6 +240,7 @@ function twentyseventeen_setup() {
 	);
 
 	/**
+     * 过滤器2017启动内容的数组。
 	 * Filters Twenty Seventeen array of starter content.
 	 *
 	 * @since Twenty Seventeen 1.1
@@ -242,7 +268,8 @@ function twentyseventeen_content_width() {
 	// Get layout.
 	$page_layout = get_theme_mod( 'page_layout' );
 
-	// Check if layout is one column.
+	// 检查布局是否为一列。
+    // Check if layout is one column.
 	if ( 'one-column' === $page_layout ) {
 		if ( twentyseventeen_is_frontpage() ) {
 			$content_width = 644;
@@ -251,12 +278,14 @@ function twentyseventeen_content_width() {
 		}
 	}
 
-	// Check if is single post and there is no sidebar.
+	// 检查是否是单帖子，没有边栏。
+    // Check if is single post and there is no sidebar.
 	if ( is_single() && ! is_active_sidebar( 'sidebar-1' ) ) {
 		$content_width = 740;
 	}
 
 	/**
+     * 过滤器2017主题的内容宽度。
 	 * Filter Twenty Seventeen content width of the theme.
 	 *
 	 * @since Twenty Seventeen 1.0
@@ -326,6 +355,7 @@ add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function twentyseventeen_widgets_init() {
+    // 为单个侧边栏建立定义并返回ID。
 	register_sidebar(
 		array(
 			'name'          => __( 'Blog Sidebar', 'twentyseventeen' ),
@@ -338,6 +368,7 @@ function twentyseventeen_widgets_init() {
 		)
 	);
 
+	// 为单个侧边栏建立定义并返回ID。
 	register_sidebar(
 		array(
 			'name'          => __( 'Footer 1', 'twentyseventeen' ),
@@ -350,6 +381,7 @@ function twentyseventeen_widgets_init() {
 		)
 	);
 
+	// 为单个侧边栏建立定义并返回ID。
 	register_sidebar(
 		array(
 			'name'          => __( 'Footer 2', 'twentyseventeen' ),
@@ -365,6 +397,7 @@ function twentyseventeen_widgets_init() {
 add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
 
 /**
+ * 替换“……”（附加到自动生成的摘要）…还有一个“继续阅读”链接。
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
  * a 'Continue reading' link.
  *
@@ -389,6 +422,7 @@ function twentyseventeen_excerpt_more( $link ) {
 add_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
 
 /**
+ * 处理JavaScript检测。
  * Handles JavaScript detection.
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
@@ -401,6 +435,7 @@ function twentyseventeen_javascript_detection() {
 add_action( 'wp_head', 'twentyseventeen_javascript_detection', 0 );
 
 /**
+ * 为一个可识别的文章添加一个pingback URL自动发现头。
  * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
 function twentyseventeen_pingback_header() {
@@ -411,6 +446,7 @@ function twentyseventeen_pingback_header() {
 add_action( 'wp_head', 'twentyseventeen_pingback_header' );
 
 /**
+ * 显示自定义颜色CSS。
  * Display custom color CSS.
  */
 function twentyseventeen_colors_css_wrap() {
@@ -434,6 +470,7 @@ function twentyseventeen_colors_css_wrap() {
 add_action( 'wp_head', 'twentyseventeen_colors_css_wrap' );
 
 /**
+ * 编排脚本和样式。
  * Enqueue scripts and styles.
  */
 function twentyseventeen_scripts() {
@@ -493,6 +530,7 @@ function twentyseventeen_scripts() {
 add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
 
 /**
+ * 添加自定义图像大小属性以增强内容图像的响应图像功能。
  * Add custom image sizes attribute to enhance responsive image functionality
  * for content images.
  *
@@ -521,6 +559,7 @@ function twentyseventeen_content_image_sizes_attr( $sizes, $size ) {
 add_filter( 'wp_calculate_image_sizes', 'twentyseventeen_content_image_sizes_attr', 10, 2 );
 
 /**
+ * 在标题图像标记中过滤“大小”值。
  * Filter the `sizes` value in the header image markup.
  *
  * @since Twenty Seventeen 1.0
@@ -539,6 +578,7 @@ function twentyseventeen_header_image_tag( $html, $header, $attr ) {
 add_filter( 'get_header_image_tag', 'twentyseventeen_header_image_tag', 10, 3 );
 
 /**
+ * 添加自定义图像大小属性，以增强帖子缩略图的响应图像功能。
  * Add custom image sizes attribute to enhance responsive image functionality
  * for post thumbnails.
  *
@@ -561,6 +601,7 @@ function twentyseventeen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) 
 add_filter( 'wp_get_attachment_image_attributes', 'twentyseventeen_post_thumbnail_sizes_attr', 10, 3 );
 
 /**
+ * 当首页显示设置为静态页面时，使用front-page.php。
  * Use front-page.php when Front page displays is set to a static page.
  *
  * @since Twenty Seventeen 1.0
@@ -575,6 +616,7 @@ function twentyseventeen_front_page_template( $template ) {
 add_filter( 'frontpage_template', 'twentyseventeen_front_page_template' );
 
 /**
+ * 修改标记云小部件参数，以显示所有字体大小相同的标签，并使用列表格式以获得更好的可访问性。
  * Modifies tag cloud widget arguments to display all tags in the same font size
  * and use list format for better accessibility.
  *
@@ -600,6 +642,7 @@ add_filter( 'widget_tag_cloud_args', 'twentyseventeen_widget_tag_cloud_args' );
 require get_parent_theme_file_path( '/inc/custom-header.php' );
 
 /**
+ * 此主题的自定义模板标记。
  * Custom template tags for this theme.
  */
 require get_parent_theme_file_path( '/inc/template-tags.php' );

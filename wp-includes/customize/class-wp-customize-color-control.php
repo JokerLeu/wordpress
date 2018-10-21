@@ -18,6 +18,7 @@
  */
 class WP_Customize_Color_Control extends WP_Customize_Control {
 	/**
+     * 类型。
 	 * Type.
 	 *
 	 * @var string
@@ -25,6 +26,7 @@ class WP_Customize_Color_Control extends WP_Customize_Control {
 	public $type = 'color';
 
 	/**
+     * 状态。
 	 * Statuses.
 	 *
 	 * @var array
@@ -32,6 +34,7 @@ class WP_Customize_Color_Control extends WP_Customize_Control {
 	public $statuses;
 
 	/**
+     * 模式。
 	 * Mode.
 	 *
 	 * @since 4.7.0

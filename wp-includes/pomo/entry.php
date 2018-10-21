@@ -1,6 +1,6 @@
 <?php
 /**
- * 包含Translation_Entry类
+ * 包含翻译条目类
  * Contains Translation_Entry class
  *
  * @version $Id: entry.php 1157 2015-11-20 04:30:11Z dd32 $
@@ -10,7 +10,7 @@
 
 if ( ! class_exists( 'Translation_Entry', false ) ):
 /**
- * Translation_Entry类封装了可翻译的字符串。
+ * 翻译条目类封装了可翻译的字符串。
  * Translation_Entry class encapsulates a translatable string
  */
 class Translation_Entry {
@@ -66,6 +66,7 @@ class Translation_Entry {
 	}
 
 	/**
+     * 为该条目生成唯一键
 	 * Generates a unique key for this entry
 	 *
 	 * @return string|bool the key or false if the entry is empty

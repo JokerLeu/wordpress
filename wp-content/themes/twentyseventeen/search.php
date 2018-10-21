@@ -30,6 +30,7 @@ get_header(); ?>
 		if ( have_posts() ) :
 			/* Start the Loop */
 			while ( have_posts() ) :
+                // 在循环中迭代POST索引
 				the_post();
 
 				/**
@@ -37,10 +38,12 @@ get_header(); ?>
 				 * If you want to overload this in a child theme then include a file
 				 * called content-search.php and that will be used instead.
 				 */
+				// 将模板部件加载到模板中
 				get_template_part( 'template-parts/post/content', 'excerpt' );
 
 			endwhile; // End of the loop.
 
+            // 在适用时，显示下一页/前一组帖子的分页导航。
 			the_posts_pagination(
 				array(
 					'prev_text'          => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
@@ -54,6 +57,7 @@ get_header(); ?>
 
 			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'twentyseventeen' ); ?></p>
 			<?php
+                // 显示搜索表单
 				get_search_form();
 
 		endif;

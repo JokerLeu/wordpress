@@ -1,5 +1,6 @@
 <?php
 /**
+ * 核心导航菜单API
  * Core Navigation Menu API
  *
  * @package WordPress
@@ -14,6 +15,7 @@ require_once( ABSPATH . 'wp-admin/includes/class-walker-nav-menu-edit.php' );
 require_once( ABSPATH . 'wp-admin/includes/class-walker-nav-menu-checklist.php' );
 
 /**
+ * 打印对菜单快速搜索的适当响应。
  * Prints the appropriate response to a menu quick search.
  *
  * @since 3.0.0
@@ -131,6 +133,7 @@ function _wp_ajax_menu_quick_search( $request = array() ) {
 }
 
 /**
+ * 注册导航菜单元盒和高级菜单项。
  * Register nav menu meta boxes and advanced menu items.
  *
  * @since 3.0.0

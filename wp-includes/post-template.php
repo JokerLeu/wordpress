@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress帖子模板功能。
  * WordPress Post Template Functions.
  *
  * Gets content for the current post in the loop.
@@ -9,6 +10,7 @@
  */
 
 /**
+ * 在WordPress循环中显示当前项目的ID。
  * Display the ID of the current item in the WordPress Loop.
  *
  * @since 0.71
@@ -18,6 +20,7 @@ function the_ID() {
 }
 
 /**
+ * 在WordPress循环中检索当前项的ID。
  * Retrieve the ID of the current item in the WordPress Loop.
  *
  * @since 2.1.0
@@ -30,6 +33,7 @@ function get_the_ID() {
 }
 
 /**
+ * 显示或检索具有可选标记的当前帖子标题。
  * Display or retrieve the current post title with optional markup.
  *
  * @since 0.71
@@ -54,6 +58,7 @@ function the_title( $before = '', $after = '', $echo = true ) {
 }
 
 /**
+ * 在检索或显示时对当前标题进行净化。
  * Sanitize the current title when retrieving or displaying.
  *
  * Works like the_title(), except the parameters can be in a string or
@@ -96,6 +101,7 @@ function the_title_attribute( $args = '' ) {
 }
 
 /**
+ * 检索帖子标题。
  * Retrieve post title.
  *
  * If the post is protected and the visitor is not an admin, then "Protected"
@@ -159,6 +165,7 @@ function get_the_title( $post = 0 ) {
 }
 
 /**
+ * 显示帖子全局唯一标识符（GUID）。
  * Display the Post Global Unique Identifier (guid).
  *
  * The guid will appear to be a link, but should not be used as a link to the
@@ -191,6 +198,7 @@ function the_guid( $post = 0 ) {
 }
 
 /**
+ * 检索帖子全局唯一标识符（GUID）。
  * Retrieve the Post Global Unique Identifier (guid).
  *
  * The guid will appear to be a link, but should not be used as an link to the
@@ -220,6 +228,7 @@ function get_the_guid( $post = 0 ) {
 }
 
 /**
+ * 显示文章内容。
  * Display the post content.
  *
  * @since 0.71
@@ -243,6 +252,7 @@ function the_content( $more_link_text = null, $strip_teaser = false) {
 }
 
 /**
+ * 检索文章内容。
  * Retrieve the post content.
  *
  * @since 0.71
@@ -331,6 +341,7 @@ function get_the_content( $more_link_text = null, $strip_teaser = false ) {
 }
 
 /**
+ * JavaScript错误的外语预览修复。
  * Preview fix for JavaScript bug with foreign languages.
  *
  * @since 3.1.0
@@ -344,6 +355,7 @@ function _convert_urlencoded_to_entities( $match ) {
 }
 
 /**
+ * 显示帖子摘录。
  * Display the post excerpt.
  *
  * @since 0.71
@@ -363,6 +375,7 @@ function the_excerpt() {
 }
 
 /**
+ * 检索帖子摘录。
  * Retrieves the post excerpt.
  *
  * @since 0.71
@@ -398,6 +411,7 @@ function get_the_excerpt( $post = null ) {
 }
 
 /**
+ * 帖子是否有自定义摘录。
  * Whether the post has a custom excerpt.
  *
  * @since 2.3.0
@@ -411,6 +425,7 @@ function has_excerpt( $post = 0 ) {
 }
 
 /**
+ * 显示帖子div的类。
  * Display the classes for the post div.
  *
  * @since 2.7.0
@@ -424,6 +439,7 @@ function post_class( $class = '', $post_id = null ) {
 }
 
 /**
+ * 以数组的形式检索帖子div的类。
  * Retrieves the classes for the post div as an array.
  *
  * The class names are many. If the post is a sticky, then the 'sticky'
@@ -560,6 +576,7 @@ function body_class( $class = '' ) {
 }
 
 /**
+ * 将body元素的类作为数组检索。
  * Retrieve the classes for the body element as an array.
  *
  * @since 2.8.0
@@ -775,6 +792,7 @@ function get_body_class( $class = '' ) {
 }
 
 /**
+ * 是否提供了密码和正确的密码。
  * Whether post requires password and correct password has been provided.
  *
  * @since 2.7.0
@@ -817,11 +835,12 @@ function post_password_required( $post = null ) {
 	return apply_filters( 'post_password_required', $required, $post );
 }
 
-//
+// 主题中使用的页面模板函数
 // Page Template Functions for usage in Themes
 //
 
 /**
+ * 页面列表的格式化输出。
  * The formatted output of a list of pages.
  *
  * Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
@@ -946,6 +965,7 @@ function wp_link_pages( $args = '' ) {
 }
 
 /**
+ * wp_link_pages()的辅助函数。
  * Helper function for wp_link_pages().
  *
  * @since 3.1.0
@@ -985,11 +1005,12 @@ function _wp_link_page( $i ) {
 	return '<a href="' . esc_url( $url ) . '">';
 }
 
-//
+// 帖子元：每个POST字段自定义。
 // Post-meta: Custom per-post fields.
 //
 
 /**
+ * 检索自定义元数据字段。
  * Retrieve post custom meta data field.
  *
  * @since 1.5.0
@@ -1009,6 +1030,7 @@ function post_custom( $key = '' ) {
 }
 
 /**
+ * 显示自定义字段的列表。
  * Display list of post custom fields.
  *
  * @since 1.2.0
@@ -1049,11 +1071,12 @@ function the_meta() {
 	}
 }
 
-//
+// 页面
 // Pages
 //
 
 /**
+ * 检索或显示页面列表作为下拉列表（选择列表）。
  * Retrieve or display list of pages as a dropdown (select list).
  *
  * @since 2.1.0
@@ -1137,6 +1160,7 @@ function wp_dropdown_pages( $args = '' ) {
 }
 
 /**
+ * 在列表（LI）格式中检索或显示页面列表（或分层后类型项目）。
  * Retrieve or display list of pages (or hierarchical post type items) in list (li) format.
  *
  * @since 1.5.0
@@ -1265,6 +1289,7 @@ function wp_list_pages( $args = '' ) {
 }
 
 /**
+ * 显示或检索具有可选家庭链接的页面列表。
  * Displays or retrieves a list of pages with an optional home link.
  *
  * The arguments are listed below and part of the arguments are for wp_list_pages()} function.
@@ -1412,7 +1437,7 @@ function wp_page_menu( $args = array() ) {
 		return $menu;
 }
 
-//
+// 页面助手
 // Page helpers
 //
 

@@ -8,6 +8,7 @@
  */
 
 /**
+ * 用于实现站点图标功能的核心类。
  * Core class used to implement site icon functionality.
  *
  * @since 4.3.0

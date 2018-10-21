@@ -14,6 +14,7 @@
  */
 class Requests_Response_Headers extends Requests_Utility_CaseInsensitiveDictionary {
 	/**
+     * 获取给定的头部
 	 * Get the given header
 	 *
 	 * Unlike {@see self::getValues()}, this returns a string. If there are
@@ -35,6 +36,7 @@ class Requests_Response_Headers extends Requests_Utility_CaseInsensitiveDictiona
 	}
 
 	/**
+     * 设置给定项
 	 * Set the given item
 	 *
 	 * @throws Requests_Exception On attempting to use dictionary as list (`invalidset`)
@@ -57,6 +59,7 @@ class Requests_Response_Headers extends Requests_Utility_CaseInsensitiveDictiona
 	}
 
 	/**
+     * 获取给定标题的所有值
 	 * Get all values for a given header
 	 *
 	 * @param string $key
@@ -72,6 +75,7 @@ class Requests_Response_Headers extends Requests_Utility_CaseInsensitiveDictiona
 	}
 
 	/**
+     * 将一个值变为字符串
 	 * Flattens a value into a string
 	 *
 	 * Converts an array into a string by imploding values with a comma, as per
@@ -89,6 +93,7 @@ class Requests_Response_Headers extends Requests_Utility_CaseInsensitiveDictiona
 	}
 
 	/**
+     * 获取数据的迭代器
 	 * Get an iterator for the data
 	 *
 	 * Converts the internal

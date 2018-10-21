@@ -13,6 +13,7 @@
 
 ?>
 
+<!--图片内容 代码在模板的\template-parts\post\content-image.php-->
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( is_sticky() && is_home() ) {
@@ -21,6 +22,7 @@
 	?>
 	<header class="entry-header">
 		<?php
+        // 检索当前帖子或给定帖子的POST类型。
 		if ( 'post' === get_post_type() ) {
 			echo '<div class="entry-meta">';
 			if ( is_single() ) {

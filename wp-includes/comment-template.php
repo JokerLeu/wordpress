@@ -1894,6 +1894,7 @@ function comment_form_title( $noreplytext = false, $replytext = false, $linktopa
 }
 
 /**
+ * 列出注释。
  * List comments.
  *
  * Used in the comments.php template to list comments for a particular post.
@@ -2114,6 +2115,7 @@ function wp_list_comments( $args = array(), $comments = null ) {
 }
 
 /**
+ * 在模板中使用完整的注释表单。
  * Outputs a complete commenting form for use within a template.
  *
  * Most strings and form fields may be controlled through the $args array passed

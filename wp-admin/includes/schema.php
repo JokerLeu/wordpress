@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress管理方案API
  * WordPress Administration Scheme API
  *
  * Here we keep the DB structure and option values.
@@ -9,6 +10,7 @@
  */
 
 /**
+ * 将这些声明为全局，则从函数中包含PHP。
  * Declare these as global in case schema.php is included from a function.
  *
  * @global wpdb   $wpdb
@@ -18,11 +20,13 @@
 global $wpdb, $wp_queries, $charset_collate;
 
 /**
+ * 数据库字符排序。
  * The database character collate.
  */
 $charset_collate = $wpdb->get_charset_collate();
 
 /**
+ * 检索用于创建数据库表的SQL。
  * Retrieve the SQL for creating database tables.
  *
  * @since 3.3.0
@@ -41,7 +45,8 @@ function wp_get_db_schema( $scope = 'all', $blog_id = null ) {
 	if ( $blog_id && $blog_id != $wpdb->blogid )
 		$old_blog_id = $wpdb->set_blog_id( $blog_id );
 
-	// Engage multisite if in the middle of turning it on from network.php.
+	// 如果在network.php中打开多站点，则参与多站点。
+    // Engage multisite if in the middle of turning it on from network.php.
 	$is_multisite = is_multisite() || ( defined( 'WP_INSTALLING_NETWORK' ) && WP_INSTALLING_NETWORK );
 
 	/*
@@ -51,7 +56,8 @@ function wp_get_db_schema( $scope = 'all', $blog_id = null ) {
 	 */
 	$max_index_length = 191;
 
-	// Blog specific tables.
+	// 博客特定的表格。
+    // Blog specific tables.
 	$blog_tables = "CREATE TABLE $wpdb->termmeta (
   meta_id bigint(20) unsigned NOT NULL auto_increment,
   term_id bigint(20) unsigned NOT NULL default '0',
@@ -185,7 +191,8 @@ CREATE TABLE $wpdb->posts (
   KEY post_author (post_author)
 ) $charset_collate;\n";
 
-	// Single site users table. The multisite flavor of the users table is handled below.
+	// 单站点用户表。用户表的多站点部分在下面处理。
+    // Single site users table. The multisite flavor of the users table is handled below.
 	$users_single_table = "CREATE TABLE $wpdb->users (
   ID bigint(20) unsigned NOT NULL auto_increment,
   user_login varchar(60) NOT NULL default '',
@@ -203,7 +210,8 @@ CREATE TABLE $wpdb->posts (
   KEY user_email (user_email)
 ) $charset_collate;\n";
 
-	// Multisite users table
+	// 多站点用户表
+    // Multisite users table
 	$users_multi_table = "CREATE TABLE $wpdb->users (
   ID bigint(20) unsigned NOT NULL auto_increment,
   user_login varchar(60) NOT NULL default '',
@@ -223,7 +231,8 @@ CREATE TABLE $wpdb->posts (
   KEY user_email (user_email)
 ) $charset_collate;\n";
 
-	// Usermeta.
+	// 用户元
+    // Usermeta.
 	$usermeta_table = "CREATE TABLE $wpdb->usermeta (
   umeta_id bigint(20) unsigned NOT NULL auto_increment,
   user_id bigint(20) unsigned NOT NULL default '0',
@@ -234,13 +243,15 @@ CREATE TABLE $wpdb->posts (
   KEY meta_key (meta_key($max_index_length))
 ) $charset_collate;\n";
 
-	// Global tables
+	// 全局表
+    // Global tables
 	if ( $is_multisite )
 		$global_tables = $users_multi_table . $usermeta_table;
 	else
 		$global_tables = $users_single_table . $usermeta_table;
 
-	// Multisite global tables.
+	// 多站点全局表。
+    // Multisite global tables.
 	$ms_global_tables = "CREATE TABLE $wpdb->blogs (
   blog_id bigint(20) NOT NULL auto_increment,
   site_id bigint(20) NOT NULL default '0',
@@ -335,10 +346,12 @@ CREATE TABLE $wpdb->signups (
 	return $queries;
 }
 
+// 为后面的编译器填充。
 // Populate for back compat.
 $wp_queries = wp_get_db_schema( 'all' );
 
 /**
+ * 创建WordPress选项并设置默认值。
  * Create WordPress options and set the default values.
  *
  * @since 1.5.0
@@ -537,7 +550,8 @@ function populate_options() {
 		$options[ 'permalink_structure' ] = '/%year%/%monthnum%/%day%/%postname%/';
 	}
 
-	// Set autoload to no for these options
+	// 将自动加载设置为“否”用于这些选项
+    // Set autoload to no for these options
 	$fat_options = array( 'moderation_keys', 'recently_edited', 'blacklist_keys', 'uninstall_plugins' );
 
 	$keys = "'" . implode( "', '", array_keys( $options ) ) . "'";
@@ -562,10 +576,12 @@ function populate_options() {
 	if ( !empty($insert) )
 		$wpdb->query("INSERT INTO $wpdb->options (option_name, option_value, autoload) VALUES " . $insert);
 
-	// In case it is set, but blank, update "home".
+	// 如果是设置，而是空白，更新“首页”。
+    // In case it is set, but blank, update "home".
 	if ( !__get_option('home') ) update_option('home', $guessurl);
 
-	// Delete unused options.
+	// 删除未使用的选项。
+    // Delete unused options.
 	$unusedoptions = array(
 		'blodotgsping_url', 'bodyterminator', 'emailtestonly', 'phoneemail_separator', 'smilies_directory',
 		'subjectprefix', 'use_bbcode', 'use_blodotgsping', 'use_phoneemail', 'use_quicktags', 'use_weblogsping',
@@ -585,6 +601,7 @@ function populate_options() {
 		'embed_autourls', 'default_post_edit_rows', 'gzipcompression', 'advanced_edit'
 	);
 	foreach ( $unusedoptions as $option )
+	    // 按名称移除选项。防止删除受保护的WordPress选项。
 		delete_option($option);
 
 	// Delete obsolete magpie stuff.
@@ -595,22 +612,32 @@ function populate_options() {
 }
 
 /**
+ * 为各种WordPress版本执行WordPress角色创建。
  * Execute WordPress role creation for the various WordPress versions.
  *
  * @since 2.0.0
  */
 function populate_roles() {
+    // 为WordPress 2.0创建角色
 	populate_roles_160();
+	// 为WordPress 2.1创建和修改WordPress角色。
 	populate_roles_210();
+	// 为WordPress 2.3创建和修改WordPress角色。
 	populate_roles_230();
+	// 为WordPress 2.5创建和修改WordPress角色。
 	populate_roles_250();
+	// 为WordPress 2.6创建和修改WordPress角色。
 	populate_roles_260();
+	// 为WordPress 2.7创建和修改WordPress角色。
 	populate_roles_270();
+	// 为WordPress 2.8创建和修改WordPress角色。
 	populate_roles_280();
+	// 为WordPress 3.0创建和修改WordPress角色。
 	populate_roles_300();
 }
 
 /**
+ * 为WordPress 2创建角色
  * Create the roles for WordPress 2.0
  *
  * @since 2.0.0
@@ -716,6 +743,7 @@ function populate_roles_160() {
 }
 
 /**
+ * 为WordPress 2.1创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 2.1.
  *
  * @since 2.1.0
@@ -763,6 +791,7 @@ function populate_roles_210() {
 }
 
 /**
+ * 为WordPress 2.3创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 2.3.
  *
  * @since 2.3.0
@@ -776,6 +805,7 @@ function populate_roles_230() {
 }
 
 /**
+ * 为WordPress 2.5创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 2.5.
  *
  * @since 2.5.0
@@ -789,6 +819,7 @@ function populate_roles_250() {
 }
 
 /**
+ * 为WordPress 2.6创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 2.6.
  *
  * @since 2.6.0
@@ -803,6 +834,7 @@ function populate_roles_260() {
 }
 
 /**
+ * 为WordPress 2.7创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 2.7.
  *
  * @since 2.7.0
@@ -817,6 +849,7 @@ function populate_roles_270() {
 }
 
 /**
+ * 为WordPress 2.8创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 2.8.
  *
  * @since 2.8.0
@@ -830,6 +863,7 @@ function populate_roles_280() {
 }
 
 /**
+ * 为WordPress 3.0创建和修改WordPress角色。
  * Create and modify WordPress roles for WordPress 3.0.
  *
  * @since 3.0.0
@@ -850,6 +884,7 @@ function populate_roles_300() {
 
 if ( !function_exists( 'install_network' ) ) :
 /**
+ * 安装网络。
  * Install Network.
  *
  * @since 3.0.0
@@ -863,6 +898,7 @@ function install_network() {
 endif;
 
 /**
+ * 填充网络设置。
  * Populate network settings.
  *
  * @since 3.0.0

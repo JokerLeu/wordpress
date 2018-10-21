@@ -54,12 +54,14 @@ if ( ! defined( 'WP_ALLOW_REPAIR' ) ) {
 		}
 	}
 
-	// If at least one key uses the default value, consider it duplicated.
+	// 如果至少一个密钥使用默认值，请考虑复制它。
+    // If at least one key uses the default value, consider it duplicated.
 	if ( isset( $duplicated_keys[ $default_key ] ) ) {
 		$duplicated_keys[ $default_key ] = true;
 	}
 
-	// Weed out all unique, non-default values.
+	// 清除所有唯一的非默认值。
+    // Weed out all unique, non-default values.
 	$duplicated_keys = array_filter( $duplicated_keys );
 
 	if ( $duplicated_keys || $missing_key ) {
@@ -80,13 +82,15 @@ if ( ! defined( 'WP_ALLOW_REPAIR' ) ) {
 
 	$tables = $wpdb->tables();
 
-	// Sitecategories may not exist if global terms are disabled.
+	// 如果全局术语被禁用，站点类别可能不存在。
+    // Sitecategories may not exist if global terms are disabled.
 	$query = $wpdb->prepare( "SHOW TABLES LIKE %s", $wpdb->esc_like( $wpdb->sitecategories ) );
 	if ( is_multisite() && ! $wpdb->get_var( $query ) ) {
 		unset( $tables['sitecategories'] );
 	}
 
 	/**
+     * 筛选其他数据库表进行修复。
 	 * Filters additional database tables to repair.
 	 *
 	 * @since 3.0.0
@@ -95,7 +99,8 @@ if ( ! defined( 'WP_ALLOW_REPAIR' ) ) {
 	 */
 	$tables = array_merge( $tables, (array) apply_filters( 'tables_to_repair', array() ) );
 
-	// Loop over the tables, checking and repairing as needed.
+	// 在桌子上循环，根据需要检查和修理。
+    // Loop over the tables, checking and repairing as needed.
 	foreach ( $tables as $table ) {
 		$check = $wpdb->get_row( "CHECK TABLE $table" );
 

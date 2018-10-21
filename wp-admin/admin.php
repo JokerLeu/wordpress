@@ -33,10 +33,13 @@ if ( isset($_GET['import']) && !defined('WP_LOAD_IMPORTERS') )
 
 require_once(dirname(dirname(__FILE__)) . '/wp-load.php');
 
+// 设置头部以防止不同浏览器的缓存。
 nocache_headers();
 
 if ( get_option('db_upgraded') ) {
+    // 删除重写规则，然后重新创建重写规则。
 	flush_rewrite_rules();
+	// 更新已添加的选项的值。
 	update_option( 'db_upgraded',  false );
 
 	/**
@@ -52,6 +55,7 @@ if ( get_option('db_upgraded') ) {
 		exit;
 
 	/**
+     * 筛选是否尝试执行多站点DB升级例程。
 	 * Filters whether to attempt to perform the multisite DB upgrade routine.
 	 *
 	 * In single site, the user would be redirected to wp-admin/upgrade.php.
@@ -319,7 +323,9 @@ if ( isset($plugin_page) ) {
 
 	include(ABSPATH . 'wp-admin/admin-footer.php');
 
-	// Make sure rules are flushed
+	// 确保规则被刷新
+    // Make sure rules are flushed
+    // 删除重写规则，然后重新创建重写规则。
 	flush_rewrite_rules(false);
 
 	exit();

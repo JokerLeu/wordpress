@@ -1,5 +1,6 @@
 <?php
 /**
+ * 随机化*兼容库 在PHP 5项目中使用新的PHP 7 Realthy*API
  * Random_* Compatibility Library
  * for using the new PHP 7 random_* API in PHP 5 projects
  *
@@ -29,6 +30,7 @@
 if (!function_exists('RandomCompat_intval')) {
     
     /**
+     * 如果我们能安全地把它转换成整数。
      * Cast to an integer if we can, safely.
      * 
      * If you pass it a float in the range (~PHP_INT_MAX, PHP_INT_MAX)

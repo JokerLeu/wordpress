@@ -1,11 +1,13 @@
 <?php
 /**
+ * 主题安装管理API
  * WordPress Theme Installation Administration API
  *
  * @package WordPress
  * @subpackage Administration
  */
 
+// 主题允许标签
 $themes_allowedtags = array('a' => array('href' => array(), 'title' => array(), 'target' => array()),
 	'abbr' => array('title' => array()), 'acronym' => array('title' => array()),
 	'code' => array(), 'pre' => array(), 'em' => array(), 'strong' => array(),
@@ -14,12 +16,14 @@ $themes_allowedtags = array('a' => array('href' => array(), 'title' => array(), 
 	'img' => array('src' => array(), 'class' => array(), 'alt' => array())
 );
 
+// 主题字段默认值
 $theme_field_defaults = array( 'description' => true, 'sections' => false, 'tested' => true, 'requires' => true,
 	'rating' => true, 'downloaded' => true, 'downloadlink' => true, 'last_updated' => true, 'homepage' => true,
 	'tags' => true, 'num_ratings' => true
 );
 
 /**
+ * 检索WordPress主题特征列表（又名主题标签）
  * Retrieve list of WordPress theme features (aka theme tags)
  *
  * @since 2.8.0
@@ -47,6 +51,7 @@ function install_themes_feature_list() {
 }
 
 /**
+ * 显示搜索主题的搜索表单。
  * Display search form for searching themes.
  *
  * @since 2.8.0
@@ -59,6 +64,7 @@ function install_theme_search_form( $type_selector = true ) {
 	if ( ! $type_selector )
 		echo '<p class="install-help">' . __( 'Search for themes by keyword.' ) . '</p>';
 	?>
+    <!--主题搜索表单在wp-admin/includes/theme-install.php->install_theme_search_form()-->
 <form id="search-themes" method="get">
 	<input type="hidden" name="tab" value="search" />
 	<?php if ( $type_selector ) : ?>
@@ -91,6 +97,7 @@ function install_theme_search_form( $type_selector = true ) {
 }
 
 /**
+ * 显示主题的标签过滤器。
  * Display tags filter for themes.
  *
  * @since 2.8.0
@@ -151,6 +158,7 @@ function install_themes_upload() {
 }
 
 /**
+ * 在安装主题页面上打印主题。
  * Prints a theme on the Install Themes pages.
  *
  * @deprecated 3.4.0
@@ -170,6 +178,7 @@ function display_theme( $theme ) {
 }
 
 /**
+ * 基于主题列表显示主题内容。
  * Display theme content based on theme list.
  *
  * @since 2.8.0
@@ -188,6 +197,7 @@ function display_themes() {
 }
 
 /**
+ * 在对话框窗体中显示主题信息。
  * Display theme information in dialog box form.
  *
  * @since 2.8.0

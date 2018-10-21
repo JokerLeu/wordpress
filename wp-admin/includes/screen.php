@@ -90,6 +90,7 @@ function get_hidden_columns( $screen ) {
 }
 
 /**
+ * 打印屏幕元的元框首选项。
  * Prints the meta box preferences for screen meta.
  *
  * @since 2.7.0
@@ -139,6 +140,7 @@ function meta_box_prefs( $screen ) {
 }
 
 /**
+ * 获取隐藏元盒
  * Get Hidden Meta Boxes
  *
  * @since 2.7.0

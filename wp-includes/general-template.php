@@ -118,6 +118,7 @@ function get_sidebar( $name = null ) {
  * 将模板部件加载到模板中
  * Loads a template part into a template.
  *
+ * 为子主题提供一个简单的机制，以在主题中重载代码的可重用部分。
  * Provides a simple mechanism for child themes to overload reusable sections of code
  * in the theme.
  *
@@ -138,6 +139,7 @@ function get_sidebar( $name = null ) {
  */
 function get_template_part( $slug, $name = null ) {
 	/**
+     * 加载指定模板部件文件之前触发
 	 * Fires before the specified template part file is loaded.
 	 *
 	 * The dynamic portion of the hook name, `$slug`, refers to the slug name
@@ -157,6 +159,7 @@ function get_template_part( $slug, $name = null ) {
 
 	$templates[] = "{$slug}.php";
 
+	// 检索存在的最高优先级模板文件的名称。
 	locate_template($templates, true, false);
 }
 
@@ -367,6 +370,7 @@ function wp_registration_url() {
 }
 
 /**
+ * 提供一个简单的登录表单，用于在WordPress中的任何地方使用。
  * Provides a simple login form for use anywhere within WordPress.
  *
  * The login format HTML is echoed by default. Pass a false value for `$echo` to return it instead.
@@ -492,6 +496,7 @@ function wp_login_form( $args = array() ) {
 }
 
 /**
+ * 返回允许用户检索丢失密码的URL
  * Returns the URL that allows the user to retrieve the lost password
  *
  * @since 2.8.0
@@ -519,6 +524,7 @@ function wp_lostpassword_url( $redirect = '' ) {
 }
 
 /**
+ * 显示注册或管理链接。
  * Display the Registration or Admin link.
  *
  * Display a link which allows the user to navigate to the registration page if
@@ -563,6 +569,7 @@ function wp_register( $before = '<li>', $after = '</li>', $echo = true ) {
 }
 
 /**
+ * “wp_meta”动作的主题容器函数。
  * Theme container function for the 'wp_meta' action.
  *
  * The {@see 'wp_meta'} action can have several purposes, depending on how you use it,
@@ -1267,12 +1274,14 @@ function wp_title( $sep = '&raquo;', $display = true, $seplocation = '' ) {
  * @return string|void Title when retrieving.
  */
 function single_post_title( $prefix = '', $display = true ) {
+    // 检索当前查询的对象。
 	$_post = get_queried_object();
 
 	if ( !isset($_post->post_title) )
 		return;
 
 	/**
+     * 为单个帖子过滤页面标题。
 	 * Filters the page title for a single post.
 	 *
 	 * @since 0.71
@@ -1288,6 +1297,7 @@ function single_post_title( $prefix = '', $display = true ) {
 }
 
 /**
+ * 显示或检索帖子类型存档的标题。
  * Display or retrieve title for a post type archive.
  *
  * This is optimized for archive.php and archive-{$post_type}.php template files
@@ -2837,6 +2847,7 @@ function wp_no_robots() {
 }
 
 /**
+ * 显示站点图标元标签。
  * Display site icon meta tags.
  *
  * @since 4.3.0
@@ -2885,6 +2896,7 @@ function wp_site_icon() {
 }
 
 /**
+ * 向浏览器打印资源提示，以便预取、预渲染和预连接到Web站点。
  * Prints resource hints to browsers for pre-fetching, pre-rendering
  * and pre-connecting to web sites.
  *
@@ -2898,13 +2910,15 @@ function wp_site_icon() {
  */
 function wp_resource_hints() {
 	$hints = array(
+	    // 检索所有排队脚本和样式的唯一主机列表。
 		'dns-prefetch' => wp_dependencies_unique_hosts(),
 		'preconnect'   => array(),
 		'prefetch'     => array(),
 		'prerender'    => array(),
 	);
 
-	/*
+	/**
+     * 为Emoji CDN添加DNS预取。路径在下面的foreach循环中被移除。
 	 * Add DNS prefetch for the Emoji CDN.
 	 * The path is removed in the foreach loop below.
 	 */
@@ -2994,6 +3008,7 @@ function wp_resource_hints() {
 }
 
 /**
+ * 检索所有排队脚本和样式的唯一主机列表。
  * Retrieves a list of unique hosts of all enqueued scripts and styles.
  *
  * @since 4.6.0

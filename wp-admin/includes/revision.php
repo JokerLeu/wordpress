@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress管理修订API
  * WordPress Administration Revisions API
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 获取修订版用户界面。
  * Get the revision UI diff.
  *
  * @since 3.6.0
@@ -132,6 +134,7 @@ function wp_get_revision_ui_diff( $post, $compare_from, $compare_to ) {
 }
 
 /**
+ * 准备对JavaScript的修改。
  * Prepare revisions for JavaScript.
  *
  * @since 3.6.0
@@ -307,6 +310,7 @@ function wp_prepare_revisions_for_js( $post, $selected_revision_id, $from = null
 }
 
 /**
+ * 打印修订版所需的JavaScript模板。
  * Print JavaScript templates required for the revisions experience.
  *
  * @since 4.1.0

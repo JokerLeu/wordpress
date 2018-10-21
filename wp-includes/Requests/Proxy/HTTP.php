@@ -12,6 +12,7 @@
  * HTTP代理连接接口
  * HTTP Proxy connection interface
  *
+ * 通过HTTP代理提供连接的处理程序
  * Provides a handler for connection via an HTTP proxy
  *
  * @package Requests
@@ -20,6 +21,7 @@
  */
 class Requests_Proxy_HTTP implements Requests_Proxy {
 	/**
+     * 代理主机和端口
 	 * Proxy host and port
 	 *
 	 * Notation: "host:port" (eg 127.0.0.1:8080 or someproxy.com:3128)
@@ -29,6 +31,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	public $proxy;
 
 	/**
+     * 用户名
 	 * Username
 	 *
 	 * @var string
@@ -36,6 +39,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	public $user;
 
 	/**
+     * 密码
 	 * Password
 	 *
 	 * @var string
@@ -43,6 +47,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	public $pass;
 
 	/**
+     * 我们需要认证吗？（已提供用户名和密码）
 	 * Do we need to authenticate? (ie username & password have been provided)
 	 *
 	 * @var boolean
@@ -50,6 +55,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	public $use_authentication;
 
 	/**
+     * 构造函数
 	 * Constructor
 	 *
 	 * @since 1.6
@@ -75,6 +81,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	}
 
 	/**
+     * 注册必要的回调
 	 * Register the necessary callbacks
 	 *
 	 * @since 1.6
@@ -95,6 +102,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	}
 
 	/**
+     * 在发送数据之前设置cURL参数
 	 * Set cURL parameters before the data is sent
 	 *
 	 * @since 1.6
@@ -111,6 +119,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	}
 
 	/**
+     * 打开套接字连接之前更改远程套接字信息
 	 * Alter remote socket information before opening socket connection
 	 *
 	 * @since 1.6
@@ -121,6 +130,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	}
 
 	/**
+     * 在获取流数据之前更改远程路径
 	 * Alter remote path before getting stream data
 	 *
 	 * @since 1.6
@@ -132,6 +142,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	}
 
 	/**
+     * 在发送之前向请求添加额外的头文件
 	 * Add extra headers to the request before sending
 	 *
 	 * @since 1.6
@@ -142,6 +153,7 @@ class Requests_Proxy_HTTP implements Requests_Proxy {
 	}
 
 	/**
+     * 获取验证字符串（用户：密码）
 	 * Get the authentication string (user:pass)
 	 *
 	 * @since 1.6

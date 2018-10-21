@@ -44,6 +44,7 @@ class WP_Widget_Text extends WP_Widget {
 	}
 
 	/**
+     * 在注册此WIDGET类的所有小部件实例时，添加用于排队资产的挂钩。
 	 * Add hooks for enqueueing assets when registering all widget instances of this widget class.
 	 *
 	 * @param integer $number Optional. The unique order number of this widget instance
@@ -128,7 +129,8 @@ class WP_Widget_Text extends WP_Widget {
 		) );
 		$body = $doc->getElementsByTagName( 'body' )->item( 0 );
 
-		// See $allowedposttags.
+		// 查看允许的帖子标签。
+        // See $allowedposttags.
 		$safe_elements_attributes = array(
 			'strong' => array(),
 			'em' => array(),
@@ -184,6 +186,7 @@ class WP_Widget_Text extends WP_Widget {
 	}
 
 	/**
+     * 过滤库短代码属性。
 	 * Filter gallery shortcode attributes.
 	 *
 	 * Prevents all of a site's attachments from being shown in a gallery displayed on a
@@ -202,6 +205,7 @@ class WP_Widget_Text extends WP_Widget {
 	}
 
 	/**
+     * 输出当前文本控件实例的内容。
 	 * Outputs the content for the current Text widget instance.
 	 *
 	 * @since 2.8.0
@@ -346,6 +350,7 @@ class WP_Widget_Text extends WP_Widget {
 	}
 
 	/**
+     * 处理当前文本控件实例的更新设置。
 	 * Handles updating settings for the current Text widget instance.
 	 *
 	 * @since 2.8.0
@@ -395,6 +400,7 @@ class WP_Widget_Text extends WP_Widget {
 	}
 
 	/**
+     * 排队预览脚本。
 	 * Enqueue preview scripts.
 	 *
 	 * These scripts normally are enqueued just-in-time when a playlist shortcode is used.

@@ -1,5 +1,6 @@
 <?php
 /**
+ * 编辑标签管理：消息
  * Edit Tags Administration: Messages
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 $messages = array();
+// 0 =未使用。消息从索引1开始。
 // 0 = unused. Messages start at index 1.
 $messages['_item'] = array(
 	0 => '',
@@ -40,6 +42,7 @@ $messages['post_tag'] = array(
 );
 
 /**
+ * 过滤标签更新时显示的消息。
  * Filters the messages displayed when a tag is updated.
  *
  * @since 3.7.0

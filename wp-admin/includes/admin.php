@@ -17,70 +17,133 @@ if ( ! defined('WP_ADMIN') ) {
 	load_textdomain( 'default', WP_LANG_DIR . '/admin-' . get_locale() . '.mo' );
 }
 
-/** WordPress Administration Hooks */
+/**
+ * 管理钩子
+ * WordPress Administration Hooks
+ */
 require_once(ABSPATH . 'wp-admin/includes/admin-filters.php');
 
-/** WordPress Bookmark Administration API */
+/**
+ * 书签管理API
+ * WordPress Bookmark Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/bookmark.php');
 
-/** WordPress Comment Administration API */
+/**
+ * 评论管理API
+ * WordPress Comment Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/comment.php');
 
-/** WordPress Administration File API */
+/**
+ * 管理文件API
+ * WordPress Administration File API
+ */
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 
-/** WordPress Image Administration API */
+/**
+ * 图像管理API
+ * WordPress Image Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/image.php');
 
-/** WordPress Media Administration API */
+/**
+ * 媒体管理API
+ * WordPress Media Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/media.php');
 
-/** WordPress Import Administration API */
+/**
+ * 导入管理API
+ * WordPress Import Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/import.php');
 
-/** WordPress Misc Administration API */
+/**
+ *  混合管理API
+ * WordPress Misc Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/misc.php');
 
-/** WordPress Options Administration API */
+/**
+ * 选项管理API
+ * WordPress Options Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/options.php');
 
-/** WordPress Plugin Administration API */
+/**
+ * 插件管理API
+ * WordPress Plugin Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
-/** WordPress Post Administration API */
+/**
+ * 文章管理API
+ * WordPress Post Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/post.php');
 
-/** WordPress Administration Screen API */
+/**
+ * 管理屏幕API
+ * WordPress Administration Screen API
+ */
 require_once(ABSPATH . 'wp-admin/includes/class-wp-screen.php');
 require_once(ABSPATH . 'wp-admin/includes/screen.php');
 
-/** WordPress Taxonomy Administration API */
+/**
+ * 分类管理API
+ * WordPress Taxonomy Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/taxonomy.php');
 
-/** WordPress Template Administration API */
+/**
+ * 模板管理API
+ * WordPress Template Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/template.php');
 
-/** WordPress List Table Administration API and base class */
+/**
+ * 列表管理API和基类
+ * WordPress List Table Administration API and base class
+ */
 require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table-compat.php');
 require_once(ABSPATH . 'wp-admin/includes/list-table.php');
 
-/** WordPress Theme Administration API */
+/**
+ * 主题管理API
+ * WordPress Theme Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/theme.php');
 
-/** WordPress User Administration API */
+/**
+ * 用户管理API
+ * WordPress User Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/user.php');
 
-/** WordPress Site Icon API */
+/**
+ * 站点图标API
+ * WordPress Site Icon API
+ */
 require_once(ABSPATH . 'wp-admin/includes/class-wp-site-icon.php');
 
-/** WordPress Update Administration API */
+/**
+ * 更新管理API
+ * WordPress Update Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/update.php');
 
-/** WordPress Deprecated Administration API */
+/**
+ * 弃置管理API
+ * WordPress Deprecated Administration API
+ */
 require_once(ABSPATH . 'wp-admin/includes/deprecated.php');
 
-/** WordPress Multisite support API */
+/**
+ * 多站点支持API
+ * WordPress Multisite support API
+ */
 if ( is_multisite() ) {
 	require_once(ABSPATH . 'wp-admin/includes/ms-admin-filters.php');
 	require_once(ABSPATH . 'wp-admin/includes/ms.php');

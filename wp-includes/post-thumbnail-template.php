@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress帖子缩略图模板功能。
  * WordPress Post Thumbnail Template Functions.
  *
  * Support for post thumbnails.
@@ -10,6 +11,7 @@
  */
 
 /**
+ * 检查POST是否附有图像。
  * Check if post has an image attached.
  *
  * @since 2.9.0
@@ -23,6 +25,7 @@ function has_post_thumbnail( $post = null ) {
 }
 
 /**
+ * 检索帖子缩略图ID。
  * Retrieve post thumbnail ID.
  *
  * @since 2.9.0
@@ -40,6 +43,7 @@ function get_post_thumbnail_id( $post = null ) {
 }
 
 /**
+ * 显示帖子缩略图。
  * Display the post thumbnail.
  *
  * When a theme adds 'post-thumbnail' support, a special 'post-thumbnail' image size
@@ -63,6 +67,7 @@ function the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
 }
 
 /**
+ * 为当前循环中的缩略图更新缓存。
  * Update cache for thumbnails in the current loop.
  *
  * @since 3.2.0
@@ -92,6 +97,7 @@ function update_post_thumbnail_cache( $wp_query = null ) {
 }
 
 /**
+ * 检索帖子的缩略图。
  * Retrieve the post thumbnail.
  *
  * When a theme adds 'post-thumbnail' support, a special 'post-thumbnail' image size
@@ -119,6 +125,7 @@ function get_the_post_thumbnail( $post = null, $size = 'post-thumbnail', $attr =
 	$post_thumbnail_id = get_post_thumbnail_id( $post );
 
 	/**
+     * 过滤帖子缩略图的大小。
 	 * Filters the post thumbnail size.
 	 *
 	 * @since 2.9.0
@@ -133,6 +140,7 @@ function get_the_post_thumbnail( $post = null, $size = 'post-thumbnail', $attr =
 	if ( $post_thumbnail_id ) {
 
 		/**
+         * 在获取缩略图HTML之前先触发。
 		 * Fires before fetching the post thumbnail HTML.
 		 *
 		 * Provides "just in time" filtering of all filters in wp_get_attachment_image().
@@ -150,6 +158,7 @@ function get_the_post_thumbnail( $post = null, $size = 'post-thumbnail', $attr =
 		$html = wp_get_attachment_image( $post_thumbnail_id, $size, false, $attr );
 
 		/**
+         * 获取后缩略图HTML后触发
 		 * Fires after fetching the post thumbnail HTML.
 		 *
 		 * @since 2.9.0
@@ -165,6 +174,7 @@ function get_the_post_thumbnail( $post = null, $size = 'post-thumbnail', $attr =
 		$html = '';
 	}
 	/**
+     * 过滤帖子缩略图HTML。
 	 * Filters the post thumbnail HTML.
 	 *
 	 * @since 2.9.0
@@ -180,6 +190,7 @@ function get_the_post_thumbnail( $post = null, $size = 'post-thumbnail', $attr =
 }
 
 /**
+ * 返回帖子缩略图URL。
  * Return the post thumbnail URL.
  *
  * @since 4.4.0
@@ -198,6 +209,7 @@ function get_the_post_thumbnail_url( $post = null, $size = 'post-thumbnail' ) {
 }
 
 /**
+ * 显示帖子缩略图URL。
  * Display the post thumbnail URL.
  *
  * @since 4.4.0
@@ -214,6 +226,7 @@ function the_post_thumbnail_url( $size = 'post-thumbnail' ) {
 }
 
 /**
+ * 返回帖子缩略图标题。
  * Returns the post thumbnail caption.
  *
  * @since 4.6.0
@@ -237,6 +250,7 @@ function get_the_post_thumbnail_caption( $post = null ) {
 }
 
 /**
+ * 显示帖子缩略图标题。
  * Displays the post thumbnail caption.
  *
  * @since 4.6.0
@@ -245,6 +259,7 @@ function get_the_post_thumbnail_caption( $post = null ) {
  */
 function the_post_thumbnail_caption( $post = null ) {
 	/**
+     * 过滤显示的帖子缩略图标题。
 	 * Filters the displayed post thumbnail caption.
 	 *
 	 * @since 4.6.0

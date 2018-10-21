@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress选项管理API。
  * WordPress Options Administration API.
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 如果禁用了头像，则输出JavaScript来切换附加设置的显示。
  * Output JavaScript to toggle display of additional settings if avatars are disabled.
  *
  * @since 4.2.0
@@ -27,6 +29,7 @@ function options_discussion_add_js() {
 }
 
 /**
+ * 在页面上显示JavaScript。
  * Display JavaScript on the page.
  *
  * @since 3.5.0
@@ -92,6 +95,7 @@ function options_general_add_js() {
 }
 
 /**
+ * 在页面上显示JavaScript。
  * Display JavaScript on the page.
  *
  * @since 3.5.0
@@ -114,6 +118,7 @@ function options_reading_add_js() {
 }
 
 /**
+ * 呈现站点字符集设置。
  * Render the site charset setting.
  *
  * @since 3.5.0

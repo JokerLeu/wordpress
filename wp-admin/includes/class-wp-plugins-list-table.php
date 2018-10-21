@@ -1,5 +1,6 @@
 <?php
 /**
+ * 列表API：WP_Plugins_List_Table类
  * List Table API: WP_Plugins_List_Table class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * 核心类用于实现在列表表中显示已安装的插件。
  * Core class used to implement displaying installed plugins in a list table.
  *
  * @since 3.1.0

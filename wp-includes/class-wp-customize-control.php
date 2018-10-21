@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress定制控制类
+ * WordPress定制控件类
  * WordPress Customize Control classes
  *
  * @package WordPress
@@ -9,7 +9,7 @@
  */
 
 /**
- * 自定义控制类。
+ * 自定义控件类。
  * Customize Control class.
  *
  * @since 3.4.0
@@ -48,6 +48,7 @@ class WP_Customize_Control {
 	public $manager;
 
 	/**
+     * 控制ID
 	 * Control ID.
 	 *
 	 * @since 3.4.0
@@ -56,6 +57,7 @@ class WP_Customize_Control {
 	public $id;
 
 	/**
+     * 所有设置绑定到控件。
 	 * All settings tied to the control.
 	 *
 	 * @since 3.4.0
@@ -64,6 +66,7 @@ class WP_Customize_Control {
 	public $settings;
 
 	/**
+     * 控件的主设置（如果有一个）。
 	 * The primary setting for the control (if there is one).
 	 *
 	 * @since 3.4.0
@@ -72,6 +75,7 @@ class WP_Customize_Control {
 	public $setting = 'default';
 
 	/**
+     * 使用此控件所需的能力。
 	 * Capability required to use this control.
 	 *
 	 * Normally this is empty and the capability is derived from the capabilities
@@ -83,6 +87,7 @@ class WP_Customize_Control {
 	public $capability;
 
 	/**
+     * 加载定制器控件的命令优先级
 	 * Order priority to load the control in Customizer.
 	 *
 	 * @since 3.4.0
@@ -91,6 +96,7 @@ class WP_Customize_Control {
 	public $priority = 10;
 
 	/**
+     * 部分的控件属于。
 	 * Section the control belongs to.
 	 *
 	 * @since 3.4.0
@@ -99,6 +105,7 @@ class WP_Customize_Control {
 	public $section = '';
 
 	/**
+     * 控件的标签。
 	 * Label for the control.
 	 *
 	 * @since 3.4.0
@@ -107,6 +114,7 @@ class WP_Customize_Control {
 	public $label = '';
 
 	/**
+     * 控件的描述。
 	 * Description for the control.
 	 *
 	 * @since 4.0.0
@@ -698,81 +706,97 @@ class WP_Customize_Control {
 }
 
 /**
+ * WP自定义颜色控制类。
  * WP_Customize_Color_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-color-control.php' );
 
 /**
+ * WP自定义媒体控制类。
  * WP_Customize_Media_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-media-control.php' );
 
 /**
+ * WP自定义更新控制类。
  * WP_Customize_Upload_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-upload-control.php' );
 
 /**
+ * WP自定义图像控制类。
  * WP_Customize_Image_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-image-control.php' );
 
 /**
+ * WP自定义背景图控制类。
  * WP_Customize_Background_Image_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-background-image-control.php' );
 
 /**
+ * WP自定义背景位置控制类。
  * WP_Customize_Background_Position_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-background-position-control.php' );
 
 /**
+ * WP自定义裁剪图像控制类。
  * WP_Customize_Cropped_Image_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-cropped-image-control.php' );
 
 /**
+ * WP自定义站点图标控制类。
  * WP_Customize_Site_Icon_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-site-icon-control.php' );
 
 /**
+ * WP自定义头部图像控制类。
  * WP_Customize_Header_Image_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-header-image-control.php' );
 
 /**
+ * WP自定义主题控制类。
  * WP_Customize_Theme_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-theme-control.php' );
 
 /**
+ * WP小工具区域自定义控件类。
  * WP_Widget_Area_Customize_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-widget-area-customize-control.php' );
 
 /**
+ * WP小工具窗体自定义控件类。
  * WP_Widget_Form_Customize_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-widget-form-customize-control.php' );
 
 /**
+ * WP自定义导航菜单控制类。
  * WP_Customize_Nav_Menu_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-control.php' );
 
 /**
+ * WP自定义导航菜单选项控制类。
  * WP_Customize_Nav_Menu_Item_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-item-control.php' );
 
 /**
+ * WP自定义导航菜单定位控制类。
  * WP_Customize_Nav_Menu_Location_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-location-control.php' );
 
 /**
+ * WP自定义导航菜单名称控制类。
  * WP_Customize_Nav_Menu_Name_Control class.
  *
  * As this file is deprecated, it will trigger a deprecation notice if instantiated. In a subsequent
@@ -784,16 +808,19 @@ require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-location
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-name-control.php' );
 
 /**
+ * WP自定义导航菜单位置控制类。
  * WP_Customize_Nav_Menu_Locations_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-locations-control.php' );
 
 /**
+ * WP自定义导航菜单自动添加控制类。
  * WP_Customize_Nav_Menu_Auto_Add_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-nav-menu-auto-add-control.php' );
 
 /**
+ * WP自定义日期时间控制类。
  * WP_Customize_Date_Time_Control class.
  */
 require_once( ABSPATH . WPINC . '/customize/class-wp-customize-date-time-control.php' );

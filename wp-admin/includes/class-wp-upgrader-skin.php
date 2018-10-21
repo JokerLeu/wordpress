@@ -1,5 +1,6 @@
 <?php
 /**
+ * 升级器API：WP_Upgrader_Skin升级器皮肤类
  * Upgrader API: WP_Upgrader_Skin class
  *
  * @package WordPress
@@ -8,6 +9,7 @@
  */
 
 /**
+ * WordPress升级器类的通用皮肤。这种皮肤是为了特定目的而设计的。
  * Generic Skin for the WordPress Upgrader classes. This skin is designed to be extended for specific purposes.
  *
  * @since 2.8.0

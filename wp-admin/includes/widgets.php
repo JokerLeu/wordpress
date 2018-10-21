@@ -1,5 +1,6 @@
 <?php
 /**
+ * WordPress小部件管理API
  * WordPress Widgets Administration API
  *
  * @package WordPress
@@ -7,6 +8,7 @@
  */
 
 /**
+ * 显示可用窗口小部件的列表。
  * Display list of the available widgets.
  *
  * @since 2.5.0
@@ -50,6 +52,7 @@ function wp_list_widgets() {
 }
 
 /**
+ * 通过“名称”键对排序数组进行回调。
  * Callback to sort array by a 'name' key.
  *
  * @since 3.1.0
@@ -62,6 +65,7 @@ function _sort_name_callback( $a, $b ) {
 }
 
 /**
+ * 显示侧栏的小部件及其设置。在管理小部件配置屏幕中使用。
  * Show the widgets and their settings for a sidebar.
  * Used in the admin widget config screen.
  *
@@ -103,6 +107,7 @@ function wp_list_widget_controls( $sidebar, $sidebar_name = '' ) {
 }
 
 /**
+ * 检索控件控制参数。
  * Retrieves the widget control arguments.
  *
  * @since 2.5.0
@@ -136,6 +141,7 @@ function wp_list_widget_controls_dynamic_sidebar( $params ) {
 }
 
 /**
+ * 下一个小部件ID号
  *
  * @global array $wp_registered_widgets
  *
@@ -156,6 +162,7 @@ function next_widget_id_number( $id_base ) {
 }
 
 /**
+ * 用于显示控件控件窗体的Meta小部件。
  * Meta widget used to display the control form for a widget.
  *
  * Called from dynamic_sidebar().
@@ -281,6 +288,7 @@ function wp_widget_control( $sidebar_args ) {
 }
 
 /**
+ * WP小部件访问体类
  *
  * @param string $classes
  * @return string

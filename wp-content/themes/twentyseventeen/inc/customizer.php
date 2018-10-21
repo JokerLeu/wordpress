@@ -9,6 +9,7 @@
  */
 
 /**
+ * 为主题定制器添加站点标题和描述的POST消息支持。
  * Add postMessage support for site title and description for the Theme Customizer.
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
@@ -32,6 +33,7 @@ function twentyseventeen_customize_register( $wp_customize ) {
 	);
 
 	/**
+     * 自定义颜色。
 	 * Custom colors.
 	 */
 	$wp_customize->add_setting(
@@ -75,6 +77,7 @@ function twentyseventeen_customize_register( $wp_customize ) {
 	);
 
 	/**
+     * 主题选项。
 	 * Theme options.
 	 */
 	$wp_customize->add_section(
@@ -107,6 +110,7 @@ function twentyseventeen_customize_register( $wp_customize ) {
 	);
 
 	/**
+     * 2017页首页的过滤数。
 	 * Filter number of front page sections in Twenty Seventeen.
 	 *
 	 * @since Twenty Seventeen 1.0
@@ -115,7 +119,8 @@ function twentyseventeen_customize_register( $wp_customize ) {
 	 */
 	$num_sections = apply_filters( 'twentyseventeen_front_page_sections', 4 );
 
-	// Create a setting and control for each of the sections available in the theme.
+	// 为主题中的每个部分创建一个设置和控件。
+    // Create a setting and control for each of the sections available in the theme.
 	for ( $i = 1; $i < ( 1 + $num_sections ); $i++ ) {
 		$wp_customize->add_setting(
 			'panel_' . $i, array(
@@ -149,6 +154,7 @@ function twentyseventeen_customize_register( $wp_customize ) {
 add_action( 'customize_register', 'twentyseventeen_customize_register' );
 
 /**
+ * 清理页面布局选项。
  * Sanitize the page layout options.
  *
  * @param string $input Page layout.
@@ -167,6 +173,7 @@ function twentyseventeen_sanitize_page_layout( $input ) {
 }
 
 /**
+ * 对色彩方案进行净化。
  * Sanitize the colorscheme.
  *
  * @param string $input Color scheme.
@@ -182,6 +189,7 @@ function twentyseventeen_sanitize_colorscheme( $input ) {
 }
 
 /**
+ * 为选择刷新部分渲染站点标题。
  * Render the site title for the selective refresh partial.
  *
  * @since Twenty Seventeen 1.0
@@ -194,6 +202,7 @@ function twentyseventeen_customize_partial_blogname() {
 }
 
 /**
+ * 为选择刷新部分呈现站点标记。
  * Render the site tagline for the selective refresh partial.
  *
  * @since Twenty Seventeen 1.0
@@ -206,6 +215,7 @@ function twentyseventeen_customize_partial_blogdescription() {
 }
 
 /**
+ * 返回我们是否正在预览首页，这是一个静态页面。
  * Return whether we're previewing the front page and it's a static page.
  */
 function twentyseventeen_is_static_front_page() {
@@ -213,6 +223,7 @@ function twentyseventeen_is_static_front_page() {
 }
 
 /**
+ * 返回我们是否支持支持一列或两列布局的视图。
  * Return whether we're on a view that supports a one or two column layout.
  */
 function twentyseventeen_is_view_with_layout_option() {
@@ -221,6 +232,7 @@ function twentyseventeen_is_view_with_layout_option() {
 }
 
 /**
+ * 绑定JS处理程序到即时实时预览更改。
  * Bind JS handlers to instantly live-preview changes.
  */
 function twentyseventeen_customize_preview_js() {
@@ -229,6 +241,7 @@ function twentyseventeen_customize_preview_js() {
 add_action( 'customize_preview_init', 'twentyseventeen_customize_preview_js' );
 
 /**
+ * 为定制器控制区域加载动态逻辑。
  * Load dynamic logic for the customizer controls area.
  */
 function twentyseventeen_panels_js() {

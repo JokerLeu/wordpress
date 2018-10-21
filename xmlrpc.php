@@ -7,12 +7,14 @@
  */
 
 /**
+ * 这是否是XML- RPC请求
  * Whether this is an XML-RPC Request
  *
  * @var bool
  */
 define('XMLRPC_REQUEST', true);
 
+// 一些浏览器嵌入式客户端发送Cookie。我们不想要他们。
 // Some browser-embedded clients send cookies. We don't want them.
 $_COOKIE = array();
 
@@ -26,7 +28,10 @@ if ( !isset( $HTTP_RAW_POST_DATA ) ) {
 if ( isset($HTTP_RAW_POST_DATA) )
 	$HTTP_RAW_POST_DATA = trim($HTTP_RAW_POST_DATA);
 
-/** Include the bootstrap for setting up WordPress environment */
+/**
+ * 包括设置WordPress环境的引导程序
+ * Include the bootstrap for setting up WordPress environment
+ */
 include( dirname( __FILE__ ) . '/wp-load.php' );
 
 if ( isset( $_GET['rsd'] ) ) { // http://cyber.law.harvard.edu/blogs/gems/tech/rsd.html
@@ -60,11 +65,14 @@ header('Content-Type: text/xml; charset=' . get_option('blog_charset'), true);
 exit;
 }
 
+// 核心管理API文件
 include_once(ABSPATH . 'wp-admin/includes/admin.php');
 include_once(ABSPATH . WPINC . '/class-IXR.php');
+// WordPress支持XML- RPC协议文件
 include_once(ABSPATH . WPINC . '/class-wp-xmlrpc-server.php'); 
 
 /**
+ * 通过XML- RPC接口提交的帖子获得该标题
  * Posts submitted via the XML-RPC interface get that title
  * @name post_default_title
  * @var string
@@ -72,6 +80,7 @@ include_once(ABSPATH . WPINC . '/class-wp-xmlrpc-server.php');
 $post_default_title = "";
 
 /**
+ * 筛选用于处理XML- RPC请求的类。
  * Filters the class used for handling XML-RPC requests.
  *
  * @since 3.1.0
@@ -81,12 +90,14 @@ $post_default_title = "";
 $wp_xmlrpc_server_class = apply_filters( 'wp_xmlrpc_server_class', 'wp_xmlrpc_server' );
 $wp_xmlrpc_server = new $wp_xmlrpc_server_class;
 
+// 取消请求
 // Fire off the request
 $wp_xmlrpc_server->serve_request();
 
 exit;
 
 /**
+ * logIO()-将日志信息写入文件。
  * logIO() - Writes logging info to a file.
  *
  * @deprecated 3.4.0 Use error_log()

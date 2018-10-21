@@ -13,7 +13,9 @@
  * Add SVG definitions to the footer.
  */
 function twentyseventeen_include_svg_icons() {
-	// Define SVG sprite file.
+	// 定义SVG精灵文件。
+    // Define SVG sprite file.
+    // 检索父主题中的文件路径。
 	$svg_icons = get_parent_theme_file_path( '/assets/images/svg-icons.svg' );
 
 	// If it exists, include it.
